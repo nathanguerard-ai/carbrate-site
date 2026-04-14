@@ -78,7 +78,7 @@ export default function Home() {
   );
 
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-6 py-8 sm:px-8 lg:px-10">
+    <div className="mx-auto w-full max-w-7xl flex-col px-6 py-8 sm:px-8 lg:px-10">
       <section className="grid gap-8 pb-10 pt-4 lg:grid-cols-[1.08fr_0.92fr]">
         <div>
           <div className="inline-flex rounded-full border border-ink/10 bg-white/70 px-4 py-2 text-sm text-ink/75 backdrop-blur">
@@ -540,7 +540,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }
 

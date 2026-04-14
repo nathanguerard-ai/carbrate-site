@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
@@ -38,7 +40,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body>{children}</body>
+      <body>
+        <Header />
+        <div className="flex min-h-screen flex-col">
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </div>
+      </body>
     </html>
   );
 }
