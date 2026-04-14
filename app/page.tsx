@@ -5,7 +5,6 @@ import {
   clampTargetGrams,
   DEFAULT_TARGET_CARBS,
   getCatalogUpdatedAt,
-  getPortionRecommendations,
   getProducts,
 } from "@/lib/carbrate";
 
@@ -69,11 +68,6 @@ export default function Home() {
   const scopeDescription = hasActiveFilters
     ? "dans la sélection"
     : "dans le catalogue";
-  const portionRecommendations = getPortionRecommendations(
-    visibleProducts,
-    targetGrams,
-    3,
-  );
 
   return (
     <div className="mx-auto w-full max-w-7xl flex-col px-6 py-8 sm:px-8 lg:px-10">
@@ -192,89 +186,7 @@ export default function Home() {
         </section>
       </section>
 
-      {portionRecommendations.length > 0 ? (
-        <section className="pb-10">
-          <div className="mb-5 flex items-end justify-between gap-4">
-            <div>
-              <p className="text-sm uppercase tracking-[0.18em] text-ink/55">
-                Recommandations
-              </p>
-              <h2 className="mt-2 text-3xl font-semibold text-ink">
-                Combinaisons de portions
-              </h2>
-            </div>
-            <p className="max-w-md text-right text-sm text-ink/62">
-              Demi-portions permises pour les boissons et les barres. Les gels
-              restent en portion complète.
-            </p>
-          </div>
-          <div className="grid gap-4 lg:grid-cols-3">
-            {portionRecommendations.map((plan, index) => (
-              <article
-                key={`plan-${index}-${plan.totalCarbs}-${plan.totalCost}`}
-                className={`rounded-[1.8rem] border p-5 shadow-card backdrop-blur ${
-                  index === 0
-                    ? "border-accent/20 bg-gradient-to-br from-white/85 via-white/75 to-accent/10"
-                    : "border-[var(--line)] bg-[var(--panel)]"
-                }`}
-              >
-                <div className="flex items-center justify-between gap-3">
-                  <span className="rounded-full border border-ink/10 bg-white/70 px-3 py-1 text-xs uppercase tracking-[0.16em] text-ink/60">
-                    {index === 0 ? "Meilleure option" : `Option ${index + 1}`}
-                  </span>
-                  <span className={`rounded-full px-3 py-1 text-xs ${
-                    plan.differenceFromTarget === 0
-                      ? "bg-pine text-white"
-                      : plan.totalCarbs > targetGrams
-                        ? "bg-[#f0c75a] text-[#3a2b00]"
-                        : "bg-white/70 text-ink/70"
-                  }`}>
-                    {plan.differenceFromTarget === 0
-                      ? "exact"
-                      : plan.totalCarbs > targetGrams
-                        ? `+${plan.totalCarbs - targetGrams} g`
-                        : `-${targetGrams - plan.totalCarbs} g`}
-                  </span>
-                </div>
-                <div className="mt-4 rounded-[1.2rem] bg-white/78 px-4 py-4">
-                  <p className="text-xs uppercase tracking-[0.16em] text-ink/45">
-                    Coût total
-                  </p>
-                  <p className="mt-2 text-3xl font-semibold text-ink">
-                    ${plan.totalCost.toFixed(2)}
-                  </p>
-                  <p className="mt-1 text-sm text-ink/58">
-                    {plan.totalCarbs} g avec {formatPortions(plan.portionCount)}
-                  </p>
-                </div>
-                <div className="mt-4 space-y-2">
-                  {plan.items.map((item) => (
-                    <div
-                      key={`${item.productId}-${item.portions}`}
-                      className="flex items-center justify-between gap-3 rounded-[1rem] border border-ink/10 bg-white/70 px-3 py-3"
-                    >
-                      <div>
-                        <p className="text-sm font-medium text-ink">
-                          {formatMultiplier(item.portions)} {item.brand} {item.name}
-                        </p>
-                        <p className="text-xs text-ink/58">
-                          {item.totalCarbs} g au total
-                        </p>
-                      </div>
-                      <p className="text-sm font-semibold text-ink">
-                        ${item.totalPrice.toFixed(2)}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-                <p className="mt-4 text-sm leading-6 text-ink/62">
-                  {describePlan(plan.totalCarbs, targetGrams)}
-                </p>
-              </article>
-            ))}
-          </div>
-        </section>
-      ) : null}
+      
 
       <section className="py-10">
         <div className="mb-5 flex flex-col gap-5">
