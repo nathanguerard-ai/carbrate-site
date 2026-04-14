@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   clampTargetGrams,
   DEFAULT_TARGET_CARBS,
@@ -17,6 +17,12 @@ export default function Home() {
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState("ratio");
+  const [page, setPage] = useState(1);
+  const itemsPerPage = 20;
+
+  useEffect(() => {
+    setPage(1);
+  }, [selectedTypes, selectedBrands, searchTerm, sortBy, targetGrams]);
   const targetPresets = [30, 60, 90, 120];
   const medalStyles = [
     "border-[#b68b1e] bg-[#f0c75a] text-[#3a2b00]",
@@ -59,6 +65,11 @@ export default function Home() {
 
     return b.carbsPerDollar - a.carbsPerDollar;
   });
+  const paginatedProducts = visibleProducts.slice(
+    (page - 1) * itemsPerPage,
+    page * itemsPerPage,
+  );
+  const totalPages = Math.ceil(visibleProducts.length / itemsPerPage);
   const best = allProducts[0];
   const visibleBest = visibleProducts[0] ?? best;
   const visibleBrandCount = new Set(
@@ -453,7 +464,7 @@ export default function Home() {
                 </tr>
               </thead>
               <tbody>
-                {visibleProducts.length === 0 ? (
+                {paginatedProducts.length === 0 ? (
                   <tr>
                     <td
                       colSpan={7}
@@ -463,7 +474,7 @@ export default function Home() {
                     </td>
                   </tr>
                 ) : null}
-                {visibleProducts.map((product, index) => (
+                {paginatedProducts.map((product, index) => (
                   <tr
                     key={product.id}
                     className={`border-b border-[var(--line)] align-top last:border-b-0 ${
@@ -537,6 +548,30 @@ export default function Home() {
                 ))}
               </tbody>
             </table>
+
+            {totalPages > 1 && (
+              <div className="mt-6 flex items-center justify-between">
+                <p className="text-sm text-ink/60">
+                  Page {page} sur {totalPages} ({visibleProducts.length} produits)
+                </p>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setPage(page - 1)}
+                    disabled={page === 1}
+                    className="rounded px-3 py-1 text-sm border border-[var(--line)] disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white/50"
+                  >
+                    Précédent
+                  </button>
+                  <button
+                    onClick={() => setPage(page + 1)}
+                    disabled={page === totalPages}
+                    className="rounded px-3 py-1 text-sm border border-[var(--line)] disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white/50"
+                  >
+                    Suivant
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </section>
