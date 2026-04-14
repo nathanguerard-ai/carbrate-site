@@ -516,4 +516,9 @@ function round(value) {
   return Math.round(value * 100) / 100;
 }
 
-await main();
+try {
+  await main();
+} catch (error) {
+  console.error("Error in update-offers script:", error);
+  process.exit(1);
+}
