@@ -11,6 +11,9 @@ import {
 
 export default function Home() {
   const [targetGrams, setTargetGrams] = useState(DEFAULT_TARGET_CARBS);
+  const [pendingTargetGrams, setPendingTargetGrams] = useState(
+    DEFAULT_TARGET_CARBS,
+  );
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState("ratio");
   const [page, setPage] = useState(1);
@@ -120,7 +123,7 @@ export default function Home() {
                 Choisis ta cible de glucides.
               </h2>
               <p className="mt-3 text-sm text-white/70">
-                Le tableau et les recommandations se mettent à jour automatiquement.
+                Change la cible et clique sur Ok pour appliquer la valeur.
               </p>
             </div>
             <div className="rounded-[1.25rem] border border-white/10 bg-white/10 px-5 py-4 text-center">
@@ -138,9 +141,9 @@ export default function Home() {
               <button
                 key={preset}
                 type="button"
-                onClick={() => setTargetGrams(preset)}
+                onClick={() => setPendingTargetGrams(preset)}
                 className={`rounded-full px-4 py-2 text-sm transition ${
-                  targetGrams === preset
+                  pendingTargetGrams === preset
                     ? "bg-accent text-white"
                     : "border border-white/15 bg-white/10 text-white/80"
                 }`}
@@ -162,9 +165,11 @@ export default function Home() {
                   min="30"
                   max="180"
                   step="5"
-                  value={targetGrams}
+                  value={pendingTargetGrams}
                   onChange={(event) =>
-                    setTargetGrams(clampTargetGrams(Number(event.target.value)))
+                    setPendingTargetGrams(
+                      clampTargetGrams(Number(event.target.value)),
+                    )
                   }
                   className="w-[4.25rem] bg-transparent px-2 py-2 text-right text-white outline-none"
                 />
@@ -172,14 +177,24 @@ export default function Home() {
                   g/h
                 </span>
               </div>
+              <button
+                type="button"
+                onClick={() => setTargetGrams(pendingTargetGrams)}
+                disabled={pendingTargetGrams === targetGrams}
+                className="rounded-xl border border-white/15 bg-white/10 px-4 py-2 text-sm text-white transition hover:bg-white/20 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                Ok
+              </button>
               <input
                 type="range"
                 min="30"
                 max="180"
                 step="5"
-                value={targetGrams}
+                value={pendingTargetGrams}
                 onChange={(event) =>
-                  setTargetGrams(clampTargetGrams(Number(event.target.value)))
+                  setPendingTargetGrams(
+                    clampTargetGrams(Number(event.target.value)),
+                  )
                 }
                 className="w-full accent-[#c95c2b]"
               />
