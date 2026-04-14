@@ -2,6 +2,7 @@
   "name": "carbrate",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "predev": "npm run update:offers",
     "dev": "next dev",
