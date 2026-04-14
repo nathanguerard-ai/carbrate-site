@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-04-14T19:55:04.421Z",
+  "updatedAt": "2026-04-14T20:41:31.850Z",
   "analysis": {
-    "mode": "live",
-    "pagesFetched": 85,
-    "pagesFromCache": 0,
+    "mode": "cached",
+    "pagesFetched": 0,
+    "pagesFromCache": 183,
     "offerPricesFromLive": 50,
     "offerPricesFromFallback": 47,
     "carbsFromLive": 36,

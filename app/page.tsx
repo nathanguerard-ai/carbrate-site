@@ -5,16 +5,12 @@ import {
   clampTargetGrams,
   DEFAULT_TARGET_CARBS,
   getCatalogUpdatedAt,
-  getProductBrands,
   getPortionRecommendations,
   getProducts,
-  getProductTypes,
 } from "@/lib/carbrate";
 
 export default function Home() {
   const [targetGrams, setTargetGrams] = useState(DEFAULT_TARGET_CARBS);
-  const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
-  const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState("ratio");
   const [page, setPage] = useState(1);
@@ -22,7 +18,7 @@ export default function Home() {
 
   useEffect(() => {
     setPage(1);
-  }, [selectedTypes, selectedBrands, searchTerm, sortBy, targetGrams]);
+  }, [searchTerm, sortBy, targetGrams]);
   const targetPresets = [30, 60, 90, 120];
   const medalStyles = [
     "border-[#b68b1e] bg-[#f0c75a] text-[#3a2b00]",
@@ -31,14 +27,8 @@ export default function Home() {
   ];
 
   const allProducts = getProducts(targetGrams);
-  const productTypes = getProductTypes();
-  const productBrands = getProductBrands();
   const normalizedSearch = searchTerm.trim().toLowerCase();
   const filteredProducts = allProducts.filter((product) => {
-    const typeMatch =
-      selectedTypes.length === 0 || selectedTypes.includes(product.type);
-    const brandMatch =
-      selectedBrands.length === 0 || selectedBrands.includes(product.brand);
     const searchMatch =
       normalizedSearch.length === 0 ||
       product.name.toLowerCase().includes(normalizedSearch) ||
@@ -47,8 +37,7 @@ export default function Home() {
       product.offers.some((offer) =>
         offer.seller.toLowerCase().includes(normalizedSearch),
       );
-
-    return typeMatch && brandMatch && searchMatch;
+    return searchMatch;
   });
   const visibleProducts = [...filteredProducts].sort((a, b) => {
     if (sortBy === "cost") {
@@ -75,9 +64,7 @@ export default function Home() {
   const visibleBrandCount = new Set(
     visibleProducts.map((product) => product.brand),
   ).size;
-  const hasActiveFilters =
-    selectedTypes.length > 0 ||
-    selectedBrands.length > 0 ||
+  const hasActiveFilters = normalizedSearch.length > 0;
     normalizedSearch.length > 0;
   const scopeDescription = hasActiveFilters
     ? "dans la sélection"
@@ -112,8 +99,7 @@ export default function Home() {
               produits suivis
             </div>
             <div className="rounded-full border border-[var(--line)] bg-white/65 px-4 py-2 backdrop-blur">
-              <span className="font-semibold text-ink">{productBrands.length}</span>{" "}
-              marques
+              Estimation des meilleures offres sur les produits suivis
             </div>
             <div className="rounded-full border border-[var(--line)] bg-white/65 px-4 py-2 backdrop-blur">
               Mise à jour le{" "}
@@ -297,88 +283,12 @@ export default function Home() {
               Quel produit offre le meilleur rapport ?
             </h2>
             <p className="mt-2 max-w-2xl text-sm leading-6 text-ink/68">
-              Recherche un produit, limite par type ou marque, puis trie selon la
+                Recherche un produit, puis trie selon la
               métrique qui t'importe vraiment.
             </p>
           </div>
-          <div className="grid gap-4 lg:grid-cols-[1.1fr_1.1fr_0.95fr]">
-            <div className="rounded-[1.5rem] border border-[var(--line)] bg-[var(--panel)] p-4">
-              <p className="text-xs uppercase tracking-[0.18em] text-ink/50">
-                Type
-              </p>
-              <div className="mt-3 flex flex-wrap gap-2">
-              <button
-                type="button"
-                onClick={() => setSelectedTypes([])}
-                className={`rounded-full px-4 py-2 text-sm transition ${
-                  selectedTypes.length === 0
-                    ? "bg-ink text-white"
-                    : "border border-ink/10 bg-white/70 text-ink/72"
-                }`}
-              >
-                Tous
-              </button>
-              {productTypes.map((type) => (
-                <button
-                  key={type}
-                  type="button"
-                  onClick={() =>
-                    setSelectedTypes((current) =>
-                      current.includes(type)
-                        ? current.filter((entry) => entry !== type)
-                        : [...current, type],
-                    )
-                  }
-                  className={`rounded-full px-4 py-2 text-sm transition ${
-                    selectedTypes.includes(type)
-                      ? "bg-ink text-white"
-                      : "border border-ink/10 bg-white/70 text-ink/72"
-                  }`}
-                >
-                  {type}
-                </button>
-              ))}
-              </div>
-            </div>
-            <div className="rounded-[1.5rem] border border-[var(--line)] bg-[var(--panel)] p-4">
-              <p className="text-xs uppercase tracking-[0.18em] text-ink/50">
-                Marque
-              </p>
-              <div className="mt-3 flex flex-wrap gap-2">
-              <button
-                type="button"
-                onClick={() => setSelectedBrands([])}
-                className={`rounded-full px-4 py-2 text-sm transition ${
-                  selectedBrands.length === 0
-                    ? "bg-ink text-white"
-                    : "border border-ink/10 bg-white/70 text-ink/72"
-                }`}
-              >
-                Toutes
-              </button>
-              {productBrands.map((brand) => (
-                <button
-                  key={brand}
-                  type="button"
-                  onClick={() =>
-                    setSelectedBrands((current) =>
-                      current.includes(brand)
-                        ? current.filter((entry) => entry !== brand)
-                        : [...current, brand],
-                    )
-                  }
-                  className={`rounded-full px-4 py-2 text-sm transition ${
-                    selectedBrands.includes(brand)
-                      ? "bg-ink text-white"
-                      : "border border-ink/10 bg-white/70 text-ink/72"
-                  }`}
-                >
-                  {brand}
-                </button>
-              ))}
-              </div>
-            </div>
-            <div className="rounded-[1.5rem] border border-[var(--line)] bg-[var(--panel)] p-4">
+            <div className="grid gap-4 lg:grid-cols-[1.95fr_0.95fr]">
+              <div className="rounded-[1.5rem] border border-[var(--line)] bg-[var(--panel)] p-4">
               <p className="text-xs uppercase tracking-[0.18em] text-ink/50">
                 Contrôles
               </p>
@@ -410,8 +320,6 @@ export default function Home() {
                 <button
                   type="button"
                   onClick={() => {
-                    setSelectedTypes([]);
-                    setSelectedBrands([]);
                     setSearchTerm("");
                     setSortBy("ratio");
                   }}
@@ -420,6 +328,15 @@ export default function Home() {
                   Réinitialiser
                 </button>
               </div>
+            </div>
+            <div className="rounded-[1.5rem] border border-[var(--line)] bg-[var(--panel)] p-4">
+              <p className="text-xs uppercase tracking-[0.18em] text-ink/50">
+                Astuce
+              </p>
+              <p className="mt-3 text-sm leading-6 text-ink/68">
+                Utilise la recherche et le tri pour trouver rapidement le meilleur
+                rapport sans surcharge visuelle.
+              </p>
             </div>
           </div>
         </div>
