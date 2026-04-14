@@ -1,0 +1,30 @@
+{
+  "name": "carbrate",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "predev": "npm run update:offers",
+    "dev": "next dev",
+    "prebuild": "npm run update:offers",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "update:offers": "node scripts/update-offers.mjs",
+    "update:offers:live": "node scripts/update-offers.mjs --live"
+  },
+  "dependencies": {
+    "next": "15.2.4",
+    "react": "19.0.0",
+    "react-dom": "19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "22.14.1",
+    "@types/react": "19.0.12",
+    "@types/react-dom": "19.0.5",
+    "autoprefixer": "10.4.21",
+    "postcss": "8.5.3",
+    "tailwindcss": "3.4.17",
+    "typescript": "5.8.3"
+  }
+}

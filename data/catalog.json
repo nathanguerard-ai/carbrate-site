@@ -1,0 +1,1467 @@
+{
+  "products": [
+    {
+      "id": "maurten-gel-100",
+      "name": "Gel 100",
+      "brand": "Maurten",
+      "type": "Gel",
+      "carbsGrams": 25,
+      "sodiumMg": null,
+      "caffeineMg": null,
+      "nutritionSources": [
+        {
+          "label": "Maurten officiel",
+          "url": "https://www.maurten.com/products/gel-100"
+        }
+      ],
+      "offers": [
+        {
+          "seller": "fitfirst.ca",
+          "productUrl": "https://www.fitfirst.ca/products/gel-100",
+          "country": "CA",
+          "fallbackPrice": 5.5
+        },
+        {
+          "seller": "frontrunners.ca",
+          "productUrl": "https://nanaimo.frontrunners.ca/products/maurten-hydrogel-sports-fuel-gel-100",
+          "country": "CA",
+          "fallbackPrice": 5.75
+        }
+      ]
+    },
+    {
+      "id": "maurten-gel-100-caf-100",
+      "name": "Gel 100 Caf 100",
+      "brand": "Maurten",
+      "type": "Gel",
+      "carbsGrams": 25,
+      "sodiumMg": null,
+      "caffeineMg": 100,
+      "nutritionSources": [
+        {
+          "label": "Maurten officiel",
+          "url": "https://www.maurten.com/products/gel-100-caf-100"
+        }
+      ],
+      "offers": [
+        {
+          "seller": "spryactive.ca",
+          "productUrl": "https://spryactive.ca/products/maurten-gel-100-caf",
+          "country": "CA",
+          "fallbackPrice": 6.5
+        },
+        {
+          "seller": "lecoureurnordique.ca",
+          "productUrl": "https://lecoureurnordique.ca/en/products/maurten-gel-100-caf-100-boite",
+          "country": "CA",
+          "unitCount": 12,
+          "fallbackPrice": 6.67
+        }
+      ]
+    },
+    {
+      "id": "maurten-gel-160",
+      "name": "Gel 160",
+      "brand": "Maurten",
+      "type": "Gel",
+      "carbsGrams": 40,
+      "sodiumMg": null,
+      "caffeineMg": null,
+      "nutritionSources": [
+        {
+          "label": "Maurten officiel",
+          "url": "https://www.maurten.com/products/gel-160"
+        }
+      ],
+      "offers": [
+        {
+          "seller": "fitfirst.ca",
+          "productUrl": "https://www.fitfirst.ca/products/gel-160",
+          "country": "CA",
+          "fallbackPrice": 7.5
+        },
+        {
+          "seller": "spryactive.ca",
+          "productUrl": "https://spryactive.ca/products/maurten-gel-160",
+          "country": "CA",
+          "fallbackPrice": 7.75
+        }
+      ]
+    },
+    {
+      "id": "maurten-solid-160",
+      "name": "Solid 160",
+      "brand": "Maurten",
+      "type": "Barre",
+      "carbsGrams": 40,
+      "sodiumMg": null,
+      "caffeineMg": null,
+      "nutritionSources": [
+        {
+          "label": "Maurten officiel",
+          "url": "https://www.maurten.com/products/solid-160"
+        }
+      ],
+      "offers": [
+        {
+          "seller": "frontrunners.ca",
+          "productUrl": "https://frontrunners.ca/products/maurten-solid-c-160",
+          "country": "CA",
+          "fallbackPrice": 4.25
+        },
+        {
+          "seller": "lecoureurnordique.ca",
+          "productUrl": "https://lecoureurnordique.ca/products/maurten-solids-160-boite",
+          "country": "CA",
+          "unitCount": 12,
+          "fallbackPrice": 4.25
+        }
+      ]
+    },
+    {
+      "id": "maurten-drink-mix-160",
+      "name": "Drink Mix 160",
+      "brand": "Maurten",
+      "type": "Boisson",
+      "carbsGrams": 40,
+      "sodiumMg": 210,
+      "caffeineMg": null,
+      "nutritionSources": [
+        {
+          "label": "Maurten officiel",
+          "url": "https://www.maurten.com/products/drink-mix-160"
+        }
+      ],
+      "offers": [
+        {
+          "seller": "spryactive.ca",
+          "productUrl": "https://spryactive.ca/products/maurten-hydrogel-sports-fuel-drink-mix-160",
+          "country": "CA",
+          "fallbackPrice": 3.5
+        },
+        {
+          "seller": "frontrunners.ca",
+          "productUrl": "https://frontrunners.ca/products/maurten-drink-mix-160",
+          "country": "CA",
+          "fallbackPrice": 3.5
+        }
+      ]
+    },
+    {
+      "id": "maurten-drink-mix-320",
+      "name": "Drink Mix 320",
+      "brand": "Maurten",
+      "type": "Boisson",
+      "carbsGrams": 80,
+      "sodiumMg": null,
+      "caffeineMg": null,
+      "nutritionSources": [
+        {
+          "label": "Maurten officiel",
+          "url": "https://www.maurten.com/products/drink-mix-320"
+        }
+      ],
+      "offers": [
+        {
+          "seller": "spryactive.ca",
+          "productUrl": "https://spryactive.ca/products/maurten-hydrogel-sports-fuel-drink-mix-320",
+          "country": "CA",
+          "fallbackPrice": 5.35
+        },
+        {
+          "seller": "frontrunners.ca",
+          "productUrl": "https://frontrunners.ca/products/maurten-drink-mix-320",
+          "country": "CA",
+          "fallbackPrice": 5.5
+        }
+      ]
+    },
+    {
+      "id": "maurten-drink-mix-320-caf-100",
+      "name": "Drink Mix 320 Caf 100",
+      "brand": "Maurten",
+      "type": "Boisson",
+      "carbsGrams": 80,
+      "sodiumMg": null,
+      "caffeineMg": 100,
+      "nutritionSources": [
+        {
+          "label": "Maurten officiel",
+          "url": "https://www.maurten.com/products/drink-mix-320-caf-100"
+        }
+      ],
+      "offers": [
+        {
+          "seller": "lecoureurnordique.ca",
+          "productUrl": "https://lecoureurnordique.ca/en/products/maurten-drink-mix-320-caf-100-boite",
+          "country": "CA",
+          "unitCount": 14,
+          "fallbackPrice": 5.71
+        },
+        {
+          "seller": "spryactive.ca",
+          "productUrl": "https://spryactive.ca/products/maurten-drink-mix-320-caf-100",
+          "country": "CA",
+          "fallbackPrice": 6.35
+        }
+      ]
+    },
+    {
+      "id": "sis-beta-fuel-gel",
+      "name": "Beta Fuel Gel",
+      "brand": "SiS",
+      "type": "Gel",
+      "carbsGrams": 40,
+      "sodiumMg": 118,
+      "caffeineMg": null,
+      "nutritionSources": [
+        {
+          "label": "SiS officiel",
+          "url": "https://www.scienceinsport.com/beta-fuel-gel-pack"
+        }
+      ],
+      "offers": [
+        {
+          "seller": "shopsante.ca",
+          "productUrl": "https://shopsante.ca/en/products/sis-beta-fuel-gel-60ml-30x",
+          "country": "CA",
+          "unitCount": 30,
+          "fallbackPrice": 3
+        },
+        {
+          "seller": "fuelkit.ca",
+          "productUrl": "https://fuelkit.ca/products/sis-beta-fuel-gel",
+          "country": "CA",
+          "fallbackPrice": 3.49
+        }
+      ]
+    },
+    {
+      "id": "sis-beta-fuel-energy-chew",
+      "name": "Beta Fuel Energy Chew",
+      "brand": "SiS",
+      "type": "Bonbon",
+      "carbsGrams": 45,
+      "sodiumMg": null,
+      "caffeineMg": null,
+      "nutritionSources": [
+        {
+          "label": "SiS officiel",
+          "url": "https://www.scienceinsport.com/us/beta-fuel-energy-chew-orange-6-pack"
+        }
+      ],
+      "offers": [
+        {
+          "seller": "shopsante.ca",
+          "productUrl": "https://shopsante.ca/en/products/sis-beta-fuel-energy-chew",
+          "country": "CA",
+          "fallbackPrice": 5.49
+        },
+        {
+          "seller": "fuelkit.ca",
+          "productUrl": "https://fuelkit.ca/products/sis-beta-energy-chews",
+          "country": "CA",
+          "fallbackPrice": 5.99
+        }
+      ]
+    },
+    {
+      "id": "tailwind-endurance",
+      "name": "Endurance Fuel Single",
+      "brand": "Tailwind",
+      "type": "Boisson",
+      "carbsGrams": 50,
+      "sodiumMg": 310,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "fuelkit.ca",
+          "productUrl": "https://fuelkit.ca/products/tailwind-endurance-fuel-single-serving-caffeine-free",
+          "country": "CA",
+          "fallbackPrice": 4.25
+        },
+        {
+          "seller": "enroute.run",
+          "productUrl": "https://enroute.run/products/tailwind-endurance-fuel-stick",
+          "country": "CA",
+          "fallbackPrice": 4.5
+        }
+      ]
+    },
+    {
+      "id": "upika-endurance",
+      "name": "Endurance",
+      "brand": "Upika",
+      "type": "Boisson",
+      "carbsGrams": 25,
+      "sodiumMg": 300,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "upika.ca",
+          "productUrl": "https://upika.ca/en/products/upika-endurance",
+          "country": "CA",
+          "fallbackPrice": 2
+        },
+        {
+          "seller": "shopsante.ca",
+          "productUrl": "https://shopsante.ca/en/products/upika-endurance-725g-1",
+          "country": "CA",
+          "fallbackPrice": 2
+        },
+        {
+          "seller": "lecoureurnordique.ca",
+          "productUrl": "https://lecoureurnordique.ca/en/products/upika-endurance",
+          "country": "CA",
+          "fallbackPrice": 2
+        }
+      ]
+    },
+    {
+      "id": "upika-endurance-plus",
+      "name": "Endurance+",
+      "brand": "Upika",
+      "type": "Boisson",
+      "carbsGrams": 25,
+      "sodiumMg": 300,
+      "caffeineMg": 100,
+      "offers": [
+        {
+          "seller": "upika.ca",
+          "productUrl": "https://upika.ca/en/products/upika-endurance-plus-cerise-lime",
+          "country": "CA",
+          "fallbackPrice": 2
+        },
+        {
+          "seller": "shopsante.ca",
+          "productUrl": "https://shopsante.ca/en/collections/tous-les-produits/products/upika-endurance-725g-2",
+          "country": "CA",
+          "fallbackPrice": 2
+        }
+      ]
+    },
+    {
+      "id": "precision-pf30-gel",
+      "name": "PF 30 Gel",
+      "brand": "Precision Fuel & Hydration",
+      "type": "Gel",
+      "carbsGrams": 30,
+      "sodiumMg": 203,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "precisionhydration.com",
+          "productUrl": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/",
+          "country": "CA",
+          "fallbackPrice": 4.12
+        },
+        {
+          "seller": "enroute.run",
+          "productUrl": "https://enroute.run/products/pf-30-gel",
+          "country": "CA",
+          "fallbackPrice": 4.5
+        }
+      ]
+    },
+    {
+      "id": "precision-pf90-gel",
+      "name": "PF 90 Gel",
+      "brand": "Precision Fuel & Hydration",
+      "type": "Gel",
+      "carbsGrams": 90,
+      "sodiumMg": null,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "enroute.run",
+          "productUrl": "https://enroute.run/products/pf-90-gel",
+          "country": "CA",
+          "fallbackPrice": 8.25
+        },
+        {
+          "seller": "precisionhydration.com",
+          "productUrl": "https://www.precisionhydration.com/ca/en/products/pf-90-gel/",
+          "country": "CA",
+          "fallbackPrice": 8.5
+        }
+      ]
+    },
+    {
+      "id": "clif-bloks-caffeinated",
+      "name": "Bloks Caffeinated",
+      "brand": "Clif",
+      "type": "Bonbon",
+      "carbsGrams": 46,
+      "sodiumMg": 70,
+      "caffeineMg": 50,
+      "offers": [
+        {
+          "seller": "frontrunners.ca",
+          "productUrl": "https://frontrunners.ca/products/clif-shotbloks",
+          "country": "CA",
+          "fallbackPrice": 4.25
+        },
+        {
+          "seller": "mec.ca",
+          "productUrl": "https://www.mec.ca/en/product/6000-000/clif-bloks-energy-chews",
+          "country": "CA",
+          "fallbackPrice": 4.5
+        }
+      ]
+    },
+    {
+      "id": "krono-maple-gel",
+      "name": "Maple Energy Gel",
+      "brand": "Krono",
+      "type": "Gel",
+      "carbsGrams": 24,
+      "sodiumMg": 140,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "krononutrition.com",
+          "productUrl": "https://krononutrition.com/products/maple-energy-gels-box-of-24",
+          "country": "CA",
+          "fallbackPrice": 2.71
+        }
+      ]
+    },
+    {
+      "id": "krono-maple-coffee-gel",
+      "name": "Maple & Coffee Energy Gel",
+      "brand": "Krono",
+      "type": "Gel",
+      "carbsGrams": 24,
+      "sodiumMg": null,
+      "caffeineMg": 25,
+      "offers": [
+        {
+          "seller": "krononutrition.com",
+          "productUrl": "https://krononutrition.com/products/maple-coffee-energy-gels-box-of-24",
+          "country": "CA",
+          "fallbackPrice": 2.71
+        }
+      ]
+    },
+    {
+      "id": "krono-maple-raspberry-gel",
+      "name": "Maple & Raspberry Energy Gel",
+      "brand": "Krono",
+      "type": "Gel",
+      "carbsGrams": 29,
+      "sodiumMg": 140,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "krononutrition.com",
+          "productUrl": "https://krononutrition.com/products/maple-raspberry-energy-gels-box-of-24",
+          "country": "CA",
+          "fallbackPrice": 2.71
+        }
+      ]
+    },
+    {
+      "id": "krono-tropical-gel",
+      "name": "Tropical Energy Gel",
+      "brand": "Krono",
+      "type": "Gel",
+      "carbsGrams": 30,
+      "sodiumMg": 50,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "krononutrition.com",
+          "productUrl": "https://krononutrition.com/products/tropical-energy-gels-box-of-24",
+          "country": "CA",
+          "fallbackPrice": 2.71
+        }
+      ]
+    },
+    {
+      "id": "krono-lemon-lime-sport-drink-mix",
+      "name": "Lemon & Lime Sport Drink Mix",
+      "brand": "Krono",
+      "type": "Boisson",
+      "carbsGrams": 22,
+      "sodiumMg": 300,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "krononutrition.com",
+          "productUrl": "https://krononutrition.com/en-ca/products/lemon-lime-sport-drink-mix",
+          "country": "CA",
+          "fallbackPrice": 4.11
+        },
+        {
+          "seller": "well.ca",
+          "productUrl": "https://well.ca/products/krono-nutrition-sport-drink-mix_345933.html",
+          "country": "CA",
+          "fallbackPrice": 5.97
+        }
+      ]
+    },
+    {
+      "id": "krono-peach-sport-drink-mix",
+      "name": "Peach Sport Drink Mix",
+      "brand": "Krono",
+      "type": "Boisson",
+      "carbsGrams": 22,
+      "sodiumMg": 200,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "krononutrition.com",
+          "productUrl": "https://krononutrition.com/en/produit/nutritions/electrolytes-en/peach-sport-drink-mix/",
+          "country": "CA",
+          "fallbackPrice": 4.11
+        },
+        {
+          "seller": "elementsport.ca",
+          "productUrl": "https://elementsport.ca/products/krono-sport-drink-mix",
+          "country": "CA",
+          "fallbackPrice": 4.11
+        }
+      ]
+    },
+    {
+      "id": "neversecond-c30-energy-gel",
+      "name": "C30 Energy Gel",
+      "brand": "Neversecond",
+      "type": "Gel",
+      "carbsGrams": 30,
+      "sodiumMg": 200,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "skiuphill.ca",
+          "productUrl": "https://skiuphill.ca/products/neversecond-c30-energy-gel",
+          "country": "CA",
+          "fallbackPrice": 5
+        },
+        {
+          "seller": "theoutfitters.nf.ca",
+          "productUrl": "https://theoutfitters.nf.ca/products/neversecond-c30-energy-gel",
+          "country": "CA",
+          "fallbackPrice": 5.25
+        }
+      ]
+    },
+    {
+      "id": "maurten-solid-c-160",
+      "name": "Solid C 160",
+      "brand": "Maurten",
+      "type": "Barre",
+      "carbsGrams": 40,
+      "sodiumMg": null,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "frontrunners.ca",
+          "productUrl": "https://frontrunners.ca/products/maurten-solid-c-160",
+          "country": "CA",
+          "fallbackPrice": 4.25
+        },
+        {
+          "seller": "fuelkit.ca",
+          "productUrl": "https://fuelkit.ca/products/maurten-solid-160-bar-single-bar",
+          "country": "CA",
+          "fallbackPrice": 4.5
+        }
+      ]
+    },
+    {
+      "id": "sis-go-isotonic-energy-gel",
+      "name": "GO Isotonic Energy Gel",
+      "brand": "SiS",
+      "type": "Gel",
+      "carbsGrams": 22,
+      "sodiumMg": null,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "shopsante.ca",
+          "productUrl": "https://shopsante.ca/en/products/sis-go-isotonic-energy-gel-60ml",
+          "country": "CA",
+          "fallbackPrice": 2.99
+        },
+        {
+          "seller": "fuelkit.ca",
+          "productUrl": "https://fuelkit.ca/collections/energy-gels",
+          "country": "CA",
+          "fallbackPrice": 1.99
+        }
+      ]
+    },
+    {
+      "id": "tailwind-endurance-caffeinated",
+      "name": "Endurance Fuel Single Caffeine",
+      "brand": "Tailwind",
+      "type": "Boisson",
+      "carbsGrams": 50,
+      "sodiumMg": 630,
+      "caffeineMg": 35,
+      "offers": [
+        {
+          "seller": "fuelkit.ca",
+          "productUrl": "https://fuelkit.ca/products/tailwind-endurance-fuel-raspberry-single-serving",
+          "country": "CA",
+          "fallbackPrice": 4.25
+        }
+      ]
+    },
+    {
+      "id": "tailwind-high-carb-fuel",
+      "name": "High Carb Fuel",
+      "brand": "Tailwind",
+      "type": "Boisson",
+      "carbsGrams": 90,
+      "sodiumMg": 680,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "fuelkit.ca",
+          "productUrl": "https://fuelkit.ca/products/tailwind-high-carb-fuel",
+          "country": "CA",
+          "fallbackPrice": 6.7
+        }
+      ]
+    },
+    {
+      "id": "precision-pf30-chew",
+      "name": "PF 30 Chew",
+      "brand": "Precision Fuel & Hydration",
+      "type": "Bonbon",
+      "carbsGrams": 30,
+      "sodiumMg": null,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "precisionhydration.com",
+          "productUrl": "https://www.precisionhydration.com/ca/en/products/pf-30-chew/",
+          "country": "CA",
+          "fallbackPrice": 3.5
+        },
+        {
+          "seller": "enroute.run",
+          "productUrl": "https://enroute.run/products/pf-30-chews",
+          "country": "CA",
+          "fallbackPrice": 5
+        }
+      ]
+    },
+    {
+      "id": "precision-pf60-chew-bar",
+      "name": "PF 60 Chew Bar",
+      "brand": "Precision Fuel & Hydration",
+      "type": "Bonbon",
+      "carbsGrams": 60,
+      "sodiumMg": null,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "precisionhydration.com",
+          "productUrl": "https://www.precisionhydration.com/ca/en/products/pf-60-chew-bar/",
+          "country": "CA",
+          "fallbackPrice": 6.33
+        }
+      ]
+    },
+    {
+      "id": "neversecond-c30-plus-energy-gel",
+      "name": "C30+ Energy Gel",
+      "brand": "Neversecond",
+      "type": "Gel",
+      "carbsGrams": 30,
+      "sodiumMg": 200,
+      "caffeineMg": 75,
+      "offers": [
+        {
+          "seller": "skiuphill.ca",
+          "productUrl": "https://skiuphill.ca/products/neversecond-c30-energy-gel-copy",
+          "country": "CA",
+          "fallbackPrice": 5
+        }
+      ]
+    },
+    {
+      "id": "neversecond-c30-sports-drink",
+      "name": "C30 Sports Drink Mix",
+      "brand": "Neversecond",
+      "type": "Boisson",
+      "carbsGrams": 30,
+      "sodiumMg": 200,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "skiuphill.ca",
+          "productUrl": "https://skiuphill.ca/products/neversecond-c30-drink-mix-singles",
+          "country": "CA",
+          "fallbackPrice": 4.7
+        }
+      ]
+    },
+    {
+      "id": "neversecond-c90-high-carb-drink-mix",
+      "name": "C90 High Carb Drink Mix",
+      "brand": "Neversecond",
+      "type": "Boisson",
+      "carbsGrams": 90,
+      "sodiumMg": 200,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "skiuphill.ca",
+          "productUrl": "https://skiuphill.ca/products/neversecond-c90-high-carb-sports-drink-mix",
+          "country": "CA",
+          "fallbackPrice": 6.88
+        }
+      ]
+    },
+    {
+      "id": "krono-berries-pomegranate-sport-drink-mix",
+      "name": "Berries & Pomegranate Sport Drink Mix",
+      "brand": "Krono",
+      "type": "Boisson",
+      "carbsGrams": 22,
+      "sodiumMg": 200,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "krononutrition.com",
+          "productUrl": "https://krononutrition.com/en-ca/products/berries-and-pomegranate-sport-drink-mix",
+          "country": "CA",
+          "fallbackPrice": 4.11
+        }
+      ]
+    },
+    {
+      "id": "krono-pink-limonade-sport-drink-mix",
+      "name": "Pink Limonade Sport Drink Mix",
+      "brand": "Krono",
+      "type": "Boisson",
+      "carbsGrams": 22,
+      "sodiumMg": 200,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "krononutrition.com",
+          "productUrl": "https://krononutrition.com/en-ca/products/pink-limonade-sport-drink-mix",
+          "country": "CA",
+          "fallbackPrice": 4.11
+        }
+      ]
+    },
+    {
+      "id": "xact-energy-bar",
+      "name": "Energy Bar Maple",
+      "brand": "XACT",
+      "type": "Bonbon",
+      "carbsGrams": 25,
+      "sodiumMg": null,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "xactnutrition.com",
+          "productUrl": "https://www.xactnutrition.com/products/xact-energy-fruit-bars",
+          "country": "CA",
+          "fallbackPrice": 2.75
+        }
+      ]
+    },
+    {
+      "id": "xact-energy-performance-blackcurrant",
+      "name": "Energy Performance Blackcurrant",
+      "brand": "XACT",
+      "type": "Bonbon",
+      "carbsGrams": 25,
+      "sodiumMg": null,
+      "caffeineMg": 50,
+      "offers": [
+        {
+          "seller": "xactnutrition.com",
+          "productUrl": "https://www.xactnutrition.com/products/xact-energy-performance",
+          "country": "CA",
+          "fallbackPrice": 3.21
+        }
+      ]
+    },
+    {
+      "id": "xact-energy-performance-lemon",
+      "name": "Energy Performance Lemon",
+      "brand": "XACT",
+      "type": "Bonbon",
+      "carbsGrams": 25,
+      "sodiumMg": null,
+      "caffeineMg": 50,
+      "offers": [
+        {
+          "seller": "xactnutrition.com",
+          "productUrl": "https://www.xactnutrition.com/products/xact-energy-performance",
+          "country": "CA",
+          "fallbackPrice": 3.21
+        }
+      ]
+    },
+    {
+      "id": "xact-energy-bar-apricot",
+      "name": "Energy Bar Apricot",
+      "brand": "XACT",
+      "type": "Bonbon",
+      "carbsGrams": 25,
+      "sodiumMg": null,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "xactnutrition.com",
+          "productUrl": "https://www.xactnutrition.com/products/xact-energy-fruit-bars",
+          "country": "CA",
+          "fallbackPrice": 2.75
+        }
+      ]
+    },
+    {
+      "id": "xact-energy-bar-orange",
+      "name": "Energy Bar Orange",
+      "brand": "XACT",
+      "type": "Bonbon",
+      "carbsGrams": 25,
+      "sodiumMg": null,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "xactnutrition.com",
+          "productUrl": "https://www.xactnutrition.com/products/xact-energy-fruit-bars",
+          "country": "CA",
+          "fallbackPrice": 2.75
+        }
+      ]
+    },
+    {
+      "id": "xact-energy-bar-strawberry",
+      "name": "Energy Bar Strawberry",
+      "brand": "XACT",
+      "type": "Bonbon",
+      "carbsGrams": 25,
+      "sodiumMg": null,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "xactnutrition.com",
+          "productUrl": "https://www.xactnutrition.com/products/xact-energy-fruit-bars",
+          "country": "CA",
+          "fallbackPrice": 2.75
+        }
+      ]
+    },
+    {
+      "id": "xact-energy-bar-green-apple",
+      "name": "Energy Bar Green Apple",
+      "brand": "XACT",
+      "type": "Bonbon",
+      "carbsGrams": 25,
+      "sodiumMg": null,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "xactnutrition.com",
+          "productUrl": "https://www.xactnutrition.com/products/xact-energy-fruit-bars",
+          "country": "CA",
+          "fallbackPrice": 2.75
+        }
+      ]
+    },
+    {
+      "id": "xact-energy-bar-cherry",
+      "name": "Energy Bar Cherry",
+      "brand": "XACT",
+      "type": "Bonbon",
+      "carbsGrams": 25,
+      "sodiumMg": null,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "xactnutrition.com",
+          "productUrl": "https://www.xactnutrition.com/products/xact-energy-fruit-bars",
+          "country": "CA",
+          "fallbackPrice": 2.75
+        }
+      ]
+    },
+    {
+      "id": "xact-energy-performance-e-beet",
+      "name": "Energy Performance E-Beet",
+      "brand": "XACT",
+      "type": "Bonbon",
+      "carbsGrams": 25,
+      "sodiumMg": null,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "xactnutrition.com",
+          "productUrl": "https://www.xactnutrition.com/products/xact-energy-performance",
+          "country": "CA",
+          "fallbackPrice": 2.57
+        }
+      ]
+    },
+    {
+      "id": "xact-energy-gel-strawberry",
+      "name": "Energy Fruit Gel Strawberry",
+      "brand": "XACT",
+      "type": "Gel",
+      "carbsGrams": 25,
+      "sodiumMg": null,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "xactnutrition.com",
+          "productUrl": "https://www.xactnutrition.com/collections/real-fruit-gels",
+          "country": "CA",
+          "fallbackPrice": 4.38
+        }
+      ]
+    },
+    {
+      "id": "xact-energy-gel-apricot",
+      "name": "Energy Fruit Gel Apricot",
+      "brand": "XACT",
+      "type": "Gel",
+      "carbsGrams": 25,
+      "sodiumMg": null,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "xactnutrition.com",
+          "productUrl": "https://www.xactnutrition.com/collections/real-fruit-gels",
+          "country": "CA",
+          "fallbackPrice": 4.38
+        }
+      ]
+    },
+    {
+      "id": "xact-energy-gel-blackcurrant",
+      "name": "Energy Fruit Gel Blackcurrant",
+      "brand": "XACT",
+      "type": "Gel",
+      "carbsGrams": 25,
+      "sodiumMg": null,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "xactnutrition.com",
+          "productUrl": "https://www.xactnutrition.com/collections/real-fruit-gels",
+          "country": "CA",
+          "fallbackPrice": 4.58
+        }
+      ]
+    },
+    {
+      "id": "xact-endurance-bar-mixed-berries",
+      "name": "Endurance Bar Mixed Berries",
+      "brand": "XACT",
+      "type": "Barre",
+      "carbsGrams": 16,
+      "sodiumMg": null,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "xactnutrition.com",
+          "productUrl": "https://www.xactnutrition.com/products/endurance-almond-date-bars",
+          "country": "CA",
+          "fallbackPrice": 3.67
+        }
+      ]
+    },
+    {
+      "id": "xact-endurance-bar-apricot-peach",
+      "name": "Endurance Bar Apricot Peach",
+      "brand": "XACT",
+      "type": "Barre",
+      "carbsGrams": 16,
+      "sodiumMg": null,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "xactnutrition.com",
+          "productUrl": "https://www.xactnutrition.com/products/endurance-almond-date-bars",
+          "country": "CA",
+          "fallbackPrice": 3.67
+        }
+      ]
+    },
+    {
+      "id": "upika-carb-boost",
+      "name": "Carb-Boost",
+      "brand": "Upika",
+      "type": "Boisson",
+      "carbsGrams": 27,
+      "sodiumMg": null,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "upika.ca",
+          "productUrl": "https://upika.ca/en/products/upika-carb-boost",
+          "country": "CA",
+          "fallbackPrice": 2
+        }
+      ]
+    },
+    {
+      "id": "upika-bars",
+      "name": "Bars",
+      "brand": "Upika",
+      "type": "Barre",
+      "carbsGrams": 40,
+      "sodiumMg": null,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "upika.ca",
+          "productUrl": "https://upika.ca/en/products/barres-upika-1-barre",
+          "country": "CA",
+          "fallbackPrice": 3.99
+        }
+      ]
+    },
+    {
+      "id": "upika-sample-endurance",
+      "name": "Sample Endurance",
+      "brand": "Upika",
+      "type": "Boisson",
+      "carbsGrams": 27,
+      "sodiumMg": 300,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "upika.ca",
+          "productUrl": "https://upika.ca/en/products/samples-upika-endurance-citron-lime",
+          "country": "CA",
+          "fallbackPrice": 2.99
+        }
+      ]
+    },
+    {
+      "id": "upika-sample-endurance-plus",
+      "name": "Sample Endurance+",
+      "brand": "Upika",
+      "type": "Boisson",
+      "carbsGrams": 25,
+      "sodiumMg": 300,
+      "caffeineMg": 100,
+      "offers": [
+        {
+          "seller": "upika.ca",
+          "productUrl": "https://upika.ca/en/products/samples-upika-endurance-melon-d-eau",
+          "country": "CA",
+          "fallbackPrice": 2.99
+        }
+      ]
+    },
+    {
+      "id": "krono-apple-maple-gel",
+      "name": "Apple & Maple Energy Gel",
+      "brand": "Krono",
+      "type": "Gel",
+      "carbsGrams": 21,
+      "sodiumMg": 120,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "krononutrition.com",
+          "productUrl": "https://krononutrition.com/products/apple-maple-energy-gels-box-of-24",
+          "country": "CA",
+          "fallbackPrice": 2.71
+        }
+      ]
+    },
+    {
+      "id": "krono-citrus-gel",
+      "name": "Citrus Energy Gel",
+      "brand": "Krono",
+      "type": "Gel",
+      "carbsGrams": 30,
+      "sodiumMg": null,
+      "caffeineMg": 50,
+      "offers": [
+        {
+          "seller": "krononutrition.com",
+          "productUrl": "https://krononutrition.com/products/citrus-energy-gels-box-of-24",
+          "country": "CA",
+          "fallbackPrice": 2.71
+        }
+      ]
+    },
+    {
+      "id": "krono-blueberry-gel",
+      "name": "Blueberry Energy Gel",
+      "brand": "Krono",
+      "type": "Gel",
+      "carbsGrams": 30,
+      "sodiumMg": 50,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "krononutrition.com",
+          "productUrl": "https://krononutrition.com/en/produit/nutritions/gels/blueberry-energy-gel/",
+          "country": "CA",
+          "fallbackPrice": 2.71
+        }
+      ]
+    },
+    {
+      "id": "krono-salted-caramel-gel",
+      "name": "Salted Caramel Energy Gel",
+      "brand": "Krono",
+      "type": "Gel",
+      "carbsGrams": 30,
+      "sodiumMg": 180,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "krononutrition.com",
+          "productUrl": "https://krononutrition.com/products/salted-caramel-energy-gels-box-of-24",
+          "country": "CA",
+          "fallbackPrice": 2.71
+        }
+      ]
+    },
+    {
+      "id": "krono-raspberry-maple-chews",
+      "name": "Raspberry & Maple Chews",
+      "brand": "Krono",
+      "type": "Bonbon",
+      "carbsGrams": 38,
+      "sodiumMg": 60,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "krononutrition.com",
+          "productUrl": "https://krononutrition.com/en-ca/products/raspberry-maple-chews",
+          "country": "CA",
+          "fallbackPrice": 3.75
+        }
+      ]
+    },
+    {
+      "id": "krono-apple-maple-chews",
+      "name": "Apple & Maple Chews",
+      "brand": "Krono",
+      "type": "Bonbon",
+      "carbsGrams": 39,
+      "sodiumMg": 60,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "krononutrition.com",
+          "productUrl": "https://krononutrition.com/en-ca/products/apple-maple-chews-box-of-12",
+          "country": "CA",
+          "fallbackPrice": 3.75
+        }
+      ]
+    },
+    {
+      "id": "krono-strawberry-maple-chews",
+      "name": "Strawberry & Maple Chews",
+      "brand": "Krono",
+      "type": "Bonbon",
+      "carbsGrams": 39,
+      "sodiumMg": 60,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "krononutrition.com",
+          "productUrl": "https://krononutrition.com/en-ca/products/strawberry-maple-chews-box-of-12",
+          "country": "CA",
+          "fallbackPrice": 3.75
+        }
+      ]
+    },
+    {
+      "id": "krono-apricot-cranberry-bar",
+      "name": "Apricot & Cranberry Energy Bar",
+      "brand": "Krono",
+      "type": "Barre",
+      "carbsGrams": 32,
+      "sodiumMg": null,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "krononutrition.com",
+          "productUrl": "https://krononutrition.com/en-ca/products/apricot-cranberry-energy-bars-box-of-12",
+          "country": "CA",
+          "fallbackPrice": 3.33
+        }
+      ]
+    },
+    {
+      "id": "krono-strawberry-pineapple-bar",
+      "name": "Strawberry & Pineapple Energy Bar",
+      "brand": "Krono",
+      "type": "Barre",
+      "carbsGrams": 32,
+      "sodiumMg": null,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "krononutrition.com",
+          "productUrl": "https://krononutrition.com/products/strawberry-pineapple-energy-bars-box-of-12",
+          "country": "CA",
+          "fallbackPrice": 3.25
+        }
+      ]
+    },
+    {
+      "id": "krono-cherry-chocolate-bar",
+      "name": "Cherry & Chocolate Energy Bar",
+      "brand": "Krono",
+      "type": "Barre",
+      "carbsGrams": 31,
+      "sodiumMg": null,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "krononutrition.com",
+          "productUrl": "https://krononutrition.com/products/cherry-chocolate-energy-bars-box-of-12",
+          "country": "CA",
+          "fallbackPrice": 3.25
+        }
+      ]
+    },
+    {
+      "id": "krono-chocolate-espresso-bar",
+      "name": "Chocolate & Espresso Energy Bar",
+      "brand": "Krono",
+      "type": "Barre",
+      "carbsGrams": 29,
+      "sodiumMg": null,
+      "caffeineMg": 50,
+      "offers": [
+        {
+          "seller": "krononutrition.com",
+          "productUrl": "https://krononutrition.com/products/chocolate-espresso-energy-bars-box-of-12",
+          "country": "CA",
+          "fallbackPrice": 3.33
+        }
+      ]
+    },
+    {
+      "id": "brix-energy-gel-38g",
+      "name": "Energy Gel 38g",
+      "brand": "Brix",
+      "type": "Gel",
+      "carbsGrams": 26,
+      "sodiumMg": null,
+      "caffeineMg": null,
+      "nutritionSources": [
+        {
+          "label": "BRIX officiel",
+          "url": "https://brixrechargeparlanature.com/products/gel-energetique-brix-38g"
+        }
+      ],
+      "offers": [
+        {
+          "seller": "brixrechargeparlanature.com",
+          "productUrl": "https://brixrechargeparlanature.com/products/gel-energetique-brix-38g",
+          "country": "CA",
+          "fallbackPrice": 3.25
+        },
+        {
+          "seller": "altitude-sports.com",
+          "productUrl": "https://www.altitude-sports.com/p/brix-energy-gel-38g-bxx-100-bx",
+          "country": "CA",
+          "fallbackPrice": 3
+        }
+      ]
+    },
+    {
+      "id": "brix-energy-chews",
+      "name": "Jujube Énergétique",
+      "brand": "Brix",
+      "type": "Bonbon",
+      "carbsGrams": 49,
+      "sodiumMg": 200,
+      "caffeineMg": null,
+      "nutritionSources": [
+        {
+          "label": "BRIX officiel",
+          "url": "https://brixrechargeparlanature.com/products/jujube-energetique"
+        }
+      ],
+      "offers": [
+        {
+          "seller": "brixrechargeparlanature.com",
+          "productUrl": "https://brixrechargeparlanature.com/products/jujube-energetique",
+          "country": "CA",
+          "fallbackPrice": 5.25
+        },
+        {
+          "seller": "altitude-sports.com",
+          "productUrl": "https://www.altitude-sports.com/p/brix-energy-jujube-59g-bxx-8000-bx",
+          "country": "CA",
+          "fallbackPrice": 5.25
+        }
+      ]
+    },
+    {
+      "id": "hornet-energy-gel",
+      "name": "Energy Gel",
+      "brand": "Hornet Energy",
+      "type": "Gel",
+      "carbsGrams": 27,
+      "sodiumMg": 150,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "trailheadpaddleshack.ca",
+          "productUrl": "https://www.trailheadpaddleshack.ca/hornet-energy-gel.html",
+          "country": "CA",
+          "fallbackPrice": 2.5
+        },
+        {
+          "seller": "shopsante.ca",
+          "productUrl": "https://shopsante.ca/en/products/hornet-energy-gel-energetique-33g",
+          "country": "CA",
+          "fallbackPrice": 2.99
+        }
+      ]
+    },
+    {
+      "id": "hornet-energy-gel-caffeine",
+      "name": "Energy Gel Caffeine",
+      "brand": "Hornet Energy",
+      "type": "Gel",
+      "carbsGrams": 27,
+      "sodiumMg": 150,
+      "caffeineMg": 50,
+      "offers": [
+        {
+          "seller": "shopsante.ca",
+          "productUrl": "https://shopsante.ca/en/products/hornet-energy-gel-energetique-avec-cafeine-33g",
+          "country": "CA",
+          "fallbackPrice": 3.29
+        }
+      ]
+    },
+    {
+      "id": "naak-boost-gel-25",
+      "name": "Boost Gel 25",
+      "brand": "Näak",
+      "type": "Gel",
+      "carbsGrams": 25,
+      "sodiumMg": 125,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "naak.com",
+          "productUrl": "https://www.naak.com/products/boost-gel-neutral",
+          "country": "CA",
+          "fallbackPrice": 4
+        }
+      ]
+    },
+    {
+      "id": "naak-boost-gel-30",
+      "name": "Boost Gel 30",
+      "brand": "Näak",
+      "type": "Gel",
+      "carbsGrams": 30,
+      "sodiumMg": 250,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "naak.com",
+          "productUrl": "https://www.naak.com/collections/boost-energy/products/boost-gel-salted-lemon",
+          "country": "CA",
+          "fallbackPrice": 4
+        }
+      ]
+    },
+    {
+      "id": "naak-boost-drink-mix-60",
+      "name": "Boost Drink Mix 60",
+      "brand": "Näak",
+      "type": "Boisson",
+      "carbsGrams": 60,
+      "sodiumMg": 250,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "naak.com",
+          "productUrl": "https://www.naak.com/products/boost-drink-mix-bag-neutral",
+          "country": "CA",
+          "fallbackPrice": 3
+        }
+      ]
+    },
+    {
+      "id": "pluswatt-bcaa-liquid-carbo",
+      "name": "BCAA Ride Gel+",
+      "brand": "+Watt",
+      "type": "Gel",
+      "carbsGrams": 52.3,
+      "sodiumMg": null,
+      "caffeineMg": 46,
+      "nutritionSources": [
+        {
+          "label": "+Watt officiel",
+          "url": "https://watt.it/en/carbohydrates/energetic-gels/bcaa-ride-gel/"
+        }
+      ],
+      "offers": [
+        {
+          "seller": "velovelo.ca",
+          "productUrl": "https://www.velovelo.ca/shop/watt-bcaa-ride-gel-201",
+          "country": "CA",
+          "fallbackPrice": 8
+        }
+      ]
+    },
+    {
+      "id": "pluswatt-carbo-energy",
+      "name": "Long Race",
+      "brand": "+Watt",
+      "type": "Barre",
+      "carbsGrams": 60,
+      "sodiumMg": null,
+      "caffeineMg": null,
+      "nutritionSources": [
+        {
+          "label": "+Watt officiel",
+          "url": "https://watt.it/en/foods/energy-bars/long-race/"
+        }
+      ],
+      "offers": [
+        {
+          "seller": "velovelo.ca",
+          "productUrl": "https://www.velovelo.ca/shop/watt-long-race-205",
+          "country": "CA",
+          "fallbackPrice": 4
+        }
+      ]
+    },
+    {
+      "id": "pluswatt-sali-electrolyte",
+      "name": "Sali+ Electrolyte",
+      "brand": "+Watt",
+      "type": "Boisson",
+      "carbsGrams": 34,
+      "sodiumMg": 500,
+      "caffeineMg": null,
+      "nutritionSources": [
+        {
+          "label": "+Watt officiel",
+          "url": "https://watt.it/en/carbohydrates/energetic-drinks/sali-electrolyte/"
+        }
+      ],
+      "offers": [
+        {
+          "seller": "velovelo.ca",
+          "productUrl": "https://www.velovelo.ca/shop/watt-sali-electrolyte-224",
+          "country": "CA",
+          "unitCount": 15,
+          "fallbackPrice": 1.47
+        }
+      ]
+    }
+  ]
+}
