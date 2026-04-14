@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-04-14T18:46:00.002Z",
+  "updatedAt": "2026-04-14T19:27:24.038Z",
   "analysis": {
-    "mode": "live",
-    "pagesFetched": 85,
+    "mode": "cached",
+    "pagesFetched": 0,
     "pagesFromCache": 183,
     "offerPricesFromLive": 50,
     "offerPricesFromFallback": 47,
