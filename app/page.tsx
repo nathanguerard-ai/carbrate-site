@@ -12,6 +12,7 @@ import {
 
 export default function Home() {
   const [targetGrams, setTargetGrams] = useState(DEFAULT_TARGET_CARBS);
+  const [pendingTargetGrams, setPendingTargetGrams] = useState(DEFAULT_TARGET_CARBS);
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -144,9 +145,9 @@ export default function Home() {
               <button
                 key={preset}
                 type="button"
-                onClick={() => setTargetGrams(preset)}
+                onClick={() => setPendingTargetGrams(preset)}
                 className={`rounded-full px-4 py-2 text-sm transition ${
-                  targetGrams === preset
+                  pendingTargetGrams === preset
                     ? "bg-accent text-white"
                     : "border border-white/15 bg-white/10 text-white/80"
                 }`}
@@ -168,12 +169,20 @@ export default function Home() {
                   min="30"
                   max="180"
                   step="5"
-                  value={targetGrams}
+                  value={pendingTargetGrams}
                   onChange={(event) =>
-                    setTargetGrams(clampTargetGrams(Number(event.target.value)))
+                    setPendingTargetGrams(clampTargetGrams(Number(event.target.value)))
                   }
                   className="w-[4.25rem] bg-transparent px-2 py-2 text-right text-white outline-none"
                 />
+                <button
+                  type="button"
+                  onClick={() => setTargetGrams(pendingTargetGrams)}
+                  disabled={pendingTargetGrams === targetGrams}
+                  className="rounded-xl border border-white/15 bg-white/10 px-4 py-2 text-sm text-white transition hover:bg-white/20 disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  Ok
+                </button>
                 <span className="min-w-[3.1rem] border-l border-white/10 px-2 py-2 text-center text-sm font-medium whitespace-nowrap text-white/70">
                   g/h
                 </span>
@@ -183,9 +192,9 @@ export default function Home() {
                 min="30"
                 max="180"
                 step="5"
-                value={targetGrams}
+                value={pendingTargetGrams}
                 onChange={(event) =>
-                  setTargetGrams(clampTargetGrams(Number(event.target.value)))
+                  setPendingTargetGrams(clampTargetGrams(Number(event.target.value)))
                 }
                 className="w-full accent-[#c95c2b]"
               />
