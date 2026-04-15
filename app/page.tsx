@@ -175,6 +175,9 @@ export default function Home() {
                   }
                   className="w-[4.25rem] bg-transparent px-2 py-2 text-right text-white outline-none"
                 />
+                <span className="min-w-[3.1rem] border-l border-white/10 px-2 py-2 text-center text-sm font-medium whitespace-nowrap text-white/70">
+                  g/h
+                </span>
                 <button
                   type="button"
                   onClick={() => setTargetGrams(pendingTargetGrams)}
@@ -183,9 +186,6 @@ export default function Home() {
                 >
                   Ok
                 </button>
-                <span className="min-w-[3.1rem] border-l border-white/10 px-2 py-2 text-center text-sm font-medium whitespace-nowrap text-white/70">
-                  g/h
-                </span>
               </div>
               <input
                 type="range"
