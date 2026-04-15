@@ -393,22 +393,81 @@ export default function Home() {
                     </td>
                   </tr>
                 ) : null}
-                {paginatedProducts.map((product, index) => (
-                  <tr
-                    key={product.id}
-                    className={`border-b border-[var(--line)] align-top last:border-b-0 ${
-                      index === 0 ? "bg-pine/6" : "hover:bg-white/30"
-                    }`}
-                  >
-                    <td className="px-6 py-5 text-center align-middle">
-                      <div
-                        className={`flex h-10 w-10 items-center justify-center rounded-full text-sm font-semibold ${
-                          medalStyles[index] ?? "bg-ink/8 text-ink/70"
-                        } mx-auto`}
-                      >
-                        #{index + 1}
-                      </div>
-                    </td>
+                {paginatedProducts.map((product, index) => {
+                  const globalIndex = (page - 1) * itemsPerPage + index;
+                  return (
+                    <tr
+                      key={product.id}
+                      className={`border-b border-[var(--line)] align-top last:border-b-0 ${
+                        index === 0 ? "bg-pine/6" : "hover:bg-white/30"
+                      }`}
+                    >
+                      <td className="px-6 py-5 text-center align-middle">
+                        <div
+                          className={`flex h-10 w-10 items-center justify-center rounded-full text-sm font-semibold ${
+                            medalStyles[globalIndex] ?? "bg-ink/8 text-ink/70"
+                          } mx-auto`}
+                        >
+                          #{globalIndex + 1}
+                        </div>
+                      </td>
+                      <td className="px-6 py-5 align-middle">
+                        <div className="max-w-[18rem]">
+                          <div className="flex flex-wrap items-center gap-2">
+                            <p className="font-medium text-ink">
+                              {product.brand} {product.name}
+                            </p>
+                            {index === 0 ? (
+                              <span className="rounded-full bg-pine/12 px-2.5 py-1 text-xs font-medium text-pine">
+                                Meilleur ratio
+                              </span>
+                            ) : null}
+                          </div>
+                          <a
+                            href={product.cheapestOffer.productUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="mt-3 inline-flex rounded-full border border-ink/10 bg-white/70 px-3 py-1.5 text-xs text-ink/72 transition hover:border-accent hover:text-accent"
+                          >
+                            Voir l'offre la moins chère
+                          </a>
+                        </div>
+                      </td>
+                      <td className="px-6 py-5 text-center align-middle">
+                        <span className="rounded-full border border-ink/10 bg-white/60 px-3 py-1.5 text-sm text-ink/75">
+                          {product.type}
+                        </span>
+                      </td>
+                      <td className="px-6 py-5 text-center align-middle text-sm font-medium text-ink">
+                        {product.carbsGrams} g
+                      </td>
+                      <td className="px-6 py-5 text-center align-middle text-sm font-medium text-ink">
+                        <p className="text-lg font-semibold text-ink">
+                          ${product.cheapestOffer.price.toFixed(2)}
+                        </p>
+                        <p className="mt-1 text-xs text-ink/55">
+                          chez {product.cheapestOffer.seller}
+                        </p>
+                      </td>
+                      <td className="px-6 py-5 text-center align-middle">
+                        <p className="text-lg font-semibold text-accent">
+                          {product.carbsPerDollar.toFixed(2)}
+                        </p>
+                        <p className="text-xs uppercase tracking-[0.16em] text-ink/45">
+                          g/$
+                        </p>
+                      </td>
+                      <td className="px-6 py-5 text-center align-middle">
+                        <p className="text-lg font-semibold text-ink">
+                          ${product.costForTargetGrams.toFixed(2)}
+                        </p>
+                        <p className="text-xs text-ink/55">
+                          pour {targetGrams}g
+                        </p>
+                      </td>
+                    </tr>
+                  );
+                })}
                     <td className="px-6 py-5 align-middle">
                       <div className="max-w-[18rem]">
                         <div className="flex flex-wrap items-center gap-2">
