@@ -275,10 +275,14 @@ function canAddProductToPlan(
     return false;
   }
 
-  return (
-    isNeutralCarbAdditive(candidate) ||
-    sameTypeProducts.some((product) => isNeutralCarbAdditive(product))
-  );
+  const neutralDrinkCount = sameTypeProducts.filter(isNeutralCarbAdditive).length;
+  const regularDrinkCount = sameTypeProducts.length - neutralDrinkCount;
+
+  if (isNeutralCarbAdditive(candidate)) {
+    return neutralDrinkCount === 0;
+  }
+
+  return regularDrinkCount === 0;
 }
 
 function isNeutralCarbAdditive(product: ProductWithMetrics) {
