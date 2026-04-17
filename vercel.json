@@ -4,5 +4,11 @@
   "framework": "nextjs",
   "env": {
     "CARBRATE_ENABLE_NETWORK": "0"
-  }
+  },
+  "crons": [
+    {
+      "path": "/api/update-offers",
+      "schedule": "0 2 * * *"
+    }
+  ]
 }
