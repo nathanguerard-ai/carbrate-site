@@ -2,7 +2,7 @@ import generatedOffers from "@/data/generated-product-offers.json";
 
 export const DEFAULT_TARGET_CARBS = 60;
 
-export type ProductType = "Gel" | "Boisson" | "Barre" | "Bonbon";
+export type ProductType = "Gel" | "Boisson" | "Barre" | "Autre";
 export type OfferVerificationStatus =
   | "verified"
   | "estimated"
@@ -333,7 +333,10 @@ export function clampTargetGrams(value: number) {
 }
 
 export function getProductTypes() {
-  return [...new Set(catalog.products.map((product) => product.type))];
+  const typeOrder: ProductType[] = ["Gel", "Boisson", "Barre", "Autre"];
+  const availableTypes = new Set(catalog.products.map((product) => product.type));
+
+  return typeOrder.filter((type) => availableTypes.has(type));
 }
 
 export function getProductBrands() {

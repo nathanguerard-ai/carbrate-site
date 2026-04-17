@@ -6,9 +6,12 @@ import {
   clampTargetGrams,
   DEFAULT_TARGET_CARBS,
   getCatalogUpdatedAt,
+  getOfferVerificationLabel,
+  getOfferVerificationStatus,
   getProductBrands,
   getProducts,
   getProductTypes,
+  type Offer,
 } from "@/lib/product-offer-catalog";
 
 export default function Home() {
@@ -86,7 +89,7 @@ export default function Home() {
             Compare les glucides, les prix et les portions.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-ink/72">
-            CarbRate classe les gels, boissons, bonbons et barres selon leur
+            CarbRate classe les gels, boissons, barres et autres produits selon leur
             coût réel, leur apport en glucides et leur disponibilité chez des
             détaillants canadiens.
           </p>
@@ -216,7 +219,7 @@ export default function Home() {
                     type="text"
                     value={searchTerm}
                     onChange={(event) => setSearchTerm(event.target.value)}
-                    placeholder="Maurten, gel, XACT..."
+                    placeholder="Maurten, gel, Upika..."
                     className="rounded-xl border border-ink/10 bg-white/70 px-3 py-2 text-ink outline-none transition placeholder:text-ink/35 focus:border-accent"
                     suppressHydrationWarning={true}
                   />
@@ -432,6 +435,11 @@ export default function Home() {
                         <p className="mt-1 text-xs text-ink/55">
                           {describeOfferPrice(product.cheapestOffer)} chez {product.cheapestOffer.seller}
                         </p>
+                        {isVerifiedOffer(product.cheapestOffer) ? (
+                          <span className="mt-2 inline-flex rounded-full bg-pine/10 px-2.5 py-1 text-xs text-pine">
+                            {getOfferVerificationLabel(product.cheapestOffer)}
+                          </span>
+                        ) : null}
                       </td>
                       <td className="px-6 py-5 text-center align-middle">
                         <p className="text-lg font-semibold text-accent">
@@ -539,4 +547,8 @@ function describeOfferPrice(offer: {
   }
 
   return "prix unitaire";
+}
+
+function isVerifiedOffer(offer: Offer) {
+  return getOfferVerificationStatus(offer) === "verified";
 }

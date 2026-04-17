@@ -156,11 +156,16 @@ async function main() {
           continue;
         }
 
+        const fallbackUnitCount =
+          Number.isFinite(offer.unitCount) && offer.unitCount > 0
+            ? offer.unitCount
+            : 1;
+
         offers.push({
           seller: offer.seller,
           price: offer.fallbackPrice,
-          packagePrice: offer.fallbackPrice,
-          unitCount: 1,
+          packagePrice: round(offer.fallbackPrice * fallbackUnitCount),
+          unitCount: fallbackUnitCount,
           unitCountSource: "catalog-fallback",
           unitCountConfidence: "fallback",
           productUrl: offer.productUrl,
@@ -309,13 +314,22 @@ function resolveOfferPrice(
   }
 
   if (Number.isFinite(offer.fallbackPrice) && offer.fallbackPrice > 0) {
+    const fallbackUnitCount =
+      Number.isFinite(offer.unitCount) && offer.unitCount > 0
+        ? offer.unitCount
+        : unitResolution.unitCount;
+
     stats.offerPricesFromFallback += 1;
     return {
       price: offer.fallbackPrice,
-      packagePrice: offer.fallbackPrice,
-      unitCount: 1,
-      unitCountSource: "catalog-fallback",
-      unitCountConfidence: "fallback",
+      packagePrice: round(offer.fallbackPrice * fallbackUnitCount),
+      unitCount: fallbackUnitCount,
+      unitCountSource: Number.isFinite(offer.unitCount)
+        ? "catalog-unit-count"
+        : unitResolution.source,
+      unitCountConfidence: Number.isFinite(offer.unitCount)
+        ? "catalog"
+        : unitResolution.confidence,
       source: "catalog-fallback",
       confidence: "fallback",
       verificationStatus: "fallback",
@@ -1009,7 +1023,7 @@ function getExpectedUnitPrice(product) {
     return product.carbsGrams >= 40 ? 7 : 5;
   }
 
-  if (product.type === "Barre" || product.type === "Bonbon") {
+  if (product.type === "Barre" || product.type === "Autre") {
     return product.carbsGrams >= 50 ? 4.5 : 3.75;
   }
 

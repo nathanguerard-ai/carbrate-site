@@ -57,7 +57,7 @@ const TYPE_KEYWORDS: Array<[ProductType, RegExp]> = [
   ["Gel", /\b(gel|gels)\b/i],
   ["Boisson", /\b(boisson|drink|mix|poudre|bouteille)\b/i],
   ["Barre", /\b(barre|bar|bars)\b/i],
-  ["Bonbon", /\b(bonbon|chew|chews|gomme|gummies)\b/i],
+  ["Autre", /\b(autre|autres|chew|chews|gomme|gummies)\b/i],
 ];
 
 export function parseAdvisorQuestion(question: string): EffortAdvisorInput {
@@ -155,16 +155,30 @@ function buildMixedPlan(
   products: ProductWithMetrics[],
   targetTotalCarbs: number,
 ): EffortAdvisorPlan {
-  const byRatio = products[0];
-  const byCarbs = [...products].sort((a, b) => b.carbsGrams - a.carbsGrams)[0];
-  const byCost = [...products].sort(
-    (a, b) => estimateTotalCost(a, targetTotalCarbs) - estimateTotalCost(b, targetTotalCarbs),
-  )[0];
-  const selections = [...new Map(
-    [byRatio, byCarbs, byCost]
-      .filter(Boolean)
-      .map((product) => [product.id, product]),
-  ).values()];
+  const rankedProducts = [
+    ...products,
+    ...[...products].sort((a, b) => b.carbsGrams - a.carbsGrams),
+    ...[...products].sort(
+      (a, b) => estimateTotalCost(a, targetTotalCarbs) - estimateTotalCost(b, targetTotalCarbs),
+    ),
+  ];
+  const selections: ProductWithMetrics[] = [];
+
+  for (const product of rankedProducts) {
+    if (selections.length >= 3) {
+      break;
+    }
+
+    if (selections.some((selection) => selection.id === product.id)) {
+      continue;
+    }
+
+    if (!canAddProductToPlan(selections, product)) {
+      continue;
+    }
+
+    selections.push(product);
+  }
 
   return buildPlanFromSelections("Option mixte", targetTotalCarbs, selections);
 }
@@ -243,6 +257,34 @@ function estimatePortions(product: ProductWithMetrics, targetTotalCarbs: number)
 function estimatePortionsForCarbs(product: ProductWithMetrics, targetCarbs: number) {
   const step = product.type === "Boisson" || product.type === "Barre" ? 0.5 : 1;
   return Math.max(step, Math.ceil(targetCarbs / product.carbsGrams / step) * step);
+}
+
+function canAddProductToPlan(
+  selections: ProductWithMetrics[],
+  candidate: ProductWithMetrics,
+) {
+  const sameTypeProducts = selections.filter(
+    (selection) => selection.type === candidate.type,
+  );
+
+  if (sameTypeProducts.length === 0) {
+    return true;
+  }
+
+  if (candidate.type !== "Boisson") {
+    return false;
+  }
+
+  return (
+    isNeutralCarbAdditive(candidate) ||
+    sameTypeProducts.some((product) => isNeutralCarbAdditive(product))
+  );
+}
+
+function isNeutralCarbAdditive(product: ProductWithMetrics) {
+  const label = `${product.brand} ${product.name}`.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+  return /(?:upika.*carb-?boost|naak.*boost drink mix)/i.test(label);
 }
 
 function parseDurationMinutes(question: string) {
@@ -354,7 +396,7 @@ function formatDuration(minutes: number) {
     return `${hours} h`;
   }
 
-  return `${hours} h ${remainingMinutes}`;
+  return `${hours} h ${remainingMinutes} min`;
 }
 
 function formatPortions(value: number) {
