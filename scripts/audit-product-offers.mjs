@@ -4,8 +4,8 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, "..");
-const generatedPath = path.join(projectRoot, "data", "generated-offers.json");
-const auditPath = path.join(projectRoot, "data", "offer-audit.json");
+const generatedPath = path.join(projectRoot, "data", "generated-product-offers.json");
+const auditPath = path.join(projectRoot, "data", "product-offer-audit.json");
 
 const catalog = JSON.parse(await readFile(generatedPath, "utf8"));
 const findings = [];

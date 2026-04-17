@@ -4,17 +4,17 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "predev": "npm run update:offers",
+    "predev": "npm run refresh:product-offers",
     "dev": "next dev",
-    "prebuild": "npm run update:offers",
+    "prebuild": "npm run refresh:product-offers",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "update:offers": "node scripts/update-offers.mjs",
-    "update:offers:live": "node scripts/update-offers.mjs --live",
-    "update:offers:refresh": "node scripts/update-offers.mjs --live --force",
-    "audit:offers": "node scripts/audit-offers.mjs"
+    "refresh:product-offers": "node scripts/refresh-product-offers.mjs",
+    "refresh:product-offers:live": "node scripts/refresh-product-offers.mjs --live",
+    "refresh:product-offers:force": "node scripts/refresh-product-offers.mjs --live --force",
+    "audit:product-offers": "node scripts/audit-product-offers.mjs"
   },
   "dependencies": {
     "next": "^16.2.3",

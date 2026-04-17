@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { AdvisorPanel } from "@/components/advisor-panel";
-import { PriceAssurancePanel } from "@/components/price-assurance-panel";
+import { NutritionAdvisorPanel } from "@/components/nutrition-advisor-panel";
+import { PriceVerificationPanel } from "@/components/price-verification-panel";
 import {
   clampTargetGrams,
   DEFAULT_TARGET_CARBS,
@@ -14,7 +14,7 @@ import {
   getProducts,
   getProductTypes,
   type Offer,
-} from "@/lib/carbrate";
+} from "@/lib/product-offer-catalog";
 
 export default function Home() {
   const [targetGrams, setTargetGrams] = useState(DEFAULT_TARGET_CARBS);
@@ -214,9 +214,9 @@ export default function Home() {
         </section>
       </section>
 
-      <PriceAssurancePanel summary={assuranceSummary} />
+      <PriceVerificationPanel summary={assuranceSummary} />
 
-      <AdvisorPanel />
+      <NutritionAdvisorPanel />
 
       <section className="py-10">
         <div className="mb-5 flex flex-col gap-5">

@@ -4,7 +4,7 @@ import {
   ProductWithMetrics,
   getOfferVerificationStatus,
   getProducts,
-} from "@/lib/carbrate";
+} from "@/lib/product-offer-catalog";
 
 export type EffortPreference = "best-value" | "lowest-cost" | "simple" | "mixed";
 export type CaffeinePreference = "any" | "avoid" | "ok";

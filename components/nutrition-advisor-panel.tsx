@@ -5,7 +5,7 @@ import {
   buildEffortAdvisorResult,
   parseAdvisorQuestion,
   type EffortAdvisorResult,
-} from "@/lib/advisor";
+} from "@/lib/nutrition-advisor";
 
 const preferenceOptions = [
   { value: "best-value", label: "Meilleur ratio" },
@@ -14,7 +14,7 @@ const preferenceOptions = [
   { value: "mixed", label: "Mixte" },
 ] as const;
 
-export function AdvisorPanel() {
+export function NutritionAdvisorPanel() {
   const [durationHours, setDurationHours] = useState(2);
   const [durationMinutes, setDurationMinutes] = useState(0);
   const [targetCarbsPerHour, setTargetCarbsPerHour] = useState(60);
@@ -52,7 +52,7 @@ export function AdvisorPanel() {
     setError(null);
 
     try {
-      const response = await fetch("/api/advisor", {
+      const response = await fetch("/api/nutrition-advisor", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ question }),

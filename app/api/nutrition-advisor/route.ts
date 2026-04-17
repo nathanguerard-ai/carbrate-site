@@ -3,7 +3,7 @@ import {
   buildEffortAdvisorResult,
   parseAdvisorQuestion,
   type EffortAdvisorInput,
-} from "@/lib/advisor";
+} from "@/lib/nutrition-advisor";
 
 export async function POST(request: NextRequest) {
   try {

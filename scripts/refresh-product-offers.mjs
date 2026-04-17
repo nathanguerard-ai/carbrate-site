@@ -4,9 +4,9 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, "..");
-const catalogPath = path.join(projectRoot, "data", "catalog.json");
-const outputPath = path.join(projectRoot, "data", "generated-offers.json");
-const cachePath = path.join(projectRoot, "data", "source-cache.json");
+const catalogPath = path.join(projectRoot, "data", "product-catalog.json");
+const outputPath = path.join(projectRoot, "data", "generated-product-offers.json");
+const cachePath = path.join(projectRoot, "data", "product-page-cache.json");
 
 const USER_AGENT =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
@@ -1223,6 +1223,6 @@ function round(value) {
 try {
   await main();
 } catch (error) {
-  console.error("Error in update-offers script:", error);
+  console.error("Error in refresh-product-offers script:", error);
   process.exit(1);
 }

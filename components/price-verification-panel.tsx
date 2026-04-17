@@ -3,13 +3,13 @@ import {
   getOfferVerificationStatus,
   type OfferAssuranceSummary,
   type ProductWithMetrics,
-} from "@/lib/carbrate";
+} from "@/lib/product-offer-catalog";
 
-type PriceAssurancePanelProps = {
+type PriceVerificationPanelProps = {
   summary: OfferAssuranceSummary;
 };
 
-export function PriceAssurancePanel({ summary }: PriceAssurancePanelProps) {
+export function PriceVerificationPanel({ summary }: PriceVerificationPanelProps) {
   const reviewProducts = summary.reviewProducts.slice(0, 4);
 
   return (

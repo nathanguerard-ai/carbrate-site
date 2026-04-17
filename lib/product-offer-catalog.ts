@@ -1,4 +1,4 @@
-import generatedOffers from "@/data/generated-offers.json";
+import generatedOffers from "@/data/generated-product-offers.json";
 
 export const DEFAULT_TARGET_CARBS = 60;
 

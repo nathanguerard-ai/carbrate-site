@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-17T04:29:46.596Z",
+  "updatedAt": "2026-04-17T04:36:18.377Z",
   "analysis": {
     "mode": "cached",
     "pagesFetched": 0,
@@ -36,7 +36,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix vient d'une page live, mais une partie du calcul a été déduite automatiquement.",
-          "lastCheckedAt": "2026-04-17T04:29:46.588Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.370Z"
         },
         {
           "seller": "frontrunners.ca",
@@ -51,7 +51,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-17T04:29:46.588Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.371Z"
         }
       ]
     },
@@ -76,7 +76,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-17T04:29:46.589Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.372Z"
         },
         {
           "seller": "lecoureurnordique.ca",
@@ -91,7 +91,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-17T04:29:46.589Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.372Z"
         }
       ]
     },
@@ -116,7 +116,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix vient d'une page live, mais une partie du calcul a été déduite automatiquement.",
-          "lastCheckedAt": "2026-04-17T04:29:46.589Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.372Z"
         },
         {
           "seller": "spryactive.ca",
@@ -131,7 +131,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-17T04:29:46.589Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.372Z"
         }
       ]
     },
@@ -156,7 +156,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-17T04:29:46.590Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.372Z"
         },
         {
           "seller": "lecoureurnordique.ca",
@@ -171,7 +171,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-17T04:29:46.590Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.372Z"
         }
       ]
     },
@@ -196,7 +196,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-17T04:29:46.590Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.372Z"
         },
         {
           "seller": "frontrunners.ca",
@@ -211,7 +211,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-17T04:29:46.590Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.372Z"
         }
       ]
     },
@@ -236,7 +236,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-17T04:29:46.591Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.373Z"
         },
         {
           "seller": "frontrunners.ca",
@@ -251,7 +251,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-17T04:29:46.591Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.373Z"
         }
       ]
     },
@@ -276,7 +276,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-17T04:29:46.591Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.373Z"
         },
         {
           "seller": "spryactive.ca",
@@ -291,7 +291,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-17T04:29:46.591Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.373Z"
         }
       ]
     },
@@ -316,7 +316,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-17T04:29:46.591Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.373Z"
         },
         {
           "seller": "fuelkit.ca",
@@ -331,7 +331,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-17T04:29:46.591Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.373Z"
         }
       ]
     },
@@ -356,7 +356,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-17T04:29:46.591Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.373Z"
         },
         {
           "seller": "fuelkit.ca",
@@ -371,7 +371,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-17T04:29:46.591Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.373Z"
         }
       ]
     },
@@ -396,7 +396,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-17T04:29:46.591Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.373Z"
         },
         {
           "seller": "enroute.run",
@@ -411,7 +411,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-17T04:29:46.591Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.373Z"
         }
       ]
     },
@@ -436,7 +436,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-17T04:29:46.591Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.373Z"
         },
         {
           "seller": "shopsante.ca",
@@ -451,7 +451,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-17T04:29:46.592Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.373Z"
         },
         {
           "seller": "lecoureurnordique.ca",
@@ -466,7 +466,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-17T04:29:46.592Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.373Z"
         }
       ]
     },
@@ -491,7 +491,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-17T04:29:46.592Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.373Z"
         },
         {
           "seller": "shopsante.ca",
@@ -506,7 +506,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-17T04:29:46.592Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.373Z"
         }
       ]
     },
@@ -531,7 +531,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-17T04:29:46.593Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.374Z"
         },
         {
           "seller": "enroute.run",
@@ -546,7 +546,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-17T04:29:46.593Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.374Z"
         }
       ]
     },
@@ -571,7 +571,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-17T04:29:46.593Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.374Z"
         },
         {
           "seller": "precisionhydration.com",
@@ -586,7 +586,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix vient d'une page live, mais une partie du calcul a été déduite automatiquement.",
-          "lastCheckedAt": "2026-04-17T04:29:46.593Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.374Z"
         }
       ]
     },
@@ -611,7 +611,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-17T04:29:46.593Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.374Z"
         },
         {
           "seller": "mec.ca",
@@ -626,7 +626,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix vient d'une page live, mais une partie du calcul a été déduite automatiquement.",
-          "lastCheckedAt": "2026-04-17T04:29:46.593Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.374Z"
         }
       ]
     },
@@ -651,7 +651,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-17T04:29:46.593Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.374Z"
         }
       ]
     },
@@ -676,7 +676,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-17T04:29:46.593Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.374Z"
         }
       ]
     },
@@ -701,7 +701,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-17T04:29:46.593Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.374Z"
         }
       ]
     },
@@ -726,7 +726,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-17T04:29:46.593Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.374Z"
         }
       ]
     },
@@ -751,7 +751,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix vient d'une page live, mais une partie du calcul a été déduite automatiquement.",
-          "lastCheckedAt": "2026-04-17T04:29:46.593Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.374Z"
         },
         {
           "seller": "well.ca",
@@ -766,7 +766,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-17T04:29:46.593Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.375Z"
         }
       ]
     },
@@ -791,7 +791,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix vient d'une page live, mais une partie du calcul a été déduite automatiquement.",
-          "lastCheckedAt": "2026-04-17T04:29:46.593Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.375Z"
         },
         {
           "seller": "elementsport.ca",
@@ -806,7 +806,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix vient d'une page live, mais une partie du calcul a été déduite automatiquement.",
-          "lastCheckedAt": "2026-04-17T04:29:46.593Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.375Z"
         }
       ]
     },
@@ -831,7 +831,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-17T04:29:46.593Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.375Z"
         },
         {
           "seller": "theoutfitters.nf.ca",
@@ -846,7 +846,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-17T04:29:46.593Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.375Z"
         }
       ]
     },
@@ -871,7 +871,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-17T04:29:46.593Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.375Z"
         },
         {
           "seller": "fuelkit.ca",
@@ -886,7 +886,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-17T04:29:46.593Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.375Z"
         }
       ]
     },
@@ -911,7 +911,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-17T04:29:46.594Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.375Z"
         },
         {
           "seller": "fuelkit.ca",
@@ -926,7 +926,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix vient d'une page live, mais une partie du calcul a été déduite automatiquement.",
-          "lastCheckedAt": "2026-04-17T04:29:46.594Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.375Z"
         }
       ]
     },
@@ -951,7 +951,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-17T04:29:46.594Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.375Z"
         }
       ]
     },
@@ -976,7 +976,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-17T04:29:46.594Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.375Z"
         }
       ]
     },
@@ -1001,7 +1001,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-17T04:29:46.594Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.375Z"
         },
         {
           "seller": "enroute.run",
@@ -1016,7 +1016,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-17T04:29:46.594Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.375Z"
         }
       ]
     },
@@ -1041,7 +1041,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-17T04:29:46.594Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.375Z"
         }
       ]
     },
@@ -1066,7 +1066,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-17T04:29:46.594Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.375Z"
         }
       ]
     },
@@ -1091,7 +1091,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-17T04:29:46.594Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.375Z"
         }
       ]
     },
@@ -1116,7 +1116,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-17T04:29:46.594Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.375Z"
         }
       ]
     },
@@ -1141,7 +1141,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix vient d'une page live, mais une partie du calcul a été déduite automatiquement.",
-          "lastCheckedAt": "2026-04-17T04:29:46.594Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.375Z"
         }
       ]
     },
@@ -1166,7 +1166,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix vient d'une page live, mais une partie du calcul a été déduite automatiquement.",
-          "lastCheckedAt": "2026-04-17T04:29:46.594Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.375Z"
         }
       ]
     },
@@ -1191,7 +1191,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix vient d'une page live, mais une partie du calcul a été déduite automatiquement.",
-          "lastCheckedAt": "2026-04-17T04:29:46.594Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.375Z"
         }
       ]
     },
@@ -1216,7 +1216,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix vient d'une page live, mais une partie du calcul a été déduite automatiquement.",
-          "lastCheckedAt": "2026-04-17T04:29:46.594Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.375Z"
         }
       ]
     },
@@ -1241,7 +1241,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix vient d'une page live, mais une partie du calcul a été déduite automatiquement.",
-          "lastCheckedAt": "2026-04-17T04:29:46.594Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.375Z"
         }
       ]
     },
@@ -1266,7 +1266,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix vient d'une page live, mais une partie du calcul a été déduite automatiquement.",
-          "lastCheckedAt": "2026-04-17T04:29:46.594Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.375Z"
         }
       ]
     },
@@ -1291,7 +1291,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix vient d'une page live, mais une partie du calcul a été déduite automatiquement.",
-          "lastCheckedAt": "2026-04-17T04:29:46.594Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.375Z"
         }
       ]
     },
@@ -1316,7 +1316,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix vient d'une page live, mais une partie du calcul a été déduite automatiquement.",
-          "lastCheckedAt": "2026-04-17T04:29:46.594Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.376Z"
         }
       ]
     },
@@ -1341,7 +1341,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix vient d'une page live, mais une partie du calcul a été déduite automatiquement.",
-          "lastCheckedAt": "2026-04-17T04:29:46.594Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.376Z"
         }
       ]
     },
@@ -1366,7 +1366,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix vient d'une page live, mais une partie du calcul a été déduite automatiquement.",
-          "lastCheckedAt": "2026-04-17T04:29:46.594Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.376Z"
         }
       ]
     },
@@ -1391,7 +1391,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix vient d'une page live, mais une partie du calcul a été déduite automatiquement.",
-          "lastCheckedAt": "2026-04-17T04:29:46.594Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.376Z"
         }
       ]
     },
@@ -1416,7 +1416,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-17T04:29:46.595Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.376Z"
         }
       ]
     },
@@ -1441,7 +1441,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-17T04:29:46.595Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.376Z"
         }
       ]
     },
@@ -1466,7 +1466,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-17T04:29:46.595Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.376Z"
         }
       ]
     },
@@ -1491,7 +1491,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix vient d'une page live, mais une partie du calcul a été déduite automatiquement.",
-          "lastCheckedAt": "2026-04-17T04:29:46.595Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.376Z"
         }
       ]
     },
@@ -1516,7 +1516,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix vient d'une page live, mais une partie du calcul a été déduite automatiquement.",
-          "lastCheckedAt": "2026-04-17T04:29:46.595Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.376Z"
         }
       ]
     },
@@ -1541,7 +1541,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-17T04:29:46.595Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.376Z"
         }
       ]
     },
@@ -1566,7 +1566,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-17T04:29:46.595Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.376Z"
         }
       ]
     },
@@ -1591,7 +1591,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-17T04:29:46.595Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.376Z"
         }
       ]
     },
@@ -1616,7 +1616,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-17T04:29:46.595Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.376Z"
         }
       ]
     },
@@ -1641,7 +1641,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-17T04:29:46.595Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.376Z"
         }
       ]
     },
@@ -1666,7 +1666,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-17T04:29:46.595Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.376Z"
         }
       ]
     },
@@ -1691,7 +1691,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-17T04:29:46.595Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.376Z"
         }
       ]
     },
@@ -1716,7 +1716,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-17T04:29:46.595Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.376Z"
         }
       ]
     },
@@ -1741,7 +1741,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix vient d'une page live, mais une partie du calcul a été déduite automatiquement.",
-          "lastCheckedAt": "2026-04-17T04:29:46.595Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.376Z"
         }
       ]
     },
@@ -1766,7 +1766,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-17T04:29:46.595Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.376Z"
         }
       ]
     },
@@ -1791,7 +1791,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-17T04:29:46.595Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.376Z"
         }
       ]
     },
@@ -1816,7 +1816,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-17T04:29:46.595Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.376Z"
         }
       ]
     },
@@ -1841,7 +1841,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-17T04:29:46.595Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.376Z"
         }
       ]
     },
@@ -1866,7 +1866,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-17T04:29:46.595Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.376Z"
         }
       ]
     },
@@ -1891,7 +1891,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-17T04:29:46.595Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.376Z"
         }
       ]
     },
@@ -1916,7 +1916,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-17T04:29:46.595Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.376Z"
         },
         {
           "seller": "altitude-sports.com",
@@ -1931,7 +1931,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-17T04:29:46.595Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.376Z"
         }
       ]
     },
@@ -1956,7 +1956,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-17T04:29:46.595Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.376Z"
         },
         {
           "seller": "altitude-sports.com",
@@ -1971,7 +1971,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-17T04:29:46.595Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.376Z"
         }
       ]
     },
@@ -1996,7 +1996,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-17T04:29:46.595Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.376Z"
         },
         {
           "seller": "shopsante.ca",
@@ -2011,7 +2011,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-17T04:29:46.595Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.376Z"
         }
       ]
     },
@@ -2036,7 +2036,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-17T04:29:46.595Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.376Z"
         }
       ]
     },
@@ -2061,7 +2061,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-17T04:29:46.595Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.376Z"
         }
       ]
     },
@@ -2086,7 +2086,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-17T04:29:46.595Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.377Z"
         }
       ]
     },
@@ -2111,7 +2111,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-17T04:29:46.595Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.377Z"
         }
       ]
     },
@@ -2136,7 +2136,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-17T04:29:46.595Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.377Z"
         }
       ]
     },
@@ -2161,7 +2161,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-17T04:29:46.595Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.377Z"
         }
       ]
     },
@@ -2186,7 +2186,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-17T04:29:46.596Z"
+          "lastCheckedAt": "2026-04-17T04:36:18.377Z"
         }
       ]
     }
