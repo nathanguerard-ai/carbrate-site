@@ -138,9 +138,15 @@ async function main() {
         price: priceResolution.price,
         packagePrice: priceResolution.packagePrice,
         unitCount: priceResolution.unitCount,
+        unitCountSource: priceResolution.unitCountSource,
+        unitCountConfidence: priceResolution.unitCountConfidence,
         productUrl: offer.productUrl,
         priceSource: priceResolution.source,
         priceConfidence: priceResolution.confidence,
+        verificationStatus: priceResolution.verificationStatus,
+        verificationLabel: priceResolution.verificationLabel,
+        verificationReason: priceResolution.verificationReason,
+        lastCheckedAt: priceResolution.lastCheckedAt,
       });
     }
 
@@ -155,9 +161,16 @@ async function main() {
           price: offer.fallbackPrice,
           packagePrice: offer.fallbackPrice,
           unitCount: 1,
+          unitCountSource: "catalog-fallback",
+          unitCountConfidence: "fallback",
           productUrl: offer.productUrl,
           priceSource: "catalog-fallback",
           priceConfidence: "fallback",
+          verificationStatus: "fallback",
+          verificationLabel: "Prix de secours",
+          verificationReason:
+            "Aucun prix fiable n'a pu être extrait; le catalogue sert de valeur temporaire.",
+          lastCheckedAt: new Date().toISOString(),
         });
       }
     }
@@ -273,13 +286,25 @@ function resolveOfferPrice(
   trackUnitCountStats(unitResolution, stats);
 
   if (liveCandidate && isReliableUnitPrice(liveCandidate.value)) {
+    const verification = buildOfferVerification({
+      priceConfidence: liveCandidate.confidence ?? "live",
+      priceSource: liveCandidate.url ?? offer.productUrl,
+      packagePrice: liveCandidate.packagePrice,
+      unitCount: unitResolution.unitCount,
+      unitCountConfidence: unitResolution.confidence,
+    });
+
     stats.offerPricesFromLive += 1;
     return {
       price: round(liveCandidate.value),
       packagePrice: round(liveCandidate.packagePrice),
       unitCount: unitResolution.unitCount,
+      unitCountSource: unitResolution.source,
+      unitCountConfidence: unitResolution.confidence,
       source: liveCandidate.url ?? offer.productUrl,
       confidence: liveCandidate.confidence ?? "live",
+      ...verification,
+      lastCheckedAt: new Date().toISOString(),
     };
   }
 
@@ -289,8 +314,15 @@ function resolveOfferPrice(
       price: offer.fallbackPrice,
       packagePrice: offer.fallbackPrice,
       unitCount: 1,
+      unitCountSource: "catalog-fallback",
+      unitCountConfidence: "fallback",
       source: "catalog-fallback",
       confidence: "fallback",
+      verificationStatus: "fallback",
+      verificationLabel: "Prix de secours",
+      verificationReason:
+        "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+      lastCheckedAt: new Date().toISOString(),
     };
   }
 
@@ -298,8 +330,69 @@ function resolveOfferPrice(
     price: null,
     packagePrice: null,
     unitCount: unitResolution.unitCount,
+    unitCountSource: unitResolution.source,
+    unitCountConfidence: unitResolution.confidence,
     source: null,
     confidence: "missing",
+    verificationStatus: "review",
+    verificationLabel: "À vérifier",
+    verificationReason: "Aucun prix utilisable n'a été détecté pour cette offre.",
+    lastCheckedAt: new Date().toISOString(),
+  };
+}
+
+function buildOfferVerification({
+  priceConfidence,
+  priceSource,
+  packagePrice,
+  unitCount,
+  unitCountConfidence,
+}) {
+  if (priceConfidence === "fallback") {
+    return {
+      verificationStatus: "fallback",
+      verificationLabel: "Prix de secours",
+      verificationReason:
+        "Le prix vient du catalogue parce que l'extraction live n'a pas donné un résultat fiable.",
+    };
+  }
+
+  if (
+    unitCountConfidence === "default" &&
+    Number.isFinite(packagePrice) &&
+    packagePrice > MAX_UNIT_PRICE
+  ) {
+    return {
+      verificationStatus: "review",
+      verificationLabel: "À vérifier",
+      verificationReason:
+        "Le prix ressemble à un paquet, mais le nombre de portions n'a pas été confirmé.",
+    };
+  }
+
+  if (priceConfidence === "live-text" || unitCountConfidence === "inferred") {
+    return {
+      verificationStatus: "estimated",
+      verificationLabel: "Prix estimé",
+      verificationReason:
+        "Le prix vient d'une page live, mais une partie du calcul a été déduite automatiquement.",
+    };
+  }
+
+  if (priceSource && unitCountConfidence !== "default") {
+    return {
+      verificationStatus: "verified",
+      verificationLabel: "Prix vérifié",
+      verificationReason:
+        "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
+    };
+  }
+
+  return {
+    verificationStatus: "estimated",
+    verificationLabel: "Prix estimé",
+    verificationReason:
+      "Le prix est live, mais le format exact de portion reste moins explicite.",
   };
 }
 

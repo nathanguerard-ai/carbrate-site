@@ -1,13 +1,19 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { AdvisorPanel } from "@/components/advisor-panel";
+import { PriceAssurancePanel } from "@/components/price-assurance-panel";
 import {
   clampTargetGrams,
   DEFAULT_TARGET_CARBS,
   getCatalogUpdatedAt,
+  getOfferAssuranceSummary,
+  getOfferVerificationLabel,
+  getOfferVerificationStatus,
   getProductBrands,
   getProducts,
   getProductTypes,
+  type Offer,
 } from "@/lib/carbrate";
 
 export default function Home() {
@@ -31,6 +37,7 @@ export default function Home() {
   ];
 
   const allProducts = getProducts(targetGrams);
+  const assuranceSummary = getOfferAssuranceSummary(allProducts);
   const productTypes = getProductTypes();
   const productBrands = getProductBrands();
   const normalizedSearch = searchTerm.trim().toLowerCase();
@@ -207,7 +214,9 @@ export default function Home() {
         </section>
       </section>
 
-      
+      <PriceAssurancePanel summary={assuranceSummary} />
+
+      <AdvisorPanel />
 
       <section className="py-10">
         <div className="mb-5 flex flex-col gap-5">
@@ -448,6 +457,13 @@ export default function Home() {
                         <p className="mt-1 text-xs text-ink/55">
                           {describeOfferPrice(product.cheapestOffer)} chez {product.cheapestOffer.seller}
                         </p>
+                        <span
+                          className={`mt-2 inline-flex rounded-full px-2.5 py-1 text-xs ${verificationBadgeClass(
+                            product.cheapestOffer,
+                          )}`}
+                        >
+                          {getOfferVerificationLabel(product.cheapestOffer)}
+                        </span>
                       </td>
                       <td className="px-6 py-5 text-center align-middle">
                         <p className="text-lg font-semibold text-accent">
@@ -580,4 +596,22 @@ function describeOfferPrice(offer: {
   }
 
   return "prix unitaire";
+}
+
+function verificationBadgeClass(offer: Offer) {
+  const status = getOfferVerificationStatus(offer);
+
+  if (status === "verified") {
+    return "bg-pine/10 text-pine";
+  }
+
+  if (status === "estimated") {
+    return "bg-accent/10 text-accent";
+  }
+
+  if (status === "fallback") {
+    return "bg-amber-100 text-amber-900";
+  }
+
+  return "bg-red-100 text-red-800";
 }

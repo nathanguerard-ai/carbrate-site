@@ -13,7 +13,8 @@
     "typecheck": "tsc --noEmit",
     "update:offers": "node scripts/update-offers.mjs",
     "update:offers:live": "node scripts/update-offers.mjs --live",
-    "update:offers:refresh": "node scripts/update-offers.mjs --live --force"
+    "update:offers:refresh": "node scripts/update-offers.mjs --live --force",
+    "audit:offers": "node scripts/audit-offers.mjs"
   },
   "dependencies": {
     "next": "^16.2.3",

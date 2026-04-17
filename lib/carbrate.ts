@@ -3,15 +3,26 @@ import generatedOffers from "@/data/generated-offers.json";
 export const DEFAULT_TARGET_CARBS = 60;
 
 export type ProductType = "Gel" | "Boisson" | "Barre" | "Bonbon";
+export type OfferVerificationStatus =
+  | "verified"
+  | "estimated"
+  | "fallback"
+  | "review";
 
 export type Offer = {
   seller: string;
   price: number;
   packagePrice?: number;
   unitCount?: number;
+  unitCountSource?: string;
+  unitCountConfidence?: string;
   productUrl: string;
   priceSource?: string;
   priceConfidence?: string;
+  verificationStatus?: OfferVerificationStatus;
+  verificationLabel?: string;
+  verificationReason?: string;
+  lastCheckedAt?: string;
 };
 
 export type Product = {
@@ -20,6 +31,7 @@ export type Product = {
   brand: string;
   type: ProductType;
   carbsGrams: number;
+  carbsSource?: string;
   offers: Offer[];
 };
 
@@ -52,6 +64,16 @@ export type PortionRecommendation = {
   distinctTypeCount: number;
   matchLabel: string;
   items: PortionRecommendationItem[];
+};
+
+export type OfferAssuranceSummary = {
+  totalOffers: number;
+  verifiedOffers: number;
+  estimatedOffers: number;
+  fallbackOffers: number;
+  reviewOffers: number;
+  verifiedProductCount: number;
+  reviewProducts: ProductWithMetrics[];
 };
 
 type GeneratedCatalog = {
@@ -94,6 +116,63 @@ export function getProducts(
 
 export function getCatalogUpdatedAt() {
   return catalog.updatedAt;
+}
+
+export function getOfferAssuranceSummary(
+  products = getProducts(DEFAULT_TARGET_CARBS),
+): OfferAssuranceSummary {
+  const offers = products.flatMap((product) => product.offers);
+  const countByStatus = (status: OfferVerificationStatus) =>
+    offers.filter((offer) => getOfferVerificationStatus(offer) === status).length;
+  const reviewProducts = products.filter((product) =>
+    product.offers.some((offer) =>
+      ["fallback", "review"].includes(getOfferVerificationStatus(offer)),
+    ),
+  );
+
+  return {
+    totalOffers: offers.length,
+    verifiedOffers: countByStatus("verified"),
+    estimatedOffers: countByStatus("estimated"),
+    fallbackOffers: countByStatus("fallback"),
+    reviewOffers: countByStatus("review"),
+    verifiedProductCount: products.filter(
+      (product) => getOfferVerificationStatus(product.cheapestOffer) === "verified",
+    ).length,
+    reviewProducts,
+  };
+}
+
+export function getOfferVerificationStatus(
+  offer: Offer,
+): OfferVerificationStatus {
+  if (offer.verificationStatus) {
+    return offer.verificationStatus;
+  }
+
+  if (offer.priceConfidence === "fallback") {
+    return "fallback";
+  }
+
+  if (offer.priceConfidence === "live-text") {
+    return "estimated";
+  }
+
+  if (
+    Number.isFinite(offer.packagePrice) &&
+    Number.isFinite(offer.unitCount) &&
+    (offer.unitCount ?? 1) > 1
+  ) {
+    return "verified";
+  }
+
+  return offer.priceConfidence === "live" ? "verified" : "estimated";
+}
+
+export function getOfferVerificationLabel(offer: Offer) {
+  return offer.verificationLabel ?? labelForVerificationStatus(
+    getOfferVerificationStatus(offer),
+  );
 }
 
 export function getPortionRecommendations(
@@ -263,6 +342,22 @@ export function getProductBrands() {
 
 function round(value: number) {
   return Math.round(value * 100) / 100;
+}
+
+function labelForVerificationStatus(status: OfferVerificationStatus) {
+  if (status === "verified") {
+    return "Prix vérifié";
+  }
+
+  if (status === "estimated") {
+    return "Prix estimé";
+  }
+
+  if (status === "fallback") {
+    return "Prix de secours";
+  }
+
+  return "À vérifier";
 }
 
 function isValidOffer(offer: Offer) {
