@@ -20,6 +20,8 @@ const COMMON_UNIT_COUNTS = [2, 3, 4, 5, 6, 8, 10, 12, 14, 15, 18, 20, 24, 25, 30
 
 const enableLiveFetch =
   process.argv.includes("--live") || process.env.CARBRATE_ENABLE_NETWORK === "1";
+const forceRefresh =
+  process.argv.includes("--force") || process.env.CARBRATE_FORCE_REFRESH === "1";
 
 async function prefetchUrls(urls, cache, stats) {
   const concurrencyLimit = 5; // Limit to 5 concurrent fetches
@@ -35,7 +37,7 @@ async function prefetchUrls(urls, cache, stats) {
 
 async function prefetchUrl(url, cache, stats) {
   const cached = cache.pages?.[url];
-  if (cached && !isCacheExpired(cached.fetchedAt)) {
+  if (cached && !forceRefresh && !isCacheExpired(cached.fetchedAt)) {
     return; // Already cached and fresh
   }
 
