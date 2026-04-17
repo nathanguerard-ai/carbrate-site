@@ -20,12 +20,6 @@
           "productUrl": "https://www.fitfirst.ca/products/gel-100",
           "country": "CA",
           "fallbackPrice": 5.5
-        },
-        {
-          "seller": "frontrunners.ca",
-          "productUrl": "https://nanaimo.frontrunners.ca/products/maurten-hydrogel-sports-fuel-gel-100",
-          "country": "CA",
-          "fallbackPrice": 5.75
         }
       ]
     },
@@ -79,12 +73,6 @@
           "productUrl": "https://www.fitfirst.ca/products/gel-160",
           "country": "CA",
           "fallbackPrice": 7.5
-        },
-        {
-          "seller": "spryactive.ca",
-          "productUrl": "https://spryactive.ca/products/maurten-gel-160",
-          "country": "CA",
-          "fallbackPrice": 7.75
         }
       ]
     },
@@ -197,12 +185,6 @@
           "country": "CA",
           "unitCount": 14,
           "fallbackPrice": 5.71
-        },
-        {
-          "seller": "spryactive.ca",
-          "productUrl": "https://spryactive.ca/products/maurten-drink-mix-320-caf-100",
-          "country": "CA",
-          "fallbackPrice": 6.35
         }
       ]
     },
@@ -227,12 +209,6 @@
           "country": "CA",
           "unitCount": 30,
           "fallbackPrice": 3
-        },
-        {
-          "seller": "fuelkit.ca",
-          "productUrl": "https://fuelkit.ca/products/sis-beta-fuel-gel",
-          "country": "CA",
-          "fallbackPrice": 3.49
         }
       ]
     },
@@ -251,12 +227,6 @@
         }
       ],
       "offers": [
-        {
-          "seller": "shopsante.ca",
-          "productUrl": "https://shopsante.ca/en/products/sis-beta-fuel-energy-chew",
-          "country": "CA",
-          "fallbackPrice": 5.49
-        },
         {
           "seller": "fuelkit.ca",
           "productUrl": "https://fuelkit.ca/products/sis-beta-energy-chews",
@@ -279,12 +249,6 @@
           "productUrl": "https://fuelkit.ca/products/tailwind-endurance-fuel-single-serving-caffeine-free",
           "country": "CA",
           "fallbackPrice": 4.25
-        },
-        {
-          "seller": "enroute.run",
-          "productUrl": "https://enroute.run/products/tailwind-endurance-fuel-stick",
-          "country": "CA",
-          "fallbackPrice": 4.5
         }
       ]
     },
@@ -537,12 +501,6 @@
           "productUrl": "https://skiuphill.ca/products/neversecond-c30-energy-gel",
           "country": "CA",
           "fallbackPrice": 5
-        },
-        {
-          "seller": "theoutfitters.nf.ca",
-          "productUrl": "https://theoutfitters.nf.ca/products/neversecond-c30-energy-gel",
-          "country": "CA",
-          "fallbackPrice": 5.25
         }
       ]
     },
@@ -640,12 +598,6 @@
           "productUrl": "https://www.precisionhydration.com/ca/en/products/pf-30-chew/",
           "country": "CA",
           "fallbackPrice": 3.5
-        },
-        {
-          "seller": "enroute.run",
-          "productUrl": "https://enroute.run/products/pf-30-chews",
-          "country": "CA",
-          "fallbackPrice": 5
         }
       ]
     },
@@ -1394,29 +1346,6 @@
       ]
     },
     {
-      "id": "pluswatt-bcaa-liquid-carbo",
-      "name": "BCAA Ride Gel+",
-      "brand": "+Watt",
-      "type": "Gel",
-      "carbsGrams": 52.3,
-      "sodiumMg": null,
-      "caffeineMg": 46,
-      "nutritionSources": [
-        {
-          "label": "+Watt officiel",
-          "url": "https://watt.it/en/carbohydrates/energetic-gels/bcaa-ride-gel/"
-        }
-      ],
-      "offers": [
-        {
-          "seller": "velovelo.ca",
-          "productUrl": "https://www.velovelo.ca/shop/watt-bcaa-ride-gel-201",
-          "country": "CA",
-          "fallbackPrice": 8
-        }
-      ]
-    },
-    {
       "id": "pluswatt-carbo-energy",
       "name": "Long Race",
       "brand": "+Watt",
@@ -1433,7 +1362,7 @@
       "offers": [
         {
           "seller": "velovelo.ca",
-          "productUrl": "https://www.velovelo.ca/shop/watt-long-race-205",
+          "productUrl": "https://www.velovelo.ca/shop/watt-long-race-215?category=22#attribute_values=219,95,241",
           "country": "CA",
           "fallbackPrice": 4
         }

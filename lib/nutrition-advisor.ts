@@ -311,7 +311,7 @@ function formatAdvisorAnswer(
 ) {
   const bestPlan = plans[0];
   if (!bestPlan || bestPlan.items.length === 0) {
-    return "Je n'ai pas trouvé assez de produits fiables pour bâtir un plan.";
+    return "Aucun plan n'est disponible avec les critères actuels.";
   }
 
   const firstItem = bestPlan.items[0];
@@ -319,7 +319,7 @@ function formatAdvisorAnswer(
   return [
     `Pour ${durationHours.toString().replace(".", ",")} h à ${targetCarbsPerHour} g/h, vise environ ${targetTotalCarbs} g de glucides.`,
     `Le meilleur départ est ${firstItem.brand} ${firstItem.name}: ${formatPortions(firstItem.portions)}, ${firstItem.totalCarbs} g, environ ${firstItem.totalCost.toFixed(2)} $.`,
-    `Lien conseillé: ${firstItem.seller}. Les prix affichés viennent du catalogue vérifié, pas d'une estimation libre de l'IA.`,
+    `Détaillant recommandé: ${firstItem.seller}.`,
   ].join("\n\n");
 }
 

@@ -21,7 +21,7 @@ export function NutritionAdvisorPanel() {
   const [preference, setPreference] = useState("best-value");
   const [caffeine, setCaffeine] = useState("any");
   const [question, setQuestion] = useState(
-    "Je fais 2h30 à 60g/h, budget minimum, sans caféine.",
+    "Sortie de 2h30 à 60 g/h, priorité budget, sans caféine.",
   );
   const [assistantResult, setAssistantResult] =
     useState<EffortAdvisorResult | null>(null);
@@ -89,11 +89,11 @@ export function NutritionAdvisorPanel() {
             Assistant IA
           </p>
           <h2 className="mt-3 text-2xl font-semibold text-ink">
-            Planifie ton effort.
+            Plan d'effort
           </h2>
           <p className="mt-2 text-sm leading-6 text-ink/65">
-            Les recommandations utilisent les prix, portions et liens vérifiés du
-            catalogue. L'assistant ne crée pas de prix.
+            Calcule une stratégie d'apport selon la durée, la cible horaire et
+            les produits disponibles.
           </p>
 
           <form onSubmit={handleCalculatorSubmit} className="mt-5 grid gap-4">
@@ -175,7 +175,7 @@ export function NutritionAdvisorPanel() {
 
           <form onSubmit={handleQuestionSubmit} className="mt-5 grid gap-3">
             <label className="grid gap-2 text-sm text-ink/72">
-              Question libre
+              Demande personnalisée
               <textarea
                 value={question}
                 onChange={(event) => setQuestion(event.target.value)}
@@ -188,7 +188,7 @@ export function NutritionAdvisorPanel() {
               disabled={isLoading}
               className="rounded-lg border border-accent/25 bg-accent px-4 py-2 text-sm font-medium text-white transition hover:bg-ink disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {isLoading ? "Analyse..." : "Demander à CarbRate AI"}
+              {isLoading ? "Analyse..." : "Générer le plan"}
             </button>
             {error ? <p className="text-sm text-red-700">{error}</p> : null}
           </form>
@@ -198,7 +198,7 @@ export function NutritionAdvisorPanel() {
           <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
             <div>
               <p className="text-xs uppercase tracking-[0.18em] text-ink/50">
-                Recommandation
+                Plan recommandé
               </p>
               <h3 className="mt-3 text-2xl font-semibold text-ink">
                 {activeResult.targetTotalCarbs} g à prévoir
@@ -244,7 +244,7 @@ export function NutritionAdvisorPanel() {
                       </span>
                       <span className="block text-xs text-ink/55">
                         {item.totalCarbs} g · {item.totalCost.toFixed(2)} $ ·{" "}
-                        {item.verificationLabel} chez {item.seller}
+                        {item.seller}
                       </span>
                     </a>
                   ))}

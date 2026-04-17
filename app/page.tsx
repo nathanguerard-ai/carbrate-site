@@ -2,18 +2,13 @@
 
 import { useState, useEffect } from "react";
 import { NutritionAdvisorPanel } from "@/components/nutrition-advisor-panel";
-import { PriceVerificationPanel } from "@/components/price-verification-panel";
 import {
   clampTargetGrams,
   DEFAULT_TARGET_CARBS,
   getCatalogUpdatedAt,
-  getOfferAssuranceSummary,
-  getOfferVerificationLabel,
-  getOfferVerificationStatus,
   getProductBrands,
   getProducts,
   getProductTypes,
-  type Offer,
 } from "@/lib/product-offer-catalog";
 
 export default function Home() {
@@ -37,7 +32,6 @@ export default function Home() {
   ];
 
   const allProducts = getProducts(targetGrams);
-  const assuranceSummary = getOfferAssuranceSummary(allProducts);
   const productTypes = getProductTypes();
   const productBrands = getProductBrands();
   const normalizedSearch = searchTerm.trim().toLowerCase();
@@ -76,41 +70,34 @@ export default function Home() {
     page * itemsPerPage,
   );
   const totalPages = Math.ceil(visibleProducts.length / itemsPerPage);
-  const best = allProducts[0];
-  const visibleBest = visibleProducts[0] ?? best;
-  const visibleBrandCount = new Set(
-    visibleProducts.map((product) => product.brand),
-  ).size;
   const hasActiveFilters =
     selectedTypes.length > 0 ||
     selectedBrands.length > 0 ||
     normalizedSearch.length > 0;
-  const scopeDescription = hasActiveFilters
-    ? "dans la sélection"
-    : "dans le catalogue";
 
   return (
     <div className="mx-auto w-full max-w-7xl flex-col px-6 py-8 sm:px-8 lg:px-10">
       <section className="grid gap-8 pb-10 pt-4 lg:grid-cols-[1.08fr_0.92fr]">
         <div>
           <div className="inline-flex rounded-full border border-ink/10 bg-white/70 px-4 py-2 text-sm text-ink/75 backdrop-blur">
-            Outil de décision en nutrition sportive pour les athlètes d'endurance
+            Nutrition sportive d'endurance
           </div>
           <h1 className="mt-6 max-w-3xl text-5xl font-semibold tracking-[-0.04em] text-ink sm:text-6xl">
-            Trouve ta nutrition d'effort au meilleur prix.
+            Compare les glucides, les prix et les portions.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-ink/72">
-            CarbRate t'aide à repérer les gels, boissons, bonbons et barres les plus
-            rentables selon leur ratio en grammes de glucides par dollar.
-          </p>
-          <p className="mt-4 max-w-2xl text-sm leading-6 text-ink/62">
-            Chaque produit est comparé sur plusieurs sites canadiens et
-            l'offre la moins chère est affichée.
+            CarbRate classe les gels, boissons, bonbons et barres selon leur
+            coût réel, leur apport en glucides et leur disponibilité chez des
+            détaillants canadiens.
           </p>
           <div className="mt-8 flex flex-wrap gap-3 text-sm text-ink/72">
             <div className="rounded-full border border-[var(--line)] bg-white/65 px-4 py-2 backdrop-blur">
               <span className="font-semibold text-ink">{allProducts.length}</span>{" "}
               produits suivis
+            </div>
+            <div className="rounded-full border border-[var(--line)] bg-white/65 px-4 py-2 backdrop-blur">
+              <span className="font-semibold text-ink">{productBrands.length}</span>{" "}
+              marques disponibles
             </div>
             <div className="rounded-full border border-[var(--line)] bg-white/65 px-4 py-2 backdrop-blur">
               Mise à jour le{" "}
@@ -128,11 +115,8 @@ export default function Home() {
                 Objectif
               </p>
               <h2 className="mt-3 text-2xl font-semibold">
-                Choisis ta cible de glucides.
+                Définis ta cible horaire.
               </h2>
-              <p className="mt-3 text-sm text-white/70">
-                Le tableau et les recommandations se mettent à jour automatiquement.
-              </p>
             </div>
             <div className="rounded-[1.25rem] border border-white/10 bg-white/10 px-5 py-4 text-center">
               <p className="text-xs uppercase tracking-[0.16em] text-white/45">
@@ -204,14 +188,8 @@ export default function Home() {
               />
             </div>
           </div>
-
-          <p className="mt-5 text-xs text-white/48">
-            Données mises à jour le {formatDate(getCatalogUpdatedAt())}.
-          </p>
         </section>
       </section>
-
-      <PriceVerificationPanel summary={assuranceSummary} />
 
       <NutritionAdvisorPanel />
 
@@ -219,11 +197,11 @@ export default function Home() {
         <div className="mb-5 flex flex-col gap-5">
           <div>
             <h2 className="text-3xl font-semibold text-ink">
-              Quel produit offre le meilleur rapport ?
+              Comparateur produits
             </h2>
             <p className="mt-2 max-w-2xl text-sm leading-6 text-ink/68">
-              Recherche un produit, limite par type ou marque, puis trie selon la
-              métrique qui t'importe vraiment.
+              Filtre par type ou marque, puis classe les produits selon le
+              ratio, le coût ou la quantité de glucides.
             </p>
           </div>
           <div className="grid gap-4 lg:grid-cols-[1.1fr_1.1fr_0.95fr]">
@@ -435,7 +413,7 @@ export default function Home() {
                             rel="noreferrer"
                             className="mt-3 inline-flex rounded-full border border-ink/10 bg-white/70 px-3 py-1.5 text-xs text-ink/72 transition hover:border-accent hover:text-accent"
                           >
-                            Voir l'offre la moins chère
+                            Voir l'offre
                           </a>
                         </div>
                       </td>
@@ -454,13 +432,6 @@ export default function Home() {
                         <p className="mt-1 text-xs text-ink/55">
                           {describeOfferPrice(product.cheapestOffer)} chez {product.cheapestOffer.seller}
                         </p>
-                        <span
-                          className={`mt-2 inline-flex rounded-full px-2.5 py-1 text-xs ${verificationBadgeClass(
-                            product.cheapestOffer,
-                          )}`}
-                        >
-                          {getOfferVerificationLabel(product.cheapestOffer)}
-                        </span>
                       </td>
                       <td className="px-6 py-5 text-center align-middle">
                         <p className="text-lg font-semibold text-accent">
@@ -538,31 +509,6 @@ function labelForSort(sortBy: string, targetGrams: number) {
   return "Trié par grammes de glucides par dollar.";
 }
 
-function describePlan(totalCarbs: number, targetGrams: number) {
-  if (totalCarbs === targetGrams) {
-    return "Cette combinaison atteint exactement la cible.";
-  }
-
-  if (totalCarbs > targetGrams) {
-    return `Cette combinaison dépasse la cible de ${totalCarbs - targetGrams} g.`;
-  }
-
-  return `Cette combinaison reste ${targetGrams - totalCarbs} g sous la cible.`;
-}
-
-function formatMultiplier(value: number) {
-  if (Number.isInteger(value)) {
-    return `${value}x`;
-  }
-
-  return `${value.toString().replace(".", ",")}x`;
-}
-
-function formatPortions(value: number) {
-  const label = value.toString().replace(".", ",");
-  return `${label} portion${value > 1 ? "s" : ""}`;
-}
-
 function getDisplayedOfferPrice(offer: {
   price: number;
   packagePrice?: number;
@@ -593,22 +539,4 @@ function describeOfferPrice(offer: {
   }
 
   return "prix unitaire";
-}
-
-function verificationBadgeClass(offer: Offer) {
-  const status = getOfferVerificationStatus(offer);
-
-  if (status === "verified") {
-    return "bg-pine/10 text-pine";
-  }
-
-  if (status === "estimated") {
-    return "bg-accent/10 text-accent";
-  }
-
-  if (status === "fallback") {
-    return "bg-amber-100 text-amber-900";
-  }
-
-  return "bg-red-100 text-red-800";
 }

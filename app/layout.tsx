@@ -3,7 +3,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://carbrate-site.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -12,14 +12,14 @@ export const metadata: Metadata = {
     template: "%s | CarbRate",
   },
   description:
-    "Compare gels, boissons, bonbons et barres selon leur coût réel et leurs glucides par dollar.",
+    "Compare les produits de nutrition d'endurance selon leur coût réel, leurs portions et leurs glucides par dollar.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "CarbRate",
     description:
-      "Compare gels, boissons, bonbons et barres selon leur coût réel et leurs glucides par dollar.",
+      "Compare les produits de nutrition d'endurance selon leur coût réel, leurs portions et leurs glucides par dollar.",
     url: siteUrl,
     siteName: "CarbRate",
     locale: "fr_CA",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "CarbRate",
     description:
-      "Compare gels, boissons, bonbons et barres selon leur coût réel et leurs glucides par dollar.",
+      "Compare les produits de nutrition d'endurance selon leur coût réel, leurs portions et leurs glucides par dollar.",
   },
 };
 

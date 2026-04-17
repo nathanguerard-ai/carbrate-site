@@ -20,14 +20,6 @@ export default function Header() {
           >
             Accueil
           </Link>
-          <a
-            href="https://github.com/nathanguerard-ai/carbrate-site"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm text-ink/70 hover:text-ink transition-colors"
-          >
-            GitHub
-          </a>
         </nav>
       </div>
     </header>

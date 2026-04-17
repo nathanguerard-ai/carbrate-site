@@ -11,19 +11,10 @@ export default function Footer() {
           </div>
 
           <p className="text-sm text-ink/60">
-            Outil de comparaison nutritionnelle pour athlètes d'endurance.
+            Comparateur de nutrition sportive d'endurance.
           </p>
 
           <div className="flex items-center gap-4 text-sm text-ink/60">
-            <a
-              href="https://github.com/nathanguerard-ai/carbrate-site"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-ink transition-colors"
-            >
-              Code source
-            </a>
-            <span>•</span>
             <span>2026</span>
           </div>
         </div>
