@@ -6,6 +6,11 @@ import {
   parseAdvisorQuestion,
   type EffortAdvisorResult,
 } from "@/lib/nutrition-advisor";
+import {
+  DEFAULT_TARGET_CARBS,
+  getProductBrands,
+  type ProductType,
+} from "@/lib/product-offer-catalog";
 
 const preferenceOptions = [
   { value: "best-value", label: "Meilleur ratio" },
@@ -13,13 +18,26 @@ const preferenceOptions = [
   { value: "simple", label: "Le plus simple" },
   { value: "mixed", label: "Mixte" },
 ] as const;
+const productTypes: ProductType[] = ["Gel", "Boisson", "Barre", "Autre"];
+
+const initialTypeValues: Record<ProductType, string> = {
+  Gel: "",
+  Boisson: "",
+  Barre: "",
+  Autre: "",
+};
 
 export function NutritionAdvisorPanel() {
-  const [durationHours, setDurationHours] = useState(2);
-  const [durationMinutes, setDurationMinutes] = useState(0);
-  const [targetCarbsPerHour, setTargetCarbsPerHour] = useState(60);
+  const productBrands = getProductBrands();
+  const [durationHours, setDurationHours] = useState("2");
+  const [durationMinutes, setDurationMinutes] = useState("0");
+  const [targetCarbsPerHour, setTargetCarbsPerHour] = useState("60");
   const [preference, setPreference] = useState("best-value");
   const [caffeine, setCaffeine] = useState("any");
+  const [typeCounts, setTypeCounts] =
+    useState<Record<ProductType, string>>(initialTypeValues);
+  const [typeBrandPreferences, setTypeBrandPreferences] =
+    useState<Record<ProductType, string>>(initialTypeValues);
   const [question, setQuestion] = useState(
     "Indique la durée de la sortie, la cible de glucides par heure et le type de produit préféré.",
   );
@@ -34,14 +52,7 @@ export function NutritionAdvisorPanel() {
 
   function handleCalculatorSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setCalculatorResult(
-      buildEffortAdvisorResult({
-        durationMinutes: durationHours * 60 + durationMinutes,
-        targetCarbsPerHour,
-        preference: preference as "best-value" | "lowest-cost" | "simple" | "mixed",
-        caffeine: caffeine as "any" | "avoid" | "ok",
-      }),
-    );
+    setCalculatorResult(buildEffortAdvisorResult(buildCalculatorInput()));
     setAssistantResult(null);
     setError(null);
   }
@@ -55,7 +66,10 @@ export function NutritionAdvisorPanel() {
       const response = await fetch("/api/nutrition-advisor", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ question }),
+        body: JSON.stringify({
+          question,
+          input: buildPreferenceInput(),
+        }),
       });
       const payload = await response.json();
 
@@ -65,11 +79,25 @@ export function NutritionAdvisorPanel() {
 
       setAssistantResult(payload);
       const parsed = parseAdvisorQuestion(question);
-      setDurationHours(Math.floor(parsed.durationMinutes / 60));
-      setDurationMinutes(parsed.durationMinutes % 60);
-      setTargetCarbsPerHour(parsed.targetCarbsPerHour);
+      setDurationHours(String(Math.floor(parsed.durationMinutes / 60)));
+      setDurationMinutes(String(parsed.durationMinutes % 60));
+      setTargetCarbsPerHour(String(parsed.targetCarbsPerHour));
       setPreference(parsed.preference ?? "best-value");
       setCaffeine(parsed.caffeine ?? "any");
+      if (
+        parsed.desiredTypeCounts &&
+        Object.keys(parsed.desiredTypeCounts).length > 0
+      ) {
+        setTypeCounts((current) => ({
+          ...current,
+          ...Object.fromEntries(
+            Object.entries(parsed.desiredTypeCounts ?? {}).map(([type, count]) => [
+              type,
+              String(count),
+            ]),
+          ),
+        }));
+      }
     } catch (requestError) {
       setError(
         requestError instanceof Error
@@ -79,6 +107,46 @@ export function NutritionAdvisorPanel() {
     } finally {
       setIsLoading(false);
     }
+  }
+
+  function buildCalculatorInput() {
+    return {
+      durationMinutes:
+        parseIntegerField(durationHours, 0, 0, 24) * 60 +
+        parseIntegerField(durationMinutes, 0, 0, 59),
+      targetCarbsPerHour: parseIntegerField(
+        targetCarbsPerHour,
+        DEFAULT_TARGET_CARBS,
+        20,
+        140,
+      ),
+      preference: preference as "best-value" | "lowest-cost" | "simple" | "mixed",
+      caffeine: caffeine as "any" | "avoid" | "ok",
+      ...buildPreferenceInput(),
+    };
+  }
+
+  function buildPreferenceInput() {
+    const desiredTypeCounts = Object.fromEntries(
+      productTypes
+        .filter((type) => typeCounts[type] !== "")
+        .map((type) => [
+          type,
+          parseIntegerField(typeCounts[type], 0, 0, 12),
+        ]),
+    );
+    const brandPreferences = Object.fromEntries(
+      productTypes
+        .filter((type) => typeBrandPreferences[type] !== "")
+        .map((type) => [type, typeBrandPreferences[type]]),
+    );
+
+    return {
+      desiredTypeCounts:
+        Object.keys(desiredTypeCounts).length > 0 ? desiredTypeCounts : undefined,
+      typeBrandPreferences:
+        Object.keys(brandPreferences).length > 0 ? brandPreferences : undefined,
+    };
   }
 
   return (
@@ -105,7 +173,9 @@ export function NutritionAdvisorPanel() {
                   min="0"
                   max="24"
                   value={durationHours}
-                  onChange={(event) => setDurationHours(Number(event.target.value))}
+                  onChange={(event) =>
+                    setDurationHours(normalizeIntegerInput(event.target.value, 24))
+                  }
                   className="rounded-xl border border-ink/10 bg-white px-3 py-2 text-ink outline-none focus:border-accent"
                 />
               </label>
@@ -117,7 +187,9 @@ export function NutritionAdvisorPanel() {
                   max="59"
                   step="5"
                   value={durationMinutes}
-                  onChange={(event) => setDurationMinutes(Number(event.target.value))}
+                  onChange={(event) =>
+                    setDurationMinutes(normalizeIntegerInput(event.target.value, 59))
+                  }
                   className="rounded-xl border border-ink/10 bg-white px-3 py-2 text-ink outline-none focus:border-accent"
                 />
               </label>
@@ -131,7 +203,9 @@ export function NutritionAdvisorPanel() {
                 max="140"
                 step="5"
                 value={targetCarbsPerHour}
-                onChange={(event) => setTargetCarbsPerHour(Number(event.target.value))}
+                onChange={(event) =>
+                  setTargetCarbsPerHour(normalizeIntegerInput(event.target.value, 140))
+                }
                 className="rounded-xl border border-ink/10 bg-white px-3 py-2 text-ink outline-none focus:border-accent"
               />
             </label>
@@ -163,6 +237,63 @@ export function NutritionAdvisorPanel() {
                   <option value="ok">Accepté</option>
                 </select>
               </label>
+            </div>
+
+            <div className="grid gap-3">
+              <div>
+                <p className="text-sm font-medium text-ink">
+                  Composition souhaitée
+                </p>
+                <p className="mt-1 text-xs leading-5 text-ink/55">
+                  Laisse un champ vide pour laisser CarbRate compléter le plan.
+                  Mets 0 pour exclure un type.
+                </p>
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                {productTypes.map((type) => (
+                  <label key={type} className="grid gap-2 text-sm text-ink/72">
+                    {labelForTypeCount(type)}
+                    <input
+                      type="number"
+                      min="0"
+                      max="12"
+                      value={typeCounts[type]}
+                      onChange={(event) =>
+                        setTypeCounts((current) => ({
+                          ...current,
+                          [type]: normalizeIntegerInput(event.target.value, 12),
+                        }))
+                      }
+                      placeholder="Auto"
+                      className="rounded-xl border border-ink/10 bg-white px-3 py-2 text-ink outline-none placeholder:text-ink/35 focus:border-accent"
+                    />
+                  </label>
+                ))}
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                {productTypes.map((type) => (
+                  <label key={type} className="grid gap-2 text-sm text-ink/72">
+                    Marque {type.toLowerCase()}
+                    <select
+                      value={typeBrandPreferences[type]}
+                      onChange={(event) =>
+                        setTypeBrandPreferences((current) => ({
+                          ...current,
+                          [type]: event.target.value,
+                        }))
+                      }
+                      className="rounded-xl border border-ink/10 bg-white px-3 py-2 text-ink outline-none focus:border-accent"
+                    >
+                      <option value="">Indifférent</option>
+                      {productBrands.map((brand) => (
+                        <option key={`${type}-${brand}`} value={brand}>
+                          {brand}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                ))}
+              </div>
             </div>
 
             <button
@@ -284,4 +415,47 @@ export function NutritionAdvisorPanel() {
       </div>
     </section>
   );
+}
+
+function normalizeIntegerInput(value: string, max: number) {
+  const digits = value.replace(/\D/g, "");
+  if (digits === "") {
+    return "";
+  }
+
+  return String(Math.min(max, Number.parseInt(digits, 10)));
+}
+
+function parseIntegerField(
+  value: string,
+  fallback: number,
+  min: number,
+  max: number,
+) {
+  if (value === "") {
+    return fallback;
+  }
+
+  const parsed = Number.parseInt(value, 10);
+  if (!Number.isFinite(parsed)) {
+    return fallback;
+  }
+
+  return Math.min(max, Math.max(min, parsed));
+}
+
+function labelForTypeCount(type: ProductType) {
+  if (type === "Gel") {
+    return "Portions de gel";
+  }
+
+  if (type === "Boisson") {
+    return "Portions de boisson";
+  }
+
+  if (type === "Barre") {
+    return "Portions de barre";
+  }
+
+  return "Portions autres";
 }

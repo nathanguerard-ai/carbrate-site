@@ -240,8 +240,8 @@ export default function Home() {
                 <button
                   type="button"
                   onClick={() => {
-                      setSelectedTypes([]);
-                      setSelectedBrands([]);
+                    setSelectedTypes([]);
+                    setSelectedBrands([]);
                     setSearchTerm("");
                     setSortBy("ratio");
                   }}
@@ -464,11 +464,11 @@ export default function Home() {
             </table>
 
             {totalPages > 1 && (
-              <div className="mt-6 flex items-center justify-between">
+              <div className="mt-6 flex flex-wrap items-center justify-between gap-3 px-6 pb-6">
                 <p className="text-sm text-ink/60">
                   Page {page} sur {totalPages} ({visibleProducts.length} produits)
                 </p>
-                <div className="flex gap-2">
+                <div className="flex gap-2 pr-1">
                   <button
                     onClick={() => setPage(page - 1)}
                     disabled={page === 1}
