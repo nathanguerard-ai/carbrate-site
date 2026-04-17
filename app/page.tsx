@@ -113,9 +113,6 @@ export default function Home() {
               produits suivis
             </div>
             <div className="rounded-full border border-[var(--line)] bg-white/65 px-4 py-2 backdrop-blur">
-              Estimation des meilleures offres sur les produits suivis
-            </div>
-            <div className="rounded-full border border-[var(--line)] bg-white/65 px-4 py-2 backdrop-blur">
               Mise à jour le{" "}
               <span className="font-semibold text-ink">
                 {formatDate(getCatalogUpdatedAt())}
