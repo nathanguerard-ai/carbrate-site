@@ -377,7 +377,7 @@ export default function Home() {
                   <th className="px-6 py-4 text-left">Produit</th>
                   <th className="px-6 py-4 text-center">Type</th>
                   <th className="px-6 py-4 text-center">Glucides</th>
-                  <th className="px-6 py-4 text-center">Prix</th>
+                  <th className="px-6 py-4 text-center">Prix affiché</th>
                   <th className="px-6 py-4 text-center">Grammes de glucides / $</th>
                   <th className="px-6 py-4 text-center">Coût</th>
                 </tr>
@@ -443,10 +443,10 @@ export default function Home() {
                       </td>
                       <td className="px-6 py-5 text-center align-middle text-sm font-medium text-ink">
                         <p className="text-lg font-semibold text-ink">
-                          ${product.cheapestOffer.price.toFixed(2)}
+                          ${getDisplayedOfferPrice(product.cheapestOffer).toFixed(2)}
                         </p>
                         <p className="mt-1 text-xs text-ink/55">
-                          chez {product.cheapestOffer.seller}
+                          {describeOfferPrice(product.cheapestOffer)} chez {product.cheapestOffer.seller}
                         </p>
                       </td>
                       <td className="px-6 py-5 text-center align-middle">
@@ -548,4 +548,36 @@ function formatMultiplier(value: number) {
 function formatPortions(value: number) {
   const label = value.toString().replace(".", ",");
   return `${label} portion${value > 1 ? "s" : ""}`;
+}
+
+function getDisplayedOfferPrice(offer: {
+  price: number;
+  packagePrice?: number;
+  unitCount?: number;
+}) {
+  if (
+    Number.isFinite(offer.packagePrice) &&
+    Number.isFinite(offer.unitCount) &&
+    (offer.unitCount ?? 1) > 1
+  ) {
+    return offer.packagePrice ?? offer.price;
+  }
+
+  return offer.price;
+}
+
+function describeOfferPrice(offer: {
+  price: number;
+  packagePrice?: number;
+  unitCount?: number;
+}) {
+  if (
+    Number.isFinite(offer.packagePrice) &&
+    Number.isFinite(offer.unitCount) &&
+    (offer.unitCount ?? 1) > 1
+  ) {
+    return `${offer.price.toFixed(2)} $/portion`;
+  }
+
+  return "prix unitaire";
 }
