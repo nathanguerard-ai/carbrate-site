@@ -12,6 +12,11 @@ const USER_AGENT =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
 const CACHE_MAX_AGE_MS = 1000 * 60 * 60 * 24;
 const FETCH_TIMEOUT_MS = 4500;
+const MIN_UNIT_PRICE = 0.5;
+const MAX_UNIT_PRICE = 20;
+const MAX_PACKAGE_PRICE = 250;
+const MAX_AUTO_UNIT_COUNT = 60;
+const COMMON_UNIT_COUNTS = [2, 3, 4, 5, 6, 8, 10, 12, 14, 15, 18, 20, 24, 25, 30];
 
 const enableLiveFetch =
   process.argv.includes("--live") || process.env.CARBRATE_ENABLE_NETWORK === "1";
@@ -63,6 +68,11 @@ async function main() {
     pagesFromCache: 0,
     offerPricesFromLive: 0,
     offerPricesFromFallback: 0,
+    offerPricesSkipped: 0,
+    unitCountsFromLive: 0,
+    unitCountsFromCatalog: 0,
+    unitCountsInferredFromPrice: 0,
+    unitCountsDefaulted: 0,
     carbsFromLive: 0,
     carbsFromCatalog: 0,
   };
@@ -81,7 +91,25 @@ async function main() {
   await prefetchUrls([...allUrls], cache, stats);
 
   for (const product of catalog.products) {
-    const carbsResolution = await resolveProductCarbs(product, cache, stats);
+    const productSignals = await getProductSignals(product, cache, stats);
+    const offerPackages = product.offers.map((offer) => {
+      const pageSignals = productSignals.byUrl.get(offer.productUrl);
+      return {
+        offer,
+        pageSignals,
+        packageCandidate: choosePackagePriceCandidate(
+          pageSignals?.priceCandidates ?? [],
+        ),
+      };
+    });
+    const singleUnitPrice = inferSingleUnitPrice(offerPackages);
+    const productUnitResolution = resolveProductUnitCount(
+      product,
+      productSignals.signals,
+      offerPackages,
+      singleUnitPrice,
+    );
+    const carbsResolution = resolveProductCarbs(product, productSignals.signals, stats);
     const offers = [];
 
     for (const offer of product.offers) {
@@ -89,14 +117,25 @@ async function main() {
         continue;
       }
 
-      const priceResolution = await resolveOfferPrice(offer, cache, stats);
+      const pageSignals = productSignals.byUrl.get(offer.productUrl);
+      const priceResolution = resolveOfferPrice(
+        product,
+        offer,
+        pageSignals,
+        productUnitResolution,
+        singleUnitPrice,
+        stats,
+      );
       if (priceResolution.price === null) {
+        stats.offerPricesSkipped += 1;
         continue;
       }
 
       offers.push({
         seller: offer.seller,
         price: priceResolution.price,
+        packagePrice: priceResolution.packagePrice,
+        unitCount: priceResolution.unitCount,
         productUrl: offer.productUrl,
         priceSource: priceResolution.source,
         priceConfidence: priceResolution.confidence,
@@ -112,6 +151,8 @@ async function main() {
         offers.push({
           seller: offer.seller,
           price: offer.fallbackPrice,
+          packagePrice: offer.fallbackPrice,
+          unitCount: 1,
           productUrl: offer.productUrl,
           priceSource: "catalog-fallback",
           priceConfidence: "fallback",
@@ -148,18 +189,18 @@ async function main() {
 
   console.log(`Updated ${products.length} products in ${outputPath}`);
   console.log(
-    `Mode: ${stats.mode}, fetched: ${stats.pagesFetched}, cache hits: ${stats.pagesFromCache}, live prices: ${stats.offerPricesFromLive}, fallback prices: ${stats.offerPricesFromFallback}`,
+    `Mode: ${stats.mode}, fetched: ${stats.pagesFetched}, cache hits: ${stats.pagesFromCache}, live prices: ${stats.offerPricesFromLive}, fallback prices: ${stats.offerPricesFromFallback}, skipped prices: ${stats.offerPricesSkipped}`,
   );
 }
 
-async function resolveProductCarbs(product, cache, stats) {
+async function getProductSignals(product, cache, stats) {
   const sourceUrls = [
     ...(product.nutritionSources ?? []).map((source) => source.url),
     ...product.offers.map((offer) => offer.productUrl),
   ];
   const uniqueUrls = [...new Set(sourceUrls.filter(Boolean))];
-
-  const liveCandidates = [];
+  const signals = [];
+  const byUrl = new Map();
 
   for (const url of uniqueUrls) {
     const pageSignals = await getPageSignals(url, cache, stats);
@@ -167,8 +208,20 @@ async function resolveProductCarbs(product, cache, stats) {
       continue;
     }
 
+    const enrichedSignals = enrichPageSignals(url, pageSignals);
+    signals.push(enrichedSignals);
+    byUrl.set(url, enrichedSignals);
+  }
+
+  return { signals, byUrl };
+}
+
+function resolveProductCarbs(product, productSignals, stats) {
+  const liveCandidates = [];
+
+  for (const pageSignals of productSignals) {
     for (const candidate of pageSignals.carbCandidates ?? []) {
-      liveCandidates.push({ ...candidate, url });
+      liveCandidates.push({ ...candidate, url: pageSignals.url });
     }
   }
 
@@ -192,40 +245,70 @@ async function resolveProductCarbs(product, cache, stats) {
   };
 }
 
-async function resolveOfferPrice(offer, cache, stats) {
-  const pageSignals = await getPageSignals(offer.productUrl, cache, stats);
+function resolveOfferPrice(
+  product,
+  offer,
+  pageSignals,
+  productUnitResolution,
+  singleUnitPrice,
+  stats,
+) {
   const candidates = pageSignals?.priceCandidates ?? [];
-  const servingCandidates = pageSignals?.servingCandidates ?? [];
-  const liveUnitCount = chooseBestServingCandidate(servingCandidates, offer);
-  const effectiveUnitCount = Number.isFinite(offer.unitCount) ? offer.unitCount : (liveUnitCount ?? 1);
-  const liveCandidate = chooseBestPriceCandidate(candidates, { ...offer, unitCount: effectiveUnitCount });
+  const packageCandidate = choosePackagePriceCandidate(candidates);
+  const unitResolution = resolveOfferUnitCount(
+    product,
+    offer,
+    pageSignals,
+    productUnitResolution,
+    packageCandidate,
+    singleUnitPrice,
+  );
+  const liveCandidate = chooseBestPriceCandidate(candidates, {
+    ...offer,
+    unitCount: unitResolution.unitCount,
+  });
 
-  if (liveCandidate) {
+  trackUnitCountStats(unitResolution, stats);
+
+  if (liveCandidate && isReliableUnitPrice(liveCandidate.value)) {
     stats.offerPricesFromLive += 1;
     return {
       price: round(liveCandidate.value),
+      packagePrice: round(liveCandidate.packagePrice),
+      unitCount: unitResolution.unitCount,
       source: liveCandidate.url ?? offer.productUrl,
       confidence: liveCandidate.confidence ?? "live",
     };
   }
 
-  stats.offerPricesFromFallback += 1;
+  if (Number.isFinite(offer.fallbackPrice) && offer.fallbackPrice > 0) {
+    stats.offerPricesFromFallback += 1;
+    return {
+      price: offer.fallbackPrice,
+      packagePrice: offer.fallbackPrice,
+      unitCount: 1,
+      source: "catalog-fallback",
+      confidence: "fallback",
+    };
+  }
+
   return {
-    price: offer.fallbackPrice,
-    source: "catalog-fallback",
-    confidence: "fallback",
+    price: null,
+    packagePrice: null,
+    unitCount: unitResolution.unitCount,
+    source: null,
+    confidence: "missing",
   };
 }
 
 async function getPageSignals(url, cache, stats) {
   const cached = cache.pages?.[url];
-  if (cached && !isCacheExpired(cached.fetchedAt)) {
+  if (cached) {
     stats.pagesFromCache += 1;
     return cached;
   }
 
-  // Since we prefetched, if not cached, return null
-  return cached ?? null;
+  return null;
 }
 
 function extractPageSignals(url, html) {
@@ -246,35 +329,61 @@ function extractPageSignals(url, html) {
       ...candidate,
       url,
     })),
+    packageCountCandidates: extractPackageCountCandidates(
+      `${extractTitle(html) ?? ""} ${decodeUrlForSignals(url)} ${text}`,
+    ).map((candidate) => ({
+      ...candidate,
+      url,
+    })),
+  };
+}
+
+function enrichPageSignals(url, pageSignals) {
+  const title = pageSignals.title ?? null;
+  const locationText = `${title ?? ""} ${decodeUrlForSignals(url)}`;
+
+  return {
+    ...pageSignals,
+    url,
+    packageCountCandidates: dedupeNumberCandidates([
+      ...(pageSignals.packageCountCandidates ?? []),
+      ...extractPackageCountCandidates(locationText).map((candidate) => ({
+        ...candidate,
+        url,
+      })),
+    ]),
   };
 }
 
 function extractPriceCandidates(html) {
   const candidates = [];
   const jsonLdMatches = [
-    ...html.matchAll(/"price"\s*:\s*"(\d+(?:[.,]\d+)?)"/gi),
-    ...html.matchAll(/"price"\s*:\s*(\d+(?:[.,]\d+)?)/gi),
-    ...html.matchAll(/"salePrice"\s*:\s*"(\d+(?:[.,]\d+)?)"/gi),
-    ...html.matchAll(/"salePrice"\s*:\s*(\d+(?:[.,]\d+)?)/gi),
-    ...html.matchAll(/"offerPrice"\s*:\s*"(\d+(?:[.,]\d+)?)"/gi),
-    ...html.matchAll(/"offerPrice"\s*:\s*(\d+(?:[.,]\d+)?)/gi),
+    ...tagMatches(html.matchAll(/"price"\s*:\s*"(\d+(?:[.,]\d+)?)"/gi), "structured"),
+    ...tagMatches(html.matchAll(/"price"\s*:\s*(\d+(?:[.,]\d+)?)/gi), "structured"),
+    ...tagMatches(html.matchAll(/"salePrice"\s*:\s*"(\d+(?:[.,]\d+)?)"/gi), "structured"),
+    ...tagMatches(html.matchAll(/"salePrice"\s*:\s*(\d+(?:[.,]\d+)?)/gi), "structured"),
+    ...tagMatches(html.matchAll(/"offerPrice"\s*:\s*"(\d+(?:[.,]\d+)?)"/gi), "structured"),
+    ...tagMatches(html.matchAll(/"offerPrice"\s*:\s*(\d+(?:[.,]\d+)?)/gi), "structured"),
   ];
   const metaMatches = [
-    ...html.matchAll(
+    ...tagMatches(html.matchAll(
       /(?:product:price:amount|price" content=|price\" content=\")\s*[:=]?\s*"?(\d+(?:[.,]\d+)?)/gi,
-    ),
-    ...html.matchAll(
+    ), "meta"),
+    ...tagMatches(html.matchAll(
       /(?:sale:price|discounted.price|offer.price)[^0-9]*(\d+(?:[.,]\d+)?)/gi,
-    ),
+    ), "meta"),
   ];
   const currencyMatches = [
     ...html.matchAll(/"priceCurrency"\s*:\s*"([A-Z]{3})"/gi),
     ...html.matchAll(/(?:currency|Currency)\s*[:=]\s*"([A-Z]{3})"/g),
   ];
   const textMatches = [
-    ...html.matchAll(/\$\s*(\d+(?:[.,]\d+)?)/g),
-    ...html.matchAll(/(\d+(?:[.,]\d+)?)\s*\$/g),
-    ...html.matchAll(/(?:prix de vente|sale price|discounted|offre)[^0-9]*\$?\s*(\d+(?:[.,]\d+)?)/gi),
+    ...tagMatches(html.matchAll(/\$\s*(\d+(?:[.,]\d+)?)/g), "text"),
+    ...tagMatches(html.matchAll(/(\d+(?:[.,]\d+)?)\s*\$/g), "text"),
+    ...tagMatches(
+      html.matchAll(/(?:prix de vente|sale price|discounted|offre)[^0-9]*\$?\s*(\d+(?:[.,]\d+)?)/gi),
+      "text",
+    ),
   ];
 
   const currencies = currencyMatches.map((match) => match[1].toUpperCase());
@@ -288,14 +397,21 @@ function extractPriceCandidates(html) {
       continue;
     }
 
-    candidates.push({
-      value,
-      currency: assumedCurrency,
-      confidence: "live",
-    });
+    for (const normalizedValue of normalizeMoneyValues(value)) {
+      candidates.push({
+        value: normalizedValue,
+        currency: assumedCurrency,
+        confidence: match.source === "text" ? "live-text" : "live",
+        sourceType: match.source,
+      });
+    }
   }
 
   return dedupeNumberCandidates(candidates);
+}
+
+function tagMatches(matches, source) {
+  return [...matches].map((match) => Object.assign(match, { source }));
 }
 
 function extractCarbCandidates(text) {
@@ -326,21 +442,65 @@ function extractCarbCandidates(text) {
 function extractServingCandidates(text) {
   const candidates = [];
   const patterns = [
-    /(?:servings?|portions?|servings per container)[^0-9]{0,20}(\d+(?:[.,]\d+)?)/gi,
-    /(\d+(?:[.,]\d+)?)\s*(?:servings?|portions?)/gi,
+    {
+      pattern: /(?:servings? per container|portions? par contenant|nombre de portions|servings?|portions?)[^0-9]{0,24}(\d+(?:[.,]\d+)?)/gi,
+      sourceType: "serving-label",
+    },
+    {
+      pattern: /(\d+(?:[.,]\d+)?)\s*(?:servings?|portions?)(?!\s*(?:of|de)?\s*(?:carb|glucide))/gi,
+      sourceType: "serving-count",
+    },
   ];
 
-  for (const pattern of patterns) {
+  for (const { pattern, sourceType } of patterns) {
     for (const match of text.matchAll(pattern)) {
       const rawValue = match[1];
       const value = parseDecimal(rawValue);
-      if (value === null || value <= 0 || value > 1000) {
+      if (value === null || value <= 0 || value > MAX_AUTO_UNIT_COUNT) {
         continue;
       }
 
       candidates.push({
         value,
         confidence: "live",
+        sourceType,
+      });
+    }
+  }
+
+  return dedupeNumberCandidates(candidates);
+}
+
+function extractPackageCountCandidates(text) {
+  const normalizedText = normalizeSignalText(text);
+  const candidates = [];
+  const patterns = [
+    {
+      pattern: /\b(?:single serving|single serve|single|sample|echantillon|1\s*barre|1\s*bar|1\s*gel)\b/gi,
+      sourceType: "single",
+      fixedValue: 1,
+    },
+    {
+      pattern: /(?:box|case|pack|paquet|boite|bundle)\s*(?:of|de)?\s*(\d{1,3})\b/gi,
+      sourceType: "package-label",
+    },
+    {
+      pattern: /\b(\d{1,3})\s*(?:x|ct|count|pack|servings?|portions?|gels|bars|barres|sachets|chews|stroopwafels)\b/gi,
+      sourceType: "package-count",
+    },
+  ];
+
+  for (const { pattern, sourceType, fixedValue } of patterns) {
+    for (const match of normalizedText.matchAll(pattern)) {
+      const value = fixedValue ?? parseDecimal(match[1]);
+      if (value === null || value <= 0 || value > MAX_AUTO_UNIT_COUNT) {
+        continue;
+      }
+
+      candidates.push({
+        value,
+        confidence: "live",
+        sourceType,
       });
     }
   }
@@ -354,36 +514,66 @@ function chooseBestPriceCandidate(candidates, offer) {
   }
 
   const normalized = candidates
-    .map((candidate) => {
+    .flatMap((candidate, index) => {
       const unitCount = Number.isFinite(offer.unitCount) ? offer.unitCount : 1;
-      const normalizedValue = candidate.value / unitCount;
-      return {
+      return normalizeMoneyValues(candidate.value).map((packagePrice) => ({
         ...candidate,
-        value: round(normalizedValue),
-      };
+        packagePrice,
+        value: round(packagePrice / unitCount),
+        sourceScore: getPriceSourceScore(candidate, index),
+        packageScore: getPackagePriceScore(packagePrice),
+      }));
     })
-    .filter((candidate) => candidate.value > 0)
+    .filter((candidate) => candidate.value > 0 && candidate.packagePrice <= MAX_PACKAGE_PRICE)
     .filter((candidate) => !candidate.currency || candidate.currency === "CAD");
 
   if (normalized.length === 0) {
     return null;
   }
 
-  const baseline = offer.fallbackPrice;
-  if (!Number.isFinite(baseline) || baseline <= 0) {
-    return normalized.sort((a, b) => a.value - b.value)[0];
-  }
-
   const ranked = normalized
     .map((candidate) => ({
       ...candidate,
-      distance: Math.abs(candidate.value - baseline),
-      ratio: candidate.value / baseline,
+      score:
+        candidate.sourceScore +
+        candidate.packageScore +
+        getUnitPriceScore(candidate.value),
     }))
-    .filter((candidate) => candidate.ratio >= 0.45 && candidate.ratio <= 2.25)
-    .sort((a, b) => a.distance - b.distance || a.value - b.value);
+    .filter((candidate) => isReliableUnitPrice(candidate.value))
+    .sort(
+      (a, b) =>
+        b.score - a.score ||
+        b.sourceScore - a.sourceScore ||
+        a.packagePrice - b.packagePrice,
+    );
 
   return ranked[0] ?? null;
+}
+
+function choosePackagePriceCandidate(candidates) {
+  const normalized = candidates
+    .flatMap((candidate, index) =>
+      normalizeMoneyValues(candidate.value).map((value) => ({
+        ...candidate,
+        value,
+        sourceScore: getPriceSourceScore(candidate, index),
+        packageScore: getPackagePriceScore(value),
+      })),
+    )
+    .filter((candidate) => candidate.value > 0 && candidate.value <= MAX_PACKAGE_PRICE)
+    .filter((candidate) => !candidate.currency || candidate.currency === "CAD")
+    .map((candidate) => ({
+      ...candidate,
+      score: candidate.sourceScore + candidate.packageScore,
+    }))
+    .sort(
+      (a, b) =>
+        b.score - a.score ||
+        b.sourceScore - a.sourceScore ||
+        a.value - b.value,
+    );
+
+  return normalized[0] ?? null;
 }
 
 function chooseBestCarbCandidate(candidates, fallbackValue) {
@@ -408,39 +598,438 @@ function chooseBestCarbCandidate(candidates, fallbackValue) {
     .sort((a, b) => a.distance - b.distance || a.value - b.value)[0];
 }
 
-function chooseBestServingCandidate(candidates, offer) {
-  if (candidates.length === 0) {
-    return null;
-  }
+function resolveProductUnitCount(product, productSignals, offerPackages, singleUnitPrice) {
+  const candidates = [];
 
-  const positive = candidates.filter((candidate) => candidate.value > 0);
-  if (positive.length === 0) {
-    return null;
-  }
-
-  // If catalog has unitCount, prefer close matches
-  if (Number.isFinite(offer.unitCount)) {
-    return positive
-      .map((candidate) => ({
+  for (const pageSignals of productSignals) {
+    candidates.push(
+      ...getUnitCandidatesFromPage(pageSignals).map((candidate) => ({
         ...candidate,
-        distance: Math.abs(candidate.value - offer.unitCount),
-      }))
-      .sort((a, b) => a.distance - b.distance || a.value - b.value)[0];
+        url: pageSignals.url,
+      })),
+    );
   }
 
-  // Otherwise, take the most common or first
-  return positive.sort((a, b) => a.value - b.value)[0];
+  const packagePrices = offerPackages
+    .map((entry) => entry.packageCandidate?.value)
+    .filter((value) => Number.isFinite(value));
+  const chosen = chooseBestUnitCount(candidates, product, packagePrices, singleUnitPrice);
+
+  if (chosen) {
+    return {
+      unitCount: chosen.value,
+      source: chosen.url ?? "live",
+      confidence: chosen.sourceType === "single" ? "live-single" : "live",
+    };
+  }
+
+  return {
+    unitCount: 1,
+    source: "default-single",
+    confidence: "default",
+  };
+}
+
+function resolveOfferUnitCount(
+  product,
+  offer,
+  pageSignals,
+  productUnitResolution,
+  packageCandidate,
+  singleUnitPrice,
+) {
+  if (Number.isFinite(offer.unitCount) && offer.unitCount > 0) {
+    return {
+      unitCount: offer.unitCount,
+      source: "catalog-unit-count",
+      confidence: "catalog",
+    };
+  }
+
+  const packagePrice = packageCandidate?.value;
+  const offerCandidates = getUnitCandidatesFromPage(pageSignals);
+  const offerUnit = chooseBestUnitCount(
+    offerCandidates,
+    product,
+    Number.isFinite(packagePrice) ? [packagePrice] : [],
+    singleUnitPrice,
+  );
+
+  if (offerUnit) {
+    return {
+      unitCount: offerUnit.value,
+      source: offerUnit.url ?? pageSignals?.url ?? offer.productUrl,
+      confidence: offerUnit.sourceType === "single" ? "live-single" : "live",
+    };
+  }
+
+  const inferredFromPeerPrice = inferUnitCountFromPeerPrice(
+    packagePrice,
+    singleUnitPrice,
+  );
+  if (inferredFromPeerPrice) {
+    return {
+      unitCount: inferredFromPeerPrice,
+      source: "price-peer-inference",
+      confidence: "inferred",
+    };
+  }
+
+  if (
+    productUnitResolution.unitCount > 1 &&
+    Number.isFinite(packagePrice) &&
+    packagePrice > MAX_UNIT_PRICE &&
+    isReliableUnitPrice(packagePrice / productUnitResolution.unitCount)
+  ) {
+    return {
+      unitCount: productUnitResolution.unitCount,
+      source: productUnitResolution.source,
+      confidence: productUnitResolution.confidence,
+    };
+  }
+
+  const inferredFromPackagePrice = inferUnitCountFromPackagePrice(packagePrice, product);
+  if (inferredFromPackagePrice) {
+    return {
+      unitCount: inferredFromPackagePrice,
+      source: "package-price-inference",
+      confidence: "inferred",
+    };
+  }
+
+  return {
+    unitCount: 1,
+    source: "default-single",
+    confidence: "default",
+  };
+}
+
+function getUnitCandidatesFromPage(pageSignals) {
+  if (!pageSignals) {
+    return [];
+  }
+
+  return dedupeNumberCandidates([
+    ...(pageSignals.packageCountCandidates ?? []).map((candidate) => ({
+      ...candidate,
+      sourceType: candidate.sourceType ?? "package-count",
+    })),
+    ...(pageSignals.servingCandidates ?? []).map((candidate) => ({
+      ...candidate,
+      sourceType: candidate.sourceType ?? "serving-count",
+    })),
+  ])
+    .map((candidate) => ({
+      ...candidate,
+      value: Math.round(candidate.value),
+    }))
+    .filter((candidate) => candidate.value > 0 && candidate.value <= MAX_AUTO_UNIT_COUNT);
+}
+
+function chooseBestUnitCount(candidates, product, packagePrices, singleUnitPrice) {
+  const ranked = candidates
+    .filter((candidate) => Number.isFinite(candidate.value))
+    .map((candidate) => ({
+      ...candidate,
+      score: getUnitCountScore(candidate, product, packagePrices, singleUnitPrice),
+    }))
+    .filter((candidate) => candidate.score > 0)
+    .sort(
+      (a, b) =>
+        b.score - a.score ||
+        Number(COMMON_UNIT_COUNTS.includes(b.value)) -
+          Number(COMMON_UNIT_COUNTS.includes(a.value)) ||
+        a.value - b.value,
+    );
+
+  return ranked[0] ?? null;
+}
+
+function getUnitCountScore(candidate, product, packagePrices, singleUnitPrice) {
+  const value = candidate.value;
+  if (!Number.isFinite(value) || value <= 0 || value > MAX_AUTO_UNIT_COUNT) {
+    return -Infinity;
+  }
+
+  const isServingSignal =
+    candidate.sourceType === "serving-label" ||
+    candidate.sourceType === "serving-count";
+  const isPackageSignal =
+    candidate.sourceType === "package-label" ||
+    candidate.sourceType === "package-count" ||
+    candidate.sourceType === "single";
+
+  if (isServingSignal && product.type !== "Boisson") {
+    return -Infinity;
+  }
+
+  let score = 0;
+  if (candidate.sourceType === "single") {
+    score += value === 1 ? 12 : -8;
+  } else if (candidate.sourceType === "package-label") {
+    score += 10;
+  } else if (candidate.sourceType === "package-count") {
+    score += 8;
+  } else if (candidate.sourceType === "serving-label") {
+    score += 7;
+  } else if (candidate.sourceType === "serving-count") {
+    score += 4;
+  } else {
+    score += 2;
+  }
+
+  if (COMMON_UNIT_COUNTS.includes(value)) {
+    score += 2;
+  }
+
+  if (value === product.carbsGrams && !isPackageSignal) {
+    score -= 5;
+  }
+
+  if (value === product.caffeineMg && !isPackageSignal) {
+    score -= 5;
+  }
+
+  let hasPriceEvidence = packagePrices.length === 0;
+  for (const packagePrice of packagePrices) {
+    if (!Number.isFinite(packagePrice) || packagePrice <= 0) {
+      continue;
+    }
+
+    const unitPrice = packagePrice / value;
+    if (unitPrice >= MIN_UNIT_PRICE && unitPrice <= MAX_UNIT_PRICE) {
+      hasPriceEvidence = true;
+      score += 4;
+    }
+
+    if (unitPrice >= 1.5 && unitPrice <= 12) {
+      score += 3;
+    }
+
+    if (Number.isFinite(singleUnitPrice) && singleUnitPrice > 0) {
+      const estimatedCount = packagePrice / singleUnitPrice;
+      const ratio = value / estimatedCount;
+      if (ratio >= 0.75 && ratio <= 1.35) {
+        score += 6;
+      }
+    }
+  }
+
+  if (isServingSignal && !hasPriceEvidence) {
+    return -Infinity;
+  }
+
+  if (value === 1 && candidate.sourceType !== "single") {
+    score -= 3;
+  }
+
+  return score;
+}
+
+function inferSingleUnitPrice(offerPackages) {
+  const unitLikePrices = offerPackages
+    .filter((entry) => {
+      const value = entry.packageCandidate?.value;
+      if (!Number.isFinite(value) || value <= 0 || value > MAX_UNIT_PRICE) {
+        return false;
+      }
+
+      const locationText = normalizeSignalText(`${entry.pageSignals?.title ?? ""} ${decodeUrlForSignals(entry.offer.productUrl)}`);
+      return (
+        /(?:single|sample|echantillon|1\s*barre|1\s*bar|1\s*gel)/i.test(locationText) ||
+        !/(?:box|boite|case|pack|paquet|bundle)/i.test(locationText)
+      );
+    })
+    .map((entry) => entry.packageCandidate.value)
+    .sort((a, b) => a - b);
+
+  if (unitLikePrices.length === 0) {
+    return null;
+  }
+
+  return unitLikePrices[Math.floor(unitLikePrices.length / 2)];
+}
+
+function inferUnitCountFromPeerPrice(packagePrice, singleUnitPrice) {
+  if (
+    !Number.isFinite(packagePrice) ||
+    !Number.isFinite(singleUnitPrice) ||
+    packagePrice <= MAX_UNIT_PRICE ||
+    singleUnitPrice <= 0
+  ) {
+    return null;
+  }
+
+  const estimated = packagePrice / singleUnitPrice;
+  const nearestCommon = COMMON_UNIT_COUNTS
+    .map((count) => ({
+      count,
+      distance: Math.abs(count - estimated) / estimated,
+    }))
+    .sort((a, b) => a.distance - b.distance)[0];
+
+  if (nearestCommon && nearestCommon.distance <= 0.25) {
+    return nearestCommon.count;
+  }
+
+  const rounded = Math.round(estimated);
+  if (rounded > 1 && rounded <= MAX_AUTO_UNIT_COUNT) {
+    return rounded;
+  }
+
+  return null;
+}
+
+function inferUnitCountFromPackagePrice(packagePrice, product) {
+  if (!Number.isFinite(packagePrice) || packagePrice <= MAX_UNIT_PRICE) {
+    return null;
+  }
+
+  const targetUnitPrice = getExpectedUnitPrice(product);
+  const best = COMMON_UNIT_COUNTS
+    .map((count) => {
+      const unitPrice = packagePrice / count;
+      return {
+        count,
+        unitPrice,
+        distance: Math.abs(unitPrice - targetUnitPrice) / targetUnitPrice,
+      };
+    })
+    .filter((candidate) => isReliableUnitPrice(candidate.unitPrice))
+    .sort((a, b) => a.distance - b.distance || a.count - b.count)[0];
+
+  if (best && best.distance <= 0.45) {
+    return best.count;
+  }
+
+  return null;
+}
+
+function getExpectedUnitPrice(product) {
+  if (product.carbsGrams >= 80) {
+    return 8;
+  }
+
+  if (product.type === "Gel") {
+    return product.carbsGrams >= 40 ? 7 : 5;
+  }
+
+  if (product.type === "Barre" || product.type === "Bonbon") {
+    return product.carbsGrams >= 50 ? 4.5 : 3.75;
+  }
+
+  if (product.type === "Boisson") {
+    return product.carbsGrams >= 60 ? 5.5 : 3.5;
+  }
+
+  return 4;
+}
+
+function trackUnitCountStats(unitResolution, stats) {
+  if (unitResolution.confidence === "catalog") {
+    stats.unitCountsFromCatalog += 1;
+    return;
+  }
+
+  if (unitResolution.confidence === "inferred") {
+    stats.unitCountsInferredFromPrice += 1;
+    return;
+  }
+
+  if (unitResolution.confidence === "default") {
+    stats.unitCountsDefaulted += 1;
+    return;
+  }
+
+  stats.unitCountsFromLive += 1;
 }
 
 function dedupeNumberCandidates(candidates) {
   return [
     ...new Map(
       candidates.map((candidate) => [
-        `${candidate.value}:${candidate.currency ?? "na"}`,
+        `${candidate.value}:${candidate.currency ?? "na"}:${candidate.sourceType ?? "na"}`,
         candidate,
       ]),
     ).values(),
   ];
+}
+
+function normalizeMoneyValues(value) {
+  if (!Number.isFinite(value) || value <= 0) {
+    return [];
+  }
+
+  const values = [round(value)];
+  if (Number.isInteger(value) && value >= 1000) {
+    values.push(round(value / 100));
+  }
+
+  return [...new Set(values)].filter(
+    (candidate) => candidate > 0 && candidate <= MAX_PACKAGE_PRICE,
+  );
+}
+
+function getPriceSourceScore(candidate, index) {
+  const sourceType = candidate.sourceType;
+  if (sourceType === "structured") {
+    return 20 - index * 0.01;
+  }
+
+  if (sourceType === "meta") {
+    return 16 - index * 0.01;
+  }
+
+  if (sourceType === "text") {
+    return 8 - index * 0.01;
+  }
+
+  return 12 - index * 0.5;
+}
+
+function getPackagePriceScore(value) {
+  if (!Number.isFinite(value) || value <= 0 || value > MAX_PACKAGE_PRICE) {
+    return -Infinity;
+  }
+
+  let score = 0;
+  if (value >= MIN_UNIT_PRICE && value <= MAX_UNIT_PRICE) {
+    score += 4;
+  }
+
+  if (value < 1.25) {
+    score -= 5;
+  }
+
+  if (value > MAX_UNIT_PRICE && value <= MAX_PACKAGE_PRICE) {
+    score += 3;
+  }
+
+  if (value > 100) {
+    score -= 3;
+  }
+
+  if (Number.isInteger(value) && [30, 35, 40, 50, 60, 99, 100, 109, 160, 200].includes(value)) {
+    score -= 3;
+  }
+
+  return score;
+}
+
+function getUnitPriceScore(value) {
+  if (!isReliableUnitPrice(value)) {
+    return -Infinity;
+  }
+
+  if (value >= 1.5 && value <= 10) {
+    return 2;
+  }
+
+  return 0;
+}
+
+function isReliableUnitPrice(value) {
+  return Number.isFinite(value) && value >= MIN_UNIT_PRICE && value <= MAX_UNIT_PRICE;
 }
 
 async function fetchHtml(url) {
@@ -483,6 +1072,26 @@ function stripHtml(html) {
 function extractTitle(html) {
   const match = html.match(/<title>(.*?)<\/title>/i);
   return match?.[1]?.trim() ?? null;
+}
+
+function decodeUrlForSignals(url) {
+  try {
+    const parsedUrl = new URL(url);
+    return decodeURIComponent(parsedUrl.pathname)
+      .replace(/[-_/]+/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  } catch {
+    return url.replace(/[-_/]+/g, " ");
+  }
+}
+
+function normalizeSignalText(text) {
+  return text
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 function parseDecimal(value) {

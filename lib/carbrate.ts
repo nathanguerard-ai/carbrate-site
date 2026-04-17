@@ -7,7 +7,11 @@ export type ProductType = "Gel" | "Boisson" | "Barre" | "Bonbon";
 export type Offer = {
   seller: string;
   price: number;
+  packagePrice?: number;
+  unitCount?: number;
   productUrl: string;
+  priceSource?: string;
+  priceConfidence?: string;
 };
 
 export type Product = {
@@ -67,18 +71,24 @@ export function getProducts(
 ): ProductWithMetrics[] {
   return catalog.products
     .map((product) => {
-      const cheapestOffer = [...product.offers].sort((a, b) => a.price - b.price)[0];
+      const validOffers = product.offers.filter(isValidOffer);
+      const cheapestOffer = [...validOffers].sort((a, b) => a.price - b.price)[0];
+      if (!cheapestOffer || !Number.isFinite(product.carbsGrams) || product.carbsGrams <= 0) {
+        return null;
+      }
 
       return {
         ...product,
+        offers: validOffers,
         cheapestOffer,
-        offerCount: product.offers.length,
+        offerCount: validOffers.length,
         carbsPerDollar: round(product.carbsGrams / cheapestOffer.price),
         costForTargetGrams: round(
           (targetGrams / product.carbsGrams) * cheapestOffer.price,
         ),
       };
     })
+    .filter((product): product is ProductWithMetrics => product !== null)
     .sort((a, b) => b.carbsPerDollar - a.carbsPerDollar);
 }
 
@@ -253,6 +263,16 @@ export function getProductBrands() {
 
 function round(value: number) {
   return Math.round(value * 100) / 100;
+}
+
+function isValidOffer(offer: Offer) {
+  return (
+    Number.isFinite(offer.price) &&
+    offer.price > 0 &&
+    offer.price <= 50 &&
+    typeof offer.productUrl === "string" &&
+    offer.productUrl.length > 0
+  );
 }
 
 function getRecommendationCandidates(products: ProductWithMetrics[]) {
