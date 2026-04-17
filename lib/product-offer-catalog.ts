@@ -159,6 +159,17 @@ export function getOfferVerificationStatus(
   }
 
   if (
+    offer.unitCountConfidence === "inferred" &&
+    offer.priceConfidence === "live" &&
+    Number.isFinite(offer.packagePrice) &&
+    Number.isFinite(offer.unitCount) &&
+    (offer.packagePrice ?? 0) > 20 &&
+    (offer.unitCount ?? 0) > 1
+  ) {
+    return "verified";
+  }
+
+  if (
     Number.isFinite(offer.packagePrice) &&
     Number.isFinite(offer.unitCount) &&
     (offer.unitCount ?? 1) > 1

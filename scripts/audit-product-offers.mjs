@@ -108,5 +108,16 @@ function inferStatus(offer) {
     return "estimated";
   }
 
+  if (
+    offer.unitCountConfidence === "inferred" &&
+    offer.priceConfidence === "live" &&
+    Number.isFinite(offer.packagePrice) &&
+    Number.isFinite(offer.unitCount) &&
+    offer.packagePrice > 20 &&
+    offer.unitCount > 1
+  ) {
+    return "verified";
+  }
+
   return offer.priceConfidence === "live" ? "verified" : "review";
 }

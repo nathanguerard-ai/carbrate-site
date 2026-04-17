@@ -191,7 +191,7 @@
     {
       "id": "upika-endurance",
       "name": "Endurance",
-      "brand": "Upika",
+      "brand": "UPIKA",
       "type": "Boisson",
       "carbsGrams": 25,
       "sodiumMg": 300,
@@ -220,7 +220,7 @@
     {
       "id": "upika-endurance-plus",
       "name": "Endurance+",
-      "brand": "Upika",
+      "brand": "UPIKA",
       "type": "Boisson",
       "carbsGrams": 25,
       "sodiumMg": 300,
@@ -243,7 +243,7 @@
     {
       "id": "precision-pf30-gel",
       "name": "PF 30 Gel",
-      "brand": "Precision Fuel",
+      "brand": "Precision Fuel & Hydration",
       "type": "Gel",
       "carbsGrams": 30,
       "sodiumMg": 203,
@@ -266,7 +266,7 @@
     {
       "id": "precision-pf90-gel",
       "name": "PF 90 Gel",
-      "brand": "Precision Fuel",
+      "brand": "Precision Fuel & Hydration",
       "type": "Gel",
       "carbsGrams": 90,
       "sodiumMg": null,
@@ -289,7 +289,7 @@
     {
       "id": "krono-maple-gel",
       "name": "Maple Energy Gel",
-      "brand": "Krono",
+      "brand": "Krono Nutrition",
       "type": "Gel",
       "carbsGrams": 24,
       "sodiumMg": 140,
@@ -306,7 +306,7 @@
     {
       "id": "krono-maple-coffee-gel",
       "name": "Maple & Coffee Energy Gel",
-      "brand": "Krono",
+      "brand": "Krono Nutrition",
       "type": "Gel",
       "carbsGrams": 24,
       "sodiumMg": null,
@@ -323,7 +323,7 @@
     {
       "id": "krono-maple-raspberry-gel",
       "name": "Maple & Raspberry Energy Gel",
-      "brand": "Krono",
+      "brand": "Krono Nutrition",
       "type": "Gel",
       "carbsGrams": 29,
       "sodiumMg": 140,
@@ -340,7 +340,7 @@
     {
       "id": "krono-tropical-gel",
       "name": "Tropical Energy Gel",
-      "brand": "Krono",
+      "brand": "Krono Nutrition",
       "type": "Gel",
       "carbsGrams": 30,
       "sodiumMg": 50,
@@ -357,7 +357,7 @@
     {
       "id": "krono-lemon-lime-sport-drink-mix",
       "name": "Lemon & Lime Sport Drink Mix",
-      "brand": "Krono",
+      "brand": "Krono Nutrition",
       "type": "Boisson",
       "carbsGrams": 22,
       "sodiumMg": 300,
@@ -380,7 +380,7 @@
     {
       "id": "krono-peach-sport-drink-mix",
       "name": "Peach Sport Drink Mix",
-      "brand": "Krono",
+      "brand": "Krono Nutrition",
       "type": "Boisson",
       "carbsGrams": 22,
       "sodiumMg": 200,
@@ -426,7 +426,7 @@
     {
       "id": "precision-pf30-chew",
       "name": "PF 30 Chew",
-      "brand": "Precision Fuel",
+      "brand": "Precision Fuel & Hydration",
       "type": "Autre",
       "carbsGrams": 30,
       "sodiumMg": null,
@@ -443,7 +443,7 @@
     {
       "id": "precision-pf60-chew-bar",
       "name": "PF 60 Chew Bar",
-      "brand": "Precision Fuel",
+      "brand": "Precision Fuel & Hydration",
       "type": "Autre",
       "carbsGrams": 60,
       "sodiumMg": null,
@@ -460,7 +460,7 @@
     {
       "id": "krono-berries-pomegranate-sport-drink-mix",
       "name": "Berries & Pomegranate Sport Drink Mix",
-      "brand": "Krono",
+      "brand": "Krono Nutrition",
       "type": "Boisson",
       "carbsGrams": 22,
       "sodiumMg": 200,
@@ -477,7 +477,7 @@
     {
       "id": "krono-pink-limonade-sport-drink-mix",
       "name": "Pink Limonade Sport Drink Mix",
-      "brand": "Krono",
+      "brand": "Krono Nutrition",
       "type": "Boisson",
       "carbsGrams": 22,
       "sodiumMg": 200,
@@ -494,7 +494,7 @@
     {
       "id": "upika-carb-boost",
       "name": "Carb-Boost",
-      "brand": "Upika",
+      "brand": "UPIKA",
       "type": "Boisson",
       "carbsGrams": 27,
       "sodiumMg": null,
@@ -511,7 +511,7 @@
     {
       "id": "upika-bars",
       "name": "Bars",
-      "brand": "Upika",
+      "brand": "UPIKA",
       "type": "Barre",
       "carbsGrams": 40,
       "sodiumMg": null,
@@ -528,7 +528,7 @@
     {
       "id": "upika-sample-endurance",
       "name": "Sample Endurance",
-      "brand": "Upika",
+      "brand": "UPIKA",
       "type": "Boisson",
       "carbsGrams": 27,
       "sodiumMg": 300,
@@ -545,7 +545,7 @@
     {
       "id": "upika-sample-endurance-plus",
       "name": "Sample Endurance+",
-      "brand": "Upika",
+      "brand": "UPIKA",
       "type": "Boisson",
       "carbsGrams": 25,
       "sodiumMg": 300,
@@ -562,7 +562,7 @@
     {
       "id": "krono-apple-maple-gel",
       "name": "Apple & Maple Energy Gel",
-      "brand": "Krono",
+      "brand": "Krono Nutrition",
       "type": "Gel",
       "carbsGrams": 21,
       "sodiumMg": 120,
@@ -579,7 +579,7 @@
     {
       "id": "krono-citrus-gel",
       "name": "Citrus Energy Gel",
-      "brand": "Krono",
+      "brand": "Krono Nutrition",
       "type": "Gel",
       "carbsGrams": 30,
       "sodiumMg": null,
@@ -596,7 +596,7 @@
     {
       "id": "krono-blueberry-gel",
       "name": "Blueberry Energy Gel",
-      "brand": "Krono",
+      "brand": "Krono Nutrition",
       "type": "Gel",
       "carbsGrams": 30,
       "sodiumMg": 50,
@@ -613,7 +613,7 @@
     {
       "id": "krono-salted-caramel-gel",
       "name": "Salted Caramel Energy Gel",
-      "brand": "Krono",
+      "brand": "Krono Nutrition",
       "type": "Gel",
       "carbsGrams": 30,
       "sodiumMg": 180,
@@ -630,7 +630,7 @@
     {
       "id": "krono-raspberry-maple-chews",
       "name": "Raspberry & Maple Chews",
-      "brand": "Krono",
+      "brand": "Krono Nutrition",
       "type": "Autre",
       "carbsGrams": 38,
       "sodiumMg": 60,
@@ -647,7 +647,7 @@
     {
       "id": "krono-apple-maple-chews",
       "name": "Apple & Maple Chews",
-      "brand": "Krono",
+      "brand": "Krono Nutrition",
       "type": "Autre",
       "carbsGrams": 39,
       "sodiumMg": 60,
@@ -664,7 +664,7 @@
     {
       "id": "krono-strawberry-maple-chews",
       "name": "Strawberry & Maple Chews",
-      "brand": "Krono",
+      "brand": "Krono Nutrition",
       "type": "Autre",
       "carbsGrams": 39,
       "sodiumMg": 60,
@@ -681,7 +681,7 @@
     {
       "id": "krono-apricot-cranberry-bar",
       "name": "Apricot & Cranberry Energy Bar",
-      "brand": "Krono",
+      "brand": "Krono Nutrition",
       "type": "Barre",
       "carbsGrams": 32,
       "sodiumMg": null,
@@ -698,7 +698,7 @@
     {
       "id": "krono-strawberry-pineapple-bar",
       "name": "Strawberry & Pineapple Energy Bar",
-      "brand": "Krono",
+      "brand": "Krono Nutrition",
       "type": "Barre",
       "carbsGrams": 32,
       "sodiumMg": null,
@@ -715,7 +715,7 @@
     {
       "id": "krono-cherry-chocolate-bar",
       "name": "Cherry & Chocolate Energy Bar",
-      "brand": "Krono",
+      "brand": "Krono Nutrition",
       "type": "Barre",
       "carbsGrams": 31,
       "sodiumMg": null,
@@ -732,7 +732,7 @@
     {
       "id": "krono-chocolate-espresso-bar",
       "name": "Chocolate & Espresso Energy Bar",
-      "brand": "Krono",
+      "brand": "Krono Nutrition",
       "type": "Barre",
       "carbsGrams": 29,
       "sodiumMg": null,
@@ -789,7 +789,7 @@
     {
       "id": "naak-boost-gel-25",
       "name": "Boost Gel 25",
-      "brand": "Naak",
+      "brand": "Näak",
       "type": "Gel",
       "carbsGrams": 25,
       "sodiumMg": 125,
@@ -806,7 +806,7 @@
     {
       "id": "naak-boost-drink-mix-60",
       "name": "Boost Drink Mix 60",
-      "brand": "Naak",
+      "brand": "Näak",
       "type": "Boisson",
       "carbsGrams": 60,
       "sodiumMg": 250,
@@ -860,7 +860,7 @@
       "offers": [
         {
           "seller": "velovelo.ca",
-          "productUrl": "https://www.velovelo.ca/shop/watt-sali-electrolyte-224",
+          "productUrl": "https://www.velovelo.ca/shop/watt-sali-electrolyte-224#attribute_values=219,93,250",
           "country": "CA",
           "unitCount": 15,
           "fallbackPrice": 1.47

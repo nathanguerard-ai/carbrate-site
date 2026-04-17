@@ -1,39 +1,12 @@
 {
   "summary": {
-    "updatedAt": "2026-04-17T14:31:55.175Z",
-    "generatedAt": "2026-04-17T14:29:26.774Z",
+    "updatedAt": "2026-04-17T16:40:10.186Z",
+    "generatedAt": "2026-04-17T16:39:54.876Z",
     "productCount": 43,
     "offerCount": 56,
-    "findingsCount": 2,
-    "fallbackCount": 2,
+    "findingsCount": 0,
+    "fallbackCount": 0,
     "reviewCount": 0
   },
-  "findings": [
-    {
-      "code": "fallback",
-      "message": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-      "productId": "pluswatt-carbo-energy",
-      "productName": "+Watt Long Race",
-      "seller": "velovelo.ca",
-      "productUrl": "https://www.velovelo.ca/shop/watt-long-race-215?category=22#attribute_values=219,95,241",
-      "price": 4,
-      "packagePrice": 4,
-      "unitCount": 1,
-      "verificationStatus": "fallback",
-      "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire."
-    },
-    {
-      "code": "fallback",
-      "message": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-      "productId": "pluswatt-sali-electrolyte",
-      "productName": "+Watt Sali+ Electrolyte",
-      "seller": "velovelo.ca",
-      "productUrl": "https://www.velovelo.ca/shop/watt-sali-electrolyte-224",
-      "price": 1.47,
-      "packagePrice": 22.05,
-      "unitCount": 15,
-      "verificationStatus": "fallback",
-      "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire."
-    }
-  ]
+  "findings": []
 }

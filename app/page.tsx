@@ -219,7 +219,7 @@ export default function Home() {
                     type="text"
                     value={searchTerm}
                     onChange={(event) => setSearchTerm(event.target.value)}
-                    placeholder="Maurten, gel, Upika..."
+                    placeholder="Maurten, gel, UPIKA..."
                     className="rounded-xl border border-ink/10 bg-white/70 px-3 py-2 text-ink outline-none transition placeholder:text-ink/35 focus:border-accent"
                     suppressHydrationWarning={true}
                   />

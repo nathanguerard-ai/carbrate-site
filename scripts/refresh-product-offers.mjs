@@ -296,6 +296,7 @@ function resolveOfferPrice(
       priceSource: liveCandidate.url ?? offer.productUrl,
       packagePrice: liveCandidate.packagePrice,
       unitCount: unitResolution.unitCount,
+      unitCountSource: unitResolution.source,
       unitCountConfidence: unitResolution.confidence,
     });
 
@@ -360,6 +361,7 @@ function buildOfferVerification({
   priceSource,
   packagePrice,
   unitCount,
+  unitCountSource,
   unitCountConfidence,
 }) {
   if (priceConfidence === "fallback") {
@@ -384,7 +386,32 @@ function buildOfferVerification({
     };
   }
 
-  if (priceConfidence === "live-text" || unitCountConfidence === "inferred") {
+  if (priceConfidence === "live-text") {
+    return {
+      verificationStatus: "estimated",
+      verificationLabel: "Prix estimé",
+      verificationReason:
+        "Le prix vient d'une page live, mais une partie du calcul a été déduite automatiquement.",
+    };
+  }
+
+  if (
+    unitCountConfidence === "inferred" &&
+    isTrustedInferredUnitCount({
+      packagePrice,
+      unitCount,
+      unitCountSource,
+    })
+  ) {
+    return {
+      verificationStatus: "verified",
+      verificationLabel: "Prix vérifié",
+      verificationReason:
+        "Le prix vient d'une page vendeur et le format de portion a été confirmé par une déduction cohérente entre le prix de boîte et le prix unitaire.",
+    };
+  }
+
+  if (unitCountConfidence === "inferred") {
     return {
       verificationStatus: "estimated",
       verificationLabel: "Prix estimé",
@@ -410,6 +437,27 @@ function buildOfferVerification({
   };
 }
 
+function isTrustedInferredUnitCount({ packagePrice, unitCount, unitCountSource }) {
+  if (
+    !Number.isFinite(packagePrice) ||
+    !Number.isFinite(unitCount) ||
+    packagePrice <= MAX_UNIT_PRICE ||
+    unitCount <= 1
+  ) {
+    return false;
+  }
+
+  if (
+    unitCountSource !== "price-peer-inference" &&
+    unitCountSource !== "package-price-inference"
+  ) {
+    return false;
+  }
+
+  const unitPrice = packagePrice / unitCount;
+  return isReliableUnitPrice(unitPrice) && COMMON_UNIT_COUNTS.includes(unitCount);
+}
+
 async function getPageSignals(url, cache, stats) {
   const cached = cache.pages?.[url];
   if (cached) {
@@ -426,7 +474,7 @@ function extractPageSignals(url, html) {
 
   return {
     title: extractTitle(html),
-    priceCandidates: extractPriceCandidates(normalizedHtml).map((candidate) => ({
+    priceCandidates: extractPriceCandidates(normalizedHtml, url).map((candidate) => ({
       ...candidate,
       url,
     })),
@@ -440,10 +488,17 @@ function extractPageSignals(url, html) {
     })),
     packageCountCandidates: extractPackageCountCandidates(
       `${extractTitle(html) ?? ""} ${decodeUrlForSignals(url)} ${text}`,
-    ).map((candidate) => ({
-      ...candidate,
-      url,
-    })),
+    )
+      .concat(
+        extractSinglePackageCountCandidates(
+          `${extractTitle(html) ?? ""} ${decodeUrlForSignals(url)}`,
+        ),
+      )
+      .concat(extractOdooSingleFormatCandidates(normalizedHtml, url))
+      .map((candidate) => ({
+        ...candidate,
+        url,
+      })),
   };
 }
 
@@ -460,12 +515,17 @@ function enrichPageSignals(url, pageSignals) {
         ...candidate,
         url,
       })),
+      ...extractSinglePackageCountCandidates(locationText).map((candidate) => ({
+        ...candidate,
+        url,
+      })),
     ]),
   };
 }
 
-function extractPriceCandidates(html) {
+function extractPriceCandidates(html, url) {
   const candidates = [];
+  const derivedCandidates = extractOdooSelectedVariantPriceCandidates(html, url);
   const jsonLdMatches = [
     ...tagMatches(html.matchAll(/"price"\s*:\s*"(\d+(?:[.,]\d+)?)"/gi), "structured"),
     ...tagMatches(html.matchAll(/"price"\s*:\s*(\d+(?:[.,]\d+)?)/gi), "structured"),
@@ -473,6 +533,7 @@ function extractPriceCandidates(html) {
     ...tagMatches(html.matchAll(/"salePrice"\s*:\s*(\d+(?:[.,]\d+)?)/gi), "structured"),
     ...tagMatches(html.matchAll(/"offerPrice"\s*:\s*"(\d+(?:[.,]\d+)?)"/gi), "structured"),
     ...tagMatches(html.matchAll(/"offerPrice"\s*:\s*(\d+(?:[.,]\d+)?)/gi), "structured"),
+    ...tagMatches(html.matchAll(/itemprop=["']price["'][^>]*>\s*(\d+(?:[.,]\d+)?)/gi), "structured"),
   ];
   const metaMatches = [
     ...tagMatches(html.matchAll(
@@ -500,6 +561,13 @@ function extractPriceCandidates(html) {
     ? "CAD"
     : currencies[0] ?? null;
 
+  for (const candidate of derivedCandidates) {
+    candidates.push({
+      ...candidate,
+      currency: candidate.currency ?? assumedCurrency,
+    });
+  }
+
   for (const match of [...jsonLdMatches, ...metaMatches, ...textMatches]) {
     const value = parseDecimal(match[1]);
     if (value === null || value <= 0) {
@@ -517,6 +585,101 @@ function extractPriceCandidates(html) {
   }
 
   return dedupeNumberCandidates(candidates);
+}
+
+function extractOdooSelectedVariantPriceCandidates(html, url) {
+  const basePrice = extractOdooBasePrice(html);
+  if (basePrice === null) {
+    return [];
+  }
+
+  const selectedAttributeIds = getOdooAttributeValueIds(url);
+  if (selectedAttributeIds.size === 0) {
+    return [];
+  }
+
+  let selectedExtras = 0;
+  for (const inputMatch of html.matchAll(/<input\b[^>]*>/gi)) {
+    const inputTag = inputMatch[0];
+    const attributeId = getHtmlAttribute(inputTag, "data-attribute-value-id");
+    if (!attributeId || !selectedAttributeIds.has(attributeId)) {
+      continue;
+    }
+
+    const nearbyHtml = html.slice(inputMatch.index, inputMatch.index + 900);
+    const extraMatch = nearbyHtml.match(/variant_price_extra[\s\S]{0,180}?oe_currency_value[^>]*>\s*(\d+(?:[.,]\d+)?)/i);
+    const extraValue = extraMatch ? parseDecimal(extraMatch[1]) : null;
+    if (Number.isFinite(extraValue)) {
+      selectedExtras += extraValue;
+    }
+  }
+
+  const selectedPrice = round(basePrice + selectedExtras);
+  return [
+    {
+      value: selectedPrice,
+      currency: null,
+      confidence: "live",
+      sourceType: "structured",
+    },
+  ];
+}
+
+function extractOdooBasePrice(html) {
+  const itemPropMatch = html.match(/itemprop=["']price["'][^>]*>\s*(\d+(?:[.,]\d+)?)/i);
+  if (itemPropMatch) {
+    return parseDecimal(itemPropMatch[1]);
+  }
+
+  const priceMatch = html.match(/class=["'][^"']*\boe_price\b[^"']*["'][\s\S]{0,160}?oe_currency_value[^>]*>\s*(\d+(?:[.,]\d+)?)/i);
+  return priceMatch ? parseDecimal(priceMatch[1]) : null;
+}
+
+function extractOdooSingleFormatCandidates(html, url) {
+  const selectedAttributeIds = getOdooAttributeValueIds(url);
+  const candidates = [];
+
+  for (const inputMatch of html.matchAll(/<input\b[^>]*>/gi)) {
+    const inputTag = inputMatch[0];
+    if (getHtmlAttribute(inputTag, "data-attribute_name") !== "Format") {
+      continue;
+    }
+
+    const attributeId = getHtmlAttribute(inputTag, "data-attribute-value-id");
+    const isSelected =
+      (attributeId && selectedAttributeIds.has(attributeId)) ||
+      /checked=["']True["']/i.test(inputTag);
+    if (!isSelected || !/data-is_single=["']True["']/i.test(inputTag)) {
+      continue;
+    }
+
+    candidates.push({
+      value: 1,
+      confidence: "live",
+      sourceType: "single",
+    });
+  }
+
+  return candidates;
+}
+
+function getOdooAttributeValueIds(url) {
+  try {
+    const hash = new URL(url).hash;
+    const match = hash.match(/attribute_values=([^&]+)/i);
+    if (!match) {
+      return new Set();
+    }
+
+    return new Set(match[1].split(/[^0-9]+/).filter(Boolean));
+  } catch {
+    return new Set();
+  }
+}
+
+function getHtmlAttribute(tag, name) {
+  const match = tag.match(new RegExp(`${name}=["']([^"']+)["']`, "i"));
+  return match?.[1] ?? null;
 }
 
 function tagMatches(matches, source) {
@@ -585,11 +748,6 @@ function extractPackageCountCandidates(text) {
   const candidates = [];
   const patterns = [
     {
-      pattern: /\b(?:single serving|single serve|single|sample|echantillon|1\s*barre|1\s*bar|1\s*gel)\b/gi,
-      sourceType: "single",
-      fixedValue: 1,
-    },
-    {
       pattern: /(?:box|case|pack|paquet|boite|bundle)\s*(?:of|de)?\s*(\d{1,3})\b/gi,
       sourceType: "package-label",
     },
@@ -610,6 +768,27 @@ function extractPackageCountCandidates(text) {
         value,
         confidence: "live",
         sourceType,
+      });
+    }
+  }
+
+  return dedupeNumberCandidates(candidates);
+}
+
+function extractSinglePackageCountCandidates(locationText) {
+  const normalizedText = normalizeSignalText(locationText);
+  const candidates = [];
+  const patterns = [
+    /\b(?:single serving|single serve|sample|echantillon)\b/gi,
+    /\b1\s*(?:barre|bar|gel)\b/gi,
+  ];
+
+  for (const pattern of patterns) {
+    for (const match of normalizedText.matchAll(pattern)) {
+      candidates.push({
+        value: 1,
+        confidence: "live",
+        sourceType: "single",
       });
     }
   }
@@ -906,7 +1085,10 @@ function getUnitCountScore(candidate, product, packagePrices, singleUnitPrice) {
     }
 
     const unitPrice = packagePrice / value;
-    if (unitPrice >= MIN_UNIT_PRICE && unitPrice <= MAX_UNIT_PRICE) {
+    if (
+      unitPrice >= getMinimumPlausibleUnitPrice(product) &&
+      unitPrice <= MAX_UNIT_PRICE
+    ) {
       hasPriceEvidence = true;
       score += 4;
     }
@@ -928,6 +1110,10 @@ function getUnitCountScore(candidate, product, packagePrices, singleUnitPrice) {
     return -Infinity;
   }
 
+  if (isPackageSignal && packagePrices.length > 0 && !hasPriceEvidence) {
+    return -Infinity;
+  }
+
   if (value === 1 && candidate.sourceType !== "single") {
     score -= 3;
   }
@@ -945,7 +1131,7 @@ function inferSingleUnitPrice(offerPackages) {
 
       const locationText = normalizeSignalText(`${entry.pageSignals?.title ?? ""} ${decodeUrlForSignals(entry.offer.productUrl)}`);
       return (
-        /(?:single|sample|echantillon|1\s*barre|1\s*bar|1\s*gel)/i.test(locationText) ||
+        /(?:single serving|single serve|sample|echantillon|1\s*barre|1\s*bar|1\s*gel)/i.test(locationText) ||
         !/(?:box|boite|case|pack|paquet|bundle)/i.test(locationText)
       );
     })
@@ -1012,6 +1198,14 @@ function inferUnitCountFromPackagePrice(packagePrice, product) {
   }
 
   return null;
+}
+
+function getMinimumPlausibleUnitPrice(product) {
+  if (product.type === "Gel" || product.type === "Barre" || product.type === "Autre") {
+    return 1.25;
+  }
+
+  return MIN_UNIT_PRICE;
 }
 
 function getExpectedUnitPrice(product) {
