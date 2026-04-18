@@ -1,7 +1,7 @@
 {
   "pages": {
     "https://spryactive.ca/products/maurten-gel-100-caf": {
-      "fetchedAt": "2026-04-18T04:14:27.045Z",
+      "fetchedAt": "2026-04-18T09:06:45.049Z",
       "title": "Maurten Gel 100 Caf 100 &ndash; spry",
       "priceCandidates": [
         {
@@ -115,7 +115,7 @@
       "packageCountCandidates": []
     },
     "https://www.fitfirst.ca/products/gel-100": {
-      "fetchedAt": "2026-04-18T04:14:27.504Z",
+      "fetchedAt": "2026-04-18T09:06:45.181Z",
       "title": "Your Source for Running, Walking &amp; Training Shoes | Fit First Footwear",
       "priceCandidates": [
         {
@@ -250,7 +250,7 @@
       "packageCountCandidates": []
     },
     "https://www.fitfirst.ca/products/gel-160": {
-      "fetchedAt": "2026-04-18T04:14:28.306Z",
+      "fetchedAt": "2026-04-18T09:06:45.795Z",
       "title": "Your Source for Running, Walking &amp; Training Shoes | Fit First Footwear",
       "priceCandidates": [
         {
@@ -385,12 +385,12 @@
       "packageCountCandidates": []
     },
     "https://www.maurten.com/products/solid-160": {
-      "fetchedAt": "2026-04-18T04:14:29.139Z",
+      "fetchedAt": "2026-04-18T09:06:47.219Z",
       "title": "Solid 160 / Maurten",
       "priceCandidates": [
         {
-          "value": 51,
-          "currency": "CAD",
+          "value": 36,
+          "currency": "USD",
           "confidence": "live",
           "sourceType": "structured",
           "url": "https://www.maurten.com/products/solid-160"
@@ -415,7 +415,7 @@
       ]
     },
     "https://lecoureurnordique.ca/en/products/maurten-gel-100-caf-100-boite": {
-      "fetchedAt": "2026-04-18T04:14:27.312Z",
+      "fetchedAt": "2026-04-18T09:06:45.488Z",
       "title": "Maurten - Gel 100 CAF 100 - Boîte &ndash; Le coureur nordique",
       "priceCandidates": [
         {
@@ -542,7 +542,7 @@
       ]
     },
     "https://spryactive.ca/products/maurten-hydrogel-sports-fuel-drink-mix-160": {
-      "fetchedAt": "2026-04-18T04:14:29.554Z",
+      "fetchedAt": "2026-04-18T09:06:47.542Z",
       "title": "Maurten Drink Mix 160 &ndash; spry",
       "priceCandidates": [
         {
@@ -663,7 +663,7 @@
       "packageCountCandidates": []
     },
     "https://frontrunners.ca/products/maurten-solid-c-160": {
-      "fetchedAt": "2026-04-18T04:14:28.829Z",
+      "fetchedAt": "2026-04-18T09:06:46.017Z",
       "title": "Maurten Solid C 160 &ndash; Frontrunners Footwear",
       "priceCandidates": [
         {
@@ -791,7 +791,7 @@
       ]
     },
     "https://frontrunners.ca/products/maurten-drink-mix-160": {
-      "fetchedAt": "2026-04-18T04:14:29.767Z",
+      "fetchedAt": "2026-04-18T09:06:47.623Z",
       "title": "Maurten Drink Mix 160 &ndash; Frontrunners Footwear",
       "priceCandidates": [
         {
@@ -919,7 +919,7 @@
       "packageCountCandidates": []
     },
     "https://lecoureurnordique.ca/products/maurten-solids-160-boite": {
-      "fetchedAt": "2026-04-18T04:14:27.883Z",
+      "fetchedAt": "2026-04-18T09:06:46.042Z",
       "title": "Maurten - Solid 160 (Boite) &ndash; Le coureur nordique",
       "priceCandidates": [
         {
@@ -1064,12 +1064,12 @@
       ]
     },
     "https://www.maurten.com/products/drink-mix-160": {
-      "fetchedAt": "2026-04-18T04:14:30.667Z",
+      "fetchedAt": "2026-04-18T09:06:48.659Z",
       "title": "Drink Mix 160 / Maurten",
       "priceCandidates": [
         {
-          "value": 62,
-          "currency": "CAD",
+          "value": 45,
+          "currency": "USD",
           "confidence": "live",
           "sourceType": "structured",
           "url": "https://www.maurten.com/products/drink-mix-160"
@@ -1094,7 +1094,7 @@
       ]
     },
     "https://spryactive.ca/products/maurten-hydrogel-sports-fuel-drink-mix-320": {
-      "fetchedAt": "2026-04-18T04:14:29.590Z",
+      "fetchedAt": "2026-04-18T09:06:47.615Z",
       "title": "Maurten Drink Mix 320 &ndash; spry",
       "priceCandidates": [
         {
@@ -1208,7 +1208,7 @@
       "packageCountCandidates": []
     },
     "https://frontrunners.ca/products/maurten-drink-mix-320": {
-      "fetchedAt": "2026-04-18T04:14:31.121Z",
+      "fetchedAt": "2026-04-18T09:06:48.976Z",
       "title": "Maurten Drink Mix 320 &ndash; Frontrunners Footwear",
       "priceCandidates": [
         {
@@ -1329,9 +1329,17 @@
       "packageCountCandidates": []
     },
     "https://www.maurten.com/products/drink-mix-320-caf-100": {
-      "fetchedAt": "2026-04-18T04:14:31.512Z",
+      "fetchedAt": "2026-04-18T09:06:49.990Z",
       "title": "Drink Mix 320 Caf 100 / Maurten",
-      "priceCandidates": [],
+      "priceCandidates": [
+        {
+          "value": 56,
+          "currency": "USD",
+          "confidence": "live",
+          "sourceType": "structured",
+          "url": "https://www.maurten.com/products/drink-mix-320-caf-100"
+        }
+      ],
       "carbCandidates": [],
       "servingCandidates": [
         {
@@ -1351,7 +1359,7 @@
       ]
     },
     "https://lecoureurnordique.ca/en/products/maurten-drink-mix-320-caf-100-boite": {
-      "fetchedAt": "2026-04-18T04:14:31.340Z",
+      "fetchedAt": "2026-04-18T09:06:49.207Z",
       "title": "Maurten - Drink Mix 320 Caf 100 - Boîte &ndash; Le coureur nordique",
       "priceCandidates": [
         {
@@ -1472,12 +1480,12 @@
       ]
     },
     "https://www.maurten.com/products/drink-mix-320": {
-      "fetchedAt": "2026-04-18T04:14:30.678Z",
+      "fetchedAt": "2026-04-18T09:06:48.567Z",
       "title": "Drink Mix 320 / Maurten",
       "priceCandidates": [
         {
-          "value": 71,
-          "currency": "CAD",
+          "value": 51,
+          "currency": "USD",
           "confidence": "live",
           "sourceType": "structured",
           "url": "https://www.maurten.com/products/drink-mix-320"
@@ -1502,96 +1510,47 @@
       ]
     },
     "https://upika.ca/en/products/upika-endurance": {
-      "fetchedAt": "2026-04-18T04:14:31.924Z",
+      "fetchedAt": "2026-04-18T09:06:50.156Z",
       "title": "Endurance Citron-lime",
       "priceCandidates": [
         {
-          "value": 49.99,
-          "currency": "CAD",
+          "value": 38,
+          "currency": "USD",
           "confidence": "live",
           "sourceType": "structured",
           "url": "https://upika.ca/en/products/upika-endurance"
         },
         {
-          "value": 49.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/upika-endurance"
-        },
-        {
-          "value": 24.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/upika-endurance"
-        },
-        {
-          "value": 35,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/upika-endurance"
-        },
-        {
-          "value": 30,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/upika-endurance"
-        },
-        {
-          "value": 50,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/upika-endurance"
-        },
-        {
-          "value": 149.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/upika-endurance"
-        },
-        {
-          "value": 150,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/upika-endurance"
-        },
-        {
-          "value": 1,
-          "currency": "CAD",
+          "value": 38,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://upika.ca/en/products/upika-endurance"
         },
         {
           "value": 199.96,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://upika.ca/en/products/upika-endurance"
         },
         {
           "value": 75,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://upika.ca/en/products/upika-endurance"
         },
         {
           "value": 5,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://upika.ca/en/products/upika-endurance"
         },
         {
           "value": 8,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://upika.ca/en/products/upika-endurance"
@@ -1645,7 +1604,7 @@
       ]
     },
     "https://shopsante.ca/en/products/upika-endurance-725g-1": {
-      "fetchedAt": "2026-04-18T04:14:31.907Z",
+      "fetchedAt": "2026-04-18T09:06:49.342Z",
       "title": null,
       "priceCandidates": [
         {
@@ -1677,6 +1636,20 @@
           "url": "https://shopsante.ca/en/products/upika-endurance-725g-1"
         },
         {
+          "value": 30.99,
+          "currency": "CAD",
+          "confidence": "live-text",
+          "sourceType": "text",
+          "url": "https://shopsante.ca/en/products/upika-endurance-725g-1"
+        },
+        {
+          "value": 49.99,
+          "currency": "CAD",
+          "confidence": "live-text",
+          "sourceType": "text",
+          "url": "https://shopsante.ca/en/products/upika-endurance-725g-1"
+        },
+        {
           "value": 109,
           "currency": "CAD",
           "confidence": "live-text",
@@ -1692,20 +1665,6 @@
         },
         {
           "value": 40,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://shopsante.ca/en/products/upika-endurance-725g-1"
-        },
-        {
-          "value": 30.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://shopsante.ca/en/products/upika-endurance-725g-1"
-        },
-        {
-          "value": 49.99,
           "currency": "CAD",
           "confidence": "live-text",
           "sourceType": "text",
@@ -1787,89 +1746,40 @@
       "packageCountCandidates": []
     },
     "https://upika.ca/en/products/upika-endurance-plus-cerise-lime": {
-      "fetchedAt": "2026-04-18T04:14:33.159Z",
+      "fetchedAt": "2026-04-18T09:06:51.048Z",
       "title": "Endurance+ Cerise-lime",
       "priceCandidates": [
         {
-          "value": 49.99,
-          "currency": "CAD",
+          "value": 38,
+          "currency": "USD",
           "confidence": "live",
           "sourceType": "structured",
           "url": "https://upika.ca/en/products/upika-endurance-plus-cerise-lime"
         },
         {
-          "value": 49.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/upika-endurance-plus-cerise-lime"
-        },
-        {
-          "value": 24.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/upika-endurance-plus-cerise-lime"
-        },
-        {
-          "value": 35,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/upika-endurance-plus-cerise-lime"
-        },
-        {
-          "value": 30,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/upika-endurance-plus-cerise-lime"
-        },
-        {
-          "value": 50,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/upika-endurance-plus-cerise-lime"
-        },
-        {
-          "value": 149.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/upika-endurance-plus-cerise-lime"
-        },
-        {
-          "value": 150,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/upika-endurance-plus-cerise-lime"
-        },
-        {
-          "value": 1,
-          "currency": "CAD",
+          "value": 38,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://upika.ca/en/products/upika-endurance-plus-cerise-lime"
         },
         {
           "value": 75,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://upika.ca/en/products/upika-endurance-plus-cerise-lime"
         },
         {
           "value": 5,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://upika.ca/en/products/upika-endurance-plus-cerise-lime"
         },
         {
           "value": 8,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://upika.ca/en/products/upika-endurance-plus-cerise-lime"
@@ -1923,7 +1833,7 @@
       ]
     },
     "https://lecoureurnordique.ca/en/products/upika-endurance": {
-      "fetchedAt": "2026-04-18T04:14:32.703Z",
+      "fetchedAt": "2026-04-18T09:06:50.679Z",
       "title": "Upika - Endurance &ndash; Le coureur nordique",
       "priceCandidates": [
         {
@@ -2037,320 +1947,327 @@
       "packageCountCandidates": []
     },
     "https://www.precisionhydration.com/ca/en/products/pf-30-gel/": {
-      "fetchedAt": "2026-04-18T04:14:33.086Z",
+      "fetchedAt": "2026-04-18T09:06:51.628Z",
       "title": "PF 30 Energy Gel by Precision Fuel &amp; Hydration",
       "priceCandidates": [
         {
-          "value": 16.49,
-          "currency": "CAD",
+          "value": 12.49,
+          "currency": "USD",
           "confidence": "live",
           "sourceType": "structured",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
-          "value": 16.49,
-          "currency": "CAD",
+          "value": 12.49,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
-          "value": 84.99,
-          "currency": "CAD",
+          "value": 64.99,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 1,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 9,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 10,
-          "currency": "CAD",
+          "currency": "USD",
+          "confidence": "live-text",
+          "sourceType": "text",
+          "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
+        },
+        {
+          "value": 12,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 5,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
-        },
-        {
-          "value": 14,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 15,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 16,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 17,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 18,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 19,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 20,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 21,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 22,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 23,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 24,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 25,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 26,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 27,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 28,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 29,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 2,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 30,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 31,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 32,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 33,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 34,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 35,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 36,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 37,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 38,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 39,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 3,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 40,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 41,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 42,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 43,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 44,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 45,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 46,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
-          "value": 55,
-          "currency": "CAD",
+          "value": 47,
+          "currency": "USD",
+          "confidence": "live-text",
+          "sourceType": "text",
+          "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
+        },
+        {
+          "value": 50,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 20.26,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
         },
         {
           "value": 20.23,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/"
@@ -2392,7 +2309,7 @@
       ]
     },
     "https://shopsante.ca/en/collections/tous-les-produits/products/upika-endurance-725g-2": {
-      "fetchedAt": "2026-04-18T04:14:33.974Z",
+      "fetchedAt": "2026-04-18T09:06:51.523Z",
       "title": null,
       "priceCandidates": [
         {
@@ -2417,13 +2334,6 @@
           "url": "https://shopsante.ca/en/collections/tous-les-produits/products/upika-endurance-725g-2"
         },
         {
-          "value": 49.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://shopsante.ca/en/collections/tous-les-produits/products/upika-endurance-725g-2"
-        },
-        {
           "value": 109,
           "currency": "CAD",
           "confidence": "live-text",
@@ -2439,6 +2349,13 @@
         },
         {
           "value": 40,
+          "currency": "CAD",
+          "confidence": "live-text",
+          "sourceType": "text",
+          "url": "https://shopsante.ca/en/collections/tous-les-produits/products/upika-endurance-725g-2"
+        },
+        {
+          "value": 49.99,
           "currency": "CAD",
           "confidence": "live-text",
           "sourceType": "text",
@@ -2513,7 +2430,7 @@
       "packageCountCandidates": []
     },
     "https://enroute.run/products/pf-30-gel": {
-      "fetchedAt": "2026-04-18T04:14:32.105Z",
+      "fetchedAt": "2026-04-18T09:06:51.175Z",
       "title": "Precision Fuel PF 30 Gel | Nutrition | ENROUTE.RUN",
       "priceCandidates": [
         {
@@ -2620,152 +2537,159 @@
       ]
     },
     "https://www.precisionhydration.com/ca/en/products/pf-90-gel/": {
-      "fetchedAt": "2026-04-18T04:14:34.528Z",
+      "fetchedAt": "2026-04-18T09:06:52.344Z",
       "title": "PF 90 Energy Gel aka The Jumbo Gel by Precision Fuel &amp; Hydration",
       "priceCandidates": [
         {
-          "value": 24.99,
-          "currency": "CAD",
+          "value": 19.99,
+          "currency": "USD",
           "confidence": "live",
           "sourceType": "structured",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-90-gel/"
         },
         {
-          "value": 24.99,
-          "currency": "CAD",
+          "value": 19.99,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-90-gel/"
         },
         {
-          "value": 84.99,
-          "currency": "CAD",
+          "value": 64.99,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-90-gel/"
         },
         {
           "value": 1,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-90-gel/"
         },
         {
           "value": 9,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-90-gel/"
         },
         {
           "value": 10,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-90-gel/"
         },
         {
           "value": 12,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-90-gel/"
         },
         {
           "value": 5,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-90-gel/"
         },
         {
           "value": 15,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-90-gel/"
         },
         {
           "value": 16,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-90-gel/"
         },
         {
           "value": 17,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-90-gel/"
         },
         {
           "value": 18,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-90-gel/"
         },
         {
           "value": 19,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-90-gel/"
         },
         {
           "value": 20,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-90-gel/"
         },
         {
           "value": 21,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-90-gel/"
         },
         {
           "value": 22,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-90-gel/"
         },
         {
           "value": 23,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-90-gel/"
         },
         {
           "value": 24,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-90-gel/"
         },
         {
           "value": 25,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-90-gel/"
         },
         {
-          "value": 34,
-          "currency": "CAD",
+          "value": 2,
+          "currency": "USD",
+          "confidence": "live-text",
+          "sourceType": "text",
+          "url": "https://www.precisionhydration.com/ca/en/products/pf-90-gel/"
+        },
+        {
+          "value": 38,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-90-gel/"
         },
         {
           "value": 3,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-90-gel/"
@@ -2814,7 +2738,7 @@
       ]
     },
     "https://enroute.run/products/pf-90-gel": {
-      "fetchedAt": "2026-04-18T04:14:34.045Z",
+      "fetchedAt": "2026-04-18T09:06:51.680Z",
       "title": "Precision Fuel PF 90 Gel | Nutrition | ENROUTE.RUN",
       "priceCandidates": [
         {
@@ -2913,615 +2837,173 @@
       "packageCountCandidates": []
     },
     "https://krononutrition.com/en-ca/products/lemon-lime-sport-drink-mix": {
-      "fetchedAt": "2026-04-18T04:14:35.326Z",
-      "title": "Lemon &amp; Lime Sport Drink Mix - Krono Nutrition",
+      "fetchedAt": "2026-04-18T09:06:53.345Z",
+      "title": "Krono Nutrition | Natural Sports Nutrition Made in Quebec",
       "priceCandidates": [
         {
-          "value": 36.99,
-          "currency": "CAD",
-          "confidence": "live",
-          "sourceType": "structured",
-          "url": "https://krononutrition.com/en-ca/products/lemon-lime-sport-drink-mix"
-        },
-        {
-          "value": 59.99,
-          "currency": "CAD",
-          "confidence": "live",
-          "sourceType": "structured",
-          "url": "https://krononutrition.com/en-ca/products/lemon-lime-sport-drink-mix"
-        },
-        {
-          "value": 81.99,
-          "currency": "CAD",
-          "confidence": "live",
-          "sourceType": "structured",
+          "value": 50,
+          "currency": "USD",
+          "confidence": "live-text",
+          "sourceType": "text",
           "url": "https://krononutrition.com/en-ca/products/lemon-lime-sport-drink-mix"
         },
         {
           "value": 70,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/en-ca/products/lemon-lime-sport-drink-mix"
         },
         {
-          "value": 36.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/lemon-lime-sport-drink-mix"
-        },
-        {
-          "value": 18.49,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/lemon-lime-sport-drink-mix"
-        },
-        {
-          "value": 14.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/lemon-lime-sport-drink-mix"
-        },
-        {
-          "value": 59.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/lemon-lime-sport-drink-mix"
-        },
-        {
-          "value": 20.49,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/lemon-lime-sport-drink-mix"
-        },
-        {
-          "value": 81.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/lemon-lime-sport-drink-mix"
-        },
-        {
-          "value": 35,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/lemon-lime-sport-drink-mix"
-        },
-        {
-          "value": 30,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/lemon-lime-sport-drink-mix"
-        },
-        {
-          "value": 49.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/lemon-lime-sport-drink-mix"
-        },
-        {
-          "value": 50,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/lemon-lime-sport-drink-mix"
-        },
-        {
-          "value": 149.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/lemon-lime-sport-drink-mix"
-        },
-        {
-          "value": 150,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/lemon-lime-sport-drink-mix"
-        },
-        {
-          "value": 1,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/lemon-lime-sport-drink-mix"
-        },
-        {
-          "value": 39.99,
-          "currency": "CAD",
+          "value": 26.99,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/en-ca/products/lemon-lime-sport-drink-mix"
         }
       ],
-      "carbCandidates": [
-        {
-          "value": 22,
-          "confidence": "live",
-          "url": "https://krononutrition.com/en-ca/products/lemon-lime-sport-drink-mix"
-        }
-      ],
+      "carbCandidates": [],
       "servingCandidates": [],
-      "packageCountCandidates": [
-        {
-          "value": 12,
-          "confidence": "live",
-          "sourceType": "package-label",
-          "url": "https://krononutrition.com/en-ca/products/lemon-lime-sport-drink-mix"
-        }
-      ]
+      "packageCountCandidates": []
     },
     "https://krononutrition.com/products/maple-coffee-energy-gels-box-of-24": {
-      "fetchedAt": "2026-04-18T04:14:34.836Z",
-      "title": "Maple &amp; Coffee Energy gels - Box of 24 - Krono Nutrition",
+      "fetchedAt": "2026-04-18T09:06:52.268Z",
+      "title": "Krono Nutrition | Natural Sports Nutrition Made in Quebec",
       "priceCandidates": [
         {
-          "value": 64.99,
-          "currency": "CAD",
-          "confidence": "live",
-          "sourceType": "structured",
+          "value": 50,
+          "currency": "USD",
+          "confidence": "live-text",
+          "sourceType": "text",
           "url": "https://krononutrition.com/products/maple-coffee-energy-gels-box-of-24"
         },
         {
           "value": 70,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/products/maple-coffee-energy-gels-box-of-24"
         },
         {
-          "value": 64.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/maple-coffee-energy-gels-box-of-24"
-        },
-        {
-          "value": 16.24,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/maple-coffee-energy-gels-box-of-24"
-        },
-        {
-          "value": 35,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/maple-coffee-energy-gels-box-of-24"
-        },
-        {
-          "value": 30,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/maple-coffee-energy-gels-box-of-24"
-        },
-        {
-          "value": 49.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/maple-coffee-energy-gels-box-of-24"
-        },
-        {
-          "value": 50,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/maple-coffee-energy-gels-box-of-24"
-        },
-        {
-          "value": 149.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/maple-coffee-energy-gels-box-of-24"
-        },
-        {
-          "value": 150,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/maple-coffee-energy-gels-box-of-24"
-        },
-        {
-          "value": 1,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/maple-coffee-energy-gels-box-of-24"
-        },
-        {
-          "value": 39.99,
-          "currency": "CAD",
+          "value": 26.99,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/products/maple-coffee-energy-gels-box-of-24"
         }
       ],
-      "carbCandidates": [
-        {
-          "value": 24,
-          "confidence": "live",
-          "url": "https://krononutrition.com/products/maple-coffee-energy-gels-box-of-24"
-        }
-      ],
+      "carbCandidates": [],
       "servingCandidates": [],
       "packageCountCandidates": [
         {
           "value": 24,
           "confidence": "live",
           "sourceType": "url-package-label",
-          "url": "https://krononutrition.com/products/maple-coffee-energy-gels-box-of-24"
-        },
-        {
-          "value": 24,
-          "confidence": "live",
-          "sourceType": "title-package-label",
-          "url": "https://krononutrition.com/products/maple-coffee-energy-gels-box-of-24"
-        },
-        {
-          "value": 24,
-          "confidence": "live",
-          "sourceType": "package-label",
-          "url": "https://krononutrition.com/products/maple-coffee-energy-gels-box-of-24"
-        },
-        {
-          "value": 12,
-          "confidence": "live",
-          "sourceType": "package-label",
           "url": "https://krononutrition.com/products/maple-coffee-energy-gels-box-of-24"
         }
       ]
     },
     "https://krononutrition.com/products/maple-raspberry-energy-gels-box-of-24": {
-      "fetchedAt": "2026-04-18T04:14:34.809Z",
-      "title": "Maple &amp; Raspberry Energy Gels - Box of 24 - Krono Nutrition",
+      "fetchedAt": "2026-04-18T09:06:52.356Z",
+      "title": "Krono Nutrition | Natural Sports Nutrition Made in Quebec",
       "priceCandidates": [
         {
-          "value": 64.99,
-          "currency": "CAD",
-          "confidence": "live",
-          "sourceType": "structured",
+          "value": 50,
+          "currency": "USD",
+          "confidence": "live-text",
+          "sourceType": "text",
           "url": "https://krononutrition.com/products/maple-raspberry-energy-gels-box-of-24"
         },
         {
           "value": 70,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/products/maple-raspberry-energy-gels-box-of-24"
         },
         {
-          "value": 64.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/maple-raspberry-energy-gels-box-of-24"
-        },
-        {
-          "value": 16.24,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/maple-raspberry-energy-gels-box-of-24"
-        },
-        {
-          "value": 35,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/maple-raspberry-energy-gels-box-of-24"
-        },
-        {
-          "value": 30,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/maple-raspberry-energy-gels-box-of-24"
-        },
-        {
-          "value": 49.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/maple-raspberry-energy-gels-box-of-24"
-        },
-        {
-          "value": 50,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/maple-raspberry-energy-gels-box-of-24"
-        },
-        {
-          "value": 149.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/maple-raspberry-energy-gels-box-of-24"
-        },
-        {
-          "value": 150,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/maple-raspberry-energy-gels-box-of-24"
-        },
-        {
-          "value": 1,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/maple-raspberry-energy-gels-box-of-24"
-        },
-        {
-          "value": 39.99,
-          "currency": "CAD",
+          "value": 26.99,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/products/maple-raspberry-energy-gels-box-of-24"
         }
       ],
-      "carbCandidates": [
-        {
-          "value": 29,
-          "confidence": "live",
-          "url": "https://krononutrition.com/products/maple-raspberry-energy-gels-box-of-24"
-        }
-      ],
+      "carbCandidates": [],
       "servingCandidates": [],
       "packageCountCandidates": [
         {
           "value": 24,
           "confidence": "live",
           "sourceType": "url-package-label",
-          "url": "https://krononutrition.com/products/maple-raspberry-energy-gels-box-of-24"
-        },
-        {
-          "value": 24,
-          "confidence": "live",
-          "sourceType": "title-package-label",
-          "url": "https://krononutrition.com/products/maple-raspberry-energy-gels-box-of-24"
-        },
-        {
-          "value": 24,
-          "confidence": "live",
-          "sourceType": "package-label",
-          "url": "https://krononutrition.com/products/maple-raspberry-energy-gels-box-of-24"
-        },
-        {
-          "value": 12,
-          "confidence": "live",
-          "sourceType": "package-label",
           "url": "https://krononutrition.com/products/maple-raspberry-energy-gels-box-of-24"
         }
       ]
     },
     "https://krononutrition.com/products/maple-energy-gels-box-of-24": {
-      "fetchedAt": "2026-04-18T04:14:34.787Z",
-      "title": "Maple Energy gels - Energy Gel - Krono Nutrition",
+      "fetchedAt": "2026-04-18T09:06:52.594Z",
+      "title": "Krono Nutrition | Natural Sports Nutrition Made in Quebec",
       "priceCandidates": [
         {
-          "value": 64.99,
-          "currency": "CAD",
-          "confidence": "live",
-          "sourceType": "structured",
+          "value": 50,
+          "currency": "USD",
+          "confidence": "live-text",
+          "sourceType": "text",
           "url": "https://krononutrition.com/products/maple-energy-gels-box-of-24"
         },
         {
           "value": 70,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/products/maple-energy-gels-box-of-24"
         },
         {
-          "value": 64.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/maple-energy-gels-box-of-24"
-        },
-        {
-          "value": 16.24,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/maple-energy-gels-box-of-24"
-        },
-        {
-          "value": 35,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/maple-energy-gels-box-of-24"
-        },
-        {
-          "value": 30,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/maple-energy-gels-box-of-24"
-        },
-        {
-          "value": 49.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/maple-energy-gels-box-of-24"
-        },
-        {
-          "value": 50,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/maple-energy-gels-box-of-24"
-        },
-        {
-          "value": 149.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/maple-energy-gels-box-of-24"
-        },
-        {
-          "value": 150,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/maple-energy-gels-box-of-24"
-        },
-        {
-          "value": 1,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/maple-energy-gels-box-of-24"
-        },
-        {
-          "value": 39.99,
-          "currency": "CAD",
+          "value": 26.99,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/products/maple-energy-gels-box-of-24"
         }
       ],
-      "carbCandidates": [
-        {
-          "value": 24,
-          "confidence": "live",
-          "url": "https://krononutrition.com/products/maple-energy-gels-box-of-24"
-        }
-      ],
+      "carbCandidates": [],
       "servingCandidates": [],
       "packageCountCandidates": [
         {
           "value": 24,
           "confidence": "live",
           "sourceType": "url-package-label",
-          "url": "https://krononutrition.com/products/maple-energy-gels-box-of-24"
-        },
-        {
-          "value": 24,
-          "confidence": "live",
-          "sourceType": "package-label",
-          "url": "https://krononutrition.com/products/maple-energy-gels-box-of-24"
-        },
-        {
-          "value": 12,
-          "confidence": "live",
-          "sourceType": "package-label",
           "url": "https://krononutrition.com/products/maple-energy-gels-box-of-24"
         }
       ]
     },
     "https://krononutrition.com/products/tropical-energy-gels-box-of-24": {
-      "fetchedAt": "2026-04-18T04:14:35.553Z",
-      "title": "Tropical Energy Gels – Box of 24 - Krono Nutrition",
+      "fetchedAt": "2026-04-18T09:06:53.333Z",
+      "title": "Krono Nutrition | Natural Sports Nutrition Made in Quebec",
       "priceCandidates": [
         {
-          "value": 64.99,
-          "currency": "CAD",
-          "confidence": "live",
-          "sourceType": "structured",
+          "value": 50,
+          "currency": "USD",
+          "confidence": "live-text",
+          "sourceType": "text",
           "url": "https://krononutrition.com/products/tropical-energy-gels-box-of-24"
         },
         {
           "value": 70,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/products/tropical-energy-gels-box-of-24"
         },
         {
-          "value": 64.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/tropical-energy-gels-box-of-24"
-        },
-        {
-          "value": 16.24,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/tropical-energy-gels-box-of-24"
-        },
-        {
-          "value": 35,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/tropical-energy-gels-box-of-24"
-        },
-        {
-          "value": 30,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/tropical-energy-gels-box-of-24"
-        },
-        {
-          "value": 49.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/tropical-energy-gels-box-of-24"
-        },
-        {
-          "value": 50,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/tropical-energy-gels-box-of-24"
-        },
-        {
-          "value": 149.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/tropical-energy-gels-box-of-24"
-        },
-        {
-          "value": 150,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/tropical-energy-gels-box-of-24"
-        },
-        {
-          "value": 1,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/tropical-energy-gels-box-of-24"
-        },
-        {
-          "value": 39.99,
-          "currency": "CAD",
+          "value": 26.99,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/products/tropical-energy-gels-box-of-24"
         }
       ],
-      "carbCandidates": [
-        {
-          "value": 30,
-          "confidence": "live",
-          "url": "https://krononutrition.com/products/tropical-energy-gels-box-of-24"
-        }
-      ],
+      "carbCandidates": [],
       "servingCandidates": [],
       "packageCountCandidates": [
         {
@@ -3529,29 +3011,11 @@
           "confidence": "live",
           "sourceType": "url-package-label",
           "url": "https://krononutrition.com/products/tropical-energy-gels-box-of-24"
-        },
-        {
-          "value": 24,
-          "confidence": "live",
-          "sourceType": "title-package-label",
-          "url": "https://krononutrition.com/products/tropical-energy-gels-box-of-24"
-        },
-        {
-          "value": 24,
-          "confidence": "live",
-          "sourceType": "package-label",
-          "url": "https://krononutrition.com/products/tropical-energy-gels-box-of-24"
-        },
-        {
-          "value": 12,
-          "confidence": "live",
-          "sourceType": "package-label",
-          "url": "https://krononutrition.com/products/tropical-energy-gels-box-of-24"
         }
       ]
     },
     "https://well.ca/products/krono-nutrition-sport-drink-mix_345933.html": {
-      "fetchedAt": "2026-04-18T04:14:35.527Z",
+      "fetchedAt": "2026-04-18T09:06:53.231Z",
       "title": "Buy Krono Nutrition Sport Drink Mix Lemon & Lime  at Well.ca | Free Shipping $35+ in Canada",
       "priceCandidates": [
         {
@@ -3595,155 +3059,37 @@
       "packageCountCandidates": []
     },
     "https://krononutrition.com/en/produit/nutritions/electrolytes-en/peach-sport-drink-mix/": {
-      "fetchedAt": "2026-04-18T04:14:35.727Z",
-      "title": "Peach Sport Drink Mix - Krono Nutrition",
+      "fetchedAt": "2026-04-18T09:06:53.128Z",
+      "title": "Krono Nutrition | Natural Sports Nutrition Made in Quebec",
       "priceCandidates": [
         {
-          "value": 36.99,
-          "currency": "CAD",
-          "confidence": "live",
-          "sourceType": "structured",
-          "url": "https://krononutrition.com/en/produit/nutritions/electrolytes-en/peach-sport-drink-mix/"
-        },
-        {
-          "value": 59.99,
-          "currency": "CAD",
-          "confidence": "live",
-          "sourceType": "structured",
-          "url": "https://krononutrition.com/en/produit/nutritions/electrolytes-en/peach-sport-drink-mix/"
-        },
-        {
-          "value": 81.99,
-          "currency": "CAD",
-          "confidence": "live",
-          "sourceType": "structured",
+          "value": 50,
+          "currency": "USD",
+          "confidence": "live-text",
+          "sourceType": "text",
           "url": "https://krononutrition.com/en/produit/nutritions/electrolytes-en/peach-sport-drink-mix/"
         },
         {
           "value": 70,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/en/produit/nutritions/electrolytes-en/peach-sport-drink-mix/"
         },
         {
-          "value": 36.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en/produit/nutritions/electrolytes-en/peach-sport-drink-mix/"
-        },
-        {
-          "value": 18.49,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en/produit/nutritions/electrolytes-en/peach-sport-drink-mix/"
-        },
-        {
-          "value": 14.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en/produit/nutritions/electrolytes-en/peach-sport-drink-mix/"
-        },
-        {
-          "value": 59.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en/produit/nutritions/electrolytes-en/peach-sport-drink-mix/"
-        },
-        {
-          "value": 20.49,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en/produit/nutritions/electrolytes-en/peach-sport-drink-mix/"
-        },
-        {
-          "value": 81.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en/produit/nutritions/electrolytes-en/peach-sport-drink-mix/"
-        },
-        {
-          "value": 35,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en/produit/nutritions/electrolytes-en/peach-sport-drink-mix/"
-        },
-        {
-          "value": 30,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en/produit/nutritions/electrolytes-en/peach-sport-drink-mix/"
-        },
-        {
-          "value": 49.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en/produit/nutritions/electrolytes-en/peach-sport-drink-mix/"
-        },
-        {
-          "value": 50,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en/produit/nutritions/electrolytes-en/peach-sport-drink-mix/"
-        },
-        {
-          "value": 149.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en/produit/nutritions/electrolytes-en/peach-sport-drink-mix/"
-        },
-        {
-          "value": 150,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en/produit/nutritions/electrolytes-en/peach-sport-drink-mix/"
-        },
-        {
-          "value": 1,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en/produit/nutritions/electrolytes-en/peach-sport-drink-mix/"
-        },
-        {
-          "value": 39.99,
-          "currency": "CAD",
+          "value": 26.99,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/en/produit/nutritions/electrolytes-en/peach-sport-drink-mix/"
         }
       ],
-      "carbCandidates": [
-        {
-          "value": 22,
-          "confidence": "live",
-          "url": "https://krononutrition.com/en/produit/nutritions/electrolytes-en/peach-sport-drink-mix/"
-        }
-      ],
+      "carbCandidates": [],
       "servingCandidates": [],
-      "packageCountCandidates": [
-        {
-          "value": 12,
-          "confidence": "live",
-          "sourceType": "package-label",
-          "url": "https://krononutrition.com/en/produit/nutritions/electrolytes-en/peach-sport-drink-mix/"
-        }
-      ]
+      "packageCountCandidates": []
     },
     "https://elementsport.ca/products/krono-sport-drink-mix": {
-      "fetchedAt": "2026-04-18T04:14:35.906Z",
+      "fetchedAt": "2026-04-18T09:06:53.540Z",
       "title": null,
       "priceCandidates": [
         {
@@ -3817,6 +3163,13 @@
           "url": "https://elementsport.ca/products/krono-sport-drink-mix"
         },
         {
+          "value": 19,
+          "currency": "CAD",
+          "confidence": "live-text",
+          "sourceType": "text",
+          "url": "https://elementsport.ca/products/krono-sport-drink-mix"
+        },
+        {
           "value": 20,
           "currency": "CAD",
           "confidence": "live-text",
@@ -3836,13 +3189,6 @@
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://elementsport.ca/products/krono-sport-drink-mix"
-        },
-        {
-          "value": 19,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://elementsport.ca/products/krono-sport-drink-mix"
         }
       ],
       "carbCandidates": [],
@@ -3850,7 +3196,7 @@
       "packageCountCandidates": []
     },
     "https://fuelkit.ca/products/maurten-solid-160-bar-single-bar": {
-      "fetchedAt": "2026-04-18T04:14:36.726Z",
+      "fetchedAt": "2026-04-18T09:06:54.078Z",
       "title": null,
       "priceCandidates": [
         {
@@ -3942,82 +3288,82 @@
       "packageCountCandidates": []
     },
     "https://www.precisionhydration.com/ca/en/products/pf-60-chew-bar/": {
-      "fetchedAt": "2026-04-18T04:14:36.471Z",
+      "fetchedAt": "2026-04-18T09:06:54.553Z",
       "title": "PF 60 Energy Chew Bar - Original by Precision Fuel &amp; Hydration",
       "priceCandidates": [
         {
-          "value": 18.99,
-          "currency": "CAD",
+          "value": 12.99,
+          "currency": "USD",
           "confidence": "live",
           "sourceType": "structured",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-60-chew-bar/"
         },
         {
-          "value": 18.99,
-          "currency": "CAD",
+          "value": 12.99,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-60-chew-bar/"
         },
         {
-          "value": 84.99,
-          "currency": "CAD",
+          "value": 64.99,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-60-chew-bar/"
         },
         {
           "value": 1,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-60-chew-bar/"
         },
         {
           "value": 9,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-60-chew-bar/"
         },
         {
           "value": 10,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-60-chew-bar/"
         },
         {
           "value": 12,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-60-chew-bar/"
         },
         {
           "value": 5,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-60-chew-bar/"
         },
         {
           "value": 15,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-60-chew-bar/"
         },
         {
-          "value": 24,
-          "currency": "CAD",
+          "value": 28,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-60-chew-bar/"
         },
         {
           "value": 2,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-60-chew-bar/"
@@ -4047,194 +3393,201 @@
       ]
     },
     "https://www.precisionhydration.com/ca/en/products/pf-30-chew/": {
-      "fetchedAt": "2026-04-18T04:14:36.393Z",
+      "fetchedAt": "2026-04-18T09:06:57.503Z",
       "title": "PF 30 Energy Chew - Original by Precision Fuel &amp; Hydration",
       "priceCandidates": [
         {
-          "value": 13.99,
-          "currency": "CAD",
+          "value": 11.49,
+          "currency": "USD",
           "confidence": "live",
           "sourceType": "structured",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-chew/"
         },
         {
-          "value": 13.99,
-          "currency": "CAD",
+          "value": 11.49,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-chew/"
         },
         {
-          "value": 84.99,
-          "currency": "CAD",
+          "value": 64.99,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-chew/"
         },
         {
           "value": 1,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-chew/"
         },
         {
           "value": 9,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-chew/"
         },
         {
           "value": 10,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-chew/"
         },
         {
           "value": 12,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-chew/"
         },
         {
           "value": 5,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-chew/"
         },
         {
           "value": 15,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-chew/"
         },
         {
           "value": 16,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-chew/"
         },
         {
           "value": 17,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-chew/"
         },
         {
           "value": 18,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-chew/"
         },
         {
           "value": 19,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-chew/"
         },
         {
           "value": 20,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-chew/"
         },
         {
           "value": 21,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-chew/"
         },
         {
           "value": 22,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-chew/"
         },
         {
           "value": 23,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-chew/"
         },
         {
           "value": 24,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-chew/"
         },
         {
           "value": 25,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-chew/"
         },
         {
           "value": 26,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-chew/"
         },
         {
           "value": 27,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-chew/"
         },
         {
           "value": 28,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-chew/"
         },
         {
           "value": 29,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-chew/"
         },
         {
           "value": 2,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-chew/"
         },
         {
-          "value": 3,
-          "currency": "CAD",
+          "value": 38,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-chew/"
         },
         {
-          "value": 48,
-          "currency": "CAD",
+          "value": 42,
+          "currency": "USD",
+          "confidence": "live-text",
+          "sourceType": "text",
+          "url": "https://www.precisionhydration.com/ca/en/products/pf-30-chew/"
+        },
+        {
+          "value": 47,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-chew/"
         },
         {
           "value": 20.23,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.precisionhydration.com/ca/en/products/pf-30-chew/"
@@ -4264,392 +3617,107 @@
       ]
     },
     "https://krononutrition.com/en-ca/products/berries-and-pomegranate-sport-drink-mix": {
-      "fetchedAt": "2026-04-18T04:14:36.603Z",
-      "title": "Berries and Pomegranate Sport Drink Mix - Krono Nutrition",
+      "fetchedAt": "2026-04-18T09:06:53.823Z",
+      "title": "Krono Nutrition | Natural Sports Nutrition Made in Quebec",
       "priceCandidates": [
         {
-          "value": 36.99,
-          "currency": "CAD",
-          "confidence": "live",
-          "sourceType": "structured",
-          "url": "https://krononutrition.com/en-ca/products/berries-and-pomegranate-sport-drink-mix"
-        },
-        {
-          "value": 59.99,
-          "currency": "CAD",
-          "confidence": "live",
-          "sourceType": "structured",
-          "url": "https://krononutrition.com/en-ca/products/berries-and-pomegranate-sport-drink-mix"
-        },
-        {
-          "value": 81.99,
-          "currency": "CAD",
-          "confidence": "live",
-          "sourceType": "structured",
+          "value": 50,
+          "currency": "USD",
+          "confidence": "live-text",
+          "sourceType": "text",
           "url": "https://krononutrition.com/en-ca/products/berries-and-pomegranate-sport-drink-mix"
         },
         {
           "value": 70,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/en-ca/products/berries-and-pomegranate-sport-drink-mix"
         },
         {
-          "value": 36.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/berries-and-pomegranate-sport-drink-mix"
-        },
-        {
-          "value": 18.49,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/berries-and-pomegranate-sport-drink-mix"
-        },
-        {
-          "value": 14.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/berries-and-pomegranate-sport-drink-mix"
-        },
-        {
-          "value": 59.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/berries-and-pomegranate-sport-drink-mix"
-        },
-        {
-          "value": 20.49,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/berries-and-pomegranate-sport-drink-mix"
-        },
-        {
-          "value": 81.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/berries-and-pomegranate-sport-drink-mix"
-        },
-        {
-          "value": 35,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/berries-and-pomegranate-sport-drink-mix"
-        },
-        {
-          "value": 30,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/berries-and-pomegranate-sport-drink-mix"
-        },
-        {
-          "value": 49.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/berries-and-pomegranate-sport-drink-mix"
-        },
-        {
-          "value": 50,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/berries-and-pomegranate-sport-drink-mix"
-        },
-        {
-          "value": 149.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/berries-and-pomegranate-sport-drink-mix"
-        },
-        {
-          "value": 150,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/berries-and-pomegranate-sport-drink-mix"
-        },
-        {
-          "value": 1,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/berries-and-pomegranate-sport-drink-mix"
-        },
-        {
-          "value": 39.99,
-          "currency": "CAD",
+          "value": 26.99,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/en-ca/products/berries-and-pomegranate-sport-drink-mix"
         }
       ],
-      "carbCandidates": [
-        {
-          "value": 22,
-          "confidence": "live",
-          "url": "https://krononutrition.com/en-ca/products/berries-and-pomegranate-sport-drink-mix"
-        }
-      ],
+      "carbCandidates": [],
       "servingCandidates": [],
-      "packageCountCandidates": [
-        {
-          "value": 12,
-          "confidence": "live",
-          "sourceType": "package-label",
-          "url": "https://krononutrition.com/en-ca/products/berries-and-pomegranate-sport-drink-mix"
-        }
-      ]
+      "packageCountCandidates": []
     },
     "https://krononutrition.com/en-ca/products/pink-limonade-sport-drink-mix": {
-      "fetchedAt": "2026-04-18T04:14:36.410Z",
-      "title": "Pink Limonade Sport Drink Mix - Krono Nutrition",
+      "fetchedAt": "2026-04-18T09:06:53.834Z",
+      "title": "Krono Nutrition | Natural Sports Nutrition Made in Quebec",
       "priceCandidates": [
         {
-          "value": 36.99,
-          "currency": "CAD",
-          "confidence": "live",
-          "sourceType": "structured",
-          "url": "https://krononutrition.com/en-ca/products/pink-limonade-sport-drink-mix"
-        },
-        {
-          "value": 59.99,
-          "currency": "CAD",
-          "confidence": "live",
-          "sourceType": "structured",
-          "url": "https://krononutrition.com/en-ca/products/pink-limonade-sport-drink-mix"
-        },
-        {
-          "value": 81.99,
-          "currency": "CAD",
-          "confidence": "live",
-          "sourceType": "structured",
+          "value": 50,
+          "currency": "USD",
+          "confidence": "live-text",
+          "sourceType": "text",
           "url": "https://krononutrition.com/en-ca/products/pink-limonade-sport-drink-mix"
         },
         {
           "value": 70,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/en-ca/products/pink-limonade-sport-drink-mix"
         },
         {
-          "value": 36.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/pink-limonade-sport-drink-mix"
-        },
-        {
-          "value": 18.49,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/pink-limonade-sport-drink-mix"
-        },
-        {
-          "value": 14.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/pink-limonade-sport-drink-mix"
-        },
-        {
-          "value": 59.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/pink-limonade-sport-drink-mix"
-        },
-        {
-          "value": 20.49,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/pink-limonade-sport-drink-mix"
-        },
-        {
-          "value": 81.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/pink-limonade-sport-drink-mix"
-        },
-        {
-          "value": 35,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/pink-limonade-sport-drink-mix"
-        },
-        {
-          "value": 30,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/pink-limonade-sport-drink-mix"
-        },
-        {
-          "value": 49.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/pink-limonade-sport-drink-mix"
-        },
-        {
-          "value": 50,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/pink-limonade-sport-drink-mix"
-        },
-        {
-          "value": 149.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/pink-limonade-sport-drink-mix"
-        },
-        {
-          "value": 150,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/pink-limonade-sport-drink-mix"
-        },
-        {
-          "value": 1,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/pink-limonade-sport-drink-mix"
-        },
-        {
-          "value": 39.99,
-          "currency": "CAD",
+          "value": 26.99,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/en-ca/products/pink-limonade-sport-drink-mix"
         }
       ],
-      "carbCandidates": [
-        {
-          "value": 22,
-          "confidence": "live",
-          "url": "https://krononutrition.com/en-ca/products/pink-limonade-sport-drink-mix"
-        }
-      ],
+      "carbCandidates": [],
       "servingCandidates": [],
-      "packageCountCandidates": [
-        {
-          "value": 12,
-          "confidence": "live",
-          "sourceType": "package-label",
-          "url": "https://krononutrition.com/en-ca/products/pink-limonade-sport-drink-mix"
-        }
-      ]
+      "packageCountCandidates": []
     },
     "https://upika.ca/en/products/upika-carb-boost": {
-      "fetchedAt": "2026-04-18T04:14:37.652Z",
+      "fetchedAt": "2026-04-18T09:06:58.268Z",
       "title": "UPIKA Carb-Boost",
       "priceCandidates": [
         {
-          "value": 49.99,
-          "currency": "CAD",
+          "value": 38,
+          "currency": "USD",
           "confidence": "live",
           "sourceType": "structured",
           "url": "https://upika.ca/en/products/upika-carb-boost"
         },
         {
-          "value": 49.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/upika-carb-boost"
-        },
-        {
-          "value": 24.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/upika-carb-boost"
-        },
-        {
-          "value": 35,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/upika-carb-boost"
-        },
-        {
-          "value": 30,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/upika-carb-boost"
-        },
-        {
-          "value": 50,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/upika-carb-boost"
-        },
-        {
-          "value": 149.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/upika-carb-boost"
-        },
-        {
-          "value": 150,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/upika-carb-boost"
-        },
-        {
-          "value": 1,
-          "currency": "CAD",
+          "value": 38,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://upika.ca/en/products/upika-carb-boost"
         },
         {
           "value": 199.96,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://upika.ca/en/products/upika-carb-boost"
         },
         {
           "value": 75,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://upika.ca/en/products/upika-carb-boost"
         },
         {
           "value": 5,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://upika.ca/en/products/upika-carb-boost"
         },
         {
           "value": 8,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://upika.ca/en/products/upika-carb-boost"
@@ -4709,96 +3777,40 @@
       ]
     },
     "https://upika.ca/en/products/samples-upika-endurance-citron-lime": {
-      "fetchedAt": "2026-04-18T04:14:37.634Z",
+      "fetchedAt": "2026-04-18T09:06:58.243Z",
       "title": "Sample Endurance Citron-lime",
       "priceCandidates": [
         {
-          "value": 2.99,
-          "currency": "CAD",
+          "value": 3,
+          "currency": "USD",
           "confidence": "live",
           "sourceType": "structured",
           "url": "https://upika.ca/en/products/samples-upika-endurance-citron-lime"
         },
         {
-          "value": 2.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/samples-upika-endurance-citron-lime"
-        },
-        {
-          "value": 1.49,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/samples-upika-endurance-citron-lime"
-        },
-        {
-          "value": 35,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/samples-upika-endurance-citron-lime"
-        },
-        {
-          "value": 30,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/samples-upika-endurance-citron-lime"
-        },
-        {
-          "value": 49.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/samples-upika-endurance-citron-lime"
-        },
-        {
-          "value": 50,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/samples-upika-endurance-citron-lime"
-        },
-        {
-          "value": 149.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/samples-upika-endurance-citron-lime"
-        },
-        {
-          "value": 150,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/samples-upika-endurance-citron-lime"
-        },
-        {
-          "value": 1,
-          "currency": "CAD",
+          "value": 3,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://upika.ca/en/products/samples-upika-endurance-citron-lime"
         },
         {
           "value": 75,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://upika.ca/en/products/samples-upika-endurance-citron-lime"
         },
         {
           "value": 5,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://upika.ca/en/products/samples-upika-endurance-citron-lime"
         },
         {
           "value": 8,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://upika.ca/en/products/samples-upika-endurance-citron-lime"
@@ -4847,96 +3859,40 @@
       ]
     },
     "https://upika.ca/en/products/barres-upika-1-barre": {
-      "fetchedAt": "2026-04-18T04:14:37.982Z",
+      "fetchedAt": "2026-04-18T09:06:58.601Z",
       "title": "Barres UPIKA - 1 Barre",
       "priceCandidates": [
         {
-          "value": 3.99,
-          "currency": "CAD",
+          "value": 3,
+          "currency": "USD",
           "confidence": "live",
           "sourceType": "structured",
           "url": "https://upika.ca/en/products/barres-upika-1-barre"
         },
         {
-          "value": 3.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/barres-upika-1-barre"
-        },
-        {
-          "value": 1.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/barres-upika-1-barre"
-        },
-        {
-          "value": 35,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/barres-upika-1-barre"
-        },
-        {
-          "value": 30,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/barres-upika-1-barre"
-        },
-        {
-          "value": 49.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/barres-upika-1-barre"
-        },
-        {
-          "value": 50,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/barres-upika-1-barre"
-        },
-        {
-          "value": 149.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/barres-upika-1-barre"
-        },
-        {
-          "value": 150,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/barres-upika-1-barre"
-        },
-        {
-          "value": 1,
-          "currency": "CAD",
+          "value": 3,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://upika.ca/en/products/barres-upika-1-barre"
         },
         {
           "value": 75,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://upika.ca/en/products/barres-upika-1-barre"
         },
         {
           "value": 5,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://upika.ca/en/products/barres-upika-1-barre"
         },
         {
           "value": 8,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://upika.ca/en/products/barres-upika-1-barre"
@@ -4972,225 +3928,69 @@
       ]
     },
     "https://krononutrition.com/products/salted-caramel-energy-gels-box-of-24": {
-      "fetchedAt": "2026-04-18T04:14:38.709Z",
-      "title": "Salted Caramel Energy Gels - Box of 24 - Krono Nutrition",
+      "fetchedAt": "2026-04-18T09:06:58.989Z",
+      "title": "Krono Nutrition | Natural Sports Nutrition Made in Quebec",
       "priceCandidates": [
         {
-          "value": 64.99,
-          "currency": "CAD",
-          "confidence": "live",
-          "sourceType": "structured",
+          "value": 50,
+          "currency": "USD",
+          "confidence": "live-text",
+          "sourceType": "text",
           "url": "https://krononutrition.com/products/salted-caramel-energy-gels-box-of-24"
         },
         {
           "value": 70,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/products/salted-caramel-energy-gels-box-of-24"
         },
         {
-          "value": 64.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/salted-caramel-energy-gels-box-of-24"
-        },
-        {
-          "value": 16.24,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/salted-caramel-energy-gels-box-of-24"
-        },
-        {
-          "value": 35,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/salted-caramel-energy-gels-box-of-24"
-        },
-        {
-          "value": 30,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/salted-caramel-energy-gels-box-of-24"
-        },
-        {
-          "value": 49.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/salted-caramel-energy-gels-box-of-24"
-        },
-        {
-          "value": 50,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/salted-caramel-energy-gels-box-of-24"
-        },
-        {
-          "value": 149.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/salted-caramel-energy-gels-box-of-24"
-        },
-        {
-          "value": 150,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/salted-caramel-energy-gels-box-of-24"
-        },
-        {
-          "value": 1,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/salted-caramel-energy-gels-box-of-24"
-        },
-        {
-          "value": 39.99,
-          "currency": "CAD",
+          "value": 26.99,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/products/salted-caramel-energy-gels-box-of-24"
         }
       ],
-      "carbCandidates": [
-        {
-          "value": 30,
-          "confidence": "live",
-          "url": "https://krononutrition.com/products/salted-caramel-energy-gels-box-of-24"
-        }
-      ],
+      "carbCandidates": [],
       "servingCandidates": [],
       "packageCountCandidates": [
         {
           "value": 24,
           "confidence": "live",
           "sourceType": "url-package-label",
-          "url": "https://krononutrition.com/products/salted-caramel-energy-gels-box-of-24"
-        },
-        {
-          "value": 24,
-          "confidence": "live",
-          "sourceType": "title-package-label",
-          "url": "https://krononutrition.com/products/salted-caramel-energy-gels-box-of-24"
-        },
-        {
-          "value": 24,
-          "confidence": "live",
-          "sourceType": "package-label",
-          "url": "https://krononutrition.com/products/salted-caramel-energy-gels-box-of-24"
-        },
-        {
-          "value": 12,
-          "confidence": "live",
-          "sourceType": "package-label",
           "url": "https://krononutrition.com/products/salted-caramel-energy-gels-box-of-24"
         }
       ]
     },
     "https://krononutrition.com/products/citrus-energy-gels-box-of-24": {
-      "fetchedAt": "2026-04-18T04:14:38.940Z",
-      "title": "Citrus Energy Gels - Box of 24 - Krono Nutrition | Energy gels",
+      "fetchedAt": "2026-04-18T09:06:58.924Z",
+      "title": "Krono Nutrition | Natural Sports Nutrition Made in Quebec",
       "priceCandidates": [
         {
-          "value": 64.99,
-          "currency": "CAD",
-          "confidence": "live",
-          "sourceType": "structured",
+          "value": 50,
+          "currency": "USD",
+          "confidence": "live-text",
+          "sourceType": "text",
           "url": "https://krononutrition.com/products/citrus-energy-gels-box-of-24"
         },
         {
           "value": 70,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/products/citrus-energy-gels-box-of-24"
         },
         {
-          "value": 64.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/citrus-energy-gels-box-of-24"
-        },
-        {
-          "value": 16.24,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/citrus-energy-gels-box-of-24"
-        },
-        {
-          "value": 35,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/citrus-energy-gels-box-of-24"
-        },
-        {
-          "value": 30,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/citrus-energy-gels-box-of-24"
-        },
-        {
-          "value": 49.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/citrus-energy-gels-box-of-24"
-        },
-        {
-          "value": 50,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/citrus-energy-gels-box-of-24"
-        },
-        {
-          "value": 149.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/citrus-energy-gels-box-of-24"
-        },
-        {
-          "value": 150,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/citrus-energy-gels-box-of-24"
-        },
-        {
-          "value": 1,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/citrus-energy-gels-box-of-24"
-        },
-        {
-          "value": 39.99,
-          "currency": "CAD",
+          "value": 26.99,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/products/citrus-energy-gels-box-of-24"
         }
       ],
-      "carbCandidates": [
-        {
-          "value": 30,
-          "confidence": "live",
-          "url": "https://krononutrition.com/products/citrus-energy-gels-box-of-24"
-        }
-      ],
+      "carbCandidates": [],
       "servingCandidates": [],
       "packageCountCandidates": [
         {
@@ -5198,118 +3998,44 @@
           "confidence": "live",
           "sourceType": "url-package-label",
           "url": "https://krononutrition.com/products/citrus-energy-gels-box-of-24"
-        },
-        {
-          "value": 24,
-          "confidence": "live",
-          "sourceType": "title-package-label",
-          "url": "https://krononutrition.com/products/citrus-energy-gels-box-of-24"
-        },
-        {
-          "value": 24,
-          "confidence": "live",
-          "sourceType": "package-label",
-          "url": "https://krononutrition.com/products/citrus-energy-gels-box-of-24"
-        },
-        {
-          "value": 12,
-          "confidence": "live",
-          "sourceType": "package-label",
-          "url": "https://krononutrition.com/products/citrus-energy-gels-box-of-24"
         }
       ]
     },
     "https://upika.ca/en/products/samples-upika-endurance-melon-d-eau": {
-      "fetchedAt": "2026-04-18T04:14:38.001Z",
+      "fetchedAt": "2026-04-18T09:06:58.258Z",
       "title": "Sample UPIKA Endurance+ Melon d’eau",
       "priceCandidates": [
         {
-          "value": 2.99,
-          "currency": "CAD",
+          "value": 3,
+          "currency": "USD",
           "confidence": "live",
           "sourceType": "structured",
           "url": "https://upika.ca/en/products/samples-upika-endurance-melon-d-eau"
         },
         {
-          "value": 2.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/samples-upika-endurance-melon-d-eau"
-        },
-        {
-          "value": 1.49,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/samples-upika-endurance-melon-d-eau"
-        },
-        {
-          "value": 35,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/samples-upika-endurance-melon-d-eau"
-        },
-        {
-          "value": 30,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/samples-upika-endurance-melon-d-eau"
-        },
-        {
-          "value": 49.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/samples-upika-endurance-melon-d-eau"
-        },
-        {
-          "value": 50,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/samples-upika-endurance-melon-d-eau"
-        },
-        {
-          "value": 149.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/samples-upika-endurance-melon-d-eau"
-        },
-        {
-          "value": 150,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://upika.ca/en/products/samples-upika-endurance-melon-d-eau"
-        },
-        {
-          "value": 1,
-          "currency": "CAD",
+          "value": 3,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://upika.ca/en/products/samples-upika-endurance-melon-d-eau"
         },
         {
           "value": 75,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://upika.ca/en/products/samples-upika-endurance-melon-d-eau"
         },
         {
           "value": 5,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://upika.ca/en/products/samples-upika-endurance-melon-d-eau"
         },
         {
           "value": 8,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://upika.ca/en/products/samples-upika-endurance-melon-d-eau"
@@ -5358,1038 +4084,314 @@
       ]
     },
     "https://krononutrition.com/products/apple-maple-energy-gels-box-of-24": {
-      "fetchedAt": "2026-04-18T04:14:37.670Z",
-      "title": "Apple &amp; Maple Energy gels - Krono Nutrition",
+      "fetchedAt": "2026-04-18T09:06:57.758Z",
+      "title": "Krono Nutrition | Natural Sports Nutrition Made in Quebec",
       "priceCandidates": [
         {
-          "value": 64.99,
-          "currency": "CAD",
-          "confidence": "live",
-          "sourceType": "structured",
+          "value": 50,
+          "currency": "USD",
+          "confidence": "live-text",
+          "sourceType": "text",
           "url": "https://krononutrition.com/products/apple-maple-energy-gels-box-of-24"
         },
         {
           "value": 70,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/products/apple-maple-energy-gels-box-of-24"
         },
         {
-          "value": 64.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/apple-maple-energy-gels-box-of-24"
-        },
-        {
-          "value": 16.24,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/apple-maple-energy-gels-box-of-24"
-        },
-        {
-          "value": 35,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/apple-maple-energy-gels-box-of-24"
-        },
-        {
-          "value": 30,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/apple-maple-energy-gels-box-of-24"
-        },
-        {
-          "value": 49.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/apple-maple-energy-gels-box-of-24"
-        },
-        {
-          "value": 50,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/apple-maple-energy-gels-box-of-24"
-        },
-        {
-          "value": 149.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/apple-maple-energy-gels-box-of-24"
-        },
-        {
-          "value": 150,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/apple-maple-energy-gels-box-of-24"
-        },
-        {
-          "value": 1,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/apple-maple-energy-gels-box-of-24"
-        },
-        {
-          "value": 39.99,
-          "currency": "CAD",
+          "value": 26.99,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/products/apple-maple-energy-gels-box-of-24"
         }
       ],
-      "carbCandidates": [
-        {
-          "value": 21,
-          "confidence": "live",
-          "url": "https://krononutrition.com/products/apple-maple-energy-gels-box-of-24"
-        }
-      ],
+      "carbCandidates": [],
       "servingCandidates": [],
       "packageCountCandidates": [
         {
           "value": 24,
           "confidence": "live",
           "sourceType": "url-package-label",
-          "url": "https://krononutrition.com/products/apple-maple-energy-gels-box-of-24"
-        },
-        {
-          "value": 24,
-          "confidence": "live",
-          "sourceType": "package-label",
-          "url": "https://krononutrition.com/products/apple-maple-energy-gels-box-of-24"
-        },
-        {
-          "value": 12,
-          "confidence": "live",
-          "sourceType": "package-label",
           "url": "https://krononutrition.com/products/apple-maple-energy-gels-box-of-24"
         }
       ]
     },
     "https://krononutrition.com/en/produit/nutritions/gels/blueberry-energy-gel/": {
-      "fetchedAt": "2026-04-18T04:14:39.307Z",
-      "title": "Blueberry Energy Gels - Box of 24 - Krono Nutrition",
+      "fetchedAt": "2026-04-18T09:06:59.060Z",
+      "title": "Krono Nutrition | Natural Sports Nutrition Made in Quebec",
       "priceCandidates": [
         {
-          "value": 64.99,
-          "currency": "CAD",
-          "confidence": "live",
-          "sourceType": "structured",
+          "value": 50,
+          "currency": "USD",
+          "confidence": "live-text",
+          "sourceType": "text",
           "url": "https://krononutrition.com/en/produit/nutritions/gels/blueberry-energy-gel/"
         },
         {
           "value": 70,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/en/produit/nutritions/gels/blueberry-energy-gel/"
         },
         {
-          "value": 64.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en/produit/nutritions/gels/blueberry-energy-gel/"
-        },
-        {
-          "value": 16.24,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en/produit/nutritions/gels/blueberry-energy-gel/"
-        },
-        {
-          "value": 35,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en/produit/nutritions/gels/blueberry-energy-gel/"
-        },
-        {
-          "value": 30,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en/produit/nutritions/gels/blueberry-energy-gel/"
-        },
-        {
-          "value": 49.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en/produit/nutritions/gels/blueberry-energy-gel/"
-        },
-        {
-          "value": 50,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en/produit/nutritions/gels/blueberry-energy-gel/"
-        },
-        {
-          "value": 149.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en/produit/nutritions/gels/blueberry-energy-gel/"
-        },
-        {
-          "value": 150,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en/produit/nutritions/gels/blueberry-energy-gel/"
-        },
-        {
-          "value": 1,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en/produit/nutritions/gels/blueberry-energy-gel/"
-        },
-        {
-          "value": 39.99,
-          "currency": "CAD",
+          "value": 26.99,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/en/produit/nutritions/gels/blueberry-energy-gel/"
         }
       ],
-      "carbCandidates": [
-        {
-          "value": 30,
-          "confidence": "live",
-          "url": "https://krononutrition.com/en/produit/nutritions/gels/blueberry-energy-gel/"
-        }
-      ],
+      "carbCandidates": [],
       "servingCandidates": [],
-      "packageCountCandidates": [
-        {
-          "value": 24,
-          "confidence": "live",
-          "sourceType": "title-package-label",
-          "url": "https://krononutrition.com/en/produit/nutritions/gels/blueberry-energy-gel/"
-        },
-        {
-          "value": 24,
-          "confidence": "live",
-          "sourceType": "package-label",
-          "url": "https://krononutrition.com/en/produit/nutritions/gels/blueberry-energy-gel/"
-        },
-        {
-          "value": 12,
-          "confidence": "live",
-          "sourceType": "package-label",
-          "url": "https://krononutrition.com/en/produit/nutritions/gels/blueberry-energy-gel/"
-        }
-      ]
+      "packageCountCandidates": []
     },
     "https://krononutrition.com/en-ca/products/strawberry-maple-chews-box-of-12": {
-      "fetchedAt": "2026-04-18T04:14:39.955Z",
-      "title": "Strawberry &amp; Maple Chews - Box of 12 - Krono Nutrition",
+      "fetchedAt": "2026-04-18T09:06:59.353Z",
+      "title": "Krono Nutrition | Natural Sports Nutrition Made in Quebec",
       "priceCandidates": [
         {
-          "value": 44.99,
-          "currency": "CAD",
-          "confidence": "live",
-          "sourceType": "structured",
+          "value": 50,
+          "currency": "USD",
+          "confidence": "live-text",
+          "sourceType": "text",
           "url": "https://krononutrition.com/en-ca/products/strawberry-maple-chews-box-of-12"
         },
         {
           "value": 70,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/en-ca/products/strawberry-maple-chews-box-of-12"
         },
         {
-          "value": 44.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/strawberry-maple-chews-box-of-12"
-        },
-        {
-          "value": 22.49,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/strawberry-maple-chews-box-of-12"
-        },
-        {
-          "value": 35,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/strawberry-maple-chews-box-of-12"
-        },
-        {
-          "value": 30,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/strawberry-maple-chews-box-of-12"
-        },
-        {
-          "value": 49.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/strawberry-maple-chews-box-of-12"
-        },
-        {
-          "value": 50,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/strawberry-maple-chews-box-of-12"
-        },
-        {
-          "value": 149.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/strawberry-maple-chews-box-of-12"
-        },
-        {
-          "value": 150,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/strawberry-maple-chews-box-of-12"
-        },
-        {
-          "value": 1,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/strawberry-maple-chews-box-of-12"
-        },
-        {
-          "value": 48.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/strawberry-maple-chews-box-of-12"
-        },
-        {
-          "value": 12.99,
-          "currency": "CAD",
+          "value": 26.99,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/en-ca/products/strawberry-maple-chews-box-of-12"
         }
       ],
-      "carbCandidates": [
-        {
-          "value": 39,
-          "confidence": "live",
-          "url": "https://krononutrition.com/en-ca/products/strawberry-maple-chews-box-of-12"
-        }
-      ],
+      "carbCandidates": [],
       "servingCandidates": [],
       "packageCountCandidates": [
         {
           "value": 12,
           "confidence": "live",
           "sourceType": "url-package-label",
-          "url": "https://krononutrition.com/en-ca/products/strawberry-maple-chews-box-of-12"
-        },
-        {
-          "value": 12,
-          "confidence": "live",
-          "sourceType": "title-package-label",
-          "url": "https://krononutrition.com/en-ca/products/strawberry-maple-chews-box-of-12"
-        },
-        {
-          "value": 12,
-          "confidence": "live",
-          "sourceType": "package-label",
-          "url": "https://krononutrition.com/en-ca/products/strawberry-maple-chews-box-of-12"
-        },
-        {
-          "value": 4,
-          "confidence": "live",
-          "sourceType": "package-label",
           "url": "https://krononutrition.com/en-ca/products/strawberry-maple-chews-box-of-12"
         }
       ]
     },
     "https://krononutrition.com/en-ca/products/raspberry-maple-chews": {
-      "fetchedAt": "2026-04-18T04:14:38.471Z",
-      "title": "Raspberry &amp; Maple Chews - Krono Nutrition",
+      "fetchedAt": "2026-04-18T09:06:59.004Z",
+      "title": "Krono Nutrition | Natural Sports Nutrition Made in Quebec",
       "priceCandidates": [
         {
-          "value": 44.99,
-          "currency": "CAD",
-          "confidence": "live",
-          "sourceType": "structured",
+          "value": 50,
+          "currency": "USD",
+          "confidence": "live-text",
+          "sourceType": "text",
           "url": "https://krononutrition.com/en-ca/products/raspberry-maple-chews"
         },
         {
           "value": 70,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/en-ca/products/raspberry-maple-chews"
         },
         {
-          "value": 44.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/raspberry-maple-chews"
-        },
-        {
-          "value": 22.49,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/raspberry-maple-chews"
-        },
-        {
-          "value": 35,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/raspberry-maple-chews"
-        },
-        {
-          "value": 30,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/raspberry-maple-chews"
-        },
-        {
-          "value": 49.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/raspberry-maple-chews"
-        },
-        {
-          "value": 50,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/raspberry-maple-chews"
-        },
-        {
-          "value": 149.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/raspberry-maple-chews"
-        },
-        {
-          "value": 150,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/raspberry-maple-chews"
-        },
-        {
-          "value": 1,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/raspberry-maple-chews"
-        },
-        {
-          "value": 48.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/raspberry-maple-chews"
-        },
-        {
-          "value": 12.99,
-          "currency": "CAD",
+          "value": 26.99,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/en-ca/products/raspberry-maple-chews"
         }
       ],
-      "carbCandidates": [
-        {
-          "value": 38,
-          "confidence": "live",
-          "url": "https://krononutrition.com/en-ca/products/raspberry-maple-chews"
-        }
-      ],
+      "carbCandidates": [],
       "servingCandidates": [],
-      "packageCountCandidates": [
-        {
-          "value": 12,
-          "confidence": "live",
-          "sourceType": "package-label",
-          "url": "https://krononutrition.com/en-ca/products/raspberry-maple-chews"
-        },
-        {
-          "value": 4,
-          "confidence": "live",
-          "sourceType": "package-label",
-          "url": "https://krononutrition.com/en-ca/products/raspberry-maple-chews"
-        }
-      ]
+      "packageCountCandidates": []
     },
     "https://krononutrition.com/en-ca/products/apple-maple-chews-box-of-12": {
-      "fetchedAt": "2026-04-18T04:14:38.493Z",
-      "title": "Apple &amp; Maple Chews- Box of 12 - Krono Nutrition",
+      "fetchedAt": "2026-04-18T09:06:59.034Z",
+      "title": "Krono Nutrition | Natural Sports Nutrition Made in Quebec",
       "priceCandidates": [
         {
-          "value": 44.99,
-          "currency": "CAD",
-          "confidence": "live",
-          "sourceType": "structured",
+          "value": 50,
+          "currency": "USD",
+          "confidence": "live-text",
+          "sourceType": "text",
           "url": "https://krononutrition.com/en-ca/products/apple-maple-chews-box-of-12"
         },
         {
           "value": 70,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/en-ca/products/apple-maple-chews-box-of-12"
         },
         {
-          "value": 44.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/apple-maple-chews-box-of-12"
-        },
-        {
-          "value": 22.49,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/apple-maple-chews-box-of-12"
-        },
-        {
-          "value": 35,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/apple-maple-chews-box-of-12"
-        },
-        {
-          "value": 30,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/apple-maple-chews-box-of-12"
-        },
-        {
-          "value": 49.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/apple-maple-chews-box-of-12"
-        },
-        {
-          "value": 50,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/apple-maple-chews-box-of-12"
-        },
-        {
-          "value": 149.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/apple-maple-chews-box-of-12"
-        },
-        {
-          "value": 150,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/apple-maple-chews-box-of-12"
-        },
-        {
-          "value": 1,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/apple-maple-chews-box-of-12"
-        },
-        {
-          "value": 48.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/apple-maple-chews-box-of-12"
-        },
-        {
-          "value": 12.99,
-          "currency": "CAD",
+          "value": 26.99,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/en-ca/products/apple-maple-chews-box-of-12"
         }
       ],
-      "carbCandidates": [
-        {
-          "value": 39,
-          "confidence": "live",
-          "url": "https://krononutrition.com/en-ca/products/apple-maple-chews-box-of-12"
-        }
-      ],
+      "carbCandidates": [],
       "servingCandidates": [],
       "packageCountCandidates": [
         {
           "value": 12,
           "confidence": "live",
           "sourceType": "url-package-label",
-          "url": "https://krononutrition.com/en-ca/products/apple-maple-chews-box-of-12"
-        },
-        {
-          "value": 12,
-          "confidence": "live",
-          "sourceType": "title-package-label",
-          "url": "https://krononutrition.com/en-ca/products/apple-maple-chews-box-of-12"
-        },
-        {
-          "value": 12,
-          "confidence": "live",
-          "sourceType": "package-label",
-          "url": "https://krononutrition.com/en-ca/products/apple-maple-chews-box-of-12"
-        },
-        {
-          "value": 4,
-          "confidence": "live",
-          "sourceType": "package-label",
           "url": "https://krononutrition.com/en-ca/products/apple-maple-chews-box-of-12"
         }
       ]
     },
     "https://krononutrition.com/en-ca/products/apricot-cranberry-energy-bars-box-of-12": {
-      "fetchedAt": "2026-04-18T04:14:40.114Z",
-      "title": "Apricot &amp; Cranberry Energy Bars - Krono Nutrition",
+      "fetchedAt": "2026-04-18T09:06:59.362Z",
+      "title": "Krono Nutrition | Natural Sports Nutrition Made in Quebec",
       "priceCandidates": [
         {
-          "value": 39.99,
-          "currency": "CAD",
-          "confidence": "live",
-          "sourceType": "structured",
+          "value": 50,
+          "currency": "USD",
+          "confidence": "live-text",
+          "sourceType": "text",
           "url": "https://krononutrition.com/en-ca/products/apricot-cranberry-energy-bars-box-of-12"
         },
         {
           "value": 70,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/en-ca/products/apricot-cranberry-energy-bars-box-of-12"
         },
         {
-          "value": 39.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/apricot-cranberry-energy-bars-box-of-12"
-        },
-        {
-          "value": 19.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/apricot-cranberry-energy-bars-box-of-12"
-        },
-        {
-          "value": 35,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/apricot-cranberry-energy-bars-box-of-12"
-        },
-        {
-          "value": 30,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/apricot-cranberry-energy-bars-box-of-12"
-        },
-        {
-          "value": 49.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/apricot-cranberry-energy-bars-box-of-12"
-        },
-        {
-          "value": 50,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/apricot-cranberry-energy-bars-box-of-12"
-        },
-        {
-          "value": 149.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/apricot-cranberry-energy-bars-box-of-12"
-        },
-        {
-          "value": 150,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/en-ca/products/apricot-cranberry-energy-bars-box-of-12"
-        },
-        {
-          "value": 1,
-          "currency": "CAD",
+          "value": 26.99,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/en-ca/products/apricot-cranberry-energy-bars-box-of-12"
         }
       ],
-      "carbCandidates": [
-        {
-          "value": 32,
-          "confidence": "live",
-          "url": "https://krononutrition.com/en-ca/products/apricot-cranberry-energy-bars-box-of-12"
-        }
-      ],
+      "carbCandidates": [],
       "servingCandidates": [],
       "packageCountCandidates": [
         {
           "value": 12,
           "confidence": "live",
           "sourceType": "url-package-label",
-          "url": "https://krononutrition.com/en-ca/products/apricot-cranberry-energy-bars-box-of-12"
-        },
-        {
-          "value": 12,
-          "confidence": "live",
-          "sourceType": "package-label",
           "url": "https://krononutrition.com/en-ca/products/apricot-cranberry-energy-bars-box-of-12"
         }
       ]
     },
     "https://krononutrition.com/products/strawberry-pineapple-energy-bars-box-of-12": {
-      "fetchedAt": "2026-04-18T04:14:39.933Z",
-      "title": "Strawberry &amp; Pineapple Energy Bars - Box of 12 - Krono Nutrition",
+      "fetchedAt": "2026-04-18T09:06:59.315Z",
+      "title": "Krono Nutrition | Natural Sports Nutrition Made in Quebec",
       "priceCandidates": [
         {
-          "value": 39.99,
-          "currency": "CAD",
-          "confidence": "live",
-          "sourceType": "structured",
+          "value": 50,
+          "currency": "USD",
+          "confidence": "live-text",
+          "sourceType": "text",
           "url": "https://krononutrition.com/products/strawberry-pineapple-energy-bars-box-of-12"
         },
         {
           "value": 70,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/products/strawberry-pineapple-energy-bars-box-of-12"
         },
         {
-          "value": 39.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/strawberry-pineapple-energy-bars-box-of-12"
-        },
-        {
-          "value": 19.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/strawberry-pineapple-energy-bars-box-of-12"
-        },
-        {
-          "value": 35,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/strawberry-pineapple-energy-bars-box-of-12"
-        },
-        {
-          "value": 30,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/strawberry-pineapple-energy-bars-box-of-12"
-        },
-        {
-          "value": 49.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/strawberry-pineapple-energy-bars-box-of-12"
-        },
-        {
-          "value": 50,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/strawberry-pineapple-energy-bars-box-of-12"
-        },
-        {
-          "value": 149.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/strawberry-pineapple-energy-bars-box-of-12"
-        },
-        {
-          "value": 150,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/strawberry-pineapple-energy-bars-box-of-12"
-        },
-        {
-          "value": 1,
-          "currency": "CAD",
+          "value": 26.99,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/products/strawberry-pineapple-energy-bars-box-of-12"
         }
       ],
-      "carbCandidates": [
-        {
-          "value": 32,
-          "confidence": "live",
-          "url": "https://krononutrition.com/products/strawberry-pineapple-energy-bars-box-of-12"
-        }
-      ],
+      "carbCandidates": [],
       "servingCandidates": [],
       "packageCountCandidates": [
         {
           "value": 12,
           "confidence": "live",
           "sourceType": "url-package-label",
-          "url": "https://krononutrition.com/products/strawberry-pineapple-energy-bars-box-of-12"
-        },
-        {
-          "value": 12,
-          "confidence": "live",
-          "sourceType": "title-package-label",
-          "url": "https://krononutrition.com/products/strawberry-pineapple-energy-bars-box-of-12"
-        },
-        {
-          "value": 12,
-          "confidence": "live",
-          "sourceType": "package-label",
           "url": "https://krononutrition.com/products/strawberry-pineapple-energy-bars-box-of-12"
         }
       ]
     },
     "https://krononutrition.com/products/cherry-chocolate-energy-bars-box-of-12": {
-      "fetchedAt": "2026-04-18T04:14:40.023Z",
-      "title": "Cherry &amp; Chocolate Energy Bars - Box of 12 - Krono Nutrition",
+      "fetchedAt": "2026-04-18T09:06:59.344Z",
+      "title": "Krono Nutrition | Natural Sports Nutrition Made in Quebec",
       "priceCandidates": [
         {
-          "value": 39.99,
-          "currency": "CAD",
-          "confidence": "live",
-          "sourceType": "structured",
+          "value": 50,
+          "currency": "USD",
+          "confidence": "live-text",
+          "sourceType": "text",
           "url": "https://krononutrition.com/products/cherry-chocolate-energy-bars-box-of-12"
         },
         {
           "value": 70,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/products/cherry-chocolate-energy-bars-box-of-12"
         },
         {
-          "value": 39.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/cherry-chocolate-energy-bars-box-of-12"
-        },
-        {
-          "value": 19.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/cherry-chocolate-energy-bars-box-of-12"
-        },
-        {
-          "value": 35,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/cherry-chocolate-energy-bars-box-of-12"
-        },
-        {
-          "value": 30,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/cherry-chocolate-energy-bars-box-of-12"
-        },
-        {
-          "value": 49.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/cherry-chocolate-energy-bars-box-of-12"
-        },
-        {
-          "value": 50,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/cherry-chocolate-energy-bars-box-of-12"
-        },
-        {
-          "value": 149.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/cherry-chocolate-energy-bars-box-of-12"
-        },
-        {
-          "value": 150,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/cherry-chocolate-energy-bars-box-of-12"
-        },
-        {
-          "value": 1,
-          "currency": "CAD",
+          "value": 26.99,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/products/cherry-chocolate-energy-bars-box-of-12"
         }
       ],
-      "carbCandidates": [
-        {
-          "value": 31,
-          "confidence": "live",
-          "url": "https://krononutrition.com/products/cherry-chocolate-energy-bars-box-of-12"
-        }
-      ],
+      "carbCandidates": [],
       "servingCandidates": [],
       "packageCountCandidates": [
         {
           "value": 12,
           "confidence": "live",
           "sourceType": "url-package-label",
-          "url": "https://krononutrition.com/products/cherry-chocolate-energy-bars-box-of-12"
-        },
-        {
-          "value": 12,
-          "confidence": "live",
-          "sourceType": "title-package-label",
-          "url": "https://krononutrition.com/products/cherry-chocolate-energy-bars-box-of-12"
-        },
-        {
-          "value": 12,
-          "confidence": "live",
-          "sourceType": "package-label",
           "url": "https://krononutrition.com/products/cherry-chocolate-energy-bars-box-of-12"
         }
       ]
     },
     "https://krononutrition.com/products/chocolate-espresso-energy-bars-box-of-12": {
-      "fetchedAt": "2026-04-18T04:14:40.098Z",
-      "title": "Chocolate &amp; Espresso Energy Bars - Box of 12 - Krono Nutrition",
+      "fetchedAt": "2026-04-18T09:06:59.336Z",
+      "title": "Krono Nutrition | Natural Sports Nutrition Made in Quebec",
       "priceCandidates": [
         {
-          "value": 39.99,
-          "currency": "CAD",
-          "confidence": "live",
-          "sourceType": "structured",
+          "value": 50,
+          "currency": "USD",
+          "confidence": "live-text",
+          "sourceType": "text",
           "url": "https://krononutrition.com/products/chocolate-espresso-energy-bars-box-of-12"
         },
         {
           "value": 70,
-          "currency": "CAD",
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/products/chocolate-espresso-energy-bars-box-of-12"
         },
         {
-          "value": 39.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/chocolate-espresso-energy-bars-box-of-12"
-        },
-        {
-          "value": 19.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/chocolate-espresso-energy-bars-box-of-12"
-        },
-        {
-          "value": 35,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/chocolate-espresso-energy-bars-box-of-12"
-        },
-        {
-          "value": 30,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/chocolate-espresso-energy-bars-box-of-12"
-        },
-        {
-          "value": 49.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/chocolate-espresso-energy-bars-box-of-12"
-        },
-        {
-          "value": 50,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/chocolate-espresso-energy-bars-box-of-12"
-        },
-        {
-          "value": 149.99,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/chocolate-espresso-energy-bars-box-of-12"
-        },
-        {
-          "value": 150,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://krononutrition.com/products/chocolate-espresso-energy-bars-box-of-12"
-        },
-        {
-          "value": 1,
-          "currency": "CAD",
+          "value": 26.99,
+          "currency": "USD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://krononutrition.com/products/chocolate-espresso-energy-bars-box-of-12"
         }
       ],
-      "carbCandidates": [
-        {
-          "value": 29,
-          "confidence": "live",
-          "url": "https://krononutrition.com/products/chocolate-espresso-energy-bars-box-of-12"
-        }
-      ],
+      "carbCandidates": [],
       "servingCandidates": [],
       "packageCountCandidates": [
         {
@@ -6397,23 +4399,11 @@
           "confidence": "live",
           "sourceType": "url-package-label",
           "url": "https://krononutrition.com/products/chocolate-espresso-energy-bars-box-of-12"
-        },
-        {
-          "value": 12,
-          "confidence": "live",
-          "sourceType": "title-package-label",
-          "url": "https://krononutrition.com/products/chocolate-espresso-energy-bars-box-of-12"
-        },
-        {
-          "value": 12,
-          "confidence": "live",
-          "sourceType": "package-label",
-          "url": "https://krononutrition.com/products/chocolate-espresso-energy-bars-box-of-12"
         }
       ]
     },
     "https://www.trailheadpaddleshack.ca/hornet-energy-gel.html": {
-      "fetchedAt": "2026-04-18T04:14:40.501Z",
+      "fetchedAt": "2026-04-18T09:06:59.794Z",
       "title": "Hornet Energy Gel - Trailhead Paddle Shack",
       "priceCandidates": [
         {
@@ -6428,13 +4418,6 @@
           "currency": null,
           "confidence": "live",
           "sourceType": "meta",
-          "url": "https://www.trailheadpaddleshack.ca/hornet-energy-gel.html"
-        },
-        {
-          "value": 99,
-          "currency": null,
-          "confidence": "live-text",
-          "sourceType": "text",
           "url": "https://www.trailheadpaddleshack.ca/hornet-energy-gel.html"
         },
         {
@@ -6484,7 +4467,7 @@
       "packageCountCandidates": []
     },
     "https://shopsante.ca/en/products/hornet-energy-gel-energetique-avec-cafeine-33g": {
-      "fetchedAt": "2026-04-18T04:14:41.580Z",
+      "fetchedAt": "2026-04-18T09:07:00.218Z",
       "title": null,
       "priceCandidates": [
         {
@@ -6577,7 +4560,7 @@
       "packageCountCandidates": []
     },
     "https://shopsante.ca/en/products/hornet-energy-gel-energetique-33g": {
-      "fetchedAt": "2026-04-18T04:14:42.112Z",
+      "fetchedAt": "2026-04-18T09:07:00.456Z",
       "title": null,
       "priceCandidates": [
         {
@@ -6585,6 +4568,13 @@
           "currency": "CAD",
           "confidence": "live",
           "sourceType": "structured",
+          "url": "https://shopsante.ca/en/products/hornet-energy-gel-energetique-33g"
+        },
+        {
+          "value": 2.99,
+          "currency": "CAD",
+          "confidence": "live-text",
+          "sourceType": "text",
           "url": "https://shopsante.ca/en/products/hornet-energy-gel-energetique-33g"
         },
         {
@@ -6603,13 +4593,6 @@
         },
         {
           "value": 40,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://shopsante.ca/en/products/hornet-energy-gel-energetique-33g"
-        },
-        {
-          "value": 2.99,
           "currency": "CAD",
           "confidence": "live-text",
           "sourceType": "text",
@@ -6663,7 +4646,7 @@
       "packageCountCandidates": []
     },
     "https://www.naak.com/products/boost-gel-neutral": {
-      "fetchedAt": "2026-04-18T04:14:41.442Z",
+      "fetchedAt": "2026-04-18T09:07:00.740Z",
       "title": "Näak Boost Energy™ Gel | Neutral 25 - Näak NA",
       "priceCandidates": [
         {
@@ -6737,14 +4720,14 @@
           "url": "https://www.naak.com/products/boost-gel-neutral"
         },
         {
-          "value": 45.6,
+          "value": 48,
           "currency": "CAD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.naak.com/products/boost-gel-neutral"
         },
         {
-          "value": 48,
+          "value": 45.6,
           "currency": "CAD",
           "confidence": "live-text",
           "sourceType": "text",
@@ -6782,7 +4765,7 @@
       "carbCandidates": [],
       "servingCandidates": [
         {
-          "value": 5,
+          "value": 12,
           "confidence": "live",
           "sourceType": "serving-label",
           "url": "https://www.naak.com/products/boost-gel-neutral"
@@ -6822,46 +4805,46 @@
       ]
     },
     "https://www.naak.com/products/boost-drink-mix-bag-neutral": {
-      "fetchedAt": "2026-04-18T04:14:41.481Z",
+      "fetchedAt": "2026-04-18T09:07:00.818Z",
       "title": "Näak Boost Energy™ Drink Mix | Neutral 60 - Bag - Näak NA",
       "priceCandidates": [
         {
-          "value": 45,
+          "value": 48,
           "currency": "CAD",
           "confidence": "live",
           "sourceType": "structured",
           "url": "https://www.naak.com/products/boost-drink-mix-bag-neutral"
         },
         {
-          "value": 40.5,
+          "value": 43.2,
           "currency": "CAD",
           "confidence": "live",
           "sourceType": "structured",
           "url": "https://www.naak.com/products/boost-drink-mix-bag-neutral"
         },
         {
-          "value": 85.5,
+          "value": 91.2,
           "currency": "CAD",
           "confidence": "live",
           "sourceType": "structured",
           "url": "https://www.naak.com/products/boost-drink-mix-bag-neutral"
         },
         {
-          "value": 76.95,
+          "value": 82.08,
           "currency": "CAD",
           "confidence": "live",
           "sourceType": "structured",
           "url": "https://www.naak.com/products/boost-drink-mix-bag-neutral"
         },
         {
-          "value": 121.5,
+          "value": 129.6,
           "currency": "CAD",
           "confidence": "live",
           "sourceType": "structured",
           "url": "https://www.naak.com/products/boost-drink-mix-bag-neutral"
         },
         {
-          "value": 109.35,
+          "value": 116.64,
           "currency": "CAD",
           "confidence": "live",
           "sourceType": "structured",
@@ -6882,14 +4865,35 @@
           "url": "https://www.naak.com/products/boost-drink-mix-bag-neutral"
         },
         {
-          "value": 45,
+          "value": 3.2,
           "currency": "CAD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.naak.com/products/boost-drink-mix-bag-neutral"
         },
         {
-          "value": 135,
+          "value": 3.07,
+          "currency": "CAD",
+          "confidence": "live-text",
+          "sourceType": "text",
+          "url": "https://www.naak.com/products/boost-drink-mix-bag-neutral"
+        },
+        {
+          "value": 2.98,
+          "currency": "CAD",
+          "confidence": "live-text",
+          "sourceType": "text",
+          "url": "https://www.naak.com/products/boost-drink-mix-bag-neutral"
+        },
+        {
+          "value": 48,
+          "currency": "CAD",
+          "confidence": "live-text",
+          "sourceType": "text",
+          "url": "https://www.naak.com/products/boost-drink-mix-bag-neutral"
+        },
+        {
+          "value": 144,
           "currency": "CAD",
           "confidence": "live-text",
           "sourceType": "text",
@@ -6903,49 +4907,35 @@
           "url": "https://www.naak.com/products/boost-drink-mix-bag-neutral"
         },
         {
-          "value": 3,
+          "value": 91.2,
           "currency": "CAD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.naak.com/products/boost-drink-mix-bag-neutral"
         },
         {
-          "value": 85.5,
+          "value": 96,
           "currency": "CAD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.naak.com/products/boost-drink-mix-bag-neutral"
         },
         {
-          "value": 90,
+          "value": 3.04,
           "currency": "CAD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.naak.com/products/boost-drink-mix-bag-neutral"
         },
         {
-          "value": 2.85,
+          "value": 129.6,
           "currency": "CAD",
           "confidence": "live-text",
           "sourceType": "text",
           "url": "https://www.naak.com/products/boost-drink-mix-bag-neutral"
         },
         {
-          "value": 121.5,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://www.naak.com/products/boost-drink-mix-bag-neutral"
-        },
-        {
-          "value": 2.7,
-          "currency": "CAD",
-          "confidence": "live-text",
-          "sourceType": "text",
-          "url": "https://www.naak.com/products/boost-drink-mix-bag-neutral"
-        },
-        {
-          "value": 18,
+          "value": 2.88,
           "currency": "CAD",
           "confidence": "live-text",
           "sourceType": "text",
@@ -6961,6 +4951,12 @@
       ],
       "carbCandidates": [],
       "servingCandidates": [
+        {
+          "value": 48,
+          "confidence": "live",
+          "sourceType": "serving-label",
+          "url": "https://www.naak.com/products/boost-drink-mix-bag-neutral"
+        },
         {
           "value": 5,
           "confidence": "live",
@@ -6989,7 +4985,7 @@
       "packageCountCandidates": []
     },
     "https://watt.it/en/foods/energy-bars/long-race/": {
-      "fetchedAt": "2026-04-18T04:14:43.651Z",
+      "fetchedAt": "2026-04-18T09:07:02.559Z",
       "title": "Long Race | +Watt",
       "priceCandidates": [
         {
@@ -7054,7 +5050,7 @@
       "packageCountCandidates": []
     },
     "https://watt.it/en/carbohydrates/energetic-drinks/sali-electrolyte/": {
-      "fetchedAt": "2026-04-18T04:14:43.605Z",
+      "fetchedAt": "2026-04-18T09:07:02.575Z",
       "title": "Sali+ Electrolyte | +Watt",
       "priceCandidates": [
         {
@@ -7091,7 +5087,7 @@
       "packageCountCandidates": []
     },
     "https://www.velovelo.ca/shop/watt-long-race-215?category=22#attribute_values=219,95,241": {
-      "fetchedAt": "2026-04-18T04:14:42.661Z",
+      "fetchedAt": "2026-04-18T09:07:01.719Z",
       "title": "+Watt Long Race | velovelo",
       "priceCandidates": [
         {
@@ -7099,13 +5095,6 @@
           "currency": null,
           "confidence": "live",
           "sourceType": "structured",
-          "url": "https://www.velovelo.ca/shop/watt-long-race-215?category=22#attribute_values=219,95,241"
-        },
-        {
-          "value": 5,
-          "currency": null,
-          "confidence": "live-text",
-          "sourceType": "text",
           "url": "https://www.velovelo.ca/shop/watt-long-race-215?category=22#attribute_values=219,95,241"
         }
       ],
@@ -7121,7 +5110,7 @@
       ]
     },
     "https://www.velovelo.ca/shop/watt-sali-electrolyte-224#attribute_values=219,93,250": {
-      "fetchedAt": "2026-04-18T04:14:42.623Z",
+      "fetchedAt": "2026-04-18T09:07:02.057Z",
       "title": "+Watt Sali+ Electrolyte | velovelo",
       "priceCandidates": [
         {

@@ -1,18 +1,18 @@
 {
-  "updatedAt": "2026-04-18T04:15:05.817Z",
+  "updatedAt": "2026-04-18T09:07:02.583Z",
   "analysis": {
-    "mode": "cached",
-    "pagesFetched": 0,
+    "mode": "live",
+    "pagesFetched": 61,
     "pagesFromCache": 62,
-    "offerPricesFromLive": 56,
-    "offerPricesFromFallback": 0,
+    "offerPricesFromLive": 27,
+    "offerPricesFromFallback": 29,
     "offerPricesSkipped": 0,
-    "unitCountsFromLive": 38,
+    "unitCountsFromLive": 32,
     "unitCountsFromCatalog": 4,
-    "unitCountsInferredFromPrice": 2,
-    "unitCountsDefaulted": 12,
-    "carbsFromLive": 28,
-    "carbsFromCatalog": 15
+    "unitCountsInferredFromPrice": 3,
+    "unitCountsDefaulted": 17,
+    "carbsFromLive": 9,
+    "carbsFromCatalog": 34
   },
   "products": [
     {
@@ -36,7 +36,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix vient d'une page vendeur et le format de portion a été confirmé par une déduction cohérente entre le prix de boîte et le prix unitaire.",
-          "lastCheckedAt": "2026-04-18T04:15:05.811Z"
+          "lastCheckedAt": "2026-04-18T09:07:02.576Z"
         }
       ]
     },
@@ -61,7 +61,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-18T04:15:05.813Z"
+          "lastCheckedAt": "2026-04-18T09:07:02.577Z"
         },
         {
           "seller": "lecoureurnordique.ca",
@@ -76,7 +76,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.813Z"
+          "lastCheckedAt": "2026-04-18T09:07:02.577Z"
         }
       ]
     },
@@ -101,7 +101,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix vient d'une page vendeur et le format de portion a été confirmé par une déduction cohérente entre le prix de boîte et le prix unitaire.",
-          "lastCheckedAt": "2026-04-18T04:15:05.813Z"
+          "lastCheckedAt": "2026-04-18T09:07:02.577Z"
         }
       ]
     },
@@ -126,7 +126,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.813Z"
+          "lastCheckedAt": "2026-04-18T09:07:02.578Z"
         },
         {
           "seller": "lecoureurnordique.ca",
@@ -141,7 +141,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.813Z"
+          "lastCheckedAt": "2026-04-18T09:07:02.578Z"
         }
       ]
     },
@@ -166,7 +166,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-18T04:15:05.814Z"
+          "lastCheckedAt": "2026-04-18T09:07:02.578Z"
         },
         {
           "seller": "frontrunners.ca",
@@ -181,7 +181,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-18T04:15:05.814Z"
+          "lastCheckedAt": "2026-04-18T09:07:02.579Z"
         }
       ]
     },
@@ -206,7 +206,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-18T04:15:05.814Z"
+          "lastCheckedAt": "2026-04-18T09:07:02.579Z"
         },
         {
           "seller": "frontrunners.ca",
@@ -221,7 +221,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-18T04:15:05.814Z"
+          "lastCheckedAt": "2026-04-18T09:07:02.579Z"
         }
       ]
     },
@@ -246,7 +246,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.814Z"
+          "lastCheckedAt": "2026-04-18T09:07:02.579Z"
         }
       ]
     },
@@ -260,18 +260,18 @@
       "offers": [
         {
           "seller": "upika.ca",
-          "price": 8.33,
-          "packagePrice": 49.99,
+          "price": 2,
+          "packagePrice": 12,
           "unitCount": 6,
           "unitCountSource": "https://upika.ca/en/products/upika-endurance",
           "unitCountConfidence": "live",
           "productUrl": "https://upika.ca/en/products/upika-endurance",
-          "priceSource": "https://upika.ca/en/products/upika-endurance",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.814Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-18T09:07:02.580Z"
         },
         {
           "seller": "shopsante.ca",
@@ -286,7 +286,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.814Z"
+          "lastCheckedAt": "2026-04-18T09:07:02.580Z"
         },
         {
           "seller": "lecoureurnordique.ca",
@@ -301,7 +301,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.814Z"
+          "lastCheckedAt": "2026-04-18T09:07:02.580Z"
         }
       ]
     },
@@ -315,18 +315,18 @@
       "offers": [
         {
           "seller": "upika.ca",
-          "price": 8.33,
-          "packagePrice": 49.99,
+          "price": 2,
+          "packagePrice": 12,
           "unitCount": 6,
           "unitCountSource": "https://upika.ca/en/products/upika-endurance-plus-cerise-lime",
           "unitCountConfidence": "live",
           "productUrl": "https://upika.ca/en/products/upika-endurance-plus-cerise-lime",
-          "priceSource": "https://upika.ca/en/products/upika-endurance-plus-cerise-lime",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.814Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-18T09:07:02.580Z"
         },
         {
           "seller": "shopsante.ca",
@@ -341,7 +341,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.815Z"
+          "lastCheckedAt": "2026-04-18T09:07:02.580Z"
         }
       ]
     },
@@ -356,17 +356,17 @@
         {
           "seller": "precisionhydration.com",
           "price": 4.12,
-          "packagePrice": 16.49,
-          "unitCount": 4,
+          "packagePrice": 123.6,
+          "unitCount": 30,
           "unitCountSource": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/",
           "unitCountConfidence": "live",
           "productUrl": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/",
-          "priceSource": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.815Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-18T09:07:02.580Z"
         },
         {
           "seller": "enroute.run",
@@ -381,7 +381,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-18T04:15:05.815Z"
+          "lastCheckedAt": "2026-04-18T09:07:02.580Z"
         }
       ]
     },
@@ -406,22 +406,22 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-18T04:15:05.815Z"
+          "lastCheckedAt": "2026-04-18T09:07:02.581Z"
         },
         {
           "seller": "precisionhydration.com",
-          "price": 8.33,
-          "packagePrice": 24.99,
-          "unitCount": 3,
+          "price": 8.5,
+          "packagePrice": 170,
+          "unitCount": 20,
           "unitCountSource": "https://www.precisionhydration.com/ca/en/products/pf-90-gel/",
           "unitCountConfidence": "live",
           "productUrl": "https://www.precisionhydration.com/ca/en/products/pf-90-gel/",
-          "priceSource": "https://www.precisionhydration.com/ca/en/products/pf-90-gel/",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.815Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-18T09:07:02.581Z"
         }
       ]
     },
@@ -431,22 +431,22 @@
       "brand": "Krono Nutrition",
       "type": "Gel",
       "carbsGrams": 24,
-      "carbsSource": "https://krononutrition.com/products/maple-energy-gels-box-of-24",
+      "carbsSource": "catalog",
       "offers": [
         {
           "seller": "krononutrition.com",
           "price": 2.71,
-          "packagePrice": 64.99,
+          "packagePrice": 65.04,
           "unitCount": 24,
           "unitCountSource": "https://krononutrition.com/products/maple-energy-gels-box-of-24",
           "unitCountConfidence": "live",
           "productUrl": "https://krononutrition.com/products/maple-energy-gels-box-of-24",
-          "priceSource": "https://krononutrition.com/products/maple-energy-gels-box-of-24",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.815Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-18T09:07:02.581Z"
         }
       ]
     },
@@ -456,22 +456,22 @@
       "brand": "Krono Nutrition",
       "type": "Gel",
       "carbsGrams": 24,
-      "carbsSource": "https://krononutrition.com/products/maple-coffee-energy-gels-box-of-24",
+      "carbsSource": "catalog",
       "offers": [
         {
           "seller": "krononutrition.com",
           "price": 2.71,
-          "packagePrice": 64.99,
+          "packagePrice": 65.04,
           "unitCount": 24,
           "unitCountSource": "https://krononutrition.com/products/maple-coffee-energy-gels-box-of-24",
           "unitCountConfidence": "live",
           "productUrl": "https://krononutrition.com/products/maple-coffee-energy-gels-box-of-24",
-          "priceSource": "https://krononutrition.com/products/maple-coffee-energy-gels-box-of-24",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.815Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-18T09:07:02.581Z"
         }
       ]
     },
@@ -481,22 +481,22 @@
       "brand": "Krono Nutrition",
       "type": "Gel",
       "carbsGrams": 29,
-      "carbsSource": "https://krononutrition.com/products/maple-raspberry-energy-gels-box-of-24",
+      "carbsSource": "catalog",
       "offers": [
         {
           "seller": "krononutrition.com",
           "price": 2.71,
-          "packagePrice": 64.99,
+          "packagePrice": 65.04,
           "unitCount": 24,
           "unitCountSource": "https://krononutrition.com/products/maple-raspberry-energy-gels-box-of-24",
           "unitCountConfidence": "live",
           "productUrl": "https://krononutrition.com/products/maple-raspberry-energy-gels-box-of-24",
-          "priceSource": "https://krononutrition.com/products/maple-raspberry-energy-gels-box-of-24",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.815Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-18T09:07:02.581Z"
         }
       ]
     },
@@ -506,22 +506,22 @@
       "brand": "Krono Nutrition",
       "type": "Gel",
       "carbsGrams": 30,
-      "carbsSource": "https://krononutrition.com/products/tropical-energy-gels-box-of-24",
+      "carbsSource": "catalog",
       "offers": [
         {
           "seller": "krononutrition.com",
           "price": 2.71,
-          "packagePrice": 64.99,
+          "packagePrice": 65.04,
           "unitCount": 24,
           "unitCountSource": "https://krononutrition.com/products/tropical-energy-gels-box-of-24",
           "unitCountConfidence": "live",
           "productUrl": "https://krononutrition.com/products/tropical-energy-gels-box-of-24",
-          "priceSource": "https://krononutrition.com/products/tropical-energy-gels-box-of-24",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.815Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-18T09:07:02.581Z"
         }
       ]
     },
@@ -531,22 +531,22 @@
       "brand": "Krono Nutrition",
       "type": "Boisson",
       "carbsGrams": 22,
-      "carbsSource": "https://krononutrition.com/en-ca/products/lemon-lime-sport-drink-mix",
+      "carbsSource": "catalog",
       "offers": [
         {
           "seller": "krononutrition.com",
-          "price": 3.08,
-          "packagePrice": 36.99,
-          "unitCount": 12,
-          "unitCountSource": "https://krononutrition.com/en-ca/products/lemon-lime-sport-drink-mix",
-          "unitCountConfidence": "live",
+          "price": 4.11,
+          "packagePrice": 4.11,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
           "productUrl": "https://krononutrition.com/en-ca/products/lemon-lime-sport-drink-mix",
-          "priceSource": "https://krononutrition.com/en-ca/products/lemon-lime-sport-drink-mix",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.816Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-18T09:07:02.581Z"
         },
         {
           "seller": "well.ca",
@@ -561,7 +561,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.816Z"
+          "lastCheckedAt": "2026-04-18T09:07:02.581Z"
         }
       ]
     },
@@ -571,37 +571,37 @@
       "brand": "Krono Nutrition",
       "type": "Boisson",
       "carbsGrams": 22,
-      "carbsSource": "https://krononutrition.com/en/produit/nutritions/electrolytes-en/peach-sport-drink-mix/",
+      "carbsSource": "catalog",
       "offers": [
         {
           "seller": "krononutrition.com",
-          "price": 3.08,
-          "packagePrice": 36.99,
-          "unitCount": 12,
-          "unitCountSource": "https://krononutrition.com/en/produit/nutritions/electrolytes-en/peach-sport-drink-mix/",
-          "unitCountConfidence": "live",
+          "price": 4.11,
+          "packagePrice": 4.11,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
           "productUrl": "https://krononutrition.com/en/produit/nutritions/electrolytes-en/peach-sport-drink-mix/",
-          "priceSource": "https://krononutrition.com/en/produit/nutritions/electrolytes-en/peach-sport-drink-mix/",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.816Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-18T09:07:02.581Z"
         },
         {
           "seller": "elementsport.ca",
-          "price": 3.08,
+          "price": 3.7,
           "packagePrice": 36.99,
-          "unitCount": 12,
-          "unitCountSource": "https://krononutrition.com/en/produit/nutritions/electrolytes-en/peach-sport-drink-mix/",
-          "unitCountConfidence": "live",
+          "unitCount": 10,
+          "unitCountSource": "package-price-inference",
+          "unitCountConfidence": "inferred",
           "productUrl": "https://elementsport.ca/products/krono-sport-drink-mix",
           "priceSource": "https://elementsport.ca/products/krono-sport-drink-mix",
           "priceConfidence": "live",
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.816Z"
+          "verificationReason": "Le prix vient d'une page vendeur et le format de portion a été confirmé par une déduction cohérente entre le prix de boîte et le prix unitaire.",
+          "lastCheckedAt": "2026-04-18T09:07:02.581Z"
         }
       ]
     },
@@ -626,7 +626,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.816Z"
+          "lastCheckedAt": "2026-04-18T09:07:02.581Z"
         },
         {
           "seller": "fuelkit.ca",
@@ -641,7 +641,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-18T04:15:05.816Z"
+          "lastCheckedAt": "2026-04-18T09:07:02.581Z"
         }
       ]
     },
@@ -655,18 +655,18 @@
       "offers": [
         {
           "seller": "precisionhydration.com",
-          "price": 7,
-          "packagePrice": 13.99,
-          "unitCount": 2,
+          "price": 3.5,
+          "packagePrice": 105,
+          "unitCount": 30,
           "unitCountSource": "https://www.precisionhydration.com/ca/en/products/pf-30-chew/",
           "unitCountConfidence": "live",
           "productUrl": "https://www.precisionhydration.com/ca/en/products/pf-30-chew/",
-          "priceSource": "https://www.precisionhydration.com/ca/en/products/pf-30-chew/",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.816Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-18T09:07:02.581Z"
         }
       ]
     },
@@ -680,18 +680,18 @@
       "offers": [
         {
           "seller": "precisionhydration.com",
-          "price": 18.99,
-          "packagePrice": 18.99,
-          "unitCount": 1,
-          "unitCountSource": "default-single",
-          "unitCountConfidence": "default",
+          "price": 6.33,
+          "packagePrice": 189.9,
+          "unitCount": 30,
+          "unitCountSource": "https://www.precisionhydration.com/ca/en/products/pf-60-chew-bar/",
+          "unitCountConfidence": "live",
           "productUrl": "https://www.precisionhydration.com/ca/en/products/pf-60-chew-bar/",
-          "priceSource": "https://www.precisionhydration.com/ca/en/products/pf-60-chew-bar/",
-          "priceConfidence": "live",
-          "verificationStatus": "estimated",
-          "verificationLabel": "Prix estimé",
-          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-18T04:15:05.816Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-18T09:07:02.581Z"
         }
       ]
     },
@@ -701,22 +701,22 @@
       "brand": "Krono Nutrition",
       "type": "Boisson",
       "carbsGrams": 22,
-      "carbsSource": "https://krononutrition.com/en-ca/products/berries-and-pomegranate-sport-drink-mix",
+      "carbsSource": "catalog",
       "offers": [
         {
           "seller": "krononutrition.com",
-          "price": 3.08,
-          "packagePrice": 36.99,
-          "unitCount": 12,
-          "unitCountSource": "https://krononutrition.com/en-ca/products/berries-and-pomegranate-sport-drink-mix",
-          "unitCountConfidence": "live",
+          "price": 4.11,
+          "packagePrice": 4.11,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
           "productUrl": "https://krononutrition.com/en-ca/products/berries-and-pomegranate-sport-drink-mix",
-          "priceSource": "https://krononutrition.com/en-ca/products/berries-and-pomegranate-sport-drink-mix",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.816Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-18T09:07:02.581Z"
         }
       ]
     },
@@ -726,22 +726,22 @@
       "brand": "Krono Nutrition",
       "type": "Boisson",
       "carbsGrams": 22,
-      "carbsSource": "https://krononutrition.com/en-ca/products/pink-limonade-sport-drink-mix",
+      "carbsSource": "catalog",
       "offers": [
         {
           "seller": "krononutrition.com",
-          "price": 3.08,
-          "packagePrice": 36.99,
-          "unitCount": 12,
-          "unitCountSource": "https://krononutrition.com/en-ca/products/pink-limonade-sport-drink-mix",
-          "unitCountConfidence": "live",
+          "price": 4.11,
+          "packagePrice": 4.11,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
           "productUrl": "https://krononutrition.com/en-ca/products/pink-limonade-sport-drink-mix",
-          "priceSource": "https://krononutrition.com/en-ca/products/pink-limonade-sport-drink-mix",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.816Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-18T09:07:02.581Z"
         }
       ]
     },
@@ -756,17 +756,17 @@
         {
           "seller": "upika.ca",
           "price": 2,
-          "packagePrice": 49.99,
+          "packagePrice": 50,
           "unitCount": 25,
           "unitCountSource": "https://upika.ca/en/products/upika-carb-boost",
           "unitCountConfidence": "live",
           "productUrl": "https://upika.ca/en/products/upika-carb-boost",
-          "priceSource": "https://upika.ca/en/products/upika-carb-boost",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.816Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-18T09:07:02.582Z"
         }
       ]
     },
@@ -786,12 +786,12 @@
           "unitCountSource": "https://upika.ca/en/products/barres-upika-1-barre",
           "unitCountConfidence": "live-single",
           "productUrl": "https://upika.ca/en/products/barres-upika-1-barre",
-          "priceSource": "https://upika.ca/en/products/barres-upika-1-barre",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.816Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-18T09:07:02.582Z"
         }
       ]
     },
@@ -811,12 +811,12 @@
           "unitCountSource": "https://upika.ca/en/products/samples-upika-endurance-citron-lime",
           "unitCountConfidence": "live-single",
           "productUrl": "https://upika.ca/en/products/samples-upika-endurance-citron-lime",
-          "priceSource": "https://upika.ca/en/products/samples-upika-endurance-citron-lime",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.816Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-18T09:07:02.582Z"
         }
       ]
     },
@@ -836,12 +836,12 @@
           "unitCountSource": "https://upika.ca/en/products/samples-upika-endurance-melon-d-eau",
           "unitCountConfidence": "live-single",
           "productUrl": "https://upika.ca/en/products/samples-upika-endurance-melon-d-eau",
-          "priceSource": "https://upika.ca/en/products/samples-upika-endurance-melon-d-eau",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.816Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-18T09:07:02.582Z"
         }
       ]
     },
@@ -851,22 +851,22 @@
       "brand": "Krono Nutrition",
       "type": "Gel",
       "carbsGrams": 21,
-      "carbsSource": "https://krononutrition.com/products/apple-maple-energy-gels-box-of-24",
+      "carbsSource": "catalog",
       "offers": [
         {
           "seller": "krononutrition.com",
           "price": 2.71,
-          "packagePrice": 64.99,
+          "packagePrice": 65.04,
           "unitCount": 24,
           "unitCountSource": "https://krononutrition.com/products/apple-maple-energy-gels-box-of-24",
           "unitCountConfidence": "live",
           "productUrl": "https://krononutrition.com/products/apple-maple-energy-gels-box-of-24",
-          "priceSource": "https://krononutrition.com/products/apple-maple-energy-gels-box-of-24",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.817Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-18T09:07:02.582Z"
         }
       ]
     },
@@ -876,22 +876,22 @@
       "brand": "Krono Nutrition",
       "type": "Gel",
       "carbsGrams": 30,
-      "carbsSource": "https://krononutrition.com/products/citrus-energy-gels-box-of-24",
+      "carbsSource": "catalog",
       "offers": [
         {
           "seller": "krononutrition.com",
           "price": 2.71,
-          "packagePrice": 64.99,
+          "packagePrice": 65.04,
           "unitCount": 24,
           "unitCountSource": "https://krononutrition.com/products/citrus-energy-gels-box-of-24",
           "unitCountConfidence": "live",
           "productUrl": "https://krononutrition.com/products/citrus-energy-gels-box-of-24",
-          "priceSource": "https://krononutrition.com/products/citrus-energy-gels-box-of-24",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.817Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-18T09:07:02.582Z"
         }
       ]
     },
@@ -901,22 +901,22 @@
       "brand": "Krono Nutrition",
       "type": "Gel",
       "carbsGrams": 30,
-      "carbsSource": "https://krononutrition.com/en/produit/nutritions/gels/blueberry-energy-gel/",
+      "carbsSource": "catalog",
       "offers": [
         {
           "seller": "krononutrition.com",
           "price": 2.71,
-          "packagePrice": 64.99,
-          "unitCount": 24,
-          "unitCountSource": "https://krononutrition.com/en/produit/nutritions/gels/blueberry-energy-gel/",
-          "unitCountConfidence": "live",
+          "packagePrice": 2.71,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
           "productUrl": "https://krononutrition.com/en/produit/nutritions/gels/blueberry-energy-gel/",
-          "priceSource": "https://krononutrition.com/en/produit/nutritions/gels/blueberry-energy-gel/",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.817Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-18T09:07:02.582Z"
         }
       ]
     },
@@ -926,22 +926,22 @@
       "brand": "Krono Nutrition",
       "type": "Gel",
       "carbsGrams": 30,
-      "carbsSource": "https://krononutrition.com/products/salted-caramel-energy-gels-box-of-24",
+      "carbsSource": "catalog",
       "offers": [
         {
           "seller": "krononutrition.com",
           "price": 2.71,
-          "packagePrice": 64.99,
+          "packagePrice": 65.04,
           "unitCount": 24,
           "unitCountSource": "https://krononutrition.com/products/salted-caramel-energy-gels-box-of-24",
           "unitCountConfidence": "live",
           "productUrl": "https://krononutrition.com/products/salted-caramel-energy-gels-box-of-24",
-          "priceSource": "https://krononutrition.com/products/salted-caramel-energy-gels-box-of-24",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.817Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-18T09:07:02.582Z"
         }
       ]
     },
@@ -951,22 +951,22 @@
       "brand": "Krono Nutrition",
       "type": "Autre",
       "carbsGrams": 38,
-      "carbsSource": "https://krononutrition.com/en-ca/products/raspberry-maple-chews",
+      "carbsSource": "catalog",
       "offers": [
         {
           "seller": "krononutrition.com",
           "price": 3.75,
-          "packagePrice": 44.99,
-          "unitCount": 12,
-          "unitCountSource": "https://krononutrition.com/en-ca/products/raspberry-maple-chews",
-          "unitCountConfidence": "live",
+          "packagePrice": 3.75,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
           "productUrl": "https://krononutrition.com/en-ca/products/raspberry-maple-chews",
-          "priceSource": "https://krononutrition.com/en-ca/products/raspberry-maple-chews",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.817Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-18T09:07:02.582Z"
         }
       ]
     },
@@ -976,22 +976,22 @@
       "brand": "Krono Nutrition",
       "type": "Autre",
       "carbsGrams": 39,
-      "carbsSource": "https://krononutrition.com/en-ca/products/apple-maple-chews-box-of-12",
+      "carbsSource": "catalog",
       "offers": [
         {
           "seller": "krononutrition.com",
           "price": 3.75,
-          "packagePrice": 44.99,
+          "packagePrice": 45,
           "unitCount": 12,
           "unitCountSource": "https://krononutrition.com/en-ca/products/apple-maple-chews-box-of-12",
           "unitCountConfidence": "live",
           "productUrl": "https://krononutrition.com/en-ca/products/apple-maple-chews-box-of-12",
-          "priceSource": "https://krononutrition.com/en-ca/products/apple-maple-chews-box-of-12",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.817Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-18T09:07:02.582Z"
         }
       ]
     },
@@ -1001,22 +1001,22 @@
       "brand": "Krono Nutrition",
       "type": "Autre",
       "carbsGrams": 39,
-      "carbsSource": "https://krononutrition.com/en-ca/products/strawberry-maple-chews-box-of-12",
+      "carbsSource": "catalog",
       "offers": [
         {
           "seller": "krononutrition.com",
           "price": 3.75,
-          "packagePrice": 44.99,
+          "packagePrice": 45,
           "unitCount": 12,
           "unitCountSource": "https://krononutrition.com/en-ca/products/strawberry-maple-chews-box-of-12",
           "unitCountConfidence": "live",
           "productUrl": "https://krononutrition.com/en-ca/products/strawberry-maple-chews-box-of-12",
-          "priceSource": "https://krononutrition.com/en-ca/products/strawberry-maple-chews-box-of-12",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.817Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-18T09:07:02.582Z"
         }
       ]
     },
@@ -1026,22 +1026,22 @@
       "brand": "Krono Nutrition",
       "type": "Barre",
       "carbsGrams": 32,
-      "carbsSource": "https://krononutrition.com/en-ca/products/apricot-cranberry-energy-bars-box-of-12",
+      "carbsSource": "catalog",
       "offers": [
         {
           "seller": "krononutrition.com",
           "price": 3.33,
-          "packagePrice": 39.99,
+          "packagePrice": 39.96,
           "unitCount": 12,
           "unitCountSource": "https://krononutrition.com/en-ca/products/apricot-cranberry-energy-bars-box-of-12",
           "unitCountConfidence": "live",
           "productUrl": "https://krononutrition.com/en-ca/products/apricot-cranberry-energy-bars-box-of-12",
-          "priceSource": "https://krononutrition.com/en-ca/products/apricot-cranberry-energy-bars-box-of-12",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.817Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-18T09:07:02.582Z"
         }
       ]
     },
@@ -1051,22 +1051,22 @@
       "brand": "Krono Nutrition",
       "type": "Barre",
       "carbsGrams": 32,
-      "carbsSource": "https://krononutrition.com/products/strawberry-pineapple-energy-bars-box-of-12",
+      "carbsSource": "catalog",
       "offers": [
         {
           "seller": "krononutrition.com",
-          "price": 3.33,
-          "packagePrice": 39.99,
+          "price": 3.25,
+          "packagePrice": 39,
           "unitCount": 12,
           "unitCountSource": "https://krononutrition.com/products/strawberry-pineapple-energy-bars-box-of-12",
           "unitCountConfidence": "live",
           "productUrl": "https://krononutrition.com/products/strawberry-pineapple-energy-bars-box-of-12",
-          "priceSource": "https://krononutrition.com/products/strawberry-pineapple-energy-bars-box-of-12",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.817Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-18T09:07:02.582Z"
         }
       ]
     },
@@ -1076,22 +1076,22 @@
       "brand": "Krono Nutrition",
       "type": "Barre",
       "carbsGrams": 31,
-      "carbsSource": "https://krononutrition.com/products/cherry-chocolate-energy-bars-box-of-12",
+      "carbsSource": "catalog",
       "offers": [
         {
           "seller": "krononutrition.com",
-          "price": 3.33,
-          "packagePrice": 39.99,
+          "price": 3.25,
+          "packagePrice": 39,
           "unitCount": 12,
           "unitCountSource": "https://krononutrition.com/products/cherry-chocolate-energy-bars-box-of-12",
           "unitCountConfidence": "live",
           "productUrl": "https://krononutrition.com/products/cherry-chocolate-energy-bars-box-of-12",
-          "priceSource": "https://krononutrition.com/products/cherry-chocolate-energy-bars-box-of-12",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.817Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-18T09:07:02.582Z"
         }
       ]
     },
@@ -1101,22 +1101,22 @@
       "brand": "Krono Nutrition",
       "type": "Barre",
       "carbsGrams": 29,
-      "carbsSource": "https://krononutrition.com/products/chocolate-espresso-energy-bars-box-of-12",
+      "carbsSource": "catalog",
       "offers": [
         {
           "seller": "krononutrition.com",
           "price": 3.33,
-          "packagePrice": 39.99,
+          "packagePrice": 39.96,
           "unitCount": 12,
           "unitCountSource": "https://krononutrition.com/products/chocolate-espresso-energy-bars-box-of-12",
           "unitCountConfidence": "live",
           "productUrl": "https://krononutrition.com/products/chocolate-espresso-energy-bars-box-of-12",
-          "priceSource": "https://krononutrition.com/products/chocolate-espresso-energy-bars-box-of-12",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.817Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-18T09:07:02.582Z"
         }
       ]
     },
@@ -1141,7 +1141,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-18T04:15:05.817Z"
+          "lastCheckedAt": "2026-04-18T09:07:02.582Z"
         },
         {
           "seller": "shopsante.ca",
@@ -1156,7 +1156,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-18T04:15:05.817Z"
+          "lastCheckedAt": "2026-04-18T09:07:02.582Z"
         }
       ]
     },
@@ -1181,7 +1181,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-18T04:15:05.817Z"
+          "lastCheckedAt": "2026-04-18T09:07:02.582Z"
         }
       ]
     },
@@ -1206,7 +1206,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.817Z"
+          "lastCheckedAt": "2026-04-18T09:07:02.583Z"
         }
       ]
     },
@@ -1220,8 +1220,8 @@
       "offers": [
         {
           "seller": "naak.com",
-          "price": 9,
-          "packagePrice": 45,
+          "price": 9.6,
+          "packagePrice": 48,
           "unitCount": 5,
           "unitCountSource": "https://www.naak.com/products/boost-drink-mix-bag-neutral",
           "unitCountConfidence": "live",
@@ -1231,7 +1231,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.817Z"
+          "lastCheckedAt": "2026-04-18T09:07:02.583Z"
         }
       ]
     },
@@ -1256,7 +1256,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.817Z"
+          "lastCheckedAt": "2026-04-18T09:07:02.583Z"
         }
       ]
     },
@@ -1281,7 +1281,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T04:15:05.817Z"
+          "lastCheckedAt": "2026-04-18T09:07:02.583Z"
         }
       ]
     }
