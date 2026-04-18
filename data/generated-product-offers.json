@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-18T03:43:05.217Z",
+  "updatedAt": "2026-04-18T04:15:05.817Z",
   "analysis": {
     "mode": "cached",
     "pagesFetched": 0,
@@ -36,7 +36,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix vient d'une page vendeur et le format de portion a été confirmé par une déduction cohérente entre le prix de boîte et le prix unitaire.",
-          "lastCheckedAt": "2026-04-18T03:43:05.211Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.811Z"
         }
       ]
     },
@@ -61,7 +61,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-18T03:43:05.213Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.813Z"
         },
         {
           "seller": "lecoureurnordique.ca",
@@ -76,7 +76,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.213Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.813Z"
         }
       ]
     },
@@ -101,7 +101,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix vient d'une page vendeur et le format de portion a été confirmé par une déduction cohérente entre le prix de boîte et le prix unitaire.",
-          "lastCheckedAt": "2026-04-18T03:43:05.213Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.813Z"
         }
       ]
     },
@@ -126,7 +126,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.213Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.813Z"
         },
         {
           "seller": "lecoureurnordique.ca",
@@ -141,7 +141,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.213Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.813Z"
         }
       ]
     },
@@ -166,7 +166,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-18T03:43:05.214Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.814Z"
         },
         {
           "seller": "frontrunners.ca",
@@ -181,7 +181,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-18T03:43:05.214Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.814Z"
         }
       ]
     },
@@ -206,7 +206,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-18T03:43:05.214Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.814Z"
         },
         {
           "seller": "frontrunners.ca",
@@ -221,7 +221,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-18T03:43:05.214Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.814Z"
         }
       ]
     },
@@ -246,7 +246,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.214Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.814Z"
         }
       ]
     },
@@ -271,7 +271,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.215Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.814Z"
         },
         {
           "seller": "shopsante.ca",
@@ -286,7 +286,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.215Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.814Z"
         },
         {
           "seller": "lecoureurnordique.ca",
@@ -301,7 +301,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.215Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.814Z"
         }
       ]
     },
@@ -326,7 +326,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.215Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.814Z"
         },
         {
           "seller": "shopsante.ca",
@@ -341,7 +341,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.215Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.815Z"
         }
       ]
     },
@@ -366,7 +366,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.215Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.815Z"
         },
         {
           "seller": "enroute.run",
@@ -381,7 +381,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-18T03:43:05.215Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.815Z"
         }
       ]
     },
@@ -406,7 +406,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-18T03:43:05.215Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.815Z"
         },
         {
           "seller": "precisionhydration.com",
@@ -421,7 +421,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.215Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.815Z"
         }
       ]
     },
@@ -435,9 +435,9 @@
       "offers": [
         {
           "seller": "krononutrition.com",
-          "price": 5.42,
+          "price": 2.71,
           "packagePrice": 64.99,
-          "unitCount": 12,
+          "unitCount": 24,
           "unitCountSource": "https://krononutrition.com/products/maple-energy-gels-box-of-24",
           "unitCountConfidence": "live",
           "productUrl": "https://krononutrition.com/products/maple-energy-gels-box-of-24",
@@ -446,7 +446,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.215Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.815Z"
         }
       ]
     },
@@ -460,9 +460,9 @@
       "offers": [
         {
           "seller": "krononutrition.com",
-          "price": 5.42,
+          "price": 2.71,
           "packagePrice": 64.99,
-          "unitCount": 12,
+          "unitCount": 24,
           "unitCountSource": "https://krononutrition.com/products/maple-coffee-energy-gels-box-of-24",
           "unitCountConfidence": "live",
           "productUrl": "https://krononutrition.com/products/maple-coffee-energy-gels-box-of-24",
@@ -471,7 +471,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.215Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.815Z"
         }
       ]
     },
@@ -485,9 +485,9 @@
       "offers": [
         {
           "seller": "krononutrition.com",
-          "price": 5.42,
+          "price": 2.71,
           "packagePrice": 64.99,
-          "unitCount": 12,
+          "unitCount": 24,
           "unitCountSource": "https://krononutrition.com/products/maple-raspberry-energy-gels-box-of-24",
           "unitCountConfidence": "live",
           "productUrl": "https://krononutrition.com/products/maple-raspberry-energy-gels-box-of-24",
@@ -496,7 +496,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.215Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.815Z"
         }
       ]
     },
@@ -510,9 +510,9 @@
       "offers": [
         {
           "seller": "krononutrition.com",
-          "price": 5.42,
+          "price": 2.71,
           "packagePrice": 64.99,
-          "unitCount": 12,
+          "unitCount": 24,
           "unitCountSource": "https://krononutrition.com/products/tropical-energy-gels-box-of-24",
           "unitCountConfidence": "live",
           "productUrl": "https://krononutrition.com/products/tropical-energy-gels-box-of-24",
@@ -521,7 +521,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.216Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.815Z"
         }
       ]
     },
@@ -546,7 +546,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.216Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.816Z"
         },
         {
           "seller": "well.ca",
@@ -561,7 +561,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.216Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.816Z"
         }
       ]
     },
@@ -586,7 +586,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.216Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.816Z"
         },
         {
           "seller": "elementsport.ca",
@@ -601,7 +601,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.216Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.816Z"
         }
       ]
     },
@@ -626,7 +626,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.216Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.816Z"
         },
         {
           "seller": "fuelkit.ca",
@@ -641,7 +641,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-18T03:43:05.216Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.816Z"
         }
       ]
     },
@@ -666,7 +666,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.216Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.816Z"
         }
       ]
     },
@@ -691,7 +691,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-18T03:43:05.216Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.816Z"
         }
       ]
     },
@@ -716,7 +716,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.216Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.816Z"
         }
       ]
     },
@@ -741,7 +741,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.216Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.816Z"
         }
       ]
     },
@@ -755,9 +755,9 @@
       "offers": [
         {
           "seller": "upika.ca",
-          "price": 8.33,
+          "price": 2,
           "packagePrice": 49.99,
-          "unitCount": 6,
+          "unitCount": 25,
           "unitCountSource": "https://upika.ca/en/products/upika-carb-boost",
           "unitCountConfidence": "live",
           "productUrl": "https://upika.ca/en/products/upika-carb-boost",
@@ -766,7 +766,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.216Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.816Z"
         }
       ]
     },
@@ -791,7 +791,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.216Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.816Z"
         }
       ]
     },
@@ -816,7 +816,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.216Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.816Z"
         }
       ]
     },
@@ -841,7 +841,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.216Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.816Z"
         }
       ]
     },
@@ -855,9 +855,9 @@
       "offers": [
         {
           "seller": "krononutrition.com",
-          "price": 5.42,
+          "price": 2.71,
           "packagePrice": 64.99,
-          "unitCount": 12,
+          "unitCount": 24,
           "unitCountSource": "https://krononutrition.com/products/apple-maple-energy-gels-box-of-24",
           "unitCountConfidence": "live",
           "productUrl": "https://krononutrition.com/products/apple-maple-energy-gels-box-of-24",
@@ -866,7 +866,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.216Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.817Z"
         }
       ]
     },
@@ -880,9 +880,9 @@
       "offers": [
         {
           "seller": "krononutrition.com",
-          "price": 5.42,
+          "price": 2.71,
           "packagePrice": 64.99,
-          "unitCount": 12,
+          "unitCount": 24,
           "unitCountSource": "https://krononutrition.com/products/citrus-energy-gels-box-of-24",
           "unitCountConfidence": "live",
           "productUrl": "https://krononutrition.com/products/citrus-energy-gels-box-of-24",
@@ -891,7 +891,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.217Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.817Z"
         }
       ]
     },
@@ -905,9 +905,9 @@
       "offers": [
         {
           "seller": "krononutrition.com",
-          "price": 5.42,
+          "price": 2.71,
           "packagePrice": 64.99,
-          "unitCount": 12,
+          "unitCount": 24,
           "unitCountSource": "https://krononutrition.com/en/produit/nutritions/gels/blueberry-energy-gel/",
           "unitCountConfidence": "live",
           "productUrl": "https://krononutrition.com/en/produit/nutritions/gels/blueberry-energy-gel/",
@@ -916,7 +916,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.217Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.817Z"
         }
       ]
     },
@@ -930,9 +930,9 @@
       "offers": [
         {
           "seller": "krononutrition.com",
-          "price": 5.42,
+          "price": 2.71,
           "packagePrice": 64.99,
-          "unitCount": 12,
+          "unitCount": 24,
           "unitCountSource": "https://krononutrition.com/products/salted-caramel-energy-gels-box-of-24",
           "unitCountConfidence": "live",
           "productUrl": "https://krononutrition.com/products/salted-caramel-energy-gels-box-of-24",
@@ -941,7 +941,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.217Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.817Z"
         }
       ]
     },
@@ -955,9 +955,9 @@
       "offers": [
         {
           "seller": "krononutrition.com",
-          "price": 11.25,
+          "price": 3.75,
           "packagePrice": 44.99,
-          "unitCount": 4,
+          "unitCount": 12,
           "unitCountSource": "https://krononutrition.com/en-ca/products/raspberry-maple-chews",
           "unitCountConfidence": "live",
           "productUrl": "https://krononutrition.com/en-ca/products/raspberry-maple-chews",
@@ -966,7 +966,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.217Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.817Z"
         }
       ]
     },
@@ -980,9 +980,9 @@
       "offers": [
         {
           "seller": "krononutrition.com",
-          "price": 11.25,
+          "price": 3.75,
           "packagePrice": 44.99,
-          "unitCount": 4,
+          "unitCount": 12,
           "unitCountSource": "https://krononutrition.com/en-ca/products/apple-maple-chews-box-of-12",
           "unitCountConfidence": "live",
           "productUrl": "https://krononutrition.com/en-ca/products/apple-maple-chews-box-of-12",
@@ -991,7 +991,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.217Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.817Z"
         }
       ]
     },
@@ -1005,9 +1005,9 @@
       "offers": [
         {
           "seller": "krononutrition.com",
-          "price": 11.25,
+          "price": 3.75,
           "packagePrice": 44.99,
-          "unitCount": 4,
+          "unitCount": 12,
           "unitCountSource": "https://krononutrition.com/en-ca/products/strawberry-maple-chews-box-of-12",
           "unitCountConfidence": "live",
           "productUrl": "https://krononutrition.com/en-ca/products/strawberry-maple-chews-box-of-12",
@@ -1016,7 +1016,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.217Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.817Z"
         }
       ]
     },
@@ -1041,7 +1041,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.217Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.817Z"
         }
       ]
     },
@@ -1066,7 +1066,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.217Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.817Z"
         }
       ]
     },
@@ -1091,7 +1091,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.217Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.817Z"
         }
       ]
     },
@@ -1116,7 +1116,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.217Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.817Z"
         }
       ]
     },
@@ -1141,7 +1141,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-18T03:43:05.217Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.817Z"
         },
         {
           "seller": "shopsante.ca",
@@ -1156,7 +1156,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-18T03:43:05.217Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.817Z"
         }
       ]
     },
@@ -1181,7 +1181,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-18T03:43:05.217Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.817Z"
         }
       ]
     },
@@ -1206,7 +1206,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.217Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.817Z"
         }
       ]
     },
@@ -1231,7 +1231,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.217Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.817Z"
         }
       ]
     },
@@ -1249,14 +1249,14 @@
           "packagePrice": 4,
           "unitCount": 1,
           "unitCountSource": "https://www.velovelo.ca/shop/watt-long-race-215?category=22#attribute_values=219,95,241",
-          "unitCountConfidence": "live-single",
+          "unitCountConfidence": "live",
           "productUrl": "https://www.velovelo.ca/shop/watt-long-race-215?category=22#attribute_values=219,95,241",
           "priceSource": "https://www.velovelo.ca/shop/watt-long-race-215?category=22#attribute_values=219,95,241",
           "priceConfidence": "live",
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.217Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.817Z"
         }
       ]
     },
@@ -1281,7 +1281,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-18T03:43:05.217Z"
+          "lastCheckedAt": "2026-04-18T04:15:05.817Z"
         }
       ]
     }

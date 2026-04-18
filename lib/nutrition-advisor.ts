@@ -67,12 +67,29 @@ export type EffortAdvisorResult = {
 };
 
 const TYPE_KEYWORDS: Array<[ProductType, RegExp]> = [
-  ["Gel", /\b(gel|gels)\b/i],
-  ["Boisson", /\b(boisson|boissons|liquide|drink|mix|poudre|bouteille|bidon)\b/i],
-  ["Barre", /\b(barre|barres|bar|bars|solide)\b/i],
-  ["Autre", /\b(autre|autres|chew|chews|gomme|gommes|gummies)\b/i],
+  ["Gel", /\b(gel|gels|gelatineux|gelatineuse)\b/i],
+  ["Boisson", /\b(boisson|boissons|liquide|liquides|drink|drinks|mix|poudre|poudres|bouteille|bouteilles|bidon|bidons|flasque|flasques|hydratation|boire)\b/i],
+  ["Barre", /\b(barre|barres|bar|bars|solide|solides|manger|collation)\b/i],
+  ["Autre", /\b(autre|autres|chew|chews|gomme|gommes|gummies|bonbon|bonbons|machouiller|mastiquer)\b/i],
 ];
 const PRODUCT_TYPES: ProductType[] = ["Gel", "Boisson", "Barre", "Autre"];
+const NUMBER_WORDS: Record<string, number> = {
+  un: 1,
+  une: 1,
+  deux: 2,
+  trois: 3,
+  quatre: 4,
+  cinq: 5,
+  six: 6,
+  sept: 7,
+  huit: 8,
+  neuf: 9,
+  dix: 10,
+  onze: 11,
+  douze: 12,
+};
+const NUMBER_TOKEN =
+  "(?:\\d+(?:[,.]\\d+)?|un|une|deux|trois|quatre|cinq|six|sept|huit|neuf|dix|onze|douze)";
 
 type AdvisorSelection = {
   product: ProductWithMetrics;
@@ -91,7 +108,7 @@ export function analyzeAdvisorQuestion(
   fallbackInput: Partial<EffortAdvisorInput> = {},
 ): AdvisorQuestionAnalysis {
   const durationMinutes = parseDurationMinutes(question);
-  const targetCarbsPerHour = parseCarbsPerHour(question);
+  const targetCarbsPerHour = parseCarbsPerHour(question, durationMinutes);
   const preferredTypes = parsePreferredTypes(question);
   const desiredTypeCounts = parseDesiredTypeCounts(question);
   const missingInfo: MissingAdvisorInfo[] = [];
@@ -133,8 +150,12 @@ export function analyzeAdvisorQuestion(
     caffeine: /\b(sans|éviter|eviter|pas de|aucune?)\s+(caféine|cafeine)\b/i.test(question)
       ? "avoid"
       : fallbackInput.caffeine ?? "any",
-    preferredTypes,
-    desiredTypeCounts,
+    preferredTypes: preferredTypes.length > 0
+      ? preferredTypes
+      : fallbackInput.preferredTypes ?? [],
+    desiredTypeCounts: Object.keys(desiredTypeCounts).length > 0
+      ? desiredTypeCounts
+      : fallbackInput.desiredTypeCounts,
     question,
   } as EffortAdvisorInput;
 
@@ -314,7 +335,9 @@ function buildRequestedCompositionPlan(
     (sum, selection) => sum + selection.product.carbsGrams * (selection.portions ?? 0),
     0,
   );
-  const autoTypes = PRODUCT_TYPES.filter((type) => counts[type] === undefined);
+  const preferredTypes = input.preferredTypes ?? [];
+  const autoTypes = (preferredTypes.length > 0 ? preferredTypes : PRODUCT_TYPES)
+    .filter((type) => counts[type] === undefined);
 
   if (fixedCarbs < targetTotalCarbs && autoTypes.length > 0) {
     const rankedProducts = rankProducts(
@@ -469,31 +492,35 @@ function getBrandPreferencePenalty(
 }
 
 function parsePreferredTypes(question: string) {
-  return TYPE_KEYWORDS
+  const normalizedQuestion = normalizeQuestion(question);
+  const explicitTypes = TYPE_KEYWORDS
     .filter(([type, pattern]) => {
       if (isTypeExcluded(question, type)) {
         return false;
       }
 
-      return pattern.test(question);
+      return pattern.test(normalizedQuestion);
     })
     .map(([type]) => type);
+
+  return [...new Set(explicitTypes)];
 }
 
 function isTypeExcluded(question: string, type: ProductType) {
   const labels: Record<ProductType, string[]> = {
     Gel: ["gel", "gels"],
-    Boisson: ["boisson", "boissons", "drink", "mix", "poudre"],
-    Barre: ["barre", "barres", "bar"],
-    Autre: ["chew", "chews", "gomme", "gommes", "autre", "autres"],
+    Boisson: ["boisson", "boissons", "liquide", "liquides", "drink", "drinks", "mix", "poudre", "poudres", "bouteille", "bouteilles", "bidon", "bidons"],
+    Barre: ["barre", "barres", "bar", "bars", "solide", "solides"],
+    Autre: ["chew", "chews", "gomme", "gommes", "gummies", "bonbon", "bonbons", "autre", "autres"],
   };
   const labelPattern = labels[type].join("|");
+  const normalizedQuestion = normalizeQuestion(question);
   const negativePattern = new RegExp(
-    `\\b(?:sans|pas de|aucun|aucune|exclure|éviter|eviter)\\s+(?:${labelPattern})\\b`,
+    `\\b(?:sans|pas\\s+de|pas\\s+d|aucun|aucune|zero|0|exclure|eviter|evite|retire|enleve|pas)\\s+(?:${labelPattern})\\b`,
     "i",
   );
 
-  return negativePattern.test(question);
+  return negativePattern.test(normalizedQuestion);
 }
 
 function selectProductForType(
@@ -540,42 +567,93 @@ function isNeutralCarbAdditive(product: ProductWithMetrics) {
 }
 
 function parseDurationMinutes(question: string) {
-  const colonDuration = question.match(/\b(\d{1,2})\s*[:]\s*(\d{1,2})\b/);
+  const normalizedQuestion = normalizeQuestion(question);
+  const colonDuration = normalizedQuestion.match(/\b(\d{1,2})\s*[:]\s*(\d{1,2})\b/);
   if (colonDuration) {
     return Number.parseInt(colonDuration[1], 10) * 60 +
       Number.parseInt(colonDuration[2], 10);
   }
 
-  const hoursMinutes = question.match(
-    /(\d+(?:[.,]\d+)?)\s*(?:h|hr|hrs|heure|heures)\s*(\d{1,2})?\s*(?:min|minutes)?/i,
+  const compactDuration = normalizedQuestion.match(/\b(\d{1,2})h(\d{1,2})\b/i);
+  if (compactDuration) {
+    return Number.parseInt(compactDuration[1], 10) * 60 +
+      Number.parseInt(compactDuration[2], 10);
+  }
+
+  const hoursMinutes = normalizedQuestion.match(
+    new RegExp(
+      `\\b(${NUMBER_TOKEN})\\s*(?:h|hr|hrs|heure|heures)\\s*(?:et\\s*)?(demie|demi|quart|trois\\s+quart|${NUMBER_TOKEN})?\\s*(?:min|mins|minute|minutes)?\\b`,
+      "i",
+    ),
   );
   if (hoursMinutes) {
-    const hours = parseNumber(hoursMinutes[1]) ?? 0;
-    const minutes = Number.parseInt(hoursMinutes[2] ?? "0", 10);
+    const hours = parseFlexibleNumber(hoursMinutes[1]) ?? 0;
+    const rawMinutes = hoursMinutes[2];
+    const minutes = parseDurationMinuteSuffix(rawMinutes);
     return Math.round(hours * 60 + minutes);
   }
 
-  const minutes = question.match(/\b(\d{2,3})\s*(?:min|minutes)\b/i);
+  const plainHours = normalizedQuestion.match(
+    new RegExp(`\\b(?:pendant|duree|sortie|ride|course|entrainement|effort)?\\s*(${NUMBER_TOKEN})\\s*(?:h|hr|hrs|heure|heures)\\b`, "i"),
+  );
+  if (plainHours) {
+    const hours = parseFlexibleNumber(plainHours[1]);
+    if (hours !== null) {
+      return Math.round(hours * 60);
+    }
+  }
+
+  const minutes = normalizedQuestion.match(
+    new RegExp(`\\b(${NUMBER_TOKEN})\\s*(?:min|mins|minute|minutes)\\b`, "i"),
+  );
   if (minutes) {
-    return Number.parseInt(minutes[1], 10);
+    const parsedMinutes = parseFlexibleNumber(minutes[1]);
+    return parsedMinutes === null ? null : Math.round(parsedMinutes);
   }
 
   return null;
 }
 
-function parseCarbsPerHour(question: string) {
-  const hourlyMatch = question.match(
-    /\b(\d{2,3})\s*(?:g|grammes?|glucides?|carbs?)\s*(?:\/\s*h|par\s*(?:heure|h)|(?:a|à)\s*l['’]?heure|heure|h\b)/i,
+function parseCarbsPerHour(question: string, durationMinutes: number | null = null) {
+  const normalizedQuestion = normalizeQuestion(question);
+  const hourlyRange = normalizedQuestion.match(
+    /\b(\d{2,3})\s*(?:-|a|à|to)\s*(\d{2,3})\s*(?:g|grammes?|glucides?|carbs?)\s*(?:\/\s*h|par\s*(?:heure|h)|a\s+l[' ]?heure|heure|h\b)/i,
+  );
+  if (hourlyRange) {
+    return Math.round(
+      (Number.parseInt(hourlyRange[1], 10) + Number.parseInt(hourlyRange[2], 10)) / 2,
+    );
+  }
+
+  const hourlyMatch = normalizedQuestion.match(
+    /\b(\d{2,3})\s*(?:g|grammes?|gr|glucides?|carbs?)\s*(?:\/\s*h|par\s*(?:heure|h)|a\s+l[' ]?heure|a\s+lheure|heure|h\b|chaque\s+heure)\b/i,
   );
   if (hourlyMatch) {
     return Number.parseInt(hourlyMatch[1], 10);
   }
 
-  const contextMatch = question.match(
-    /\b(?:cible|objectif|vise|viser|veux|besoin|glucides?|carbs?)\D{0,24}(\d{2,3})\s*(?:g|grammes?|glucides?|carbs?)?\b/i,
+  const reversedHourlyMatch = normalizedQuestion.match(
+    /\b(?:par\s*(?:heure|h)|a\s+l[' ]?heure|a\s+lheure|chaque\s+heure)\D{0,20}(\d{2,3})\s*(?:g|grammes?|gr|glucides?|carbs?)?\b/i,
   );
+  if (reversedHourlyMatch) {
+    return Number.parseInt(reversedHourlyMatch[1], 10);
+  }
 
-  return contextMatch ? Number.parseInt(contextMatch[1], 10) : null;
+  const contextMatch = normalizedQuestion.match(
+    /\b(?:cible|objectif|vise|viser|veux|voudrais|prendre|absorber|manger|boire|besoin|plan|glucides?|carbs?|hydrates?)\D{0,36}(\d{2,3})\s*(?:g|grammes?|gr|glucides?|carbs?)?\b/i,
+  );
+  if (contextMatch) {
+    return Number.parseInt(contextMatch[1], 10);
+  }
+
+  const totalMatch = normalizedQuestion.match(
+    /\b(?:total|en\s+tout|sur\s+la\s+sortie|pour\s+l[' ]?effort|pendant\s+l[' ]?effort)\D{0,28}(\d{2,4})\s*(?:g|grammes?|gr|glucides?|carbs?)\b/i,
+  );
+  if (totalMatch && durationMinutes) {
+    return Math.round(Number.parseInt(totalMatch[1], 10) / (durationMinutes / 60));
+  }
+
+  return null;
 }
 
 function parsePreference(question: string): EffortPreference {
@@ -595,23 +673,56 @@ function parsePreference(question: string): EffortPreference {
 }
 
 function parseDesiredTypeCounts(question: string) {
+  const normalizedQuestion = normalizeQuestion(question);
   const counts: Partial<Record<ProductType, number>> = {};
-  const patterns: Array<[ProductType, RegExp]> = [
-    ["Gel", /\b(?:x\s*)?(\d+)\s*(?:gels?)\b|\b(?:gels?)\s*x?\s*(\d+)\b/i],
-    ["Boisson", /\b(?:x\s*)?(\d+)\s*(?:boissons?|bouteilles?|drinks?|mix|bidons?)\b|\b(?:boissons?|bouteilles?|drinks?|mix|bidons?)\s*x?\s*(\d+)\b/i],
-    ["Barre", /\b(?:x\s*)?(\d+)\s*(?:barres?|bars?)\b|\b(?:barres?|bars?)\s*x?\s*(\d+)\b/i],
-    ["Autre", /\b(?:x\s*)?(\d+)\s*(?:autres?|chews?|gommes?|gummies)\b|\b(?:autres?|chews?|gommes?|gummies)\s*x?\s*(\d+)\b/i],
+  const patterns: Array<[ProductType, RegExp[]]> = [
+    [
+      "Gel",
+      [
+        new RegExp(`\\b(?:x\\s*)?(${NUMBER_TOKEN})\\s*(?:gels?)\\b`, "i"),
+        new RegExp(`\\b(?:gels?)\\s*(?:x|fois|de)?\\s*(${NUMBER_TOKEN})\\b`, "i"),
+      ],
+    ],
+    [
+      "Boisson",
+      [
+        new RegExp(`\\b(?:x\\s*)?(${NUMBER_TOKEN})\\s*(?:boissons?|bouteilles?|drinks?|mix|bidons?|flasques?)\\b`, "i"),
+        new RegExp(`\\b(?:boissons?|bouteilles?|drinks?|mix|bidons?|flasques?)\\s*(?:x|fois|de)?\\s*(${NUMBER_TOKEN})\\b`, "i"),
+      ],
+    ],
+    [
+      "Barre",
+      [
+        new RegExp(`\\b(?:x\\s*)?(${NUMBER_TOKEN})\\s*(?:barres?|bars?)\\b`, "i"),
+        new RegExp(`\\b(?:barres?|bars?)\\s*(?:x|fois|de)?\\s*(${NUMBER_TOKEN})\\b`, "i"),
+      ],
+    ],
+    [
+      "Autre",
+      [
+        new RegExp(`\\b(?:x\\s*)?(${NUMBER_TOKEN})\\s*(?:autres?|chews?|gommes?|gummies|bonbons?)\\b`, "i"),
+        new RegExp(`\\b(?:autres?|chews?|gommes?|gummies|bonbons?)\\s*(?:x|fois|de)?\\s*(${NUMBER_TOKEN})\\b`, "i"),
+      ],
+    ],
   ];
 
-  for (const [type, pattern] of patterns) {
-    const match = question.match(pattern);
+  for (const [type, typePatterns] of patterns) {
     if (isTypeExcluded(question, type)) {
       counts[type] = 0;
       continue;
     }
 
-    if (match) {
-      counts[type] = clamp(Number.parseInt(match[1] ?? match[2], 10), 0, 12);
+    for (const pattern of typePatterns) {
+      const match = normalizedQuestion.match(pattern);
+      if (!match) {
+        continue;
+      }
+
+      const parsedCount = parseFlexibleNumber(match[1]);
+      if (parsedCount !== null) {
+        counts[type] = clamp(Math.round(parsedCount), 0, 12);
+        break;
+      }
     }
   }
 
@@ -782,6 +893,65 @@ function formatPlanItems(items: EffortAdvisorItem[]) {
 
 function formatSellers(items: EffortAdvisorItem[]) {
   return [...new Set(items.map((item) => item.seller))].join(", ");
+}
+
+function normalizeQuestion(value: string) {
+  return value
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[’`]/g, "'")
+    .replace(/,/g, ".")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function parseFlexibleNumber(value: string | undefined) {
+  if (!value) {
+    return null;
+  }
+
+  const normalized = normalizeQuestion(value);
+  if (NUMBER_WORDS[normalized] !== undefined) {
+    return NUMBER_WORDS[normalized];
+  }
+
+  if (normalized === "demi" || normalized === "demie") {
+    return 0.5;
+  }
+
+  if (normalized === "quart") {
+    return 0.25;
+  }
+
+  const parsed = Number.parseFloat(normalized.replace(/[^\d.]/g, ""));
+  return Number.isFinite(parsed) ? parsed : null;
+}
+
+function parseDurationMinuteSuffix(value: string | undefined) {
+  if (!value) {
+    return 0;
+  }
+
+  const normalized = normalizeQuestion(value);
+  if (normalized === "demi" || normalized === "demie") {
+    return 30;
+  }
+
+  if (normalized === "quart") {
+    return 15;
+  }
+
+  if (normalized === "trois quart") {
+    return 45;
+  }
+
+  const parsed = parseFlexibleNumber(normalized);
+  if (parsed === null) {
+    return 0;
+  }
+
+  return parsed <= 0.99 ? Math.round(parsed * 60) : Math.round(parsed);
 }
 
 function parseNumber(value: string) {

@@ -48,6 +48,40 @@ for (const product of catalog.products ?? []) {
       );
     }
 
+    const urlPackageCount = inferPackageCountFromUrl(offer.productUrl);
+    if (
+      Number.isFinite(urlPackageCount) &&
+      Number.isFinite(offer.unitCount) &&
+      urlPackageCount !== offer.unitCount
+    ) {
+      findings.push(
+        buildFinding(
+          product,
+          offer,
+          "url-package-count-mismatch",
+          `L'URL indique un paquet de ${urlPackageCount}, mais l'offre est divisée par ${offer.unitCount}.`,
+        ),
+      );
+    }
+
+    if (
+      Number.isFinite(offer.packagePrice) &&
+      Number.isFinite(offer.unitCount) &&
+      offer.unitCount > 1
+    ) {
+      const recomputedUnitPrice = round(offer.packagePrice / offer.unitCount);
+      if (Math.abs(recomputedUnitPrice - offer.price) > 0.02) {
+        findings.push(
+          buildFinding(
+            product,
+            offer,
+            "unit-price-math-mismatch",
+            "Le prix par portion ne correspond pas au prix du paquet divisé par le nombre d'unités.",
+          ),
+        );
+      }
+    }
+
     if (status === "fallback" || status === "review") {
       findings.push(
         buildFinding(
@@ -120,4 +154,29 @@ function inferStatus(offer) {
   }
 
   return offer.priceConfidence === "live" ? "verified" : "review";
+}
+
+function inferPackageCountFromUrl(url) {
+  if (!url) {
+    return null;
+  }
+
+  const normalized = url
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[-_/%]+/g, " ")
+    .toLowerCase();
+  const match = normalized.match(
+    /\b(?:box|boite|case|pack|paquet|bundle)\s*(?:of|de|x)?\s*(\d{1,3})\b/,
+  );
+  if (!match) {
+    return null;
+  }
+
+  const value = Number.parseInt(match[1], 10);
+  return Number.isFinite(value) && value > 1 && value <= 60 ? value : null;
+}
+
+function round(value) {
+  return Math.round(value * 100) / 100;
 }

@@ -17,6 +17,20 @@ const MAX_UNIT_PRICE = 20;
 const MAX_PACKAGE_PRICE = 250;
 const MAX_AUTO_UNIT_COUNT = 60;
 const COMMON_UNIT_COUNTS = [2, 3, 4, 5, 6, 8, 10, 12, 14, 15, 18, 20, 24, 25, 30];
+const STRONG_PACKAGE_SOURCE_TYPES = new Set([
+  "url-package-label",
+  "title-package-label",
+  "url-package-count",
+  "title-package-count",
+  "odoo-format",
+]);
+const PACKAGE_SOURCE_TYPES = new Set([
+  ...STRONG_PACKAGE_SOURCE_TYPES,
+  "package-label",
+  "package-count",
+  "single",
+]);
+const SERVING_SOURCE_TYPES = new Set(["serving-label", "serving-count"]);
 
 const enableLiveFetch =
   process.argv.includes("--live") || process.env.CARBRATE_ENABLE_NETWORK === "1";
@@ -471,9 +485,10 @@ async function getPageSignals(url, cache, stats) {
 function extractPageSignals(url, html) {
   const normalizedHtml = html.replace(/\s+/g, " ");
   const text = stripHtml(html);
+  const title = extractTitle(html);
 
   return {
-    title: extractTitle(html),
+    title,
     priceCandidates: extractPriceCandidates(normalizedHtml, url).map((candidate) => ({
       ...candidate,
       url,
@@ -486,12 +501,11 @@ function extractPageSignals(url, html) {
       ...candidate,
       url,
     })),
-    packageCountCandidates: extractPackageCountCandidates(
-      `${extractTitle(html) ?? ""} ${decodeUrlForSignals(url)} ${text}`,
-    )
+    packageCountCandidates: extractLocationPackageCountCandidates(url, title)
+      .concat(extractPackageCountCandidates(text))
       .concat(
         extractSinglePackageCountCandidates(
-          `${extractTitle(html) ?? ""} ${decodeUrlForSignals(url)}`,
+          `${title ?? ""} ${decodeUrlForSignals(url)}`,
         ),
       )
       .concat(extractOdooSingleFormatCandidates(normalizedHtml, url))
@@ -510,11 +524,11 @@ function enrichPageSignals(url, pageSignals) {
     ...pageSignals,
     url,
     packageCountCandidates: dedupeNumberCandidates([
-      ...(pageSignals.packageCountCandidates ?? []),
-      ...extractPackageCountCandidates(locationText).map((candidate) => ({
+      ...extractLocationPackageCountCandidates(url, title).map((candidate) => ({
         ...candidate,
         url,
       })),
+      ...(pageSignals.packageCountCandidates ?? []),
       ...extractSinglePackageCountCandidates(locationText).map((candidate) => ({
         ...candidate,
         url,
@@ -656,7 +670,7 @@ function extractOdooSingleFormatCandidates(html, url) {
     candidates.push({
       value: 1,
       confidence: "live",
-      sourceType: "single",
+      sourceType: "odoo-format",
     });
   }
 
@@ -743,16 +757,25 @@ function extractServingCandidates(text) {
   return dedupeNumberCandidates(candidates);
 }
 
-function extractPackageCountCandidates(text) {
+function extractLocationPackageCountCandidates(url, title) {
+  const decodedUrl = decodeUrlForSignals(url);
+
+  return dedupeNumberCandidates([
+    ...extractPackageCountCandidates(decodedUrl, "url"),
+    ...extractPackageCountCandidates(title ?? "", "title"),
+  ]);
+}
+
+function extractPackageCountCandidates(text, origin = "body") {
   const normalizedText = normalizeSignalText(text);
   const candidates = [];
   const patterns = [
     {
-      pattern: /(?:box|case|pack|paquet|boite|bundle)\s*(?:of|de)?\s*(\d{1,3})\b/gi,
+      pattern: /(?:box|case|pack|paquet|boite|boîte|bundle|caisse|format)\s*(?:of|de|d'|x)?\s*(\d{1,3})\b/gi,
       sourceType: "package-label",
     },
     {
-      pattern: /\b(\d{1,3})\s*(?:x|ct|count|pack|gels|bars|barres|sachets|chews|stroopwafels)\b/gi,
+      pattern: /\b(\d{1,3})\s*(?:x|ct|count|pack|paquet|boite|boîte|gels|bars|barres|sachets|chews|stroopwafels)\b/gi,
       sourceType: "package-count",
     },
   ];
@@ -767,7 +790,7 @@ function extractPackageCountCandidates(text) {
       candidates.push({
         value,
         confidence: "live",
-        sourceType,
+        sourceType: origin === "body" ? sourceType : `${origin}-${sourceType}`,
       });
     }
   }
@@ -1020,14 +1043,23 @@ function chooseBestUnitCount(candidates, product, packagePrices, singleUnitPrice
     .map((candidate) => ({
       ...candidate,
       score: getUnitCountScore(candidate, product, packagePrices, singleUnitPrice),
+      sourceRank: getUnitCountSourceRank(candidate),
+      priceCoherence: getUnitCountPriceCoherence(
+        candidate,
+        product,
+        packagePrices,
+        singleUnitPrice,
+      ),
     }))
     .filter((candidate) => candidate.score > 0)
     .sort(
       (a, b) =>
         b.score - a.score ||
+        b.sourceRank - a.sourceRank ||
+        b.priceCoherence - a.priceCoherence ||
         Number(COMMON_UNIT_COUNTS.includes(b.value)) -
           Number(COMMON_UNIT_COUNTS.includes(a.value)) ||
-        a.value - b.value,
+        b.value - a.value,
     );
 
   return ranked[0] ?? null;
@@ -1039,25 +1071,28 @@ function getUnitCountScore(candidate, product, packagePrices, singleUnitPrice) {
     return -Infinity;
   }
 
-  const isServingSignal =
-    candidate.sourceType === "serving-label" ||
-    candidate.sourceType === "serving-count";
-  const isPackageSignal =
-    candidate.sourceType === "package-label" ||
-    candidate.sourceType === "package-count" ||
-    candidate.sourceType === "single";
+  const isServingSignal = SERVING_SOURCE_TYPES.has(candidate.sourceType);
+  const isPackageSignal = PACKAGE_SOURCE_TYPES.has(candidate.sourceType);
 
   if (isServingSignal && product.type !== "Boisson") {
     return -Infinity;
   }
 
   let score = 0;
-  if (candidate.sourceType === "single") {
+  if (candidate.sourceType === "single" || candidate.sourceType === "odoo-format") {
     score += value === 1 ? 12 : -8;
+  } else if (candidate.sourceType === "url-package-label") {
+    score += 22;
+  } else if (candidate.sourceType === "title-package-label") {
+    score += 20;
+  } else if (candidate.sourceType === "url-package-count") {
+    score += 18;
+  } else if (candidate.sourceType === "title-package-count") {
+    score += 16;
   } else if (candidate.sourceType === "package-label") {
-    score += 10;
+    score += 9;
   } else if (candidate.sourceType === "package-count") {
-    score += 8;
+    score += 6;
   } else if (candidate.sourceType === "serving-label") {
     score += 7;
   } else if (candidate.sourceType === "serving-count") {
@@ -1068,6 +1103,10 @@ function getUnitCountScore(candidate, product, packagePrices, singleUnitPrice) {
 
   if (COMMON_UNIT_COUNTS.includes(value)) {
     score += 2;
+  }
+
+  if (STRONG_PACKAGE_SOURCE_TYPES.has(candidate.sourceType)) {
+    score += 6;
   }
 
   if (value === product.carbsGrams && !isPackageSignal) {
@@ -1114,8 +1153,117 @@ function getUnitCountScore(candidate, product, packagePrices, singleUnitPrice) {
     return -Infinity;
   }
 
-  if (value === 1 && candidate.sourceType !== "single") {
+  if (
+    packagePrices.length > 0 &&
+    isPackageSignal &&
+    !STRONG_PACKAGE_SOURCE_TYPES.has(candidate.sourceType)
+  ) {
+    const hasStrongerContradiction = candidatesHaveStrongerPackageProof(
+      candidate,
+      packagePrices,
+      product,
+    );
+    if (hasStrongerContradiction) {
+      score -= 8;
+    }
+  }
+
+  if (
+    value === 1 &&
+    candidate.sourceType !== "single" &&
+    candidate.sourceType !== "odoo-format"
+  ) {
     score -= 3;
+  }
+
+  return score;
+}
+
+function candidatesHaveStrongerPackageProof(candidate, packagePrices, product) {
+  if (!Number.isFinite(candidate.value) || candidate.value <= 1) {
+    return false;
+  }
+
+  for (const packagePrice of packagePrices) {
+    if (!Number.isFinite(packagePrice)) {
+      continue;
+    }
+
+    const unitPrice = packagePrice / candidate.value;
+    if (unitPrice <= getExpectedUnitPrice(product) * 0.55) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+function getUnitCountSourceRank(candidate) {
+  if (candidate.sourceType === "url-package-label") {
+    return 8;
+  }
+
+  if (candidate.sourceType === "title-package-label") {
+    return 7;
+  }
+
+  if (candidate.sourceType === "url-package-count") {
+    return 6;
+  }
+
+  if (candidate.sourceType === "title-package-count") {
+    return 5;
+  }
+
+  if (candidate.sourceType === "odoo-format" || candidate.sourceType === "single") {
+    return 4;
+  }
+
+  if (candidate.sourceType === "package-label") {
+    return 3;
+  }
+
+  if (candidate.sourceType === "package-count") {
+    return 2;
+  }
+
+  return 1;
+}
+
+function getUnitCountPriceCoherence(candidate, product, packagePrices, singleUnitPrice) {
+  if (!Number.isFinite(candidate.value) || candidate.value <= 0) {
+    return -Infinity;
+  }
+
+  if (packagePrices.length === 0) {
+    return 0;
+  }
+
+  let score = 0;
+  const expectedUnitPrice = getExpectedUnitPrice(product);
+
+  for (const packagePrice of packagePrices) {
+    if (!Number.isFinite(packagePrice) || packagePrice <= 0) {
+      continue;
+    }
+
+    const unitPrice = packagePrice / candidate.value;
+    if (!isReliableUnitPrice(unitPrice)) {
+      score -= 8;
+      continue;
+    }
+
+    const expectedDistance = Math.abs(unitPrice - expectedUnitPrice) / expectedUnitPrice;
+    score += Math.max(0, 6 - expectedDistance * 8);
+
+    if (Number.isFinite(singleUnitPrice) && singleUnitPrice > 0) {
+      const peerDistance = Math.abs(unitPrice - singleUnitPrice) / singleUnitPrice;
+      score += Math.max(0, 7 - peerDistance * 10);
+    }
+
+    if (unitPrice >= getMinimumPlausibleUnitPrice(product) && unitPrice <= 8) {
+      score += 2;
+    }
   }
 
   return score;
