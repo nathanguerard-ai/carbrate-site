@@ -14,6 +14,8 @@ import {
   type Offer,
 } from "@/lib/product-offer-catalog";
 
+type DisplayMode = "auto" | "desktop" | "mobile";
+
 export default function Home() {
   const [targetGrams, setTargetGrams] = useState(DEFAULT_TARGET_CARBS);
   const [pendingTargetGrams, setPendingTargetGrams] = useState(DEFAULT_TARGET_CARBS);
@@ -22,6 +24,7 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState("ratio");
   const [page, setPage] = useState(1);
+  const [displayMode, setDisplayMode] = useState<DisplayMode>("auto");
   const itemsPerPage = 20;
 
   useEffect(() => {
@@ -77,15 +80,27 @@ export default function Home() {
     selectedTypes.length > 0 ||
     selectedBrands.length > 0 ||
     normalizedSearch.length > 0;
+  const tableVisibilityClass =
+    displayMode === "mobile"
+      ? "hidden"
+      : displayMode === "desktop"
+        ? "block"
+        : "hidden md:block";
+  const mobileVisibilityClass =
+    displayMode === "desktop"
+      ? "hidden"
+      : displayMode === "mobile"
+        ? "grid"
+        : "grid md:hidden";
 
   return (
     <div className="mx-auto w-full max-w-7xl flex-col px-6 py-8 sm:px-8 lg:px-10">
       <section className="grid gap-8 pb-10 pt-4 lg:grid-cols-[1.08fr_0.92fr]">
         <div>
-          <div className="inline-flex rounded-full border border-ink/10 bg-white/70 px-4 py-2 text-sm text-ink/75 backdrop-blur">
+          <div className="inline-flex rounded-full border border-pine/15 bg-white px-4 py-2 text-sm font-medium text-pine shadow-sm">
             Nutrition sportive d'endurance
           </div>
-          <h1 className="mt-6 max-w-3xl text-5xl font-semibold tracking-[-0.04em] text-ink sm:text-6xl">
+          <h1 className="mt-6 max-w-3xl text-5xl font-semibold text-ink sm:text-6xl">
             Compare les glucides, les prix et les portions.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-ink/72">
@@ -109,12 +124,38 @@ export default function Home() {
               </span>
             </div>
           </div>
+          <div className="mt-6 inline-flex flex-wrap gap-2 rounded-lg border border-[var(--line)] bg-white p-2 shadow-sm">
+            {[
+              ["auto", "Auto"],
+              ["desktop", "Ordinateur"],
+              ["mobile", "Cellulaire"],
+            ].map(([mode, label]) => (
+              <button
+                key={mode}
+                type="button"
+                onClick={() => setDisplayMode(mode as DisplayMode)}
+                className={`rounded-md px-3 py-2 text-sm font-medium transition ${
+                  displayMode === mode
+                    ? "bg-pine text-white"
+                    : "text-ink/65 hover:bg-pine/8 hover:text-pine"
+                }`}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
         </div>
 
-        <section className="rounded-[2rem] border border-[var(--line)] bg-ink p-6 text-white shadow-card">
+        <section className="overflow-hidden rounded-lg border border-[var(--line)] bg-ink text-white shadow-card">
+          <img
+            src="https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=1200&q=80"
+            alt=""
+            className="h-36 w-full object-cover"
+          />
+          <div className="p-6">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="text-sm uppercase tracking-[0.2em] text-white/45">
+              <p className="text-sm font-medium text-white/55">
                 Objectif
               </p>
               <h2 className="mt-3 text-2xl font-semibold">
@@ -187,9 +228,10 @@ export default function Home() {
                 onChange={(event) =>
                   setPendingTargetGrams(clampTargetGrams(Number(event.target.value)))
                 }
-                className="w-full accent-[#c95c2b]"
+                className="w-full accent-[#e64b5d]"
               />
             </div>
+          </div>
           </div>
         </section>
       </section>
@@ -347,7 +389,99 @@ export default function Home() {
               ) : null}
             </div>
           </div>
-          <div className="overflow-x-auto">
+          <div className={`${mobileVisibilityClass} gap-3 p-4`}>
+            {paginatedProducts.length === 0 ? (
+              <div className="rounded-lg border border-[var(--line)] bg-white p-5 text-center text-sm text-ink/60">
+                Aucun produit ne correspond à cette combinaison de filtres.
+              </div>
+            ) : null}
+            {paginatedProducts.map((product, index) => {
+              const globalIndex = (page - 1) * itemsPerPage + index;
+
+              return (
+                <article
+                  key={`mobile-${product.id}`}
+                  className="rounded-lg border border-[var(--line)] bg-white p-4 shadow-sm"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <p className="text-xs font-semibold text-accent">
+                        #{globalIndex + 1} · {product.type}
+                      </p>
+                      <h3 className="mt-1 text-lg font-semibold text-ink">
+                        {product.brand} {product.name}
+                      </h3>
+                    </div>
+                    {isVerifiedOffer(product.cheapestOffer) ? (
+                      <span className="rounded-full bg-pine/10 px-2.5 py-1 text-xs text-pine">
+                        Vérifié
+                      </span>
+                    ) : null}
+                  </div>
+                  <div className="mt-4 grid grid-cols-3 gap-2 text-center">
+                    <div className="rounded-lg bg-pine/8 px-2 py-3">
+                      <p className="text-xs text-ink/55">Glucides</p>
+                      <p className="mt-1 font-semibold text-ink">{product.carbsGrams} g</p>
+                    </div>
+                    <div className="rounded-lg bg-accent/8 px-2 py-3">
+                      <p className="text-xs text-ink/55">Ratio</p>
+                      <p className="mt-1 font-semibold text-accent">
+                        {product.carbsPerDollar.toFixed(2)}
+                      </p>
+                    </div>
+                    <div className="rounded-lg bg-white px-2 py-3 ring-1 ring-ink/10">
+                      <p className="text-xs text-ink/55">Coût</p>
+                      <p className="mt-1 font-semibold text-ink">
+                        ${product.costForTargetGrams.toFixed(2)}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="mt-4 flex items-center justify-between gap-3">
+                    <div className="text-sm text-ink/65">
+                      <p className="font-semibold text-ink">
+                        ${getDisplayedOfferPrice(product.cheapestOffer).toFixed(2)}
+                      </p>
+                      <p>{describeOfferPrice(product.cheapestOffer)}</p>
+                    </div>
+                    <a
+                      href={product.cheapestOffer.productUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="rounded-md bg-ink px-3 py-2 text-sm font-medium text-white transition hover:bg-accent"
+                    >
+                      Voir
+                    </a>
+                  </div>
+                </article>
+              );
+            })}
+            {totalPages > 1 ? (
+              <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-[var(--line)] bg-white p-3">
+                <p className="text-sm text-ink/60">
+                  Page {page} sur {totalPages}
+                </p>
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setPage(page - 1)}
+                    disabled={page === 1}
+                    className="rounded-md border border-[var(--line)] px-3 py-2 text-sm disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    Précédent
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setPage(page + 1)}
+                    disabled={page === totalPages}
+                    className="rounded-md border border-[var(--line)] px-3 py-2 text-sm disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    Suivant
+                  </button>
+                </div>
+              </div>
+            ) : null}
+          </div>
+          <div className={`${tableVisibilityClass} overflow-x-auto`}>
             <table className="min-w-full table-fixed text-left">
               <colgroup>
                 <col className="w-20" />
@@ -358,7 +492,7 @@ export default function Home() {
                 <col className="w-[13%]" />
                 <col className="w-[17%]" />
               </colgroup>
-              <thead className="sticky top-0 z-10 border-b border-[var(--line)] bg-[#f7f1e6]/95 text-xs uppercase tracking-[0.18em] text-ink/55 backdrop-blur">
+              <thead className="sticky top-0 z-10 border-b border-[var(--line)] bg-[#edf8f4]/95 text-xs font-semibold text-ink/55 backdrop-blur">
                 <tr>
                   <th className="px-6 py-4 text-center">#</th>
                   <th className="px-6 py-4 text-left">Produit</th>

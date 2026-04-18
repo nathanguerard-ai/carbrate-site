@@ -20,6 +20,17 @@ export type EffortAdvisorInput = {
   question?: string;
 };
 
+export type MissingAdvisorInfo =
+  | "duration"
+  | "targetCarbsPerHour"
+  | "productPreference";
+
+export type AdvisorQuestionAnalysis = {
+  input: EffortAdvisorInput;
+  missingInfo: MissingAdvisorInfo[];
+  prompt: string | null;
+};
+
 export type EffortAdvisorItem = {
   productId: string;
   name: string;
@@ -57,9 +68,9 @@ export type EffortAdvisorResult = {
 
 const TYPE_KEYWORDS: Array<[ProductType, RegExp]> = [
   ["Gel", /\b(gel|gels)\b/i],
-  ["Boisson", /\b(boisson|drink|mix|poudre|bouteille)\b/i],
-  ["Barre", /\b(barre|bar|bars)\b/i],
-  ["Autre", /\b(autre|autres|chew|chews|gomme|gummies)\b/i],
+  ["Boisson", /\b(boisson|boissons|liquide|drink|mix|poudre|bouteille|bidon)\b/i],
+  ["Barre", /\b(barre|barres|bar|bars|solide)\b/i],
+  ["Autre", /\b(autre|autres|chew|chews|gomme|gommes|gummies)\b/i],
 ];
 const PRODUCT_TYPES: ProductType[] = ["Gel", "Boisson", "Barre", "Autre"];
 
@@ -69,23 +80,68 @@ type AdvisorSelection = {
 };
 
 export function parseAdvisorQuestion(question: string): EffortAdvisorInput {
-  const durationMinutes = parseDurationMinutes(question) ?? 120;
-  const targetCarbsPerHour = parseCarbsPerHour(question) ?? DEFAULT_TARGET_CARBS;
-  const preferredTypes = TYPE_KEYWORDS
-    .filter(([, pattern]) => pattern.test(question))
-    .map(([type]) => type);
-  const desiredTypeCounts = parseDesiredTypeCounts(question);
+  return analyzeAdvisorQuestion(question, {
+    durationMinutes: 120,
+    targetCarbsPerHour: DEFAULT_TARGET_CARBS,
+  }).input;
+}
 
-  return {
-    durationMinutes,
-    targetCarbsPerHour,
+export function analyzeAdvisorQuestion(
+  question: string,
+  fallbackInput: Partial<EffortAdvisorInput> = {},
+): AdvisorQuestionAnalysis {
+  const durationMinutes = parseDurationMinutes(question);
+  const targetCarbsPerHour = parseCarbsPerHour(question);
+  const preferredTypes = parsePreferredTypes(question);
+  const desiredTypeCounts = parseDesiredTypeCounts(question);
+  const missingInfo: MissingAdvisorInfo[] = [];
+
+  if (
+    durationMinutes === null &&
+    !Number.isFinite(fallbackInput.durationMinutes)
+  ) {
+    missingInfo.push("duration");
+  }
+
+  if (
+    targetCarbsPerHour === null &&
+    !Number.isFinite(fallbackInput.targetCarbsPerHour)
+  ) {
+    missingInfo.push("targetCarbsPerHour");
+  }
+
+  const fallbackTypeCounts = normalizeTypeCounts(fallbackInput.desiredTypeCounts);
+  const hasFallbackProductPreference =
+    (fallbackInput.preferredTypes?.length ?? 0) > 0 ||
+    Object.keys(fallbackTypeCounts).length > 0;
+
+  if (
+    preferredTypes.length === 0 &&
+    Object.keys(desiredTypeCounts).length === 0 &&
+    !hasFallbackProductPreference
+  ) {
+    missingInfo.push("productPreference");
+  }
+
+  const input = {
+    ...fallbackInput,
+    durationMinutes:
+      durationMinutes ?? fallbackInput.durationMinutes ?? 120,
+    targetCarbsPerHour:
+      targetCarbsPerHour ?? fallbackInput.targetCarbsPerHour ?? DEFAULT_TARGET_CARBS,
     preference: parsePreference(question),
     caffeine: /\b(sans|éviter|eviter|pas de|aucune?)\s+(caféine|cafeine)\b/i.test(question)
       ? "avoid"
-      : "any",
+      : fallbackInput.caffeine ?? "any",
     preferredTypes,
     desiredTypeCounts,
     question,
+  } as EffortAdvisorInput;
+
+  return {
+    input,
+    missingInfo,
+    prompt: missingInfo.length > 0 ? formatMissingInfoPrompt(missingInfo) : null,
   };
 }
 
@@ -412,6 +468,34 @@ function getBrandPreferencePenalty(
   return preferredBrand && product.brand !== preferredBrand ? 1 : 0;
 }
 
+function parsePreferredTypes(question: string) {
+  return TYPE_KEYWORDS
+    .filter(([type, pattern]) => {
+      if (isTypeExcluded(question, type)) {
+        return false;
+      }
+
+      return pattern.test(question);
+    })
+    .map(([type]) => type);
+}
+
+function isTypeExcluded(question: string, type: ProductType) {
+  const labels: Record<ProductType, string[]> = {
+    Gel: ["gel", "gels"],
+    Boisson: ["boisson", "boissons", "drink", "mix", "poudre"],
+    Barre: ["barre", "barres", "bar"],
+    Autre: ["chew", "chews", "gomme", "gommes", "autre", "autres"],
+  };
+  const labelPattern = labels[type].join("|");
+  const negativePattern = new RegExp(
+    `\\b(?:sans|pas de|aucun|aucune|exclure|éviter|eviter)\\s+(?:${labelPattern})\\b`,
+    "i",
+  );
+
+  return negativePattern.test(question);
+}
+
 function selectProductForType(
   products: ProductWithMetrics[],
   type: ProductType,
@@ -456,14 +540,22 @@ function isNeutralCarbAdditive(product: ProductWithMetrics) {
 }
 
 function parseDurationMinutes(question: string) {
-  const hoursMinutes = question.match(/(\d+(?:[.,]\d+)?)\s*h(?:eures?)?\s*(\d{1,2})?/i);
+  const colonDuration = question.match(/\b(\d{1,2})\s*[:]\s*(\d{1,2})\b/);
+  if (colonDuration) {
+    return Number.parseInt(colonDuration[1], 10) * 60 +
+      Number.parseInt(colonDuration[2], 10);
+  }
+
+  const hoursMinutes = question.match(
+    /(\d+(?:[.,]\d+)?)\s*(?:h|hr|hrs|heure|heures)\s*(\d{1,2})?\s*(?:min|minutes)?/i,
+  );
   if (hoursMinutes) {
     const hours = parseNumber(hoursMinutes[1]) ?? 0;
     const minutes = Number.parseInt(hoursMinutes[2] ?? "0", 10);
     return Math.round(hours * 60 + minutes);
   }
 
-  const minutes = question.match(/(\d{2,3})\s*(?:min|minutes)\b/i);
+  const minutes = question.match(/\b(\d{2,3})\s*(?:min|minutes)\b/i);
   if (minutes) {
     return Number.parseInt(minutes[1], 10);
   }
@@ -472,8 +564,18 @@ function parseDurationMinutes(question: string) {
 }
 
 function parseCarbsPerHour(question: string) {
-  const match = question.match(/(\d{2,3})\s*g\s*(?:\/|par)?\s*h/i);
-  return match ? Number.parseInt(match[1], 10) : null;
+  const hourlyMatch = question.match(
+    /\b(\d{2,3})\s*(?:g|grammes?|glucides?|carbs?)\s*(?:\/\s*h|par\s*(?:heure|h)|(?:a|à)\s*l['’]?heure|heure|h\b)/i,
+  );
+  if (hourlyMatch) {
+    return Number.parseInt(hourlyMatch[1], 10);
+  }
+
+  const contextMatch = question.match(
+    /\b(?:cible|objectif|vise|viser|veux|besoin|glucides?|carbs?)\D{0,24}(\d{2,3})\s*(?:g|grammes?|glucides?|carbs?)?\b/i,
+  );
+
+  return contextMatch ? Number.parseInt(contextMatch[1], 10) : null;
 }
 
 function parsePreference(question: string): EffortPreference {
@@ -495,20 +597,52 @@ function parsePreference(question: string): EffortPreference {
 function parseDesiredTypeCounts(question: string) {
   const counts: Partial<Record<ProductType, number>> = {};
   const patterns: Array<[ProductType, RegExp]> = [
-    ["Gel", /\b(\d+)\s*gels?\b/i],
-    ["Boisson", /\b(\d+)\s*(?:boissons?|bouteilles?|drink|mix)\b/i],
-    ["Barre", /\b(\d+)\s*barres?\b/i],
-    ["Autre", /\b(\d+)\s*(?:autres?|chews?|gommes?|gummies)\b/i],
+    ["Gel", /\b(?:x\s*)?(\d+)\s*(?:gels?)\b|\b(?:gels?)\s*x?\s*(\d+)\b/i],
+    ["Boisson", /\b(?:x\s*)?(\d+)\s*(?:boissons?|bouteilles?|drinks?|mix|bidons?)\b|\b(?:boissons?|bouteilles?|drinks?|mix|bidons?)\s*x?\s*(\d+)\b/i],
+    ["Barre", /\b(?:x\s*)?(\d+)\s*(?:barres?|bars?)\b|\b(?:barres?|bars?)\s*x?\s*(\d+)\b/i],
+    ["Autre", /\b(?:x\s*)?(\d+)\s*(?:autres?|chews?|gommes?|gummies)\b|\b(?:autres?|chews?|gommes?|gummies)\s*x?\s*(\d+)\b/i],
   ];
 
   for (const [type, pattern] of patterns) {
     const match = question.match(pattern);
+    if (isTypeExcluded(question, type)) {
+      counts[type] = 0;
+      continue;
+    }
+
     if (match) {
-      counts[type] = clamp(Number.parseInt(match[1], 10), 0, 12);
+      counts[type] = clamp(Number.parseInt(match[1] ?? match[2], 10), 0, 12);
     }
   }
 
   return counts;
+}
+
+function formatMissingInfoPrompt(missingInfo: MissingAdvisorInfo[]) {
+  const details = missingInfo.map((entry) => {
+    if (entry === "duration") {
+      return "la durée de l'effort";
+    }
+
+    if (entry === "targetCarbsPerHour") {
+      return "la cible de glucides par heure";
+    }
+
+    return "le type de produit souhaité";
+  });
+
+  return [
+    "Il me manque quelques détails pour générer un plan utile.",
+    `Précise ${formatList(details)}, par exemple: “3 h, 80 g/h, gels et boisson, sans caféine”.`,
+  ].join(" ");
+}
+
+function formatList(values: string[]) {
+  if (values.length <= 1) {
+    return values[0] ?? "";
+  }
+
+  return `${values.slice(0, -1).join(", ")} et ${values.at(-1)}`;
 }
 
 function normalizeTypeCounts(

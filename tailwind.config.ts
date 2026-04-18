@@ -9,14 +9,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        surface: "#f5efe4",
-        ink: "#112019",
-        accent: "#c95c2b",
-        pine: "#2e5d50",
-        sand: "#d8c49c",
+        surface: "#f6faf7",
+        ink: "#17251e",
+        accent: "#e64b5d",
+        pine: "#177d72",
+        sand: "#f4c542",
       },
       boxShadow: {
-        card: "0 18px 60px rgba(17, 32, 25, 0.12)",
+        card: "0 18px 50px rgba(23, 37, 30, 0.12)",
       },
       fontFamily: {
         sans: ["var(--font-sans)"],

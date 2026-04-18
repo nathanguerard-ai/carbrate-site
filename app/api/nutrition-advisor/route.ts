@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import {
+  analyzeAdvisorQuestion,
   buildEffortAdvisorResult,
-  parseAdvisorQuestion,
   type EffortAdvisorInput,
 } from "@/lib/nutrition-advisor";
 
@@ -11,11 +11,23 @@ export async function POST(request: NextRequest) {
       question?: string;
       input?: Partial<EffortAdvisorInput>;
     };
-    const parsedInput = body.question
-      ? parseAdvisorQuestion(body.question)
+    const analysis = body.question
+      ? analyzeAdvisorQuestion(body.question, body.input)
       : null;
+
+    if (analysis?.missingInfo.length) {
+      return NextResponse.json(
+        {
+          error: analysis.prompt,
+          missingInfo: analysis.missingInfo,
+          input: analysis.input,
+        },
+        { status: 400 },
+      );
+    }
+
     const input = {
-      ...parsedInput,
+      ...analysis?.input,
       ...body.input,
       question: body.question ?? body.input?.question,
     } as EffortAdvisorInput;

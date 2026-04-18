@@ -94,7 +94,7 @@ export function getProducts(
   return catalog.products
     .map((product) => {
       const validOffers = product.offers.filter(isValidOffer);
-      const cheapestOffer = [...validOffers].sort((a, b) => a.price - b.price)[0];
+      const cheapestOffer = choosePrimaryOffer(validOffers);
       if (!cheapestOffer || !Number.isFinite(product.carbsGrams) || product.carbsGrams <= 0) {
         return null;
       }
@@ -184,6 +184,31 @@ export function getOfferVerificationLabel(offer: Offer) {
   return offer.verificationLabel ?? labelForVerificationStatus(
     getOfferVerificationStatus(offer),
   );
+}
+
+function choosePrimaryOffer(offers: Offer[]) {
+  return [...offers].sort((a, b) => {
+    const statusDifference =
+      getOfferStatusRank(a) - getOfferStatusRank(b);
+    if (statusDifference !== 0) {
+      return statusDifference;
+    }
+
+    return a.price - b.price;
+  })[0];
+}
+
+function getOfferStatusRank(offer: Offer) {
+  const status = getOfferVerificationStatus(offer);
+  if (status === "verified") {
+    return 0;
+  }
+
+  if (status === "estimated") {
+    return 1;
+  }
+
+  return 2;
 }
 
 export function getPortionRecommendations(

@@ -39,7 +39,7 @@ export function NutritionAdvisorPanel() {
   const [typeBrandPreferences, setTypeBrandPreferences] =
     useState<Record<ProductType, string>>(initialTypeValues);
   const [question, setQuestion] = useState(
-    "Indique la durée de la sortie, la cible de glucides par heure et le type de produit préféré.",
+    "Ex.: 3 h, 80 g/h, gels et boisson, sans caféine.",
   );
   const [calculatorResult, setCalculatorResult] =
     useState<EffortAdvisorResult | null>(null);
@@ -47,6 +47,7 @@ export function NutritionAdvisorPanel() {
     useState<EffortAdvisorResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [missingPrompt, setMissingPrompt] = useState<string | null>(null);
 
   const activeResult = assistantResult ?? calculatorResult;
 
@@ -55,6 +56,7 @@ export function NutritionAdvisorPanel() {
     setCalculatorResult(buildEffortAdvisorResult(buildCalculatorInput()));
     setAssistantResult(null);
     setError(null);
+    setMissingPrompt(null);
   }
 
   async function handleQuestionSubmit(event: FormEvent<HTMLFormElement>) {
@@ -74,9 +76,14 @@ export function NutritionAdvisorPanel() {
       const payload = await response.json();
 
       if (!response.ok) {
+        if (payload.missingInfo) {
+          setMissingPrompt(payload.error);
+        }
+
         throw new Error(payload.error ?? "Le plan n'a pas pu être généré.");
       }
 
+      setMissingPrompt(null);
       setAssistantResult(payload);
       const parsed = parseAdvisorQuestion(question);
       setDurationHours(String(Math.floor(parsed.durationMinutes / 60)));
@@ -150,19 +157,26 @@ export function NutritionAdvisorPanel() {
   }
 
   return (
-    <section className="py-8">
+    <section className="py-10">
       <div className="grid gap-5 lg:grid-cols-[0.95fr_1.05fr]">
-        <div className="rounded-[1.5rem] border border-[var(--line)] bg-white/70 p-5">
-          <p className="text-xs uppercase tracking-[0.18em] text-ink/50">
-            Plan personnalisé
-          </p>
-          <h2 className="mt-3 text-2xl font-semibold text-ink">
-            Plan d'effort
-          </h2>
-          <p className="mt-2 text-sm leading-6 text-ink/65">
-            Calcule une stratégie d'apport selon la durée, la cible horaire et
-            les produits disponibles.
-          </p>
+        <div className="rounded-lg border border-[var(--line)] bg-white p-5 shadow-card">
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <p className="text-xs font-semibold text-accent">
+                Analyse intelligente
+              </p>
+              <h2 className="mt-2 text-2xl font-semibold text-ink">
+                Plan d'effort
+              </h2>
+              <p className="mt-2 text-sm leading-6 text-ink/65">
+                Décris la sortie, la cible de glucides et les produits souhaités.
+                CarbRate valide les informations avant de calculer.
+              </p>
+            </div>
+            <div className="rounded-lg bg-pine/10 px-3 py-2 text-xs font-medium text-pine">
+              Durée + glucides + produits
+            </div>
+          </div>
 
           <form onSubmit={handleCalculatorSubmit} className="mt-5 grid gap-4">
             <div className="grid grid-cols-2 gap-3">
@@ -314,6 +328,22 @@ export function NutritionAdvisorPanel() {
                 className="resize-none rounded-xl border border-ink/10 bg-white px-3 py-2 text-ink outline-none focus:border-accent"
               />
             </label>
+            <div className="flex flex-wrap gap-2">
+              {[
+                "2 h 30, 70 g/h, gels seulement",
+                "4 h, 90 g/h, boisson et barres, sans caféine",
+                "90 min, 60 g/h, 2 gels et 1 boisson",
+              ].map((example) => (
+                <button
+                  key={example}
+                  type="button"
+                  onClick={() => setQuestion(example)}
+                  className="rounded-full border border-pine/15 bg-pine/8 px-3 py-1.5 text-xs text-pine transition hover:border-pine/35 hover:bg-pine/12"
+                >
+                  {example}
+                </button>
+              ))}
+            </div>
             <button
               type="submit"
               disabled={isLoading}
@@ -321,11 +351,19 @@ export function NutritionAdvisorPanel() {
             >
               {isLoading ? "Analyse..." : "Générer le plan"}
             </button>
-            {error ? <p className="text-sm text-red-700">{error}</p> : null}
+            {missingPrompt ? (
+              <div className="rounded-lg border border-accent/25 bg-accent/8 p-4 text-sm leading-6 text-ink">
+                <p className="font-semibold text-accent">Information requise</p>
+                <p className="mt-1">{missingPrompt}</p>
+              </div>
+            ) : null}
+            {error && !missingPrompt ? (
+              <p className="text-sm text-red-700">{error}</p>
+            ) : null}
           </form>
         </div>
 
-        <div className="rounded-[1.5rem] border border-[var(--line)] bg-[var(--panel)] p-5">
+        <div className="rounded-lg border border-[var(--line)] bg-white p-5 shadow-card">
           {activeResult ? (
             <>
               <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
@@ -398,16 +436,16 @@ export function NutritionAdvisorPanel() {
               </div>
             </>
           ) : (
-            <div className="flex min-h-[22rem] flex-col justify-center rounded-xl border border-ink/10 bg-white/65 p-6">
-              <p className="text-xs uppercase tracking-[0.18em] text-ink/50">
+            <div className="flex min-h-[22rem] flex-col justify-center rounded-lg border border-pine/10 bg-pine/8 p-6">
+              <p className="text-xs font-semibold text-pine">
                 Plan recommandé
               </p>
               <h3 className="mt-3 text-2xl font-semibold text-ink">
-                Prêt à calculer
+                Prêt à analyser
               </h3>
               <p className="mt-3 text-sm leading-6 text-ink/65">
-                Entre la durée, la cible de glucides et tes préférences, puis
-                lance le calcul.
+                Écris une demande complète comme “3 h, 80 g/h, gels et boisson”.
+                Si un détail manque, CarbRate le demandera avant de proposer un plan.
               </p>
             </div>
           )}

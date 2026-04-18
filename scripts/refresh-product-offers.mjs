@@ -752,7 +752,7 @@ function extractPackageCountCandidates(text) {
       sourceType: "package-label",
     },
     {
-      pattern: /\b(\d{1,3})\s*(?:x|ct|count|pack|servings?|portions?|gels|bars|barres|sachets|chews|stroopwafels)\b/gi,
+      pattern: /\b(\d{1,3})\s*(?:x|ct|count|pack|gels|bars|barres|sachets|chews|stroopwafels)\b/gi,
       sourceType: "package-count",
     },
   ];

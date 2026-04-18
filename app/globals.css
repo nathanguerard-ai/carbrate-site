@@ -3,10 +3,10 @@
 @tailwind utilities;
 
 :root {
-  --background: #f5efe4;
-  --foreground: #112019;
-  --panel: rgba(255, 251, 242, 0.84);
-  --line: rgba(17, 32, 25, 0.08);
+  --background: #f6faf7;
+  --foreground: #17251e;
+  --panel: rgba(255, 255, 255, 0.88);
+  --line: rgba(23, 37, 30, 0.1);
 }
 
 * {
@@ -26,9 +26,7 @@ body {
     "Segoe UI",
     sans-serif;
   background:
-    radial-gradient(circle at top left, rgba(201, 92, 43, 0.18), transparent 28%),
-    radial-gradient(circle at top right, rgba(46, 93, 80, 0.18), transparent 32%),
-    linear-gradient(180deg, #f9f3e8 0%, #f0e7d6 100%);
+    linear-gradient(180deg, #f6faf7 0%, #ffffff 48%, #edf8f4 100%);
   color: var(--foreground);
 }
 
