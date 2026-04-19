@@ -1,18 +1,26 @@
 {
-  "updatedAt": "2026-04-19T02:42:12.963Z",
+  "updatedAt": "2026-04-19T03:28:14.330Z",
   "analysis": {
     "mode": "cached",
     "pagesFetched": 0,
     "pagesFromCache": 62,
     "offerPricesFromLive": 56,
-    "offerPricesFromFallback": 0,
+    "offerPricesFromFallback": 4,
     "offerPricesSkipped": 0,
     "unitCountsFromLive": 38,
     "unitCountsFromCatalog": 4,
     "unitCountsInferredFromPrice": 2,
-    "unitCountsDefaulted": 12,
+    "unitCountsDefaulted": 16,
     "carbsFromLive": 28,
-    "carbsFromCatalog": 15
+    "carbsFromCatalog": 19,
+    "discoveredProductsAdded": 0,
+    "discoveredProductsSkipped": 0,
+    "discoveredProductsMerged": 0,
+    "discoveredBrandsScanned": 0,
+    "discoveryPagesFetched": 0,
+    "discoveredOfferUrlsAdded": 0,
+    "searchQueriesRun": 0,
+    "retailerSearchQueriesRun": 0
   },
   "products": [
     {
@@ -22,6 +30,7 @@
       "type": "Gel",
       "carbsGrams": 25,
       "carbsSource": "catalog",
+      "officialProductUrl": "https://www.maurten.com/products/gel-100",
       "offers": [
         {
           "seller": "fitfirst.ca",
@@ -36,7 +45,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix vient d'une page vendeur et le format de portion a été confirmé par une déduction cohérente entre le prix de boîte et le prix unitaire.",
-          "lastCheckedAt": "2026-04-19T02:42:12.956Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.322Z"
         }
       ]
     },
@@ -47,6 +56,7 @@
       "type": "Gel",
       "carbsGrams": 12,
       "carbsSource": "https://lecoureurnordique.ca/en/products/maurten-gel-100-caf-100-boite",
+      "officialProductUrl": "https://www.maurten.com/products/gel-100-caf-100",
       "offers": [
         {
           "seller": "spryactive.ca",
@@ -61,7 +71,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T02:42:12.958Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.324Z"
         },
         {
           "seller": "lecoureurnordique.ca",
@@ -76,7 +86,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.958Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.324Z"
         }
       ]
     },
@@ -87,6 +97,7 @@
       "type": "Gel",
       "carbsGrams": 40,
       "carbsSource": "catalog",
+      "officialProductUrl": "https://www.maurten.com/products/gel-160",
       "offers": [
         {
           "seller": "fitfirst.ca",
@@ -101,7 +112,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix vient d'une page vendeur et le format de portion a été confirmé par une déduction cohérente entre le prix de boîte et le prix unitaire.",
-          "lastCheckedAt": "2026-04-19T02:42:12.958Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.324Z"
         }
       ]
     },
@@ -112,6 +123,7 @@
       "type": "Barre",
       "carbsGrams": 20,
       "carbsSource": "https://lecoureurnordique.ca/products/maurten-solids-160-boite",
+      "officialProductUrl": "https://www.maurten.com/products/solid-160",
       "offers": [
         {
           "seller": "frontrunners.ca",
@@ -126,7 +138,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.959Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.324Z"
         },
         {
           "seller": "lecoureurnordique.ca",
@@ -141,7 +153,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.959Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.324Z"
         }
       ]
     },
@@ -152,6 +164,7 @@
       "type": "Boisson",
       "carbsGrams": 40,
       "carbsSource": "catalog",
+      "officialProductUrl": "https://www.maurten.com/products/drink-mix-160",
       "offers": [
         {
           "seller": "spryactive.ca",
@@ -166,7 +179,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T02:42:12.959Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.325Z"
         },
         {
           "seller": "frontrunners.ca",
@@ -181,7 +194,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T02:42:12.959Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.325Z"
         }
       ]
     },
@@ -192,6 +205,7 @@
       "type": "Boisson",
       "carbsGrams": 80,
       "carbsSource": "catalog",
+      "officialProductUrl": "https://www.maurten.com/products/drink-mix-320",
       "offers": [
         {
           "seller": "spryactive.ca",
@@ -206,7 +220,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T02:42:12.960Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.325Z"
         },
         {
           "seller": "frontrunners.ca",
@@ -221,7 +235,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T02:42:12.960Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.325Z"
         }
       ]
     },
@@ -232,6 +246,7 @@
       "type": "Boisson",
       "carbsGrams": 80,
       "carbsSource": "catalog",
+      "officialProductUrl": "https://www.maurten.com/products/drink-mix-320-caf-100",
       "offers": [
         {
           "seller": "lecoureurnordique.ca",
@@ -246,7 +261,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.960Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.325Z"
         }
       ]
     },
@@ -257,6 +272,7 @@
       "type": "Boisson",
       "carbsGrams": 25,
       "carbsSource": "https://upika.ca/en/products/upika-endurance",
+      "officialProductUrl": "https://upika.ca/en/products/upika-endurance",
       "offers": [
         {
           "seller": "upika.ca",
@@ -271,7 +287,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.960Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.325Z"
         },
         {
           "seller": "shopsante.ca",
@@ -286,7 +302,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.960Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.325Z"
         },
         {
           "seller": "lecoureurnordique.ca",
@@ -301,7 +317,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.960Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.326Z"
         }
       ]
     },
@@ -312,6 +328,7 @@
       "type": "Boisson",
       "carbsGrams": 25,
       "carbsSource": "https://upika.ca/en/products/upika-endurance-plus-cerise-lime",
+      "officialProductUrl": "https://upika.ca/en/products/upika-endurance-plus-cerise-lime",
       "offers": [
         {
           "seller": "upika.ca",
@@ -326,7 +343,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.960Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.326Z"
         },
         {
           "seller": "shopsante.ca",
@@ -341,7 +358,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.960Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.326Z"
         }
       ]
     },
@@ -352,6 +369,7 @@
       "type": "Gel",
       "carbsGrams": 30,
       "carbsSource": "catalog",
+      "officialProductUrl": "https://www.precisionhydration.com/ca/en/products/pf-30-gel/",
       "offers": [
         {
           "seller": "precisionhydration.com",
@@ -366,7 +384,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.960Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.326Z"
         },
         {
           "seller": "enroute.run",
@@ -381,7 +399,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T02:42:12.960Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.326Z"
         }
       ]
     },
@@ -392,6 +410,7 @@
       "type": "Gel",
       "carbsGrams": 90,
       "carbsSource": "catalog",
+      "officialProductUrl": "https://www.precisionhydration.com/ca/en/products/pf-90-gel/",
       "offers": [
         {
           "seller": "enroute.run",
@@ -406,7 +425,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T02:42:12.961Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.326Z"
         },
         {
           "seller": "precisionhydration.com",
@@ -421,7 +440,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.961Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.326Z"
         }
       ]
     },
@@ -432,6 +451,7 @@
       "type": "Gel",
       "carbsGrams": 24,
       "carbsSource": "https://krononutrition.com/products/maple-energy-gels-box-of-24",
+      "officialProductUrl": "https://krononutrition.com/products/maple-energy-gels-box-of-24",
       "offers": [
         {
           "seller": "krononutrition.com",
@@ -446,7 +466,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.961Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.326Z"
         }
       ]
     },
@@ -457,6 +477,7 @@
       "type": "Gel",
       "carbsGrams": 24,
       "carbsSource": "https://krononutrition.com/products/maple-coffee-energy-gels-box-of-24",
+      "officialProductUrl": "https://krononutrition.com/products/maple-coffee-energy-gels-box-of-24",
       "offers": [
         {
           "seller": "krononutrition.com",
@@ -471,7 +492,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.961Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.326Z"
         }
       ]
     },
@@ -482,6 +503,7 @@
       "type": "Gel",
       "carbsGrams": 29,
       "carbsSource": "https://krononutrition.com/products/maple-raspberry-energy-gels-box-of-24",
+      "officialProductUrl": "https://krononutrition.com/products/maple-raspberry-energy-gels-box-of-24",
       "offers": [
         {
           "seller": "krononutrition.com",
@@ -496,7 +518,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.961Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.326Z"
         }
       ]
     },
@@ -507,6 +529,7 @@
       "type": "Gel",
       "carbsGrams": 30,
       "carbsSource": "https://krononutrition.com/products/tropical-energy-gels-box-of-24",
+      "officialProductUrl": "https://krononutrition.com/products/tropical-energy-gels-box-of-24",
       "offers": [
         {
           "seller": "krononutrition.com",
@@ -521,7 +544,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.961Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.327Z"
         }
       ]
     },
@@ -532,6 +555,7 @@
       "type": "Boisson",
       "carbsGrams": 22,
       "carbsSource": "https://krononutrition.com/en-ca/products/lemon-lime-sport-drink-mix",
+      "officialProductUrl": "https://krononutrition.com/en-ca/products/lemon-lime-sport-drink-mix",
       "offers": [
         {
           "seller": "krononutrition.com",
@@ -546,7 +570,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.961Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.327Z"
         },
         {
           "seller": "well.ca",
@@ -561,7 +585,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.961Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.327Z"
         }
       ]
     },
@@ -572,6 +596,7 @@
       "type": "Boisson",
       "carbsGrams": 22,
       "carbsSource": "https://krononutrition.com/en/produit/nutritions/electrolytes-en/peach-sport-drink-mix/",
+      "officialProductUrl": "https://krononutrition.com/en/produit/nutritions/electrolytes-en/peach-sport-drink-mix/",
       "offers": [
         {
           "seller": "krononutrition.com",
@@ -586,7 +611,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.961Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.327Z"
         },
         {
           "seller": "elementsport.ca",
@@ -601,7 +626,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.961Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.327Z"
         }
       ]
     },
@@ -612,6 +637,7 @@
       "type": "Barre",
       "carbsGrams": 40,
       "carbsSource": "https://fuelkit.ca/products/maurten-solid-160-bar-single-bar",
+      "officialProductUrl": null,
       "offers": [
         {
           "seller": "frontrunners.ca",
@@ -626,7 +652,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.961Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.327Z"
         },
         {
           "seller": "fuelkit.ca",
@@ -641,7 +667,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T02:42:12.961Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.327Z"
         }
       ]
     },
@@ -652,6 +678,7 @@
       "type": "Autre",
       "carbsGrams": 30,
       "carbsSource": "catalog",
+      "officialProductUrl": "https://www.precisionhydration.com/ca/en/products/pf-30-chew/",
       "offers": [
         {
           "seller": "precisionhydration.com",
@@ -666,7 +693,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.961Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.327Z"
         }
       ]
     },
@@ -677,6 +704,7 @@
       "type": "Autre",
       "carbsGrams": 68,
       "carbsSource": "https://www.precisionhydration.com/ca/en/products/pf-60-chew-bar/",
+      "officialProductUrl": "https://www.precisionhydration.com/ca/en/products/pf-60-chew-bar/",
       "offers": [
         {
           "seller": "precisionhydration.com",
@@ -691,7 +719,59 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T02:42:12.962Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.327Z"
+        }
+      ]
+    },
+    {
+      "id": "precision-pf30-caffeine-gel",
+      "name": "PF 30 Caffeine Gel",
+      "brand": "Precision Fuel & Hydration",
+      "type": "Gel",
+      "carbsGrams": 30,
+      "carbsSource": "catalog",
+      "officialProductUrl": "https://www.precisionhydration.com/ca/en/products/pf-30-caffeine-gel/",
+      "offers": [
+        {
+          "seller": "precisionhydration.com",
+          "price": 5,
+          "packagePrice": 5,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://www.precisionhydration.com/ca/en/products/pf-30-caffeine-gel/",
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-19T03:28:14.327Z"
+        }
+      ]
+    },
+    {
+      "id": "precision-pf300-flow-gel",
+      "name": "PF 300 Flow Gel",
+      "brand": "Precision Fuel & Hydration",
+      "type": "Gel",
+      "carbsGrams": 300,
+      "carbsSource": "catalog",
+      "officialProductUrl": "https://www.precisionhydration.com/ca/en/products/pf-300-flow-gel/",
+      "offers": [
+        {
+          "seller": "precisionhydration.com",
+          "price": 29.99,
+          "packagePrice": 29.99,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://www.precisionhydration.com/ca/en/products/pf-300-flow-gel/",
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-19T03:28:14.327Z"
         }
       ]
     },
@@ -702,6 +782,7 @@
       "type": "Boisson",
       "carbsGrams": 22,
       "carbsSource": "https://krononutrition.com/en-ca/products/berries-and-pomegranate-sport-drink-mix",
+      "officialProductUrl": "https://krononutrition.com/en-ca/products/berries-and-pomegranate-sport-drink-mix",
       "offers": [
         {
           "seller": "krononutrition.com",
@@ -716,7 +797,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.962Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.327Z"
         }
       ]
     },
@@ -727,6 +808,7 @@
       "type": "Boisson",
       "carbsGrams": 22,
       "carbsSource": "https://krononutrition.com/en-ca/products/pink-limonade-sport-drink-mix",
+      "officialProductUrl": "https://krononutrition.com/en-ca/products/pink-limonade-sport-drink-mix",
       "offers": [
         {
           "seller": "krononutrition.com",
@@ -741,7 +823,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.962Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.327Z"
         }
       ]
     },
@@ -752,6 +834,7 @@
       "type": "Boisson",
       "carbsGrams": 27,
       "carbsSource": "https://upika.ca/en/products/upika-carb-boost",
+      "officialProductUrl": "https://upika.ca/en/products/upika-carb-boost",
       "offers": [
         {
           "seller": "upika.ca",
@@ -766,7 +849,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.962Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.328Z"
         }
       ]
     },
@@ -777,6 +860,7 @@
       "type": "Barre",
       "carbsGrams": 50,
       "carbsSource": "https://upika.ca/en/products/barres-upika-1-barre",
+      "officialProductUrl": "https://upika.ca/en/products/barres-upika-1-barre",
       "offers": [
         {
           "seller": "upika.ca",
@@ -791,7 +875,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.962Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.328Z"
         }
       ]
     },
@@ -802,6 +886,7 @@
       "type": "Boisson",
       "carbsGrams": 27,
       "carbsSource": "catalog",
+      "officialProductUrl": "https://upika.ca/en/products/samples-upika-endurance-citron-lime",
       "offers": [
         {
           "seller": "upika.ca",
@@ -816,7 +901,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.962Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.328Z"
         }
       ]
     },
@@ -827,6 +912,7 @@
       "type": "Boisson",
       "carbsGrams": 25,
       "carbsSource": "catalog",
+      "officialProductUrl": "https://upika.ca/en/products/samples-upika-endurance-melon-d-eau",
       "offers": [
         {
           "seller": "upika.ca",
@@ -841,7 +927,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.962Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.328Z"
         }
       ]
     },
@@ -852,6 +938,7 @@
       "type": "Gel",
       "carbsGrams": 21,
       "carbsSource": "https://krononutrition.com/products/apple-maple-energy-gels-box-of-24",
+      "officialProductUrl": "https://krononutrition.com/products/apple-maple-energy-gels-box-of-24",
       "offers": [
         {
           "seller": "krononutrition.com",
@@ -866,7 +953,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.962Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.328Z"
         }
       ]
     },
@@ -877,6 +964,7 @@
       "type": "Gel",
       "carbsGrams": 30,
       "carbsSource": "https://krononutrition.com/products/citrus-energy-gels-box-of-24",
+      "officialProductUrl": "https://krononutrition.com/products/citrus-energy-gels-box-of-24",
       "offers": [
         {
           "seller": "krononutrition.com",
@@ -891,7 +979,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.962Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.328Z"
         }
       ]
     },
@@ -902,6 +990,7 @@
       "type": "Gel",
       "carbsGrams": 30,
       "carbsSource": "https://krononutrition.com/en/produit/nutritions/gels/blueberry-energy-gel/",
+      "officialProductUrl": "https://krononutrition.com/en/produit/nutritions/gels/blueberry-energy-gel/",
       "offers": [
         {
           "seller": "krononutrition.com",
@@ -916,7 +1005,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.962Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.328Z"
         }
       ]
     },
@@ -927,6 +1016,7 @@
       "type": "Gel",
       "carbsGrams": 30,
       "carbsSource": "https://krononutrition.com/products/salted-caramel-energy-gels-box-of-24",
+      "officialProductUrl": "https://krononutrition.com/products/salted-caramel-energy-gels-box-of-24",
       "offers": [
         {
           "seller": "krononutrition.com",
@@ -941,7 +1031,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.962Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.328Z"
         }
       ]
     },
@@ -952,6 +1042,7 @@
       "type": "Autre",
       "carbsGrams": 38,
       "carbsSource": "https://krononutrition.com/en-ca/products/raspberry-maple-chews",
+      "officialProductUrl": "https://krononutrition.com/en-ca/products/raspberry-maple-chews",
       "offers": [
         {
           "seller": "krononutrition.com",
@@ -966,7 +1057,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.962Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.328Z"
         }
       ]
     },
@@ -977,6 +1068,7 @@
       "type": "Autre",
       "carbsGrams": 39,
       "carbsSource": "https://krononutrition.com/en-ca/products/apple-maple-chews-box-of-12",
+      "officialProductUrl": "https://krononutrition.com/en-ca/products/apple-maple-chews-box-of-12",
       "offers": [
         {
           "seller": "krononutrition.com",
@@ -991,7 +1083,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.962Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.328Z"
         }
       ]
     },
@@ -1002,6 +1094,7 @@
       "type": "Autre",
       "carbsGrams": 39,
       "carbsSource": "https://krononutrition.com/en-ca/products/strawberry-maple-chews-box-of-12",
+      "officialProductUrl": "https://krononutrition.com/en-ca/products/strawberry-maple-chews-box-of-12",
       "offers": [
         {
           "seller": "krononutrition.com",
@@ -1016,7 +1109,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.962Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.328Z"
         }
       ]
     },
@@ -1027,6 +1120,7 @@
       "type": "Barre",
       "carbsGrams": 32,
       "carbsSource": "https://krononutrition.com/en-ca/products/apricot-cranberry-energy-bars-box-of-12",
+      "officialProductUrl": "https://krononutrition.com/en-ca/products/apricot-cranberry-energy-bars-box-of-12",
       "offers": [
         {
           "seller": "krononutrition.com",
@@ -1041,7 +1135,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.962Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.328Z"
         }
       ]
     },
@@ -1052,6 +1146,7 @@
       "type": "Barre",
       "carbsGrams": 32,
       "carbsSource": "https://krononutrition.com/products/strawberry-pineapple-energy-bars-box-of-12",
+      "officialProductUrl": "https://krononutrition.com/products/strawberry-pineapple-energy-bars-box-of-12",
       "offers": [
         {
           "seller": "krononutrition.com",
@@ -1066,7 +1161,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.962Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.328Z"
         }
       ]
     },
@@ -1077,6 +1172,7 @@
       "type": "Barre",
       "carbsGrams": 31,
       "carbsSource": "https://krononutrition.com/products/cherry-chocolate-energy-bars-box-of-12",
+      "officialProductUrl": "https://krononutrition.com/products/cherry-chocolate-energy-bars-box-of-12",
       "offers": [
         {
           "seller": "krononutrition.com",
@@ -1091,7 +1187,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.963Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.328Z"
         }
       ]
     },
@@ -1102,6 +1198,7 @@
       "type": "Barre",
       "carbsGrams": 29,
       "carbsSource": "https://krononutrition.com/products/chocolate-espresso-energy-bars-box-of-12",
+      "officialProductUrl": "https://krononutrition.com/products/chocolate-espresso-energy-bars-box-of-12",
       "offers": [
         {
           "seller": "krononutrition.com",
@@ -1116,7 +1213,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.963Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.329Z"
         }
       ]
     },
@@ -1127,6 +1224,7 @@
       "type": "Gel",
       "carbsGrams": 27,
       "carbsSource": "https://www.trailheadpaddleshack.ca/hornet-energy-gel.html",
+      "officialProductUrl": "https://www.trailheadpaddleshack.ca/hornet-energy-gel.html",
       "offers": [
         {
           "seller": "trailheadpaddleshack.ca",
@@ -1141,7 +1239,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T02:42:12.963Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.329Z"
         },
         {
           "seller": "shopsante.ca",
@@ -1156,7 +1254,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T02:42:12.963Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.329Z"
         }
       ]
     },
@@ -1167,6 +1265,7 @@
       "type": "Gel",
       "carbsGrams": 27,
       "carbsSource": "catalog",
+      "officialProductUrl": "https://shopsante.ca/en/products/hornet-energy-gel-energetique-avec-cafeine-33g",
       "offers": [
         {
           "seller": "shopsante.ca",
@@ -1181,7 +1280,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T02:42:12.963Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.329Z"
         }
       ]
     },
@@ -1192,6 +1291,7 @@
       "type": "Gel",
       "carbsGrams": 25,
       "carbsSource": "catalog",
+      "officialProductUrl": "https://www.naak.com/products/boost-gel-neutral",
       "offers": [
         {
           "seller": "naak.com",
@@ -1206,7 +1306,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.963Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.329Z"
         }
       ]
     },
@@ -1217,6 +1317,7 @@
       "type": "Boisson",
       "carbsGrams": 60,
       "carbsSource": "catalog",
+      "officialProductUrl": "https://www.naak.com/products/boost-drink-mix-bag-neutral",
       "offers": [
         {
           "seller": "naak.com",
@@ -1231,7 +1332,59 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.963Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.329Z"
+        }
+      ]
+    },
+    {
+      "id": "naak-energy-gel-salted-maple",
+      "name": "Energy Gel Salted Maple",
+      "brand": "Näak",
+      "type": "Gel",
+      "carbsGrams": 27,
+      "carbsSource": "catalog",
+      "officialProductUrl": "https://www.naak.com/products/ultra-energy-gel-salted-maple?variant=49096442413360",
+      "offers": [
+        {
+          "seller": "naak.com",
+          "price": 4.25,
+          "packagePrice": 4.25,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://www.naak.com/products/ultra-energy-gel-salted-maple?variant=49096442413360",
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-19T03:28:14.329Z"
+        }
+      ]
+    },
+    {
+      "id": "naak-energy-gel-chocolate",
+      "name": "Energy Gel Chocolate",
+      "brand": "Näak",
+      "type": "Gel",
+      "carbsGrams": 27,
+      "carbsSource": "catalog",
+      "officialProductUrl": "https://www.naak.com/products/ultra-energy-gel-chocolate?variant=49096432779568",
+      "offers": [
+        {
+          "seller": "naak.com",
+          "price": 4.5,
+          "packagePrice": 4.5,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://www.naak.com/products/ultra-energy-gel-chocolate?variant=49096432779568",
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-19T03:28:14.329Z"
         }
       ]
     },
@@ -1242,6 +1395,7 @@
       "type": "Barre",
       "carbsGrams": 60,
       "carbsSource": "catalog",
+      "officialProductUrl": "https://watt.it/en/foods/energy-bars/long-race/",
       "offers": [
         {
           "seller": "velovelo.ca",
@@ -1256,7 +1410,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.963Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.329Z"
         }
       ]
     },
@@ -1267,6 +1421,7 @@
       "type": "Boisson",
       "carbsGrams": 34,
       "carbsSource": "catalog",
+      "officialProductUrl": "https://watt.it/en/carbohydrates/energetic-drinks/sali-electrolyte/",
       "offers": [
         {
           "seller": "velovelo.ca",
@@ -1281,7 +1436,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T02:42:12.963Z"
+          "lastCheckedAt": "2026-04-19T03:28:14.329Z"
         }
       ]
     }

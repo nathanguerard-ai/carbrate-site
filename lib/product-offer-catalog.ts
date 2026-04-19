@@ -32,6 +32,7 @@ export type Product = {
   type: ProductType;
   carbsGrams: number;
   carbsSource?: string;
+  officialProductUrl?: string;
   offers: Offer[];
 };
 
@@ -188,14 +189,38 @@ export function getOfferVerificationLabel(offer: Offer) {
 
 function choosePrimaryOffer(offers: Offer[]) {
   return [...offers].sort((a, b) => {
+    const availabilityDifference =
+      getOfferAvailabilityRank(a) - getOfferAvailabilityRank(b);
+    if (availabilityDifference !== 0) {
+      return availabilityDifference;
+    }
+
+    const priceDifference = a.price - b.price;
+    if (priceDifference !== 0) {
+      return priceDifference;
+    }
+
     const statusDifference =
       getOfferStatusRank(a) - getOfferStatusRank(b);
     if (statusDifference !== 0) {
       return statusDifference;
     }
 
-    return a.price - b.price;
+    return (b.unitCount ?? 1) - (a.unitCount ?? 1);
   })[0];
+}
+
+function getOfferAvailabilityRank(offer: Offer) {
+  const status = getOfferVerificationStatus(offer);
+  if (status === "fallback") {
+    return 1;
+  }
+
+  if (status === "review") {
+    return 2;
+  }
+
+  return 0;
 }
 
 function getOfferStatusRank(offer: Offer) {

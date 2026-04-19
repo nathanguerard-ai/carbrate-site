@@ -1,0 +1,86 @@
+{
+  "brands": [
+    {
+      "brand": "Maurten",
+      "seller": "maurten.com",
+      "country": "CA",
+      "collectionUrls": [
+        "https://www.maurten.com/products/"
+      ],
+      "allowedHosts": [
+        "www.maurten.com",
+        "maurten.com"
+      ],
+      "productPathPrefixes": [
+        "/products/"
+      ],
+      "excludePathPatterns": [
+        "/collections/",
+        "/faq/",
+        "/essentials/",
+        "/soon"
+      ]
+    },
+    {
+      "brand": "Precision Fuel & Hydration",
+      "seller": "precisionhydration.com",
+      "country": "CA",
+      "collectionUrls": [
+        "https://www.precisionhydration.com/ca/en/collections/pf-energy-gels/",
+        "https://www.precisionhydration.com/ca/en/collections/pf-chews/",
+        "https://www.precisionhydration.com/ca/en/collections/flow-range/"
+      ],
+      "allowedHosts": [
+        "www.precisionhydration.com",
+        "precisionhydration.com"
+      ],
+      "productPathPrefixes": [
+        "/ca/en/products/"
+      ],
+      "excludePathPatterns": [
+        "/collections/",
+        "/book-a-video-consultation/"
+      ]
+    },
+    {
+      "brand": "Näak",
+      "seller": "naak.com",
+      "country": "CA",
+      "collectionUrls": [
+        "https://www.naak.com/"
+      ],
+      "allowedHosts": [
+        "www.naak.com",
+        "naak.com"
+      ],
+      "productPathPrefixes": [
+        "/products/"
+      ],
+      "excludePathPatterns": [
+        "/blogs/",
+        "/pages/",
+        "/collections/"
+      ]
+    },
+    {
+      "brand": "UPIKA",
+      "seller": "upika.ca",
+      "country": "CA",
+      "collectionUrls": [
+        "https://upika.ca/en"
+      ],
+      "allowedHosts": [
+        "upika.ca",
+        "www.upika.ca"
+      ],
+      "productPathPrefixes": [
+        "/en/products/",
+        "/products/"
+      ],
+      "excludePathPatterns": [
+        "/collections/",
+        "/pages/"
+      ]
+    }
+  ]
+}

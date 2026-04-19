@@ -458,6 +458,40 @@
       ]
     },
     {
+      "id": "precision-pf30-caffeine-gel",
+      "name": "PF 30 Caffeine Gel",
+      "brand": "Precision Fuel & Hydration",
+      "type": "Gel",
+      "carbsGrams": 30,
+      "sodiumMg": null,
+      "caffeineMg": 100,
+      "offers": [
+        {
+          "seller": "precisionhydration.com",
+          "productUrl": "https://www.precisionhydration.com/ca/en/products/pf-30-caffeine-gel/",
+          "country": "CA",
+          "fallbackPrice": 5
+        }
+      ]
+    },
+    {
+      "id": "precision-pf300-flow-gel",
+      "name": "PF 300 Flow Gel",
+      "brand": "Precision Fuel & Hydration",
+      "type": "Gel",
+      "carbsGrams": 300,
+      "sodiumMg": null,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "precisionhydration.com",
+          "productUrl": "https://www.precisionhydration.com/ca/en/products/pf-300-flow-gel/",
+          "country": "CA",
+          "fallbackPrice": 29.99
+        }
+      ]
+    },
+    {
       "id": "krono-berries-pomegranate-sport-drink-mix",
       "name": "Berries & Pomegranate Sport Drink Mix",
       "brand": "Krono Nutrition",
@@ -817,6 +851,40 @@
           "productUrl": "https://www.naak.com/products/boost-drink-mix-bag-neutral",
           "country": "CA",
           "fallbackPrice": 3
+        }
+      ]
+    },
+    {
+      "id": "naak-energy-gel-salted-maple",
+      "name": "Energy Gel Salted Maple",
+      "brand": "Näak",
+      "type": "Gel",
+      "carbsGrams": 27,
+      "sodiumMg": 420,
+      "caffeineMg": null,
+      "offers": [
+        {
+          "seller": "naak.com",
+          "productUrl": "https://www.naak.com/products/ultra-energy-gel-salted-maple?variant=49096442413360",
+          "country": "CA",
+          "fallbackPrice": 4.25
+        }
+      ]
+    },
+    {
+      "id": "naak-energy-gel-chocolate",
+      "name": "Energy Gel Chocolate",
+      "brand": "Näak",
+      "type": "Gel",
+      "carbsGrams": 27,
+      "sodiumMg": 460,
+      "caffeineMg": 35,
+      "offers": [
+        {
+          "seller": "naak.com",
+          "productUrl": "https://www.naak.com/products/ultra-energy-gel-chocolate?variant=49096432779568",
+          "country": "CA",
+          "fallbackPrice": 4.5
         }
       ]
     },

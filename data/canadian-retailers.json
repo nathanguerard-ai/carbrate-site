@@ -1,0 +1,46 @@
+{
+  "retailers": [
+    {
+      "seller": "lecoureurnordique.ca",
+      "priority": 100,
+      "searchUrlTemplate": "https://lecoureurnordique.ca/en/search?q={query}&type=product",
+      "allowedHosts": ["lecoureurnordique.ca", "www.lecoureurnordique.ca"]
+    },
+    {
+      "seller": "fitfirst.ca",
+      "priority": 95,
+      "searchUrlTemplate": "https://www.fitfirst.ca/search?q={query}&type=product",
+      "allowedHosts": ["fitfirst.ca", "www.fitfirst.ca"]
+    },
+    {
+      "seller": "frontrunners.ca",
+      "priority": 90,
+      "searchUrlTemplate": "https://frontrunners.ca/search?q={query}&type=product",
+      "allowedHosts": ["frontrunners.ca", "www.frontrunners.ca"]
+    },
+    {
+      "seller": "spryactive.ca",
+      "priority": 85,
+      "searchUrlTemplate": "https://spryactive.ca/search?q={query}&type=product",
+      "allowedHosts": ["spryactive.ca", "www.spryactive.ca"]
+    },
+    {
+      "seller": "shopsante.ca",
+      "priority": 80,
+      "searchUrlTemplate": "https://shopsante.ca/en/search?q={query}&type=product",
+      "allowedHosts": ["shopsante.ca", "www.shopsante.ca"]
+    },
+    {
+      "seller": "enroute.run",
+      "priority": 75,
+      "searchUrlTemplate": "https://enroute.run/search?q={query}&type=product",
+      "allowedHosts": ["enroute.run", "www.enroute.run"]
+    },
+    {
+      "seller": "fuelkit.ca",
+      "priority": 70,
+      "searchUrlTemplate": "https://fuelkit.ca/search?q={query}&type=product",
+      "allowedHosts": ["fuelkit.ca", "www.fuelkit.ca"]
+    }
+  ]
+}

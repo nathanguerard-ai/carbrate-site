@@ -5,6 +5,9 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, "..");
 const catalogPath = path.join(projectRoot, "data", "product-catalog.json");
+const brandDiscoveryPath = path.join(projectRoot, "data", "brand-discovery.json");
+const canadianRetailersPath = path.join(projectRoot, "data", "canadian-retailers.json");
+const discoveredCatalogPath = path.join(projectRoot, "data", "discovered-product-catalog.json");
 const outputPath = path.join(projectRoot, "data", "generated-product-offers.json");
 const cachePath = path.join(projectRoot, "data", "product-page-cache.json");
 
@@ -12,6 +15,7 @@ const USER_AGENT =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
 const CACHE_MAX_AGE_MS = 1000 * 60 * 60 * 24;
 const FETCH_TIMEOUT_MS = 4500;
+const SEARCH_TIMEOUT_MS = 6000;
 const MIN_UNIT_PRICE = 0.5;
 const MAX_UNIT_PRICE = 20;
 const MAX_PACKAGE_PRICE = 250;
@@ -84,7 +88,29 @@ async function prefetchUrl(url, cache, stats) {
 
 async function main() {
   const catalog = JSON.parse(await readFile(catalogPath, "utf8"));
-  const cache = await readJson(cachePath, { pages: {} });
+  const brandDiscovery = await readJson(brandDiscoveryPath, { brands: [] });
+  const canadianRetailers = await readJson(canadianRetailersPath, { retailers: [] });
+  const brandConfigByBrand = new Map((brandDiscovery.brands ?? []).map((entry) => [entry.brand, entry]));
+  const discoveredCatalogSnapshot = await readJson(discoveredCatalogPath, { products: [] });
+  const cache = await readJson(cachePath, { pages: {}, searches: {} });
+  const discoveredCatalog = await enrichCatalogWithDiscoveredProducts(
+    {
+      products: [
+        ...catalog.products,
+        ...(discoveredCatalogSnapshot.products ?? []),
+      ],
+    },
+    brandDiscovery,
+    cache,
+    enableLiveFetch ? statsForDiscovery() : null,
+  );
+  const offerDiscoveredCatalog = await enrichCatalogWithDiscoveredOffers(
+    discoveredCatalog.products,
+    brandDiscovery,
+    canadianRetailers,
+    cache,
+    discoveredCatalog.discoveryStats,
+  );
   const products = [];
   const stats = {
     mode: enableLiveFetch ? "live" : "cached",
@@ -99,11 +125,19 @@ async function main() {
     unitCountsDefaulted: 0,
     carbsFromLive: 0,
     carbsFromCatalog: 0,
+    discoveredProductsAdded: discoveredCatalog.discoveryStats.discoveredProductsAdded,
+    discoveredProductsSkipped: discoveredCatalog.discoveryStats.discoveredProductsSkipped,
+    discoveredProductsMerged: discoveredCatalog.discoveryStats.discoveredProductsMerged,
+    discoveredBrandsScanned: discoveredCatalog.discoveryStats.discoveredBrandsScanned,
+    discoveryPagesFetched: discoveredCatalog.discoveryStats.discoveryPagesFetched,
+    discoveredOfferUrlsAdded: discoveredCatalog.discoveryStats.discoveredOfferUrlsAdded,
+    searchQueriesRun: discoveredCatalog.discoveryStats.searchQueriesRun,
+    retailerSearchQueriesRun: discoveredCatalog.discoveryStats.retailerSearchQueriesRun,
   };
 
   // Collect all unique URLs to prefetch
   const allUrls = new Set();
-  for (const product of catalog.products) {
+  for (const product of offerDiscoveredCatalog.products) {
     const sourceUrls = [
       ...(product.nutritionSources ?? []).map((source) => source.url),
       ...product.offers.map((offer) => offer.productUrl),
@@ -114,7 +148,7 @@ async function main() {
   // Prefetch all URLs in parallel with concurrency limit
   await prefetchUrls([...allUrls], cache, stats);
 
-  for (const product of catalog.products) {
+  for (const product of offerDiscoveredCatalog.products) {
     const productSignals = await getProductSignals(product, cache, stats);
     const offerPackages = product.offers.map((offer) => {
       const pageSignals = productSignals.byUrl.get(offer.productUrl);
@@ -209,11 +243,25 @@ async function main() {
       type: product.type,
       carbsGrams: carbsResolution.carbsGrams,
       carbsSource: carbsResolution.source,
+      officialProductUrl: getOfficialProductUrl(product, brandConfigByBrand.get(product.brand)),
       offers,
     });
   }
 
   await mkdir(path.dirname(outputPath), { recursive: true });
+  await writeFile(
+    discoveredCatalogPath,
+    JSON.stringify(
+      {
+        updatedAt: new Date().toISOString(),
+        products: discoveredCatalog.products.filter((product) =>
+          !catalog.products.some((entry) => entry.id === product.id),
+        ),
+      },
+      null,
+      2,
+    ),
+  );
   await writeFile(
     outputPath,
     JSON.stringify(
@@ -235,6 +283,806 @@ async function main() {
   );
 }
 
+function statsForDiscovery() {
+  return {
+    discoveredProductsAdded: 0,
+    discoveredProductsSkipped: 0,
+    discoveredProductsMerged: 0,
+    discoveredBrandsScanned: 0,
+    discoveryPagesFetched: 0,
+    discoveredOfferUrlsAdded: 0,
+    searchQueriesRun: 0,
+    retailerSearchQueriesRun: 0,
+  };
+}
+
+async function enrichCatalogWithDiscoveredProducts(catalog, discoveryConfig, cache, discoveryStats) {
+  if (!enableLiveFetch || !Array.isArray(discoveryConfig?.brands) || discoveryConfig.brands.length === 0) {
+    return {
+      products: catalog.products,
+      discoveryStats: discoveryStats ?? statsForDiscovery(),
+    };
+  }
+
+  const products = [...catalog.products];
+  const existingIds = new Set(products.map((product) => product.id));
+  const existingUrls = new Set(
+    products.flatMap((product) => [
+      ...(product.nutritionSources ?? []).map((source) => normalizeComparableUrl(source.url)),
+      ...product.offers.map((offer) => normalizeComparableUrl(offer.productUrl)),
+    ]),
+  );
+
+  for (const brandConfig of discoveryConfig.brands) {
+    discoveryStats.discoveredBrandsScanned += 1;
+    const discoveredProducts = await discoverProductsForBrand(brandConfig, cache, discoveryStats);
+
+    for (const discoveredProduct of discoveredProducts) {
+      const comparableOfferUrls = (discoveredProduct.offers ?? []).map((offer) =>
+        normalizeComparableUrl(offer.productUrl),
+      );
+      const comparableNutritionUrls = (discoveredProduct.nutritionSources ?? []).map((source) =>
+        normalizeComparableUrl(source.url),
+      );
+      const knownUrl =
+        comparableOfferUrls.some((url) => existingUrls.has(url)) ||
+        comparableNutritionUrls.some((url) => existingUrls.has(url));
+      const existingIndex = products.findIndex(
+        (product) =>
+          product.id === discoveredProduct.id ||
+          (product.brand === discoveredProduct.brand &&
+            normalizeProductLabel(product.name) === normalizeProductLabel(discoveredProduct.name)),
+      );
+
+      if (existingIndex >= 0) {
+        products[existingIndex] = mergeCatalogProducts(products[existingIndex], discoveredProduct);
+        discoveryStats.discoveredProductsMerged += 1;
+        for (const url of comparableOfferUrls.concat(comparableNutritionUrls)) {
+          existingUrls.add(url);
+        }
+        existingIds.add(products[existingIndex].id);
+        continue;
+      }
+
+      if (knownUrl || existingIds.has(discoveredProduct.id)) {
+        discoveryStats.discoveredProductsSkipped += 1;
+        continue;
+      }
+
+      products.push(discoveredProduct);
+      discoveryStats.discoveredProductsAdded += 1;
+      existingIds.add(discoveredProduct.id);
+      for (const url of comparableOfferUrls.concat(comparableNutritionUrls)) {
+        existingUrls.add(url);
+      }
+    }
+  }
+
+  return {
+    products,
+    discoveryStats,
+  };
+}
+
+async function enrichCatalogWithDiscoveredOffers(
+  products,
+  discoveryConfig,
+  retailerConfig,
+  cache,
+  discoveryStats,
+) {
+  if (!enableLiveFetch || !Array.isArray(products) || products.length === 0) {
+    return { products, discoveryStats };
+  }
+
+  const configsByBrand = new Map(
+    (discoveryConfig.brands ?? []).map((entry) => [entry.brand, entry]),
+  );
+
+  const nextProducts = [];
+  for (const product of products) {
+    const brandConfig = configsByBrand.get(product.brand);
+    if (!brandConfig) {
+      nextProducts.push(product);
+      continue;
+    }
+
+    const discoveredOffers = await discoverOffersForProduct(
+      product,
+      brandConfig,
+      retailerConfig,
+      cache,
+      discoveryStats,
+    );
+    if (discoveredOffers.length === 0) {
+      nextProducts.push(product);
+      continue;
+    }
+
+    const mergedOffers = dedupeByUrl(
+      [...(product.offers ?? []), ...discoveredOffers],
+      "productUrl",
+    );
+    discoveryStats.discoveredOfferUrlsAdded += Math.max(
+      0,
+      mergedOffers.length - (product.offers?.length ?? 0),
+    );
+    nextProducts.push({
+      ...product,
+      offers: mergedOffers,
+    });
+  }
+
+  return { products: nextProducts, discoveryStats };
+}
+
+async function discoverOffersForProduct(
+  product,
+  brandConfig,
+  retailerConfig,
+  cache,
+  discoveryStats,
+) {
+  const queries = buildProductSearchQueries(product);
+  const resultUrls = new Set();
+  const officialUrl = getOfficialProductUrl(product, brandConfig);
+  if (officialUrl) {
+    resultUrls.add(officialUrl);
+  }
+
+  const directRetailerResults = await searchKnownRetailersForProduct(
+    product,
+    brandConfig,
+    retailerConfig,
+    cache,
+    discoveryStats,
+  );
+  for (const result of directRetailerResults) {
+    resultUrls.add(result.url);
+  }
+
+  for (const query of queries) {
+    const results = await searchProductUrls(query, cache, discoveryStats);
+    for (const result of results) {
+      if (!isLikelyCanadianOfferUrl(result.url, brandConfig, retailerConfig)) {
+        continue;
+      }
+
+      if (!isLikelySearchResultMatch(product, result.title ?? "", result.url)) {
+        continue;
+      }
+
+      resultUrls.add(result.url);
+    }
+  }
+
+  const knownUrls = new Set(
+    (product.offers ?? []).map((offer) => normalizeComparableUrl(offer.productUrl)),
+  );
+  const discoveredOffers = [];
+  for (const url of resultUrls) {
+    const normalizedUrl = normalizeComparableUrl(url);
+    if (knownUrls.has(normalizedUrl)) {
+      continue;
+    }
+
+    discoveredOffers.push({
+      seller: sellerFromUrl(url),
+      productUrl: url,
+      country: "CA",
+    });
+  }
+
+  return discoveredOffers;
+}
+
+async function discoverProductsForBrand(brandConfig, cache, discoveryStats) {
+  const productUrls = new Set();
+
+  for (const collectionUrl of brandConfig.collectionUrls ?? []) {
+    const html = await fetchHtml(collectionUrl);
+    if (!html) {
+      continue;
+    }
+
+    discoveryStats.discoveryPagesFetched += 1;
+    for (const productUrl of extractProductUrlsFromCollectionHtml(html, collectionUrl, brandConfig)) {
+      productUrls.add(productUrl);
+    }
+  }
+
+  const discoveredProducts = [];
+  for (const productUrl of productUrls) {
+    const discoveredProduct = await buildDiscoveredProduct(brandConfig, productUrl, cache);
+    if (discoveredProduct) {
+      discoveredProducts.push(discoveredProduct);
+    } else {
+      discoveryStats.discoveredProductsSkipped += 1;
+    }
+  }
+
+  return discoveredProducts;
+}
+
+function buildProductSearchQueries(product) {
+  const label = `${product.brand} ${product.name}`.trim();
+  return [
+    `"${label}" Canada`,
+    `"${label}" Canada box`,
+    `"${label}" Canada pack`,
+  ];
+}
+
+async function searchKnownRetailersForProduct(
+  product,
+  brandConfig,
+  retailerConfig,
+  cache,
+  discoveryStats,
+) {
+  const retailers = [...(retailerConfig?.retailers ?? [])]
+    .filter((retailer) => retailer?.searchUrlTemplate)
+    .sort((a, b) => (b.priority ?? 0) - (a.priority ?? 0));
+  const results = [];
+
+  for (const retailer of retailers) {
+    const query = buildRetailerSearchQuery(product);
+    const links = await searchRetailerProductUrls(
+      retailer,
+      query,
+      product,
+      brandConfig,
+      cache,
+      discoveryStats,
+    );
+    results.push(...links);
+  }
+
+  return dedupeByUrl(results, "url");
+}
+
+function buildRetailerSearchQuery(product) {
+  return `${product.brand} ${product.name}`.trim();
+}
+
+async function searchRetailerProductUrls(
+  retailer,
+  query,
+  product,
+  brandConfig,
+  cache,
+  discoveryStats,
+) {
+  const cacheKey = `retailer:${retailer.seller}:${query}`;
+  const cached = cache.searches?.[cacheKey];
+  if (cached && !forceRefresh && !isCacheExpired(cached.fetchedAt)) {
+    return cached.results ?? [];
+  }
+
+  const searchUrl = retailer.searchUrlTemplate.replace("{query}", encodeURIComponent(query));
+  const html = await fetchHtml(searchUrl, { timeoutMs: SEARCH_TIMEOUT_MS });
+  if (!html) {
+    return cached?.results ?? [];
+  }
+
+  const results = extractRetailerProductResults(html, searchUrl, retailer, brandConfig)
+    .filter((result) => isLikelySearchResultMatch(product, result.title ?? "", result.url));
+  cache.searches ??= {};
+  cache.searches[cacheKey] = {
+    fetchedAt: new Date().toISOString(),
+    results,
+  };
+  discoveryStats.retailerSearchQueriesRun += 1;
+  return results;
+}
+
+async function searchProductUrls(query, cache, discoveryStats) {
+  const cacheKey = `ddg:${query}`;
+  const cached = cache.searches?.[cacheKey];
+  if (cached && !forceRefresh && !isCacheExpired(cached.fetchedAt)) {
+    return cached.results ?? [];
+  }
+
+  const html = await fetchSearchHtml(query);
+  if (!html) {
+    return cached?.results ?? [];
+  }
+
+  const results = extractDuckDuckGoResults(html);
+  cache.searches ??= {};
+  cache.searches[cacheKey] = {
+    fetchedAt: new Date().toISOString(),
+    results,
+  };
+  discoveryStats.searchQueriesRun += 1;
+  return results;
+}
+
+async function fetchSearchHtml(query) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), SEARCH_TIMEOUT_MS);
+
+  try {
+    const url = new URL("https://duckduckgo.com/html/");
+    url.searchParams.set("q", query);
+    const response = await fetch(url, {
+      headers: {
+        "user-agent": USER_AGENT,
+        accept: "text/html,application/xhtml+xml",
+      },
+      signal: controller.signal,
+    });
+
+    if (!response.ok) {
+      return null;
+    }
+
+    return await response.text();
+  } catch {
+    return null;
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+function extractDuckDuckGoResults(html) {
+  const results = [];
+  for (const match of html.matchAll(/<a[^>]*class="[^"]*result__a[^"]*"[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/gi)) {
+    const url = decodeDuckDuckGoUrl(match[1]);
+    if (!url) {
+      continue;
+    }
+
+    results.push({
+      url,
+      title: stripHtml(match[2]),
+    });
+  }
+
+  return results;
+}
+
+function decodeDuckDuckGoUrl(url) {
+  try {
+    const resolved = new URL(url, "https://duckduckgo.com");
+    const redirect = resolved.searchParams.get("uddg");
+    return redirect ? decodeURIComponent(redirect) : resolved.toString();
+  } catch {
+    return null;
+  }
+}
+
+function isLikelyCanadianOfferUrl(url, brandConfig, retailerConfig = null) {
+  try {
+    const parsedUrl = new URL(url);
+    if (brandConfig.allowedHosts?.includes(parsedUrl.hostname)) {
+      return true;
+    }
+
+    if ((retailerConfig?.retailers ?? []).some((retailer) =>
+      retailer.allowedHosts?.includes(parsedUrl.hostname),
+    )) {
+      return true;
+    }
+
+    if (parsedUrl.hostname.endsWith(".ca")) {
+      return true;
+    }
+
+    return /\/ca\//i.test(parsedUrl.pathname) || /\/ca\//i.test(parsedUrl.toString());
+  } catch {
+    return false;
+  }
+}
+
+function isLikelySearchResultMatch(product, title, url) {
+  const haystack = normalizeSignalText(`${title} ${decodeUrlForSignals(url)}`).toLowerCase();
+  const brandTokens = normalizeSignalText(product.brand)
+    .toLowerCase()
+    .split(/\s+/)
+    .filter(isSignificantProductToken)
+    .slice(0, 3);
+  const nameTokens = normalizeSignalText(product.name)
+    .toLowerCase()
+    .split(/\s+/)
+    .filter(isSignificantProductToken)
+    .slice(0, 5);
+  const matchedBrandTokens = brandTokens.filter((token) => haystack.includes(token));
+  const matchedNameTokens = nameTokens.filter((token) => haystack.includes(token));
+  const hasBrandMatch = brandTokens.length === 0 || matchedBrandTokens.length >= 1;
+  const requiredNameMatches =
+    nameTokens.length >= 3 ? 2 : Math.min(1, nameTokens.length);
+
+  return hasBrandMatch && matchedNameTokens.length >= requiredNameMatches;
+}
+
+function isSignificantProductToken(token) {
+  return token.length >= 3 || /^\d{2,3}$/.test(token);
+}
+
+function sellerFromUrl(url) {
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return url;
+  }
+}
+
+function extractProductUrlsFromCollectionHtml(html, baseUrl, brandConfig) {
+  const productUrls = new Set();
+
+  for (const link of extractAnchorLinks(html, baseUrl)) {
+    const candidate = link.url;
+    if (!candidate) {
+      continue;
+    }
+
+    if (!isAllowedDiscoveryProductUrl(candidate, brandConfig)) {
+      continue;
+    }
+
+    productUrls.add(candidate);
+  }
+
+  return [...productUrls];
+}
+
+function extractRetailerProductResults(html, baseUrl, retailer, brandConfig) {
+  const productPathPrefixes =
+    retailer.productPathPrefixes ??
+    brandConfig?.productPathPrefixes ??
+    ["/products/", "/en/products/", "/fr/products/", "/shop/", "/product/"];
+
+  return extractAnchorLinks(html, baseUrl)
+    .filter((link) => isAllowedRetailerProductUrl(link.url, retailer, productPathPrefixes))
+    .map((link) => ({
+      url: link.url,
+      title: link.title,
+      seller: retailer.seller,
+      priority: retailer.priority ?? 0,
+    }));
+}
+
+function extractAnchorLinks(html, baseUrl) {
+  const links = [];
+  for (const match of html.matchAll(/<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)) {
+    const url = resolveUrl(baseUrl, match[1]);
+    if (!url) {
+      continue;
+    }
+
+    links.push({
+      url,
+      title: stripHtml(match[2] ?? ""),
+    });
+  }
+
+  return links;
+}
+
+function isAllowedRetailerProductUrl(url, retailer, productPathPrefixes) {
+  try {
+    const parsedUrl = new URL(url);
+    const hostAllowed =
+      (retailer.allowedHosts ?? []).length === 0 ||
+      retailer.allowedHosts.includes(parsedUrl.hostname);
+    if (!hostAllowed) {
+      return false;
+    }
+
+    if (/\b(search|collections?|blogs?|pages?|cart|account)\b/i.test(parsedUrl.pathname)) {
+      return false;
+    }
+
+    return productPathPrefixes.some((prefix) => parsedUrl.pathname.startsWith(prefix));
+  } catch {
+    return false;
+  }
+}
+
+function isAllowedDiscoveryProductUrl(url, brandConfig) {
+  try {
+    const parsedUrl = new URL(url);
+    const hostAllowed =
+      (brandConfig.allowedHosts ?? []).length === 0 ||
+      brandConfig.allowedHosts.includes(parsedUrl.hostname);
+    if (!hostAllowed) {
+      return false;
+    }
+
+    const pathAllowed =
+      (brandConfig.productPathPrefixes ?? []).length === 0 ||
+      brandConfig.productPathPrefixes.some((prefix) => parsedUrl.pathname.startsWith(prefix));
+    if (!pathAllowed) {
+      return false;
+    }
+
+    return !(brandConfig.excludePathPatterns ?? []).some((pattern) =>
+      parsedUrl.pathname.includes(pattern),
+    );
+  } catch {
+    return false;
+  }
+}
+
+async function buildDiscoveredProduct(brandConfig, productUrl, cache) {
+  const pageSignals = await ensurePageSignals(productUrl, cache, {
+    pagesFetched: 0,
+    pagesFromCache: 0,
+  });
+  if (!pageSignals) {
+    return null;
+  }
+
+  const html = await fetchHtml(productUrl);
+  if (!html) {
+    return null;
+  }
+
+  const text = stripHtml(html);
+  const title = pageSignals.title ?? extractTitle(html);
+  const name = cleanDiscoveredProductName(title, brandConfig.brand);
+  const type = inferProductType(name, productUrl, text);
+  const carbsGrams = chooseDiscoveredCarbValue(extractCarbCandidates(text), name, type);
+  if (!name || !type || !Number.isFinite(carbsGrams) || carbsGrams <= 0) {
+    return null;
+  }
+
+  const caffeineMg = chooseOptionalNutrientValue(extractCaffeineCandidates(text));
+  const sodiumMg = chooseOptionalNutrientValue(extractSodiumCandidates(text));
+  const packageCandidate = choosePackagePriceCandidate(pageSignals.priceCandidates ?? []);
+  const unitCountCandidate = chooseBestUnitCount(
+    getUnitCandidatesFromPage(pageSignals),
+    { type, carbsGrams, caffeineMg, sodiumMg },
+    Number.isFinite(packageCandidate?.value) ? [packageCandidate.value] : [],
+    null,
+  );
+  const unitCount = unitCountCandidate?.value ?? 1;
+  const fallbackPrice = Number.isFinite(packageCandidate?.value)
+    ? round(packageCandidate.value / unitCount)
+    : null;
+  if (!Number.isFinite(fallbackPrice) || fallbackPrice <= 0) {
+    return null;
+  }
+
+  return {
+    id: slugifyProductId(brandConfig.brand, name),
+    name,
+    brand: brandConfig.brand,
+    type,
+    carbsGrams,
+    sodiumMg: Number.isFinite(sodiumMg) ? sodiumMg : null,
+    caffeineMg: Number.isFinite(caffeineMg) ? caffeineMg : null,
+    nutritionSources: [
+      {
+        label: `${brandConfig.brand} officiel`,
+        url: productUrl,
+      },
+    ],
+    offers: [
+      {
+        seller: brandConfig.seller,
+        productUrl,
+        country: brandConfig.country ?? "CA",
+        ...(unitCount > 1 ? { unitCount } : {}),
+        fallbackPrice,
+      },
+    ],
+  };
+}
+
+function mergeCatalogProducts(existingProduct, discoveredProduct) {
+  const nutritionSources = dedupeByUrl([
+    ...(existingProduct.nutritionSources ?? []),
+    ...(discoveredProduct.nutritionSources ?? []),
+  ], "url");
+  const offers = dedupeByUrl([
+    ...(existingProduct.offers ?? []),
+    ...(discoveredProduct.offers ?? []),
+  ], "productUrl");
+
+  return {
+    ...existingProduct,
+    carbsGrams:
+      Number.isFinite(existingProduct.carbsGrams) && existingProduct.carbsGrams > 0
+        ? existingProduct.carbsGrams
+        : discoveredProduct.carbsGrams,
+    sodiumMg:
+      existingProduct.sodiumMg ?? discoveredProduct.sodiumMg ?? null,
+    caffeineMg:
+      existingProduct.caffeineMg ?? discoveredProduct.caffeineMg ?? null,
+    nutritionSources,
+    offers,
+  };
+}
+
+function getOfficialProductUrl(product, brandConfig = null) {
+  const officialSource = (product.nutritionSources ?? []).find((source) =>
+    /officiel|official/i.test(source.label ?? ""),
+  );
+  if (officialSource?.url) {
+    return officialSource.url;
+  }
+
+  if (product.nutritionSources?.[0]?.url) {
+    return product.nutritionSources[0].url;
+  }
+
+  const officialOffer = (product.offers ?? []).find((offer) =>
+    offer.seller === brandConfig?.seller ||
+    offer.productUrl.includes(brandConfig?.seller ?? "") ||
+    brandConfig?.allowedHosts?.some((host) => {
+      try {
+        return new URL(offer.productUrl).hostname === host;
+      } catch {
+        return false;
+      }
+    }),
+  );
+
+  return officialOffer?.productUrl ?? null;
+}
+
+function dedupeByUrl(items, key) {
+  return [
+    ...new Map(
+      items
+        .filter(Boolean)
+        .map((item) => [normalizeComparableUrl(item[key]), item]),
+    ).values(),
+  ];
+}
+
+function chooseDiscoveredCarbValue(candidates, name, type) {
+  const positive = candidates
+    .map((candidate) => candidate.value)
+    .filter((value) => Number.isFinite(value) && value > 0)
+    .filter((value) => value <= (type === "Gel" ? 350 : 200));
+  if (positive.length === 0) {
+    return null;
+  }
+
+  const expected = getExpectedDiscoveredCarbs(name, type);
+  return positive
+    .map((value) => ({
+      value,
+      distance: Math.abs(value - expected),
+    }))
+    .sort((a, b) => a.distance - b.distance || a.value - b.value)[0].value;
+}
+
+function getExpectedDiscoveredCarbs(name, type) {
+  const numbers = [...String(name).matchAll(/\b(\d{2,3})\b/g)]
+    .map((match) => Number.parseInt(match[1], 10))
+    .filter((value) => Number.isFinite(value) && value <= 320);
+  if (numbers.length > 0) {
+    return numbers[0];
+  }
+
+  if (type === "Boisson") {
+    return 40;
+  }
+
+  if (type === "Barre" || type === "Autre") {
+    return 30;
+  }
+
+  return 30;
+}
+
+function extractCaffeineCandidates(text) {
+  return extractNutrientCandidates(text, ["caffeine", "cafeine", "cafeine", "cafeine"]);
+}
+
+function extractSodiumCandidates(text) {
+  return extractNutrientCandidates(text, ["sodium", "sel"]);
+}
+
+function extractNutrientCandidates(text, labels) {
+  const normalizedLabels = labels.join("|");
+  const candidates = [];
+  const patterns = [
+    new RegExp(`(?:${normalizedLabels})[^0-9]{0,30}(\\d+(?:[.,]\\d+)?)\\s*mg`, "gi"),
+    new RegExp(`(\\d+(?:[.,]\\d+)?)\\s*mg[^a-z]{0,20}(?:of\\s+)?(?:${normalizedLabels})`, "gi"),
+  ];
+
+  for (const pattern of patterns) {
+    for (const match of text.matchAll(pattern)) {
+      const value = parseDecimal(match[1]);
+      if (value === null || value <= 0 || value > 5000) {
+        continue;
+      }
+
+      candidates.push({ value });
+    }
+  }
+
+  return dedupeNumberCandidates(candidates);
+}
+
+function chooseOptionalNutrientValue(candidates) {
+  const value = candidates
+    .map((candidate) => candidate.value)
+    .filter((entry) => Number.isFinite(entry) && entry > 0)
+    .sort((a, b) => a - b)[0];
+  return Number.isFinite(value) ? value : null;
+}
+
+function inferProductType(name, productUrl, text) {
+  const label = normalizeSignalText(`${name} ${decodeUrlForSignals(productUrl)} ${text}`).toLowerCase();
+  if (/\b(drink mix|drink|boisson|hydration)\b/.test(label)) {
+    return "Boisson";
+  }
+
+  if (/\b(bar|barre|waffle|solid)\b/.test(label)) {
+    return "Barre";
+  }
+
+  if (/\b(gel)\b/.test(label)) {
+    return "Gel";
+  }
+
+  if (/\b(chew|chews|stroopwafel)\b/.test(label)) {
+    return "Autre";
+  }
+
+  return null;
+}
+
+function cleanDiscoveredProductName(rawTitle, brand) {
+  if (!rawTitle) {
+    return null;
+  }
+
+  let value = rawTitle
+    .replace(/\s+by\s+[^|]+$/i, "")
+    .replace(/\|.*$/g, "")
+    .replace(/\s+-\s+\d+\s+(?:gel|gels|bar|bars|servings?|packets?|pouches?).*$/i, "")
+    .replace(/\s+\(\d+\s+servings?\).*$/i, "")
+    .replace(/\s+\/\s+.+$/i, "")
+    .trim();
+
+  const brandPattern = new RegExp(`^${escapeRegExp(brand)}\\s+`, "i");
+  value = value.replace(brandPattern, "").trim();
+
+  return value || null;
+}
+
+function normalizeComparableUrl(url) {
+  try {
+    const parsedUrl = new URL(url);
+    parsedUrl.hash = "";
+    return parsedUrl.toString();
+  } catch {
+    return url;
+  }
+}
+
+function normalizeProductLabel(value) {
+  return normalizeSignalText(value).toLowerCase();
+}
+
+function resolveUrl(baseUrl, href) {
+  try {
+    return new URL(href, baseUrl).toString();
+  } catch {
+    return null;
+  }
+}
+
+function slugifyProductId(brand, name) {
+  return `${brand}-${name}`
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
 async function getProductSignals(product, cache, stats) {
   const sourceUrls = [
     ...(product.nutritionSources ?? []).map((source) => source.url),
@@ -245,7 +1093,7 @@ async function getProductSignals(product, cache, stats) {
   const byUrl = new Map();
 
   for (const url of uniqueUrls) {
-    const pageSignals = await getPageSignals(url, cache, stats);
+    const pageSignals = await ensurePageSignals(url, cache, stats);
     if (!pageSignals) {
       continue;
     }
@@ -256,6 +1104,43 @@ async function getProductSignals(product, cache, stats) {
   }
 
   return { signals, byUrl };
+}
+
+async function ensurePageSignals(url, cache, stats) {
+  const cached = cache.pages?.[url];
+  if (cached && !forceRefresh && !isCacheExpired(cached.fetchedAt)) {
+    stats.pagesFromCache += 1;
+    return cached;
+  }
+
+  if (!enableLiveFetch) {
+    if (cached) {
+      stats.pagesFromCache += 1;
+      return cached;
+    }
+
+    return null;
+  }
+
+  const html = await fetchHtml(url);
+  if (!html || isBlockedOrEmptyHtml(html)) {
+    return cached ?? null;
+  }
+
+  const pageSignals = extractPageSignals(url, html);
+  if (cached && isCacheRegression(cached, pageSignals)) {
+    stats.pagesFromCache += 1;
+    return cached;
+  }
+
+  const nextEntry = {
+    fetchedAt: new Date().toISOString(),
+    ...pageSignals,
+  };
+
+  cache.pages[url] = nextEntry;
+  stats.pagesFetched += 1;
+  return nextEntry;
 }
 
 function resolveProductCarbs(product, productSignals, stats) {
@@ -1522,9 +2407,10 @@ function isReliableUnitPrice(value) {
   return Number.isFinite(value) && value >= MIN_UNIT_PRICE && value <= MAX_UNIT_PRICE;
 }
 
-async function fetchHtml(url) {
+async function fetchHtml(url, options = {}) {
+  const timeoutMs = options.timeoutMs ?? FETCH_TIMEOUT_MS;
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
 
   try {
     const response = await fetch(url, {

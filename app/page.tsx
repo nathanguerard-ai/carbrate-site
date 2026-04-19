@@ -442,6 +442,19 @@ export default function Home() {
                         ${getDisplayedOfferPrice(product.cheapestOffer).toFixed(2)}
                       </p>
                       <p>{describeOfferPrice(product.cheapestOffer)}</p>
+                      <div className="mt-2 flex flex-wrap gap-2">
+                        {getProductLinks(product).map((link) => (
+                          <a
+                            key={link.href}
+                            href={link.href}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="rounded-full border border-ink/10 bg-white px-2.5 py-1 text-xs text-ink/72 transition hover:border-accent hover:text-accent"
+                          >
+                            {link.label}
+                          </a>
+                        ))}
+                      </div>
                     </div>
                     <a
                       href={product.cheapestOffer.productUrl}
@@ -544,14 +557,19 @@ export default function Home() {
                               </span>
                             ) : null}
                           </div>
-                          <a
-                            href={product.cheapestOffer.productUrl}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="mt-3 inline-flex rounded-full border border-ink/10 bg-white/70 px-3 py-1.5 text-xs text-ink/72 transition hover:border-accent hover:text-accent"
-                          >
-                            Voir l'offre
-                          </a>
+                          <div className="mt-3 flex flex-wrap gap-2">
+                            {getProductLinks(product).map((link) => (
+                              <a
+                                key={link.href}
+                                href={link.href}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="inline-flex rounded-full border border-ink/10 bg-white/70 px-3 py-1.5 text-xs text-ink/72 transition hover:border-accent hover:text-accent"
+                              >
+                                {link.label}
+                              </a>
+                            ))}
+                          </div>
                         </div>
                       </td>
                       <td className="px-6 py-5 text-center align-middle">
@@ -685,4 +703,35 @@ function describeOfferPrice(offer: {
 
 function isVerifiedOffer(offer: Offer) {
   return getOfferVerificationStatus(offer) === "verified";
+}
+
+function getProductLinks(product: {
+  officialProductUrl?: string;
+  cheapestOffer: Offer;
+}) {
+  const officialUrl = product.officialProductUrl;
+  const cheapestUrl = product.cheapestOffer.productUrl;
+
+  if (!officialUrl) {
+    return [{ href: cheapestUrl, label: "Meilleur prix" }];
+  }
+
+  if (normalizeUrl(officialUrl) === normalizeUrl(cheapestUrl)) {
+    return [{ href: officialUrl, label: "Page officielle" }];
+  }
+
+  return [
+    { href: officialUrl, label: "Page officielle" },
+    { href: cheapestUrl, label: "Meilleur prix" },
+  ];
+}
+
+function normalizeUrl(value: string) {
+  try {
+    const url = new URL(value);
+    url.hash = "";
+    return url.toString();
+  } catch {
+    return value;
+  }
 }
