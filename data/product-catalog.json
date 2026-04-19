@@ -14,12 +14,25 @@
           "url": "https://www.maurten.com/products/gel-100"
         }
       ],
-      "offers": [
-        {
-          "seller": "fitfirst.ca",
-          "productUrl": "https://www.fitfirst.ca/products/gel-100",
-          "country": "CA",
-          "fallbackPrice": 5.5
+    "offers": [
+      {
+        "seller": "spryactive.ca",
+        "productUrl": "https://spryactive.ca/products/maurten-hydrogel-sports-fuel-gel-100",
+        "country": "CA",
+        "fallbackPrice": 5.5
+      },
+      {
+        "seller": "lecoureurnordique.ca",
+        "productUrl": "https://lecoureurnordique.ca/en/products/maurten-gel-100-boite",
+        "country": "CA",
+        "unitCount": 12,
+        "fallbackPrice": 5
+      },
+      {
+        "seller": "fitfirst.ca",
+        "productUrl": "https://www.fitfirst.ca/products/gel-100",
+        "country": "CA",
+        "fallbackPrice": 5.5
         }
       ]
     },
@@ -67,12 +80,31 @@
           "url": "https://www.maurten.com/products/gel-160"
         }
       ],
-      "offers": [
-        {
-          "seller": "fitfirst.ca",
-          "productUrl": "https://www.fitfirst.ca/products/gel-160",
-          "country": "CA",
-          "fallbackPrice": 7.5
+    "offers": [
+      {
+        "seller": "spryactive.ca",
+        "productUrl": "https://spryactive.ca/products/maurten-hydrogel-sports-fuel-gel-160",
+        "country": "CA",
+        "fallbackPrice": 7.5
+      },
+      {
+        "seller": "lecoureurnordique.ca",
+        "productUrl": "https://lecoureurnordique.ca/en/products/maurten-gel-160-boite",
+        "country": "CA",
+        "unitCount": 10,
+        "fallbackPrice": 7.5
+      },
+      {
+        "seller": "frontrunners.ca",
+        "productUrl": "https://frontrunners.ca/products/maurten-gel-160",
+        "country": "CA",
+        "fallbackPrice": 7.5
+      },
+      {
+        "seller": "fitfirst.ca",
+        "productUrl": "https://www.fitfirst.ca/products/gel-160",
+        "country": "CA",
+        "fallbackPrice": 7.5
         }
       ]
     },

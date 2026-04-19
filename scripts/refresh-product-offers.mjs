@@ -1,5 +1,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { execFile } from "node:child_process";
 import path from "node:path";
+import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -35,6 +37,7 @@ const PACKAGE_SOURCE_TYPES = new Set([
   "single",
 ]);
 const SERVING_SOURCE_TYPES = new Set(["serving-label", "serving-count"]);
+const execFileAsync = promisify(execFile);
 
 const enableLiveFetch =
   process.argv.includes("--live") || process.env.CARBRATE_ENABLE_NETWORK === "1";
@@ -157,6 +160,10 @@ async function main() {
         pageSignals,
         packageCandidate: choosePackagePriceCandidate(
           pageSignals?.priceCandidates ?? [],
+          {
+            ...product,
+            ...offer,
+          },
         ),
       };
     });
@@ -619,7 +626,9 @@ async function fetchSearchHtml(query) {
 
     return await response.text();
   } catch {
-    return null;
+    const url = new URL("https://duckduckgo.com/html/");
+    url.searchParams.set("q", query);
+    return fetchHtmlWithCurl(url.toString(), SEARCH_TIMEOUT_MS);
   } finally {
     clearTimeout(timeout);
   }
@@ -830,7 +839,12 @@ async function buildDiscoveredProduct(brandConfig, productUrl, cache) {
 
   const caffeineMg = chooseOptionalNutrientValue(extractCaffeineCandidates(text));
   const sodiumMg = chooseOptionalNutrientValue(extractSodiumCandidates(text));
-  const packageCandidate = choosePackagePriceCandidate(pageSignals.priceCandidates ?? []);
+  const packageCandidate = choosePackagePriceCandidate(pageSignals.priceCandidates ?? [], {
+    brand: brandConfig.brand,
+    name,
+    type,
+    carbsGrams,
+  });
   const unitCountCandidate = chooseBestUnitCount(
     getUnitCandidatesFromPage(pageSignals),
     { type, carbsGrams, caffeineMg, sodiumMg },
@@ -1181,7 +1195,10 @@ function resolveOfferPrice(
   stats,
 ) {
   const candidates = pageSignals?.priceCandidates ?? [];
-  const packageCandidate = choosePackagePriceCandidate(candidates);
+  const packageCandidate = choosePackagePriceCandidate(candidates, {
+    ...product,
+    ...offer,
+  });
   const unitResolution = resolveOfferUnitCount(
     product,
     offer,
@@ -1379,10 +1396,12 @@ function extractPageSignals(url, html) {
   const normalizedHtml = html.replace(/\s+/g, " ");
   const text = stripHtml(html);
   const title = extractTitle(html);
+  const pageContext = extractPageContextSignals(url, normalizedHtml, text, title);
 
   return {
     title,
-    priceCandidates: extractPriceCandidates(normalizedHtml, url).map((candidate) => ({
+    pageContext,
+    priceCandidates: extractPriceCandidates(normalizedHtml, url, pageContext).map((candidate) => ({
       ...candidate,
       url,
     })),
@@ -1443,10 +1462,18 @@ function isCacheRegression(cached, nextSignals) {
 function enrichPageSignals(url, pageSignals) {
   const title = pageSignals.title ?? null;
   const locationText = `${title ?? ""} ${decodeUrlForSignals(url)}`;
+  const pageContext = pageSignals.pageContext ?? createFallbackPageContext(url, pageSignals);
 
   return {
     ...pageSignals,
     url,
+    pageContext,
+    priceCandidates: (pageSignals.priceCandidates ?? []).map((candidate) => ({
+      ...candidate,
+      url: candidate.url ?? url,
+      pageContext,
+      pageType: candidate.pageType ?? pageContext.pageType,
+    })),
     packageCountCandidates: dedupeNumberCandidates([
       ...extractLocationPackageCountCandidates(url, title).map((candidate) => ({
         ...candidate,
@@ -1461,68 +1488,1054 @@ function enrichPageSignals(url, pageSignals) {
   };
 }
 
-function extractPriceCandidates(html, url) {
-  const candidates = [];
-  const derivedCandidates = extractOdooSelectedVariantPriceCandidates(html, url);
-  const jsonLdMatches = [
-    ...tagMatches(html.matchAll(/"price"\s*:\s*"(\d+(?:[.,]\d+)?)"/gi), "structured"),
-    ...tagMatches(html.matchAll(/"price"\s*:\s*(\d+(?:[.,]\d+)?)/gi), "structured"),
-    ...tagMatches(html.matchAll(/"salePrice"\s*:\s*"(\d+(?:[.,]\d+)?)"/gi), "structured"),
-    ...tagMatches(html.matchAll(/"salePrice"\s*:\s*(\d+(?:[.,]\d+)?)/gi), "structured"),
-    ...tagMatches(html.matchAll(/"offerPrice"\s*:\s*"(\d+(?:[.,]\d+)?)"/gi), "structured"),
-    ...tagMatches(html.matchAll(/"offerPrice"\s*:\s*(\d+(?:[.,]\d+)?)/gi), "structured"),
-    ...tagMatches(html.matchAll(/itemprop=["']price["'][^>]*>\s*(\d+(?:[.,]\d+)?)/gi), "structured"),
-  ];
-  const metaMatches = [
-    ...tagMatches(html.matchAll(
-      /(?:product:price:amount|price" content=|price\" content=\")\s*[:=]?\s*"?(\d+(?:[.,]\d+)?)/gi,
-    ), "meta"),
-    ...tagMatches(html.matchAll(
-      /(?:sale:price|discounted.price|offer.price)[^0-9]*(\d+(?:[.,]\d+)?)/gi,
-    ), "meta"),
-  ];
-  const currencyMatches = [
-    ...html.matchAll(/"priceCurrency"\s*:\s*"([A-Z]{3})"/gi),
-    ...html.matchAll(/(?:currency|Currency)\s*[:=]\s*"([A-Z]{3})"/g),
-  ];
-  const textMatches = [
-    ...tagMatches(html.matchAll(/\$\s*(\d+(?:[.,]\d+)?)/g), "text"),
-    ...tagMatches(html.matchAll(/(\d+(?:[.,]\d+)?)\s*\$/g), "text"),
-    ...tagMatches(
-      html.matchAll(/(?:prix de vente|sale price|discounted|offre)[^0-9]*\$?\s*(\d+(?:[.,]\d+)?)/gi),
-      "text",
+function extractPriceCandidates(html, url, pageContext) {
+  const currencies = extractCurrencyHints(html, pageContext);
+  const assumedCurrency = chooseAssumedCurrency(currencies);
+  const candidates = [
+    ...extractOdooSelectedVariantPriceCandidates(html, url).map((candidate) =>
+      enrichPriceCandidate(candidate, pageContext, {
+        sourceType: candidate.sourceType ?? "structured",
+        currency: candidate.currency ?? assumedCurrency,
+        evidenceText: candidate.evidenceText ?? "",
+      }),
     ),
+    ...extractJsonLdPriceCandidates(html, url, pageContext, assumedCurrency),
+    ...extractMetaPriceCandidates(html, url, pageContext, assumedCurrency),
+    ...extractScriptPriceCandidates(html, url, pageContext, assumedCurrency),
+    ...extractShopifyProductPriceCandidates(html, url, pageContext, assumedCurrency),
+    ...extractVisiblePriceCandidates(html, url, pageContext, assumedCurrency),
   ];
 
-  const currencies = currencyMatches.map((match) => match[1].toUpperCase());
-  const assumedCurrency = currencies.includes("CAD")
-    ? "CAD"
-    : currencies[0] ?? null;
+  return sanitizePriceCandidates(candidates, pageContext);
+}
 
-  for (const candidate of derivedCandidates) {
-    candidates.push({
-      ...candidate,
-      currency: candidate.currency ?? assumedCurrency,
-    });
+function createFallbackPageContext(url, pageSignals) {
+  const title = pageSignals?.title ?? null;
+  const normalizedTitle = normalizeSignalText(title ?? "").toLowerCase();
+  const decodedPath = decodeUrlForSignals(url).toLowerCase();
+  const genericTitle = isGenericStoreTitle(normalizedTitle);
+  const homepageLike = genericTitle || /^\/?$/.test(safePathname(url));
+
+  return {
+    title,
+    canonicalUrl: null,
+    canonicalPath: null,
+    ogType: null,
+    pageType: homepageLike ? "homepage" : "unknown",
+    genericTitle,
+    homepageLike,
+    productLike:
+      !homepageLike &&
+      (decodedPath.includes("product") || decodedPath.includes("products")),
+    decodedPath,
+    normalizedTitle,
+    productTexts: [normalizedTitle, decodedPath].filter(Boolean),
+    brandHints: inferBrandHintsFromTexts([normalizedTitle, decodedPath]),
+    productHints: inferProductHintsFromTexts([normalizedTitle, decodedPath]),
+  };
+}
+
+function extractPageContextSignals(url, html, text, title) {
+  const canonicalUrl = extractCanonicalUrl(html, url);
+  const canonicalPath = canonicalUrl ? safePathname(canonicalUrl) : null;
+  const ogType = extractMetaContent(html, "property", "og:type");
+  const ogTitle = extractMetaContent(html, "property", "og:title");
+  const ogDescription = extractMetaContent(html, "property", "og:description");
+  const shopifyPageType = extractEmbeddedPageType(html);
+  const jsonLdObjects = extractJsonLdObjects(html);
+  const productSchemas = extractProductSchemas(jsonLdObjects);
+  const structuredTitles = productSchemas
+    .flatMap((schema) => [schema.name, schema.title, schema.brand?.name, schema.brand])
+    .filter((value) => typeof value === "string");
+  const normalizedTitle = normalizeSignalText(title ?? "").toLowerCase();
+  const decodedPath = decodeUrlForSignals(url).toLowerCase();
+  const canonicalDecodedPath = canonicalUrl ? decodeUrlForSignals(canonicalUrl).toLowerCase() : "";
+  const genericTitle = isGenericStoreTitle(normalizedTitle);
+  const homepageLike = isHomepageLikeContext({
+    url,
+    canonicalPath,
+    ogType,
+    title: normalizedTitle,
+    shopifyPageType,
+  });
+  const productLike = isProductLikeContext({
+    url,
+    canonicalPath,
+    ogType,
+    shopifyPageType,
+    structuredTitles,
+    ogTitle,
+    genericTitle,
+  });
+  const productTexts = [
+    normalizedTitle,
+    normalizeSignalText(ogTitle ?? "").toLowerCase(),
+    normalizeSignalText(ogDescription ?? "").toLowerCase(),
+    decodedPath,
+    canonicalDecodedPath,
+    ...structuredTitles.map((value) => normalizeSignalText(value).toLowerCase()),
+  ].filter(Boolean);
+
+  return {
+    title,
+    canonicalUrl,
+    canonicalPath,
+    ogType,
+    ogTitle,
+    ogDescription,
+    pageType: shopifyPageType ?? inferPageTypeFromContext(homepageLike, productLike, ogType),
+    genericTitle,
+    homepageLike,
+    productLike,
+    decodedPath,
+    canonicalDecodedPath,
+    productTexts,
+    brandHints: inferBrandHintsFromTexts(productTexts),
+    productHints: inferProductHintsFromTexts(productTexts),
+    productSchemas,
+    textPreview: normalizeSignalText(text.slice(0, 1200)).toLowerCase(),
+  };
+}
+
+function extractCurrencyHints(html, pageContext) {
+  const currencies = new Set();
+  for (const match of html.matchAll(/"priceCurrency"\s*:\s*"([A-Z]{3})"/gi)) {
+    currencies.add(match[1].toUpperCase());
   }
 
-  for (const match of [...jsonLdMatches, ...metaMatches, ...textMatches]) {
-    const value = parseDecimal(match[1]);
-    if (value === null || value <= 0) {
+  for (const match of html.matchAll(/(?:currency|Currency)\s*[:=]\s*"([A-Z]{3})"/g)) {
+    currencies.add(match[1].toUpperCase());
+  }
+
+  for (const match of html.matchAll(/content=["']([A-Z]{3})["'][^>]*(?:price:currency|currency)/gi)) {
+    currencies.add(match[1].toUpperCase());
+  }
+
+  if (pageContext?.canonicalUrl?.includes("/en-ca/") || pageContext?.canonicalUrl?.includes("/ca/")) {
+    currencies.add("CAD");
+  }
+
+  return [...currencies];
+}
+
+function chooseAssumedCurrency(currencies) {
+  if (currencies.includes("CAD")) {
+    return "CAD";
+  }
+
+  return currencies[0] ?? null;
+}
+
+function extractJsonLdPriceCandidates(html, url, pageContext, assumedCurrency) {
+  const jsonLdObjects = pageContext?.productSchemas?.length
+    ? pageContext.productSchemas
+    : extractProductSchemas(extractJsonLdObjects(html));
+  const candidates = [];
+
+  for (const schema of jsonLdObjects) {
+    candidates.push(
+      ...extractPricesFromJsonLdNode(schema, {
+        url,
+        pageContext,
+        assumedCurrency,
+        sourceType: "structured",
+      }),
+    );
+  }
+
+  for (const match of html.matchAll(/itemprop=["']price["'][^>]*>\s*(\d+(?:[.,]\d+)?)/gi)) {
+    candidates.push(
+      ...createPriceCandidatesFromRawValue(match[1], {
+        url,
+        pageContext,
+        sourceType: "structured",
+        assumedCurrency,
+        evidenceText: getHtmlWindow(html, match.index, 220),
+        semanticType: "current",
+        contextLabel: "itemprop-price",
+      }),
+    );
+  }
+
+  return candidates;
+}
+
+function extractMetaPriceCandidates(html, url, pageContext, assumedCurrency) {
+  const candidates = [];
+  const metaRules = [
+    {
+      regex: /<meta[^>]+property=["']product:price:amount["'][^>]+content=["']([^"']+)["'][^>]*>/gi,
+      semanticType: "current",
+      contextLabel: "og-product-price",
+    },
+    {
+      regex: /<meta[^>]+property=["']og:price:amount["'][^>]+content=["']([^"']+)["'][^>]*>/gi,
+      semanticType: "current",
+      contextLabel: "og-price",
+    },
+    {
+      regex: /<meta[^>]+(?:name|property)=["'](?:sale_price|sale:price|product:sale_price)["'][^>]+content=["']([^"']+)["'][^>]*>/gi,
+      semanticType: "sale",
+      contextLabel: "meta-sale-price",
+    },
+    {
+      regex: /<meta[^>]+(?:name|property)=["'](?:compare_at_price|product:compare_at_price|regular_price)["'][^>]+content=["']([^"']+)["'][^>]*>/gi,
+      semanticType: "compare",
+      contextLabel: "meta-compare-price",
+    },
+  ];
+
+  for (const rule of metaRules) {
+    for (const match of html.matchAll(rule.regex)) {
+      candidates.push(
+        ...createPriceCandidatesFromRawValue(match[1], {
+          url,
+          pageContext,
+          sourceType: "meta",
+          assumedCurrency,
+          evidenceText: match[0],
+          semanticType: rule.semanticType,
+          contextLabel: rule.contextLabel,
+        }),
+      );
+    }
+  }
+
+  return candidates;
+}
+
+function extractScriptPriceCandidates(html, url, pageContext, assumedCurrency) {
+  const candidates = [];
+  const scriptRules = [
+    {
+      regex: /"price"\s*:\s*"(\d+(?:[.,]\d+)?)"/gi,
+      semanticType: "current",
+      contextLabel: "json-price",
+    },
+    {
+      regex: /"salePrice"\s*:\s*"(\d+(?:[.,]\d+)?)"/gi,
+      semanticType: "sale",
+      contextLabel: "json-sale-price",
+    },
+    {
+      regex: /"compareAtPrice"\s*:\s*"(\d+(?:[.,]\d+)?)"/gi,
+      semanticType: "compare",
+      contextLabel: "json-compare-price",
+    },
+    {
+      regex: /(?:price_amount|priceAmount|amount)\s*[:=]\s*["']?(\d+(?:[.,]\d+)?)/gi,
+      semanticType: "current",
+      contextLabel: "script-amount",
+    },
+    {
+      regex: /(?:compare_at_price|compareAtPrice)\s*[:=]\s*["']?(\d+(?:[.,]\d+)?)/gi,
+      semanticType: "compare",
+      contextLabel: "script-compare",
+    },
+    {
+      regex: /(?:unit_price|unitPrice)\s*[:=]\s*["']?(\d+(?:[.,]\d+)?)/gi,
+      semanticType: "unit-reference",
+      contextLabel: "script-unit-price",
+    },
+  ];
+
+  for (const rule of scriptRules) {
+    for (const match of html.matchAll(rule.regex)) {
+      candidates.push(
+        ...createPriceCandidatesFromRawValue(match[1], {
+          url,
+          pageContext,
+          sourceType: "structured",
+          assumedCurrency,
+          evidenceText: getHtmlWindow(html, match.index, 240),
+          semanticType: rule.semanticType,
+          contextLabel: rule.contextLabel,
+        }),
+      );
+    }
+  }
+
+  return candidates;
+}
+
+function extractShopifyProductPriceCandidates(html, url, pageContext, assumedCurrency) {
+  const candidates = [];
+  const productJsonBlocks = [
+    ...extractJsonBlocksByKey(html, "variants"),
+    ...extractJsonBlocksByAssignment(html, "__st"),
+    ...extractJsonBlocksByAssignment(html, "meta"),
+  ];
+
+  for (const block of productJsonBlocks) {
+    const parsed = tryParseJson(block);
+    if (!parsed) {
       continue;
     }
 
-    for (const normalizedValue of normalizeMoneyValues(value)) {
+    candidates.push(
+      ...extractPricesFromShopifyNode(parsed, {
+        url,
+        pageContext,
+        assumedCurrency,
+        sourceType: "structured",
+      }),
+    );
+  }
+
+  return candidates;
+}
+
+function extractVisiblePriceCandidates(html, url, pageContext, assumedCurrency) {
+  const candidates = [];
+  const textRules = [
+    {
+      regex: /\$\s*(\d{1,4}(?:[.,]\d{2})?)/g,
+      contextLabel: "money-symbol-leading",
+    },
+    {
+      regex: /(\d{1,4}(?:[.,]\d{2})?)\s*\$/g,
+      contextLabel: "money-symbol-trailing",
+    },
+    {
+      regex: /(?:sale price|prix de vente|now|maintenant|our price|prix)\D{0,24}\$?\s*(\d{1,4}(?:[.,]\d{2})?)/gi,
+      contextLabel: "labelled-price",
+    },
+  ];
+
+  for (const rule of textRules) {
+    for (const match of html.matchAll(rule.regex)) {
+      const evidenceText = getHtmlWindow(html, match.index, 260);
+      const context = classifyPriceContextWindow(evidenceText, pageContext);
+      candidates.push(
+        ...createPriceCandidatesFromRawValue(match[1], {
+          url,
+          pageContext,
+          sourceType: "text",
+          assumedCurrency,
+          evidenceText,
+          semanticType: context.semanticType,
+          contextLabel: rule.contextLabel,
+          contextConfidence: context.contextConfidence,
+          contextTags: context.tags,
+        }),
+      );
+    }
+  }
+
+  return candidates;
+}
+
+function extractPricesFromJsonLdNode(node, options) {
+  const candidates = [];
+  const visited = new Set();
+
+  walkObject(node, (value, key, parent) => {
+    if (!isPlainObject(parent)) {
+      return;
+    }
+
+    const semanticType = classifyJsonLdPriceKey(key, parent);
+    if (!semanticType) {
+      return;
+    }
+
+    const candidateKey = `${key}:${JSON.stringify(value)}`;
+    if (visited.has(candidateKey)) {
+      return;
+    }
+    visited.add(candidateKey);
+
+    const currency = getFirstString(
+      parent.priceCurrency,
+      parent.currency,
+      parent.price_currency,
+      options.assumedCurrency,
+    );
+
+    candidates.push(
+      ...createPriceCandidatesFromRawValue(value, {
+        ...options,
+        currency,
+        assumedCurrency: currency ?? options.assumedCurrency,
+        evidenceText: JSON.stringify(parent).slice(0, 600),
+        semanticType,
+        contextLabel: "jsonld",
+      }),
+    );
+  });
+
+  return candidates;
+}
+
+function extractPricesFromShopifyNode(node, options) {
+  const candidates = [];
+
+  walkObject(node, (value, key, parent) => {
+    if (!isPlainObject(parent)) {
+      return;
+    }
+
+    const semanticType = classifyShopifyPriceKey(key, parent);
+    if (!semanticType) {
+      return;
+    }
+
+    const currency = getFirstString(
+      parent.currency,
+      parent.currencyCode,
+      options.assumedCurrency,
+    );
+    candidates.push(
+      ...createPriceCandidatesFromRawValue(value, {
+        ...options,
+        currency,
+        assumedCurrency: currency ?? options.assumedCurrency,
+        evidenceText: JSON.stringify(parent).slice(0, 500),
+        semanticType,
+        contextLabel: "shopify-json",
+      }),
+    );
+  });
+
+  return candidates;
+}
+
+function sanitizePriceCandidates(candidates, pageContext) {
+  const normalized = [];
+
+  for (const candidate of candidates) {
+    if (!candidate || !Number.isFinite(candidate.value)) {
+      continue;
+    }
+
+    const cleaned = finalizePriceCandidate(candidate, pageContext);
+    if (!cleaned) {
+      continue;
+    }
+
+    normalized.push(cleaned);
+  }
+
+  return dedupeSemanticPriceCandidates(normalized);
+}
+
+function finalizePriceCandidate(candidate, pageContext) {
+  const normalizedCurrency = normalizeCurrencyCode(
+    candidate.currency ?? candidate.assumedCurrency ?? null,
+  );
+  const cleaned = {
+    ...candidate,
+    pageContext: candidate.pageContext ?? pageContext ?? null,
+    currency: normalizedCurrency,
+    evidenceText: normalizeSignalText(candidate.evidenceText ?? ""),
+    contextLabel: candidate.contextLabel ?? "unknown",
+    semanticType: candidate.semanticType ?? "current",
+    contextConfidence: candidate.contextConfidence ?? "medium",
+    contextTags: [...new Set(candidate.contextTags ?? [])],
+    pageType: candidate.pageType ?? pageContext?.pageType ?? "unknown",
+  };
+
+  if (cleaned.value <= 0) {
+    return null;
+  }
+
+  if (cleaned.semanticType === "shipping" || cleaned.semanticType === "savings") {
+    cleaned.confidence = "live-text";
+  }
+
+  return cleaned;
+}
+
+function enrichPriceCandidate(candidate, pageContext, overrides = {}) {
+  return {
+    ...candidate,
+    ...overrides,
+    pageContext,
+    pageType: pageContext?.pageType ?? "unknown",
+    contextTags: [...new Set([...(candidate.contextTags ?? []), ...(overrides.contextTags ?? [])])],
+    contextConfidence:
+      overrides.contextConfidence ?? candidate.contextConfidence ?? "medium",
+    semanticType: overrides.semanticType ?? candidate.semanticType ?? "current",
+    evidenceText: overrides.evidenceText ?? candidate.evidenceText ?? "",
+  };
+}
+
+function createPriceCandidatesFromRawValue(rawValue, options) {
+  const parsedValues = parseMoneyValueCandidates(rawValue);
+  const candidates = [];
+
+  for (const parsed of parsedValues) {
+    for (const normalizedValue of normalizeMoneyValues(parsed.value)) {
       candidates.push({
         value: normalizedValue,
-        currency: assumedCurrency,
-        confidence: match.source === "text" ? "live-text" : "live",
-        sourceType: match.source,
+        rawValue: parsed.rawValue,
+        currency: normalizeCurrencyCode(parsed.currency ?? options.currency ?? options.assumedCurrency),
+        confidence: options.sourceType === "text" ? "live-text" : "live",
+        sourceType: options.sourceType,
+        pageContext: options.pageContext ?? null,
+        semanticType: options.semanticType ?? "current",
+        contextLabel: options.contextLabel ?? "raw",
+        contextConfidence: options.contextConfidence ?? "medium",
+        contextTags: [...new Set(options.contextTags ?? [])],
+        evidenceText: options.evidenceText ?? "",
+        pageType: options.pageContext?.pageType ?? "unknown",
       });
     }
   }
 
-  return dedupeNumberCandidates(candidates);
+  return candidates;
+}
+
+function parseMoneyValueCandidates(rawValue) {
+  const values = [];
+
+  if (typeof rawValue === "number") {
+    values.push({
+      value: rawValue,
+      rawValue: String(rawValue),
+      currency: null,
+    });
+    return values;
+  }
+
+  if (typeof rawValue !== "string") {
+    return values;
+  }
+
+  const currency = detectCurrencyCode(rawValue);
+  const cleaned = rawValue
+    .replace(/&nbsp;/gi, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  const decimalLike = parseDecimal(cleaned);
+  if (decimalLike !== null) {
+    values.push({ value: decimalLike, rawValue: cleaned, currency });
+  }
+
+  const moneyLike = parseLocalizedMoney(cleaned);
+  if (moneyLike !== null && !values.some((entry) => nearlyEqual(entry.value, moneyLike))) {
+    values.push({ value: moneyLike, rawValue: cleaned, currency });
+  }
+
+  return values;
+}
+
+function parseLocalizedMoney(value) {
+  if (typeof value !== "string") {
+    return null;
+  }
+
+  const normalized = value.replace(/[^\d,.-]/g, "");
+  if (!normalized) {
+    return null;
+  }
+
+  if (/^\d+$/.test(normalized)) {
+    return Number.parseFloat(normalized);
+  }
+
+  const lastDot = normalized.lastIndexOf(".");
+  const lastComma = normalized.lastIndexOf(",");
+  const decimalSeparator =
+    lastDot > lastComma ? "." : lastComma > lastDot ? "," : null;
+
+  if (!decimalSeparator) {
+    return Number.parseFloat(normalized.replace(/[^\d-]/g, ""));
+  }
+
+  const pieces = normalized.split(decimalSeparator);
+  const whole = pieces.slice(0, -1).join("").replace(/[^\d-]/g, "");
+  const fraction = pieces.at(-1)?.replace(/[^\d]/g, "") ?? "";
+  if (!whole && !fraction) {
+    return null;
+  }
+
+  const parsed = Number.parseFloat(`${whole || "0"}.${fraction || "0"}`);
+  return Number.isFinite(parsed) ? parsed : null;
+}
+
+function extractCanonicalUrl(html, requestUrl) {
+  const href = extractTagAttribute(html, "link", "rel", "canonical", "href");
+  if (!href) {
+    return null;
+  }
+
+  return resolveUrl(requestUrl, href);
+}
+
+function extractMetaContent(html, attrName, attrValue) {
+  const escaped = escapeRegExp(attrValue);
+  const match = html.match(
+    new RegExp(`<meta[^>]+${attrName}=["']${escaped}["'][^>]+content=["']([^"']+)["'][^>]*>`, "i"),
+  );
+  return match?.[1] ?? null;
+}
+
+function extractEmbeddedPageType(html) {
+  const matches = [
+    html.match(/"pageType"\s*:\s*"([^"]+)"/i),
+    html.match(/page_type["']?\s*[:=]\s*["']([^"']+)["']/i),
+    html.match(/ShopifyAnalytics\.meta\s*=\s*(\{[\s\S]*?\});/i),
+  ];
+
+  for (const match of matches) {
+    if (!match) {
+      continue;
+    }
+
+    if (match[1]?.startsWith("{")) {
+      const parsed = tryParseJson(match[1]);
+      if (parsed?.page?.pageType) {
+        return String(parsed.page.pageType).toLowerCase();
+      }
+      if (parsed?.pageType) {
+        return String(parsed.pageType).toLowerCase();
+      }
+      continue;
+    }
+
+    return String(match[1]).toLowerCase();
+  }
+
+  return null;
+}
+
+function extractJsonLdObjects(html) {
+  const objects = [];
+  for (const match of html.matchAll(/<script[^>]+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)) {
+    const parsed = tryParseJson(match[1]);
+    if (!parsed) {
+      continue;
+    }
+
+    if (Array.isArray(parsed)) {
+      objects.push(...parsed);
+    } else {
+      objects.push(parsed);
+    }
+  }
+
+  return objects;
+}
+
+function extractProductSchemas(objects) {
+  const results = [];
+  for (const object of objects) {
+    walkObject(object, (value) => {
+      if (isPlainObject(value) && isProductSchemaNode(value)) {
+        results.push(value);
+      }
+    });
+
+    if (isPlainObject(object) && isProductSchemaNode(object)) {
+      results.push(object);
+    }
+  }
+
+  return dedupeObjects(results);
+}
+
+function isProductSchemaNode(node) {
+  const type = getSchemaType(node);
+  return type.includes("product") || type.includes("offer");
+}
+
+function getSchemaType(node) {
+  const rawType = node?.["@type"];
+  if (Array.isArray(rawType)) {
+    return rawType.join(" ").toLowerCase();
+  }
+
+  return String(rawType ?? "").toLowerCase();
+}
+
+function isHomepageLikeContext({ url, canonicalPath, ogType, title, shopifyPageType }) {
+  if (shopifyPageType === "index" || shopifyPageType === "homepage") {
+    return true;
+  }
+
+  if (canonicalPath === "/" || canonicalPath === "") {
+    return true;
+  }
+
+  if (safePathname(url) === "/" && !ogType) {
+    return true;
+  }
+
+  return isGenericStoreTitle(title);
+}
+
+function isProductLikeContext({
+  url,
+  canonicalPath,
+  ogType,
+  shopifyPageType,
+  structuredTitles,
+  ogTitle,
+  genericTitle,
+}) {
+  if (shopifyPageType === "product") {
+    return true;
+  }
+
+  if (String(ogType ?? "").toLowerCase() === "product") {
+    return true;
+  }
+
+  if ((canonicalPath ?? "").includes("/products/") || safePathname(url).includes("/products/")) {
+    return true;
+  }
+
+  if (structuredTitles.length > 0) {
+    return true;
+  }
+
+  return Boolean(ogTitle) && !genericTitle;
+}
+
+function inferPageTypeFromContext(homepageLike, productLike, ogType) {
+  if (homepageLike) {
+    return "homepage";
+  }
+
+  if (productLike) {
+    return "product";
+  }
+
+  if (String(ogType ?? "").toLowerCase() === "website") {
+    return "website";
+  }
+
+  return "unknown";
+}
+
+function isGenericStoreTitle(title) {
+  if (!title) {
+    return false;
+  }
+
+  return /(?:your source for|home|footwear|running|walking|training shoes|welcome|official store|shop online)/i.test(title);
+}
+
+function inferBrandHintsFromTexts(texts) {
+  const brands = [
+    "maurten",
+    "precision",
+    "hydration",
+    "krono",
+    "upika",
+    "naak",
+    "hornet",
+    "watt",
+  ];
+
+  return brands.filter((brand) =>
+    texts.some((text) => text.includes(brand)),
+  );
+}
+
+function inferProductHintsFromTexts(texts) {
+  const hints = [
+    "gel",
+    "drink mix",
+    "drink",
+    "bar",
+    "chew",
+    "solid",
+    "caf",
+    "caffeine",
+    "flow",
+    "electrolyte",
+  ];
+
+  return hints.filter((hint) =>
+    texts.some((text) => text.includes(hint)),
+  );
+}
+
+function classifyJsonLdPriceKey(key, parent) {
+  const normalizedKey = String(key ?? "").toLowerCase();
+  if (normalizedKey === "price" || normalizedKey === "lowprice") {
+    return "current";
+  }
+
+  if (normalizedKey === "saleprice" || normalizedKey === "offerprice") {
+    return "sale";
+  }
+
+  if (normalizedKey === "highprice" || normalizedKey.includes("compare")) {
+    return "compare";
+  }
+
+  if (normalizedKey.includes("shipping")) {
+    return "shipping";
+  }
+
+  if (normalizedKey.includes("unit")) {
+    return "unit-reference";
+  }
+
+  if (
+    normalizedKey.includes("price") &&
+    typeof parent?.availability === "string"
+  ) {
+    return "current";
+  }
+
+  return normalizedKey.includes("price") ? "current" : null;
+}
+
+function classifyShopifyPriceKey(key, parent) {
+  const normalizedKey = String(key ?? "").toLowerCase();
+  if (normalizedKey === "price" || normalizedKey === "final_price") {
+    return "current";
+  }
+
+  if (normalizedKey === "compare_at_price") {
+    return "compare";
+  }
+
+  if (normalizedKey === "unit_price") {
+    return "unit-reference";
+  }
+
+  if (normalizedKey === "price_min") {
+    return "current";
+  }
+
+  if (normalizedKey === "price_max") {
+    return "range-high";
+  }
+
+  if (normalizedKey.includes("shipping")) {
+    return "shipping";
+  }
+
+  if (normalizedKey.includes("discount")) {
+    return "savings";
+  }
+
+  if (normalizedKey.includes("price")) {
+    return parent?.available === false ? "compare" : "current";
+  }
+
+  return null;
+}
+
+function classifyPriceContextWindow(windowText, pageContext) {
+  const normalized = normalizeSignalText(windowText).toLowerCase();
+  const tags = [];
+  let semanticType = "current";
+  let contextConfidence = "medium";
+
+  if (/(compare at|regular price|prix regulier|regular|msrp|was |ancien prix)/i.test(normalized)) {
+    semanticType = "compare";
+    tags.push("compare");
+  }
+
+  if (/(save|economisez|rabais|off|discount|reduction)/i.test(normalized)) {
+    semanticType = semanticType === "compare" ? semanticType : "savings";
+    tags.push("savings");
+  }
+
+  if (/(shipping|livraison|free ship|expedition)/i.test(normalized)) {
+    semanticType = "shipping";
+    tags.push("shipping");
+  }
+
+  if (/(from |starting at|a partir de|dès)/i.test(normalized)) {
+    tags.push("starting-at");
+    contextConfidence = "low";
+  }
+
+  if (/(sale price|prix de vente|our price|now|maintenant|price)/i.test(normalized)) {
+    semanticType = semanticType === "current" ? "current" : semanticType;
+    tags.push("current-label");
+    contextConfidence = "high";
+  }
+
+  if (/(sold out|rupture|out of stock)/i.test(normalized)) {
+    tags.push("sold-out");
+    contextConfidence = "low";
+  }
+
+  if (pageContext?.homepageLike) {
+    tags.push("homepage-like");
+    contextConfidence = "low";
+  }
+
+  return { semanticType, contextConfidence, tags };
+}
+
+function extractJsonBlocksByKey(html, key) {
+  const blocks = [];
+  const escaped = escapeRegExp(key);
+  for (const match of html.matchAll(new RegExp(`"${escaped}"\\s*:\\s*(\\[[\\s\\S]*?\\]|\\{[\\s\\S]*?\\})`, "gi"))) {
+    blocks.push(match[1]);
+  }
+  return blocks;
+}
+
+function extractJsonBlocksByAssignment(html, variableName) {
+  const blocks = [];
+  const escaped = escapeRegExp(variableName);
+  for (const match of html.matchAll(new RegExp(`${escaped}\\s*=\\s*(\\{[\\s\\S]*?\\});`, "gi"))) {
+    blocks.push(match[1]);
+  }
+  return blocks;
+}
+
+function tryParseJson(value) {
+  if (typeof value !== "string") {
+    return null;
+  }
+
+  const candidates = [value.trim(), value.trim().replace(/;$/, "")];
+  for (const candidate of candidates) {
+    try {
+      return JSON.parse(candidate);
+    } catch {
+      // Continue.
+    }
+  }
+
+  return null;
+}
+
+function walkObject(value, visitor, parent = null, key = null, seen = new Set()) {
+  if (!value || typeof value !== "object") {
+    return;
+  }
+
+  if (seen.has(value)) {
+    return;
+  }
+  seen.add(value);
+
+  visitor(value, key, parent);
+
+  if (Array.isArray(value)) {
+    value.forEach((entry, index) => walkObject(entry, visitor, value, index, seen));
+    return;
+  }
+
+  for (const [entryKey, entryValue] of Object.entries(value)) {
+    if (entryValue && typeof entryValue === "object") {
+      walkObject(entryValue, visitor, value, entryKey, seen);
+    } else {
+      visitor(entryValue, entryKey, value);
+    }
+  }
+}
+
+function isPlainObject(value) {
+  return Boolean(value) && typeof value === "object" && !Array.isArray(value);
+}
+
+function dedupeObjects(objects) {
+  return [
+    ...new Map(
+      objects.map((object) => [JSON.stringify(object), object]),
+    ).values(),
+  ];
+}
+
+function getFirstString(...values) {
+  for (const value of values) {
+    if (typeof value === "string" && value.trim()) {
+      return value.trim();
+    }
+  }
+  return null;
+}
+
+function getHtmlWindow(html, index, radius = 180) {
+  if (!Number.isFinite(index)) {
+    return "";
+  }
+
+  const start = Math.max(0, index - radius);
+  const end = Math.min(html.length, index + radius);
+  return html.slice(start, end);
+}
+
+function extractTagAttribute(html, tagName, keyName, keyValue, attributeName) {
+  const escapedTag = escapeRegExp(tagName);
+  const escapedKey = escapeRegExp(keyName);
+  const escapedValue = escapeRegExp(keyValue);
+  const escapedAttr = escapeRegExp(attributeName);
+  const regex = new RegExp(
+    `<${escapedTag}[^>]+${escapedKey}=["']${escapedValue}["'][^>]+${escapedAttr}=["']([^"']+)["'][^>]*>`,
+    "i",
+  );
+  return html.match(regex)?.[1] ?? null;
+}
+
+function safePathname(url) {
+  try {
+    return new URL(url).pathname;
+  } catch {
+    return "";
+  }
+}
+
+function normalizeCurrencyCode(value) {
+  if (typeof value !== "string" || !value.trim()) {
+    return null;
+  }
+
+  const normalized = value.trim().toUpperCase();
+  if (normalized === "CA$" || normalized === "$CAD") {
+    return "CAD";
+  }
+
+  if (/^[A-Z]{3}$/.test(normalized)) {
+    return normalized;
+  }
+
+  return normalized.includes("CAD") ? "CAD" : null;
+}
+
+function detectCurrencyCode(value) {
+  if (typeof value !== "string") {
+    return null;
+  }
+
+  if (/CAD|CA\$|\$ CAD/i.test(value)) {
+    return "CAD";
+  }
+
+  if (/USD|US\$|\$ US/i.test(value)) {
+    return "USD";
+  }
+
+  return null;
+}
+
+function dedupeSemanticPriceCandidates(candidates) {
+  return [
+    ...new Map(
+      candidates.map((candidate) => [
+        [
+          round(candidate.value),
+          candidate.currency ?? "na",
+          candidate.sourceType ?? "na",
+          candidate.semanticType ?? "na",
+          candidate.contextLabel ?? "na",
+          normalizeSignalText(candidate.evidenceText ?? "").slice(0, 120),
+        ].join(":"),
+        candidate,
+      ]),
+    ).values(),
+  ];
+}
+
+function nearlyEqual(a, b) {
+  if (!Number.isFinite(a) || !Number.isFinite(b)) {
+    return false;
+  }
+
+  return Math.abs(a - b) <= 0.01;
 }
 
 function extractOdooSelectedVariantPriceCandidates(html, url) {
@@ -1755,12 +2768,18 @@ function chooseBestPriceCandidate(candidates, offer) {
         ...candidate,
         packagePrice,
         value: round(packagePrice / unitCount),
-        sourceScore: getPriceSourceScore(candidate, index),
+        sourceScore: getPriceSourceScore(candidate, index, offer),
         packageScore: getPackagePriceScore(packagePrice),
+        semanticScore: getPriceSemanticScore(candidate, offer),
+        pageScore: getPageContextScore(candidate, offer),
+        evidenceScore: getEvidenceQualityScore(candidate, offer),
+        noisePenalty: getPriceNoisePenalty(candidate, offer),
+        matchScore: getOfferProductMatchScore(candidate, offer),
       }));
     })
     .filter((candidate) => candidate.value > 0 && candidate.packagePrice <= MAX_PACKAGE_PRICE)
-    .filter((candidate) => !candidate.currency || candidate.currency === "CAD");
+    .filter((candidate) => !candidate.currency || candidate.currency === "CAD")
+    .filter((candidate) => !shouldRejectPriceCandidate(candidate, offer));
 
   if (normalized.length === 0) {
     return null;
@@ -1772,12 +2791,19 @@ function chooseBestPriceCandidate(candidates, offer) {
       score:
         candidate.sourceScore +
         candidate.packageScore +
-        getUnitPriceScore(candidate.value),
+        candidate.semanticScore +
+        candidate.pageScore +
+        candidate.evidenceScore +
+        candidate.matchScore +
+        candidate.noisePenalty +
+        getUnitPriceScore(candidate.value, offer),
     }))
     .filter((candidate) => isReliableUnitPrice(candidate.value))
     .sort(
       (a, b) =>
         b.score - a.score ||
+        b.matchScore - a.matchScore ||
+        b.pageScore - a.pageScore ||
         b.sourceScore - a.sourceScore ||
         a.packagePrice - b.packagePrice,
     );
@@ -1785,25 +2811,40 @@ function chooseBestPriceCandidate(candidates, offer) {
   return ranked[0] ?? null;
 }
 
-function choosePackagePriceCandidate(candidates) {
+function choosePackagePriceCandidate(candidates, offer = null) {
   const normalized = candidates
     .flatMap((candidate, index) =>
       normalizeMoneyValues(candidate.value).map((value) => ({
         ...candidate,
         value,
-        sourceScore: getPriceSourceScore(candidate, index),
+        sourceScore: getPriceSourceScore(candidate, index, offer),
         packageScore: getPackagePriceScore(value),
+        semanticScore: getPriceSemanticScore(candidate, offer),
+        pageScore: getPageContextScore(candidate, offer),
+        evidenceScore: getEvidenceQualityScore(candidate, offer),
+        noisePenalty: getPriceNoisePenalty(candidate, offer),
+        matchScore: getOfferProductMatchScore(candidate, offer),
       })),
     )
     .filter((candidate) => candidate.value > 0 && candidate.value <= MAX_PACKAGE_PRICE)
     .filter((candidate) => !candidate.currency || candidate.currency === "CAD")
+    .filter((candidate) => !shouldRejectPriceCandidate(candidate, offer))
     .map((candidate) => ({
       ...candidate,
-      score: candidate.sourceScore + candidate.packageScore,
+      score:
+        candidate.sourceScore +
+        candidate.packageScore +
+        candidate.semanticScore +
+        candidate.pageScore +
+        candidate.evidenceScore +
+        candidate.matchScore +
+        candidate.noisePenalty,
     }))
     .sort(
       (a, b) =>
         b.score - a.score ||
+        b.matchScore - a.matchScore ||
+        b.pageScore - a.pageScore ||
         b.sourceScore - a.sourceScore ||
         a.value - b.value,
     );
@@ -2345,21 +3386,43 @@ function normalizeMoneyValues(value) {
   );
 }
 
-function getPriceSourceScore(candidate, index) {
+function getPriceSourceScore(candidate, index, offer = null) {
   const sourceType = candidate.sourceType;
+  let score = 0;
+
   if (sourceType === "structured") {
-    return 20 - index * 0.01;
+    score += 20;
+  } else if (sourceType === "meta") {
+    score += 17;
+  } else if (sourceType === "text") {
+    score += 8;
+  } else {
+    score += 12;
   }
 
-  if (sourceType === "meta") {
-    return 16 - index * 0.01;
+  if (candidate.contextLabel === "jsonld") {
+    score += 5;
   }
 
-  if (sourceType === "text") {
-    return 8 - index * 0.01;
+  if (candidate.contextLabel === "og-product-price" || candidate.contextLabel === "og-price") {
+    score += 4;
   }
 
-  return 12 - index * 0.5;
+  if (candidate.contextLabel === "shopify-json") {
+    score += 4;
+  }
+
+  if (candidate.contextConfidence === "high") {
+    score += 2;
+  } else if (candidate.contextConfidence === "low") {
+    score -= 3;
+  }
+
+  if (offer?.productUrl && normalizeComparableUrl(candidate.url ?? offer.productUrl) === normalizeComparableUrl(offer.productUrl)) {
+    score += 1;
+  }
+
+  return score - index * 0.05;
 }
 
 function getPackagePriceScore(value) {
@@ -2403,6 +3466,268 @@ function getUnitPriceScore(value) {
   return 0;
 }
 
+function getPriceSemanticScore(candidate, offer = null) {
+  const semanticType = candidate.semanticType ?? "current";
+  if (semanticType === "current" || semanticType === "sale") {
+    return semanticType === "sale" ? 7 : 9;
+  }
+
+  if (semanticType === "range-low") {
+    return 3;
+  }
+
+  if (semanticType === "unit-reference") {
+    return -4;
+  }
+
+  if (semanticType === "compare" || semanticType === "range-high") {
+    return -12;
+  }
+
+  if (semanticType === "shipping" || semanticType === "savings") {
+    return -20;
+  }
+
+  if (semanticType === "unknown" && offer?.type === "Boisson") {
+    return -2;
+  }
+
+  return -6;
+}
+
+function getPageContextScore(candidate, offer = null) {
+  let score = 0;
+  const pageType = candidate.pageType ?? "unknown";
+
+  if (pageType === "product") {
+    score += 8;
+  } else if (pageType === "homepage") {
+    score -= 24;
+  } else if (pageType === "website") {
+    score -= 10;
+  }
+
+  if (candidate.contextTags?.includes("homepage-like")) {
+    score -= 18;
+  }
+
+  if (candidate.pageContext?.genericTitle) {
+    score -= 8;
+  }
+
+  if (candidate.pageContext?.productLike) {
+    score += 4;
+  }
+
+  if (offer) {
+    score += getPageTitleOfferMatchScore(candidate.pageContext, offer);
+  }
+
+  return score;
+}
+
+function getEvidenceQualityScore(candidate, offer = null) {
+  const evidence = normalizeSignalText(candidate.evidenceText ?? "").toLowerCase();
+  if (!evidence) {
+    return 0;
+  }
+
+  let score = 0;
+  if (/(add to cart|buy now|in stock|variant|quantity selector)/i.test(evidence)) {
+    score += 2;
+  }
+
+  if (/(sale price|prix de vente|our price|og:price:amount|pricecurrency|itemprop price|product price)/i.test(evidence)) {
+    score += 4;
+  }
+
+  if (/(compare at|regular price|retail|msrp|you save|save \$|shipping|livraison)/i.test(evidence)) {
+    score -= 6;
+  }
+
+  if (/(review|rating|stars|points|reward|gift card)/i.test(evidence)) {
+    score -= 5;
+  }
+
+  if (offer) {
+    score += scoreEvidenceAgainstOfferIdentity(evidence, offer);
+  }
+
+  return score;
+}
+
+function getPriceNoisePenalty(candidate, offer = null) {
+  let penalty = 0;
+  const evidence = normalizeSignalText(candidate.evidenceText ?? "").toLowerCase();
+  const value = candidate.value;
+
+  if (candidate.semanticType === "shipping" || candidate.semanticType === "savings") {
+    penalty -= 30;
+  }
+
+  if (candidate.pageType === "homepage") {
+    penalty -= 28;
+  }
+
+  if (candidate.pageContext?.homepageLike) {
+    penalty -= 20;
+  }
+
+  if (value > 150) {
+    penalty -= 8;
+  }
+
+  if (Number.isInteger(value) && [30, 35, 40, 50, 60, 80, 100, 160, 200, 300].includes(value)) {
+    penalty -= 4;
+  }
+
+  if (/(km|grams?|glucides|carbohydrates?|ml|servings?|portions?)/i.test(evidence) && !/\$/i.test(candidate.rawValue ?? "")) {
+    penalty -= 5;
+  }
+
+  if (/(from |starting at|a partir de|dès)/i.test(evidence)) {
+    penalty -= 5;
+  }
+
+  if (/(wishlist|compare|quick view|newsletter|footer|header)/i.test(evidence)) {
+    penalty -= 12;
+  }
+
+  if (offer?.brand && !offerIdentityAppearsInText(evidence, offer, { strict: false })) {
+    penalty -= 6;
+  }
+
+  return penalty;
+}
+
+function getOfferProductMatchScore(candidate, offer = null) {
+  if (!offer) {
+    return 0;
+  }
+
+  const texts = [
+    candidate.pageContext?.normalizedTitle,
+    candidate.pageContext?.decodedPath,
+    candidate.pageContext?.canonicalDecodedPath,
+    normalizeSignalText(candidate.evidenceText ?? "").toLowerCase(),
+  ].filter(Boolean);
+
+  return scoreTextsAgainstOffer(texts, offer);
+}
+
+function shouldRejectPriceCandidate(candidate, offer = null) {
+  if (!candidate) {
+    return true;
+  }
+
+  if (candidate.semanticType === "shipping" || candidate.semanticType === "savings") {
+    return true;
+  }
+
+  if (candidate.pageType === "homepage" && candidate.sourceType !== "meta") {
+    return true;
+  }
+
+  if (
+    candidate.pageContext?.homepageLike &&
+    candidate.pageContext?.genericTitle &&
+    !offerIdentityAppearsInText(candidate.pageContext?.decodedPath ?? "", offer, { strict: true }) &&
+    !offerIdentityAppearsInText(candidate.pageContext?.normalizedTitle ?? "", offer, { strict: false })
+  ) {
+    return true;
+  }
+
+  if (
+    offer &&
+    candidate.sourceType === "structured" &&
+    candidate.pageContext?.genericTitle &&
+    scoreTextsAgainstOffer(
+      [
+        candidate.pageContext?.normalizedTitle,
+        candidate.pageContext?.decodedPath,
+        candidate.pageContext?.canonicalDecodedPath,
+      ],
+      offer,
+    ) <= -8
+  ) {
+    return true;
+  }
+
+  return false;
+}
+
+function getPageTitleOfferMatchScore(pageContext, offer) {
+  if (!pageContext || !offer) {
+    return 0;
+  }
+
+  return scoreTextsAgainstOffer(
+    [
+      pageContext.normalizedTitle,
+      pageContext.decodedPath,
+      pageContext.canonicalDecodedPath,
+      ...(pageContext.productTexts ?? []),
+    ],
+    offer,
+  );
+}
+
+function scoreEvidenceAgainstOfferIdentity(evidence, offer) {
+  return scoreTextsAgainstOffer([evidence], offer);
+}
+
+function offerIdentityAppearsInText(text, offer, { strict = false } = {}) {
+  return scoreTextsAgainstOffer([text], offer, { strict }) > 0;
+}
+
+function scoreTextsAgainstOffer(texts, offer, { strict = true } = {}) {
+  if (!offer) {
+    return 0;
+  }
+
+  const haystack = normalizeSignalText(texts.filter(Boolean).join(" ")).toLowerCase();
+  if (!haystack) {
+    return 0;
+  }
+
+  const brandTokens = tokenizeOfferIdentity(offer.brand ?? "");
+  const nameTokens = tokenizeOfferIdentity(offer.name ?? "");
+  let score = 0;
+
+  const matchedBrand = brandTokens.filter((token) => haystack.includes(token));
+  const matchedName = nameTokens.filter((token) => haystack.includes(token));
+
+  if (matchedBrand.length > 0) {
+    score += 6 + matchedBrand.length * 1.5;
+  } else if (brandTokens.length > 0 && strict) {
+    score -= 8;
+  }
+
+  if (matchedName.length > 0) {
+    score += matchedName.length * 3;
+  } else if (nameTokens.length > 0 && strict) {
+    score -= 6;
+  }
+
+  if (/\b(official|officiel|product|products)\b/.test(haystack)) {
+    score += 1;
+  }
+
+  if (/\b(home|welcome|source for|footwear|shop online)\b/.test(haystack)) {
+    score -= 5;
+  }
+
+  return score;
+}
+
+function tokenizeOfferIdentity(value) {
+  return normalizeSignalText(value)
+    .toLowerCase()
+    .split(/\s+/)
+    .filter((token) => token.length >= 3 || /^\d{2,3}$/.test(token))
+    .filter((token) => !["mix", "fuel", "sport", "energy"].includes(token));
+}
+
 function isReliableUnitPrice(value) {
   return Number.isFinite(value) && value >= MIN_UNIT_PRICE && value <= MAX_UNIT_PRICE;
 }
@@ -2428,9 +3753,29 @@ async function fetchHtml(url, options = {}) {
 
     return await response.text();
   } catch {
-    return null;
+    return fetchHtmlWithCurl(url, timeoutMs);
   } finally {
     clearTimeout(timeout);
+  }
+}
+
+async function fetchHtmlWithCurl(url, timeoutMs) {
+  try {
+    const seconds = String(Math.max(3, Math.ceil(timeoutMs / 1000)));
+    const { stdout } = await execFileAsync("curl", [
+      "-L",
+      "-A",
+      USER_AGENT,
+      "--max-time",
+      seconds,
+      "--compressed",
+      url,
+    ], {
+      maxBuffer: 8 * 1024 * 1024,
+    });
+    return typeof stdout === "string" && stdout.trim() ? stdout : null;
+  } catch {
+    return null;
   }
 }
 
