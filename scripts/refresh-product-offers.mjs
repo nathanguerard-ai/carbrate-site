@@ -64,7 +64,15 @@ async function prefetchUrl(url, cache, stats) {
     return;
   }
 
+  if (isBlockedOrEmptyHtml(html)) {
+    return;
+  }
+
   const pageSignals = extractPageSignals(url, html);
+  if (cached && isCacheRegression(cached, pageSignals)) {
+    return;
+  }
+
   const nextEntry = {
     fetchedAt: new Date().toISOString(),
     ...pageSignals,
@@ -514,6 +522,37 @@ function extractPageSignals(url, html) {
         url,
       })),
   };
+}
+
+function isBlockedOrEmptyHtml(html) {
+  const text = stripHtml(html).toLowerCase();
+  if (text.length < 120) {
+    return true;
+  }
+
+  return /(?:access denied|forbidden|captcha|verify you are human|checking your browser|cloudflare|security check|bot detection|temporarily blocked|enable javascript)/i.test(text);
+}
+
+function isCacheRegression(cached, nextSignals) {
+  const cachedPriceCount = cached.priceCandidates?.length ?? 0;
+  const nextPriceCount = nextSignals.priceCandidates?.length ?? 0;
+  if (cachedPriceCount > 0 && nextPriceCount === 0) {
+    return true;
+  }
+
+  const cachedPackageCount = cached.packageCountCandidates?.length ?? 0;
+  const nextPackageCount = nextSignals.packageCountCandidates?.length ?? 0;
+  if (cachedPriceCount > 0 && cachedPackageCount > 0 && nextPackageCount === 0) {
+    return true;
+  }
+
+  const cachedCarbCount = cached.carbCandidates?.length ?? 0;
+  const nextCarbCount = nextSignals.carbCandidates?.length ?? 0;
+  if (cachedCarbCount > 0 && nextCarbCount === 0 && nextPriceCount === 0) {
+    return true;
+  }
+
+  return false;
 }
 
 function enrichPageSignals(url, pageSignals) {
