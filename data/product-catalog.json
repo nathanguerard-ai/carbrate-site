@@ -11,10 +11,10 @@
       "nutritionSources": [
         {
           "label": "Maurten officiel",
-          "url": "https://www.maurten.com/products/gel-100"
+          "url": "https://www.maurten.com/products/gel-100-box-us"
         }
       ],
-    "offers": [
+      "offers": [
       {
         "seller": "spryactive.ca",
         "productUrl": "https://spryactive.ca/products/maurten-hydrogel-sports-fuel-gel-100",
@@ -27,13 +27,7 @@
         "country": "CA",
         "unitCount": 12,
         "fallbackPrice": 5
-      },
-      {
-        "seller": "fitfirst.ca",
-        "productUrl": "https://www.fitfirst.ca/products/gel-100",
-        "country": "CA",
-        "fallbackPrice": 5.5
-        }
+      }
       ]
     },
     {
@@ -47,7 +41,7 @@
       "nutritionSources": [
         {
           "label": "Maurten officiel",
-          "url": "https://www.maurten.com/products/gel-100-caf-100"
+          "url": "https://www.maurten.com/products/gel-100-caf-100-box-ca"
         }
       ],
       "offers": [
@@ -77,10 +71,10 @@
       "nutritionSources": [
         {
           "label": "Maurten officiel",
-          "url": "https://www.maurten.com/products/gel-160"
+          "url": "https://www.maurten.com/products/gel-160-us-ca"
         }
       ],
-    "offers": [
+      "offers": [
       {
         "seller": "spryactive.ca",
         "productUrl": "https://spryactive.ca/products/maurten-hydrogel-sports-fuel-gel-160",
@@ -99,13 +93,7 @@
         "productUrl": "https://frontrunners.ca/products/maurten-gel-160",
         "country": "CA",
         "fallbackPrice": 7.5
-      },
-      {
-        "seller": "fitfirst.ca",
-        "productUrl": "https://www.fitfirst.ca/products/gel-160",
-        "country": "CA",
-        "fallbackPrice": 7.5
-        }
+      }
       ]
     },
     {
@@ -149,7 +137,7 @@
       "nutritionSources": [
         {
           "label": "Maurten officiel",
-          "url": "https://www.maurten.com/products/drink-mix-160"
+          "url": "https://www.maurten.com/products/drink-mix-160-box-us"
         }
       ],
       "offers": [
@@ -178,7 +166,7 @@
       "nutritionSources": [
         {
           "label": "Maurten officiel",
-          "url": "https://www.maurten.com/products/drink-mix-320"
+          "url": "https://www.maurten.com/products/drink-mix-320-box-us"
         }
       ],
       "offers": [

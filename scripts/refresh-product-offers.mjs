@@ -1171,7 +1171,7 @@ function resolveProductCarbs(product, productSignals, stats) {
     product.carbsGrams,
   );
 
-  if (chosenLiveCandidate) {
+  if (chosenLiveCandidate && isLiveCarbCandidateCompatible(chosenLiveCandidate, product)) {
     stats.carbsFromLive += 1;
     return {
       carbsGrams: chosenLiveCandidate.value,
@@ -1184,6 +1184,28 @@ function resolveProductCarbs(product, productSignals, stats) {
     carbsGrams: product.carbsGrams,
     source: "catalog",
   };
+}
+
+function isLiveCarbCandidateCompatible(candidate, product) {
+  if (!candidate || !Number.isFinite(candidate.value) || candidate.value <= 0) {
+    return false;
+  }
+
+  if (!Number.isFinite(product.carbsGrams) || product.carbsGrams <= 0) {
+    return true;
+  }
+
+  if (candidate.value === product.carbsGrams) {
+    return true;
+  }
+
+  const absoluteDifference = Math.abs(candidate.value - product.carbsGrams);
+
+  if (absoluteDifference <= 2) {
+    return true;
+  }
+
+  return false;
 }
 
 function resolveOfferPrice(

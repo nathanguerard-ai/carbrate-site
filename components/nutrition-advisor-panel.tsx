@@ -3,6 +3,8 @@
 import { FormEvent, useState } from "react";
 import {
   buildEffortAdvisorResult,
+  DEFAULT_MAX_DRINK_PORTIONS_PER_HOUR,
+  DRINK_WATER_ML_PER_PORTION,
   parseAdvisorQuestion,
   type EffortAdvisorResult,
 } from "@/lib/nutrition-advisor";
@@ -32,6 +34,9 @@ export function NutritionAdvisorPanel() {
   const [durationHours, setDurationHours] = useState("2");
   const [durationMinutes, setDurationMinutes] = useState("0");
   const [targetCarbsPerHour, setTargetCarbsPerHour] = useState("60");
+  const [maxDrinkPortionsPerHour, setMaxDrinkPortionsPerHour] = useState(
+    String(DEFAULT_MAX_DRINK_PORTIONS_PER_HOUR),
+  );
   const [preference, setPreference] = useState("best-value");
   const [caffeine, setCaffeine] = useState("any");
   const [typeCounts, setTypeCounts] =
@@ -89,6 +94,9 @@ export function NutritionAdvisorPanel() {
       setDurationHours(String(Math.floor(parsed.durationMinutes / 60)));
       setDurationMinutes(String(parsed.durationMinutes % 60));
       setTargetCarbsPerHour(String(parsed.targetCarbsPerHour));
+      setMaxDrinkPortionsPerHour(
+        String(parsed.maxDrinkPortionsPerHour ?? DEFAULT_MAX_DRINK_PORTIONS_PER_HOUR),
+      );
       setPreference(parsed.preference ?? "best-value");
       setCaffeine(parsed.caffeine ?? "any");
       if (
@@ -126,6 +134,12 @@ export function NutritionAdvisorPanel() {
         DEFAULT_TARGET_CARBS,
         20,
         140,
+      ),
+      maxDrinkPortionsPerHour: parseIntegerField(
+        maxDrinkPortionsPerHour,
+        DEFAULT_MAX_DRINK_PORTIONS_PER_HOUR,
+        0,
+        6,
       ),
       preference: preference as "best-value" | "lowest-cost" | "simple" | "mixed",
       caffeine: caffeine as "any" | "avoid" | "ok",
@@ -222,6 +236,27 @@ export function NutritionAdvisorPanel() {
                 }
                 className="rounded-xl border border-ink/10 bg-white px-3 py-2 text-ink outline-none focus:border-accent"
               />
+            </label>
+
+            <label className="grid gap-2 text-sm text-ink/72">
+              Max boissons par heure
+              <input
+                type="number"
+                min="0"
+                max="6"
+                step="1"
+                value={maxDrinkPortionsPerHour}
+                onChange={(event) =>
+                  setMaxDrinkPortionsPerHour(normalizeIntegerInput(event.target.value, 6))
+                }
+                className="rounded-xl border border-ink/10 bg-white px-3 py-2 text-ink outline-none focus:border-accent"
+              />
+              <span className="text-xs leading-5 text-ink/55">
+                Une portion de boisson est calculée avec environ{" "}
+                {DRINK_WATER_ML_PER_PORTION} ml d'eau. Par défaut, CarbRate limite
+                la boisson à {DEFAULT_MAX_DRINK_PORTIONS_PER_HOUR} portions/h pour
+                éviter un plan impossible à boire sur les longues sorties.
+              </span>
             </label>
 
             <div className="grid grid-cols-2 gap-3">
@@ -416,6 +451,9 @@ export function NutritionAdvisorPanel() {
                           <span className="block text-xs text-ink/55">
                             {item.totalCarbs} g · {item.totalCost.toFixed(2)} $ ·{" "}
                             {item.seller}
+                            {item.waterMl
+                              ? ` · environ ${item.waterMl} ml d'eau`
+                              : ""}
                           </span>
                         </a>
                       ))}
