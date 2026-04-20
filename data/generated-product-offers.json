@@ -1,16 +1,16 @@
 {
-  "updatedAt": "2026-04-19T09:13:17.251Z",
+  "updatedAt": "2026-04-20T10:15:55.943Z",
   "analysis": {
     "mode": "live",
     "pagesFetched": 72,
     "pagesFromCache": 0,
     "offerPricesFromLive": 69,
     "offerPricesFromFallback": 22,
-    "offerPricesSkipped": 18,
-    "unitCountsFromLive": 53,
+    "offerPricesSkipped": 20,
+    "unitCountsFromLive": 51,
     "unitCountsFromCatalog": 7,
     "unitCountsInferredFromPrice": 0,
-    "unitCountsDefaulted": 49,
+    "unitCountsDefaulted": 53,
     "carbsFromLive": 31,
     "carbsFromCatalog": 17,
     "discoveredProductsAdded": 1,
@@ -18,8 +18,8 @@
     "discoveredProductsMerged": 0,
     "discoveredBrandsScanned": 4,
     "discoveryPagesFetched": 6,
-    "discoveredOfferUrlsAdded": 43,
-    "searchQueriesRun": 53,
+    "discoveredOfferUrlsAdded": 45,
+    "searchQueriesRun": 56,
     "retailerSearchQueriesRun": 33
   },
   "products": [
@@ -28,8 +28,8 @@
       "name": "Gel 100",
       "brand": "Maurten",
       "type": "Gel",
-      "carbsGrams": 25,
-      "carbsSource": "https://enroute.run/products/maurten-gel-100",
+      "carbsGrams": 65,
+      "carbsSource": "https://enroute.run/products/maurten-gel-160",
       "officialProductUrl": "https://www.maurten.com/products/gel-100",
       "offers": [
         {
@@ -45,7 +45,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-19T09:12:59.983Z"
+          "lastCheckedAt": "2026-04-20T10:15:38.160Z"
         },
         {
           "seller": "lecoureurnordique.ca",
@@ -60,7 +60,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-19T09:12:59.983Z"
+          "lastCheckedAt": "2026-04-20T10:15:38.160Z"
         },
         {
           "seller": "fitfirst.ca",
@@ -75,7 +75,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-19T09:12:59.984Z"
+          "lastCheckedAt": "2026-04-20T10:15:38.161Z"
         },
         {
           "seller": "enroute.run",
@@ -90,7 +90,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T09:12:59.986Z"
+          "lastCheckedAt": "2026-04-20T10:15:38.164Z"
         },
         {
           "seller": "enroute.run",
@@ -105,7 +105,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T09:12:59.989Z"
+          "lastCheckedAt": "2026-04-20T10:15:38.166Z"
         },
         {
           "seller": "enroute.run",
@@ -120,7 +120,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T09:12:59.993Z"
+          "lastCheckedAt": "2026-04-20T10:15:38.170Z"
         },
         {
           "seller": "runnersedge.ca",
@@ -135,7 +135,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix vient d'une page live, mais une partie du calcul a été déduite automatiquement.",
-          "lastCheckedAt": "2026-04-19T09:12:59.994Z"
+          "lastCheckedAt": "2026-04-20T10:15:38.171Z"
         }
       ]
     },
@@ -144,8 +144,8 @@
       "name": "Gel 100 Caf 100",
       "brand": "Maurten",
       "type": "Gel",
-      "carbsGrams": 25,
-      "carbsSource": "https://enroute.run/products/maurten-gel-100",
+      "carbsGrams": 12,
+      "carbsSource": "https://lecoureurnordique.ca/en/products/maurten-gel-100-caf-100-boite",
       "officialProductUrl": "https://www.maurten.com/products/gel-100-caf-100",
       "offers": [
         {
@@ -161,7 +161,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T09:13:00.674Z"
+          "lastCheckedAt": "2026-04-20T10:15:38.856Z"
         },
         {
           "seller": "lecoureurnordique.ca",
@@ -176,37 +176,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:00.674Z"
-        },
-        {
-          "seller": "enroute.run",
-          "price": 5,
-          "packagePrice": 5,
-          "unitCount": 1,
-          "unitCountSource": "default-single",
-          "unitCountConfidence": "default",
-          "productUrl": "https://enroute.run/products/maurten-gel-100",
-          "priceSource": "https://enroute.run/products/maurten-gel-100",
-          "priceConfidence": "live",
-          "verificationStatus": "estimated",
-          "verificationLabel": "Prix estimé",
-          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T09:13:00.677Z"
-        },
-        {
-          "seller": "enroute.run",
-          "price": 7,
-          "packagePrice": 7,
-          "unitCount": 1,
-          "unitCountSource": "default-single",
-          "unitCountConfidence": "default",
-          "productUrl": "https://enroute.run/products/maurten-drink-mix-320-caf-100",
-          "priceSource": "https://enroute.run/products/maurten-drink-mix-320-caf-100",
-          "priceConfidence": "live",
-          "verificationStatus": "estimated",
-          "verificationLabel": "Prix estimé",
-          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T09:13:00.679Z"
+          "lastCheckedAt": "2026-04-20T10:15:38.857Z"
         },
         {
           "seller": "enroute.run",
@@ -221,7 +191,37 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T09:13:00.682Z"
+          "lastCheckedAt": "2026-04-20T10:15:38.859Z"
+        },
+        {
+          "seller": "enroute.run",
+          "price": 5,
+          "packagePrice": 5,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://enroute.run/products/maurten-gel-100",
+          "priceSource": "https://enroute.run/products/maurten-gel-100",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-20T10:15:38.861Z"
+        },
+        {
+          "seller": "enroute.run",
+          "price": 7,
+          "packagePrice": 7,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://enroute.run/products/maurten-drink-mix-320-caf-100",
+          "priceSource": "https://enroute.run/products/maurten-drink-mix-320-caf-100",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-20T10:15:38.863Z"
         }
       ]
     },
@@ -230,8 +230,8 @@
       "name": "Gel 160",
       "brand": "Maurten",
       "type": "Gel",
-      "carbsGrams": 25,
-      "carbsSource": "https://enroute.run/products/maurten-gel-100",
+      "carbsGrams": 40,
+      "carbsSource": "https://enroute.run/products/maurten-solid-160",
       "officialProductUrl": "https://www.maurten.com/products/gel-160",
       "offers": [
         {
@@ -247,7 +247,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-19T09:13:02.553Z"
+          "lastCheckedAt": "2026-04-20T10:15:40.772Z"
         },
         {
           "seller": "lecoureurnordique.ca",
@@ -262,7 +262,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-19T09:13:02.553Z"
+          "lastCheckedAt": "2026-04-20T10:15:40.772Z"
         },
         {
           "seller": "frontrunners.ca",
@@ -277,7 +277,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-19T09:13:02.553Z"
+          "lastCheckedAt": "2026-04-20T10:15:40.772Z"
         },
         {
           "seller": "fitfirst.ca",
@@ -292,7 +292,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-19T09:13:02.553Z"
+          "lastCheckedAt": "2026-04-20T10:15:40.773Z"
         },
         {
           "seller": "enroute.run",
@@ -307,67 +307,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T09:13:02.556Z"
-        },
-        {
-          "seller": "enroute.run",
-          "price": 5,
-          "packagePrice": 5,
-          "unitCount": 1,
-          "unitCountSource": "default-single",
-          "unitCountConfidence": "default",
-          "productUrl": "https://enroute.run/products/maurten-gel-100",
-          "priceSource": "https://enroute.run/products/maurten-gel-100",
-          "priceConfidence": "live",
-          "verificationStatus": "estimated",
-          "verificationLabel": "Prix estimé",
-          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T09:13:02.557Z"
-        },
-        {
-          "seller": "enroute.run",
-          "price": 3.5,
-          "packagePrice": 3.5,
-          "unitCount": 1,
-          "unitCountSource": "default-single",
-          "unitCountConfidence": "default",
-          "productUrl": "https://enroute.run/products/maurten-drink-mix-160",
-          "priceSource": "https://enroute.run/products/maurten-drink-mix-160",
-          "priceConfidence": "live",
-          "verificationStatus": "estimated",
-          "verificationLabel": "Prix estimé",
-          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T09:13:02.560Z"
-        },
-        {
-          "seller": "enroute.run",
-          "price": 4.5,
-          "packagePrice": 4.5,
-          "unitCount": 1,
-          "unitCountSource": "https://enroute.run/products/maurten-solid-160",
-          "unitCountConfidence": "live",
-          "productUrl": "https://enroute.run/products/maurten-solid-160",
-          "priceSource": "https://enroute.run/products/maurten-solid-160",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:02.562Z"
-        },
-        {
-          "seller": "enroute.run",
-          "price": 4.5,
-          "packagePrice": 4.5,
-          "unitCount": 1,
-          "unitCountSource": "default-single",
-          "unitCountConfidence": "default",
-          "productUrl": "https://enroute.run/products/maurten-solid-c-160",
-          "priceSource": "https://enroute.run/products/maurten-solid-c-160",
-          "priceConfidence": "live",
-          "verificationStatus": "estimated",
-          "verificationLabel": "Prix estimé",
-          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T09:13:02.565Z"
+          "lastCheckedAt": "2026-04-20T10:15:40.775Z"
         },
         {
           "seller": "enroute.run",
@@ -382,7 +322,67 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T09:13:02.567Z"
+          "lastCheckedAt": "2026-04-20T10:15:40.777Z"
+        },
+        {
+          "seller": "enroute.run",
+          "price": 5,
+          "packagePrice": 5,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://enroute.run/products/maurten-gel-100",
+          "priceSource": "https://enroute.run/products/maurten-gel-100",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-20T10:15:40.779Z"
+        },
+        {
+          "seller": "enroute.run",
+          "price": 3.5,
+          "packagePrice": 3.5,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://enroute.run/products/maurten-drink-mix-160",
+          "priceSource": "https://enroute.run/products/maurten-drink-mix-160",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-20T10:15:40.782Z"
+        },
+        {
+          "seller": "enroute.run",
+          "price": 4.5,
+          "packagePrice": 4.5,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://enroute.run/products/maurten-solid-160",
+          "priceSource": "https://enroute.run/products/maurten-solid-160",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-20T10:15:40.784Z"
+        },
+        {
+          "seller": "enroute.run",
+          "price": 4.5,
+          "packagePrice": 4.5,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://enroute.run/products/maurten-solid-c-160",
+          "priceSource": "https://enroute.run/products/maurten-solid-c-160",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-20T10:15:40.786Z"
         }
       ]
     },
@@ -391,8 +391,8 @@
       "name": "Solid 160",
       "brand": "Maurten",
       "type": "Barre",
-      "carbsGrams": 20,
-      "carbsSource": "https://lecoureurnordique.ca/products/maurten-solids-160-boite",
+      "carbsGrams": 40,
+      "carbsSource": "https://enroute.run/products/maurten-solid-160",
       "officialProductUrl": "https://www.maurten.com/products/solid-160",
       "offers": [
         {
@@ -408,7 +408,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-19T09:13:04.143Z"
+          "lastCheckedAt": "2026-04-20T10:15:42.300Z"
         },
         {
           "seller": "lecoureurnordique.ca",
@@ -423,7 +423,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:04.144Z"
+          "lastCheckedAt": "2026-04-20T10:15:42.301Z"
         },
         {
           "seller": "enroute.run",
@@ -438,7 +438,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T09:13:04.147Z"
+          "lastCheckedAt": "2026-04-20T10:15:42.303Z"
         },
         {
           "seller": "enroute.run",
@@ -453,22 +453,22 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T09:13:04.149Z"
+          "lastCheckedAt": "2026-04-20T10:15:42.305Z"
         },
         {
           "seller": "enroute.run",
           "price": 4.5,
           "packagePrice": 4.5,
           "unitCount": 1,
-          "unitCountSource": "https://enroute.run/products/maurten-solid-160",
-          "unitCountConfidence": "live",
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
           "productUrl": "https://enroute.run/products/maurten-solid-160",
           "priceSource": "https://enroute.run/products/maurten-solid-160",
           "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:04.152Z"
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-20T10:15:42.308Z"
         },
         {
           "seller": "enroute.run",
@@ -483,7 +483,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T09:13:04.154Z"
+          "lastCheckedAt": "2026-04-20T10:15:42.310Z"
         }
       ]
     },
@@ -509,7 +509,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T09:13:05.733Z"
+          "lastCheckedAt": "2026-04-20T10:15:43.848Z"
         },
         {
           "seller": "frontrunners.ca",
@@ -524,7 +524,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-19T09:13:05.734Z"
+          "lastCheckedAt": "2026-04-20T10:15:43.849Z"
         },
         {
           "seller": "enroute.run",
@@ -539,22 +539,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T09:13:05.736Z"
-        },
-        {
-          "seller": "enroute.run",
-          "price": 5.14,
-          "packagePrice": 72,
-          "unitCount": 14,
-          "unitCountSource": "https://enroute.run/products/maurten-drink-mix-320-caf-100",
-          "unitCountConfidence": "live",
-          "productUrl": "https://enroute.run/products/maurten-drink-mix-320-caf-100",
-          "priceSource": "https://enroute.run/products/maurten-drink-mix-320-caf-100",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:05.738Z"
+          "lastCheckedAt": "2026-04-20T10:15:43.851Z"
         },
         {
           "seller": "enroute.run",
@@ -569,7 +554,22 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T09:13:05.741Z"
+          "lastCheckedAt": "2026-04-20T10:15:43.853Z"
+        },
+        {
+          "seller": "enroute.run",
+          "price": 5.14,
+          "packagePrice": 72,
+          "unitCount": 14,
+          "unitCountSource": "https://enroute.run/products/maurten-drink-mix-320-caf-100",
+          "unitCountConfidence": "live",
+          "productUrl": "https://enroute.run/products/maurten-drink-mix-320-caf-100",
+          "priceSource": "https://enroute.run/products/maurten-drink-mix-320-caf-100",
+          "priceConfidence": "live",
+          "verificationStatus": "verified",
+          "verificationLabel": "Prix vérifié",
+          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
+          "lastCheckedAt": "2026-04-20T10:15:43.855Z"
         }
       ]
     },
@@ -595,7 +595,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T09:13:07.320Z"
+          "lastCheckedAt": "2026-04-20T10:15:45.424Z"
         },
         {
           "seller": "frontrunners.ca",
@@ -610,7 +610,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-19T09:13:07.321Z"
+          "lastCheckedAt": "2026-04-20T10:15:45.424Z"
         },
         {
           "seller": "enroute.run",
@@ -625,7 +625,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:07.324Z"
+          "lastCheckedAt": "2026-04-20T10:15:45.427Z"
         },
         {
           "seller": "enroute.run",
@@ -640,7 +640,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T09:13:07.326Z"
+          "lastCheckedAt": "2026-04-20T10:15:45.429Z"
         },
         {
           "seller": "enroute.run",
@@ -655,7 +655,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T09:13:07.328Z"
+          "lastCheckedAt": "2026-04-20T10:15:45.432Z"
         }
       ]
     },
@@ -681,7 +681,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:08.707Z"
+          "lastCheckedAt": "2026-04-20T10:15:46.861Z"
         },
         {
           "seller": "enroute.run",
@@ -696,7 +696,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:08.709Z"
+          "lastCheckedAt": "2026-04-20T10:15:46.863Z"
         }
       ]
     },
@@ -722,7 +722,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:08.999Z"
+          "lastCheckedAt": "2026-04-20T10:15:47.019Z"
         },
         {
           "seller": "shopsante.ca",
@@ -737,7 +737,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:08.999Z"
+          "lastCheckedAt": "2026-04-20T10:15:47.020Z"
         },
         {
           "seller": "lecoureurnordique.ca",
@@ -752,7 +752,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:08.999Z"
+          "lastCheckedAt": "2026-04-20T10:15:47.020Z"
         }
       ]
     },
@@ -778,7 +778,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:09.054Z"
+          "lastCheckedAt": "2026-04-20T10:15:47.174Z"
         },
         {
           "seller": "shopsante.ca",
@@ -793,7 +793,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:09.054Z"
+          "lastCheckedAt": "2026-04-20T10:15:47.174Z"
         }
       ]
     },
@@ -819,7 +819,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-19T09:13:10.112Z"
+          "lastCheckedAt": "2026-04-20T10:15:48.118Z"
         },
         {
           "seller": "enroute.run",
@@ -834,7 +834,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T09:13:10.114Z"
+          "lastCheckedAt": "2026-04-20T10:15:48.120Z"
         }
       ]
     },
@@ -860,7 +860,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T09:13:10.651Z"
+          "lastCheckedAt": "2026-04-20T10:15:48.733Z"
         },
         {
           "seller": "precisionhydration.com",
@@ -875,7 +875,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-19T09:13:10.663Z"
+          "lastCheckedAt": "2026-04-20T10:15:48.744Z"
         }
       ]
     },
@@ -901,7 +901,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:10.693Z"
+          "lastCheckedAt": "2026-04-20T10:15:48.782Z"
         }
       ]
     },
@@ -927,7 +927,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:10.765Z"
+          "lastCheckedAt": "2026-04-20T10:15:48.810Z"
         }
       ]
     },
@@ -953,7 +953,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:10.877Z"
+          "lastCheckedAt": "2026-04-20T10:15:48.841Z"
         }
       ]
     },
@@ -979,7 +979,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:10.905Z"
+          "lastCheckedAt": "2026-04-20T10:15:48.865Z"
         }
       ]
     },
@@ -1005,7 +1005,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:11.266Z"
+          "lastCheckedAt": "2026-04-20T10:15:49.325Z"
         },
         {
           "seller": "well.ca",
@@ -1020,7 +1020,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:11.267Z"
+          "lastCheckedAt": "2026-04-20T10:15:49.326Z"
         }
       ]
     },
@@ -1046,7 +1046,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:11.405Z"
+          "lastCheckedAt": "2026-04-20T10:15:49.525Z"
         },
         {
           "seller": "elementsport.ca",
@@ -1061,7 +1061,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:11.405Z"
+          "lastCheckedAt": "2026-04-20T10:15:49.525Z"
         }
       ]
     },
@@ -1087,7 +1087,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-19T09:13:11.517Z"
+          "lastCheckedAt": "2026-04-20T10:15:49.640Z"
         },
         {
           "seller": "fuelkit.ca",
@@ -1102,7 +1102,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T09:13:11.518Z"
+          "lastCheckedAt": "2026-04-20T10:15:49.641Z"
         },
         {
           "seller": "enroute.run",
@@ -1117,7 +1117,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T09:13:11.520Z"
+          "lastCheckedAt": "2026-04-20T10:15:49.643Z"
         }
       ]
     },
@@ -1143,7 +1143,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-19T09:13:12.024Z"
+          "lastCheckedAt": "2026-04-20T10:15:50.798Z"
         }
       ]
     },
@@ -1169,7 +1169,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-19T09:13:12.497Z"
+          "lastCheckedAt": "2026-04-20T10:15:51.169Z"
         }
       ]
     },
@@ -1195,7 +1195,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-19T09:13:12.937Z"
+          "lastCheckedAt": "2026-04-20T10:15:51.728Z"
         }
       ]
     },
@@ -1221,7 +1221,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-19T09:13:13.304Z"
+          "lastCheckedAt": "2026-04-20T10:15:52.074Z"
         }
       ]
     },
@@ -1247,7 +1247,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:13.335Z"
+          "lastCheckedAt": "2026-04-20T10:15:52.109Z"
         }
       ]
     },
@@ -1273,7 +1273,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:13.365Z"
+          "lastCheckedAt": "2026-04-20T10:15:52.136Z"
         }
       ]
     },
@@ -1299,7 +1299,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-19T09:13:13.522Z"
+          "lastCheckedAt": "2026-04-20T10:15:52.170Z"
         }
       ]
     },
@@ -1325,7 +1325,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-19T09:13:13.544Z"
+          "lastCheckedAt": "2026-04-20T10:15:52.201Z"
         }
       ]
     },
@@ -1351,7 +1351,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-19T09:13:13.574Z"
+          "lastCheckedAt": "2026-04-20T10:15:52.232Z"
         }
       ]
     },
@@ -1377,7 +1377,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:13.602Z"
+          "lastCheckedAt": "2026-04-20T10:15:52.253Z"
         }
       ]
     },
@@ -1403,7 +1403,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:13.636Z"
+          "lastCheckedAt": "2026-04-20T10:15:52.277Z"
         }
       ]
     },
@@ -1429,7 +1429,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:13.668Z"
+          "lastCheckedAt": "2026-04-20T10:15:52.323Z"
         }
       ]
     },
@@ -1455,7 +1455,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:13.703Z"
+          "lastCheckedAt": "2026-04-20T10:15:52.361Z"
         }
       ]
     },
@@ -1481,7 +1481,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:13.726Z"
+          "lastCheckedAt": "2026-04-20T10:15:52.399Z"
         }
       ]
     },
@@ -1507,7 +1507,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:13.748Z"
+          "lastCheckedAt": "2026-04-20T10:15:52.422Z"
         }
       ]
     },
@@ -1533,7 +1533,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:13.780Z"
+          "lastCheckedAt": "2026-04-20T10:15:52.450Z"
         }
       ]
     },
@@ -1559,7 +1559,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:13.809Z"
+          "lastCheckedAt": "2026-04-20T10:15:52.500Z"
         }
       ]
     },
@@ -1585,7 +1585,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:13.849Z"
+          "lastCheckedAt": "2026-04-20T10:15:52.537Z"
         }
       ]
     },
@@ -1611,7 +1611,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:13.955Z"
+          "lastCheckedAt": "2026-04-20T10:15:52.559Z"
         }
       ]
     },
@@ -1637,7 +1637,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:14.018Z"
+          "lastCheckedAt": "2026-04-20T10:15:52.582Z"
         }
       ]
     },
@@ -1663,7 +1663,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:14.045Z"
+          "lastCheckedAt": "2026-04-20T10:15:52.614Z"
         }
       ]
     },
@@ -1689,7 +1689,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix vient d'une page live, mais une partie du calcul a été déduite automatiquement.",
-          "lastCheckedAt": "2026-04-19T09:13:14.267Z"
+          "lastCheckedAt": "2026-04-20T10:15:52.839Z"
         },
         {
           "seller": "shopsante.ca",
@@ -1704,7 +1704,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T09:13:14.268Z"
+          "lastCheckedAt": "2026-04-20T10:15:52.839Z"
         }
       ]
     },
@@ -1730,7 +1730,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-19T09:13:14.289Z"
+          "lastCheckedAt": "2026-04-20T10:15:52.861Z"
         }
       ]
     },
@@ -1756,7 +1756,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:14.324Z"
+          "lastCheckedAt": "2026-04-20T10:15:52.886Z"
         }
       ]
     },
@@ -1782,7 +1782,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:14.349Z"
+          "lastCheckedAt": "2026-04-20T10:15:52.918Z"
         }
       ]
     },
@@ -1808,7 +1808,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-19T09:13:14.382Z"
+          "lastCheckedAt": "2026-04-20T10:15:52.943Z"
         }
       ]
     },
@@ -1834,7 +1834,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-19T09:13:14.406Z"
+          "lastCheckedAt": "2026-04-20T10:15:52.967Z"
         }
       ]
     },
@@ -1860,7 +1860,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:15.915Z"
+          "lastCheckedAt": "2026-04-20T10:15:54.581Z"
         }
       ]
     },
@@ -1886,7 +1886,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:17.215Z"
+          "lastCheckedAt": "2026-04-20T10:15:55.908Z"
         }
       ]
     },
@@ -1912,7 +1912,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-19T09:13:17.250Z"
+          "lastCheckedAt": "2026-04-20T10:15:55.941Z"
         }
       ]
     }
