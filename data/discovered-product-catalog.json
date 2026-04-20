@@ -1,4 +1,29 @@
 {
-  "updatedAt": "2026-04-19T03:42:51.959Z",
-  "products": []
+  "updatedAt": "2026-04-20T15:51:55.369Z",
+  "products": [
+    {
+      "id": "naak-ultra-energy-puree",
+      "name": "Ultra Energy™ Puree",
+      "brand": "Näak",
+      "type": "Boisson",
+      "carbsGrams": 5,
+      "sodiumMg": null,
+      "caffeineMg": null,
+      "nutritionSources": [
+        {
+          "label": "Näak officiel",
+          "url": "https://www.naak.com/products/energy-puree-apple-maple-syrup"
+        }
+      ],
+      "offers": [
+        {
+          "seller": "naak.com",
+          "productUrl": "https://www.naak.com/products/energy-puree-apple-maple-syrup",
+          "country": "CA",
+          "unitCount": 4,
+          "fallbackPrice": 1.07
+        }
+      ]
+    }
+  ]
 }

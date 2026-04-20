@@ -17,6 +17,7 @@ export type EffortAdvisorInput = {
   preferredTypes?: ProductType[];
   desiredTypeCounts?: Partial<Record<ProductType, number>>;
   typeBrandPreferences?: Partial<Record<ProductType, string>>;
+  maxDrinkPortionsPerHour?: number;
   question?: string;
 };
 
@@ -43,6 +44,7 @@ export type EffortAdvisorItem = {
   totalCarbs: number;
   unitPrice: number;
   totalCost: number;
+  waterMl?: number;
   packagePrice?: number;
   unitCount?: number;
   verificationLabel: string;
@@ -73,6 +75,8 @@ const TYPE_KEYWORDS: Array<[ProductType, RegExp]> = [
   ["Autre", /\b(autre|autres|chew|chews|gomme|gommes|gummies|bonbon|bonbons|machouiller|mastiquer)\b/i],
 ];
 const PRODUCT_TYPES: ProductType[] = ["Gel", "Boisson", "Barre", "Autre"];
+export const DEFAULT_MAX_DRINK_PORTIONS_PER_HOUR = 2;
+export const DRINK_WATER_ML_PER_PORTION = 500;
 const NUMBER_WORDS: Record<string, number> = {
   un: 1,
   une: 1,
@@ -111,6 +115,7 @@ export function analyzeAdvisorQuestion(
   const targetCarbsPerHour = parseCarbsPerHour(question, durationMinutes);
   const preferredTypes = parsePreferredTypes(question);
   const desiredTypeCounts = parseDesiredTypeCounts(question);
+  const maxDrinkPortionsPerHour = parseMaxDrinkPortionsPerHour(question);
   const missingInfo: MissingAdvisorInfo[] = [];
 
   if (
@@ -156,6 +161,10 @@ export function analyzeAdvisorQuestion(
     desiredTypeCounts: Object.keys(desiredTypeCounts).length > 0
       ? desiredTypeCounts
       : fallbackInput.desiredTypeCounts,
+    maxDrinkPortionsPerHour:
+      maxDrinkPortionsPerHour ??
+      fallbackInput.maxDrinkPortionsPerHour ??
+      DEFAULT_MAX_DRINK_PORTIONS_PER_HOUR,
     question,
   } as EffortAdvisorInput;
 
@@ -173,16 +182,18 @@ export function buildEffortAdvisorResult(
   const targetCarbsPerHour = clamp(input.targetCarbsPerHour, 20, 140);
   const durationHours = round(durationMinutes / 60);
   const targetTotalCarbs = Math.round(durationHours * targetCarbsPerHour);
+  const maxDrinkPortions = getMaxDrinkPortionsForDuration(input, durationHours);
   const products = getAdvisorProducts(input);
   const assumptions = buildAssumptions(input, durationMinutes, targetCarbsPerHour);
-  const customPlan = buildRequestedCompositionPlan(products, targetTotalCarbs, input);
-  const mixedPlan = buildMixedPlan(products, targetTotalCarbs, input);
+  const customPlan = buildRequestedCompositionPlan(products, targetTotalCarbs, input, maxDrinkPortions);
+  const mixedPlan = buildMixedPlan(products, targetTotalCarbs, input, maxDrinkPortions);
   const budgetPlan = buildSingleProductPlan(
     "Option budget",
     products,
     targetTotalCarbs,
     "lowest-cost",
     input,
+    maxDrinkPortions,
   );
   const ratioPlan = buildSingleProductPlan(
     "Option meilleur ratio",
@@ -190,6 +201,7 @@ export function buildEffortAdvisorResult(
     targetTotalCarbs,
     "best-value",
     input,
+    maxDrinkPortions,
   );
   const simplePlan = buildSingleProductPlan(
     "Option simple",
@@ -197,6 +209,7 @@ export function buildEffortAdvisorResult(
     targetTotalCarbs,
     "simple",
     input,
+    maxDrinkPortions,
   );
   const plans = dedupePlans(
     (customPlan
@@ -248,6 +261,7 @@ function buildSingleProductPlan(
   targetTotalCarbs: number,
   mode: EffortPreference,
   input: EffortAdvisorInput,
+  maxDrinkPortions: number,
 ): EffortAdvisorPlan {
   const ranked = rankProducts(products, targetTotalCarbs, mode, input);
   const product = ranked[0] ?? products[0];
@@ -256,6 +270,7 @@ function buildSingleProductPlan(
     title,
     targetTotalCarbs,
     product ? [{ product }] : [],
+    maxDrinkPortions,
   );
 }
 
@@ -263,6 +278,7 @@ function buildMixedPlan(
   products: ProductWithMetrics[],
   targetTotalCarbs: number,
   input: EffortAdvisorInput,
+  maxDrinkPortions: number,
 ): EffortAdvisorPlan {
   const rankedProducts = [
     ...rankProducts(products, targetTotalCarbs, "best-value", input),
@@ -291,6 +307,7 @@ function buildMixedPlan(
     "Option mixte",
     targetTotalCarbs,
     selections.map((product) => ({ product })),
+    maxDrinkPortions,
   );
 }
 
@@ -298,6 +315,7 @@ function buildRequestedCompositionPlan(
   products: ProductWithMetrics[],
   targetTotalCarbs: number,
   input: EffortAdvisorInput,
+  maxDrinkPortions: number,
 ): EffortAdvisorPlan | null {
   const counts = normalizeTypeCounts(input.desiredTypeCounts);
   const hasCounts = Object.keys(counts).length > 0;
@@ -314,7 +332,9 @@ function buildRequestedCompositionPlan(
       continue;
     }
 
-    if ((requestedPortions ?? 0) <= 0) {
+    const requestedCount = requestedPortions ?? 0;
+
+    if (requestedCount <= 0) {
       continue;
     }
 
@@ -327,7 +347,10 @@ function buildRequestedCompositionPlan(
     );
 
     if (product) {
-      selections.push({ product, portions: requestedPortions });
+      selections.push({
+        product,
+        portions: clampRequestedPortions(product, requestedCount, maxDrinkPortions),
+      });
     }
   }
 
@@ -364,13 +387,19 @@ function buildRequestedCompositionPlan(
     }
   }
 
-  return buildPlanFromSelections("Option personnalisée", targetTotalCarbs, selections);
+  return buildPlanFromSelections(
+    "Option personnalisée",
+    targetTotalCarbs,
+    selections,
+    maxDrinkPortions,
+  );
 }
 
 function buildPlanFromSelections(
   title: string,
   targetTotalCarbs: number,
   selections: AdvisorSelection[],
+  maxDrinkPortions: number,
 ): EffortAdvisorPlan {
   if (selections.length === 0) {
     return {
@@ -393,6 +422,7 @@ function buildPlanFromSelections(
       flexibleSelectionsLeft <= 1
         ? remainingCarbs
         : Math.max(product.carbsGrams, remainingCarbs / flexibleSelectionsLeft),
+      maxDrinkPortions,
     );
     if (selection.portions === undefined) {
       flexibleSelectionsLeft -= 1;
@@ -433,6 +463,10 @@ function buildAdvisorItem(
     totalCarbs: round(product.carbsGrams * portions),
     unitPrice: offer.price,
     totalCost: round(offer.price * portions),
+    waterMl:
+      product.type === "Boisson"
+        ? Math.round(portions * DRINK_WATER_ML_PER_PORTION)
+        : undefined,
     packagePrice: offer.packagePrice,
     unitCount: offer.unitCount,
     verificationLabel: offer.verificationLabel ?? "Prix vérifié",
@@ -447,9 +481,43 @@ function estimatePortions(product: ProductWithMetrics, targetTotalCarbs: number)
   return estimatePortionsForCarbs(product, targetTotalCarbs);
 }
 
-function estimatePortionsForCarbs(product: ProductWithMetrics, targetCarbs: number) {
+function estimatePortionsForCarbs(
+  product: ProductWithMetrics,
+  targetCarbs: number,
+  maxDrinkPortions = Infinity,
+) {
   const step = product.type === "Boisson" || product.type === "Barre" ? 0.5 : 1;
-  return Math.max(step, Math.ceil(targetCarbs / product.carbsGrams / step) * step);
+  const portions = Math.max(step, Math.ceil(targetCarbs / product.carbsGrams / step) * step);
+
+  if (product.type !== "Boisson") {
+    return portions;
+  }
+
+  return Math.min(portions, maxDrinkPortions);
+}
+
+function clampRequestedPortions(
+  product: ProductWithMetrics,
+  requestedPortions: number,
+  maxDrinkPortions: number,
+) {
+  if (product.type !== "Boisson") {
+    return requestedPortions;
+  }
+
+  return Math.min(requestedPortions, maxDrinkPortions);
+}
+
+function getMaxDrinkPortionsForDuration(
+  input: EffortAdvisorInput,
+  durationHours: number,
+) {
+  const perHour = clamp(
+    input.maxDrinkPortionsPerHour ?? DEFAULT_MAX_DRINK_PORTIONS_PER_HOUR,
+    0,
+    6,
+  );
+  return round(perHour * durationHours);
 }
 
 function rankProducts(
@@ -729,6 +797,23 @@ function parseDesiredTypeCounts(question: string) {
   return counts;
 }
 
+function parseMaxDrinkPortionsPerHour(question: string) {
+  const normalizedQuestion = normalizeQuestion(question);
+  const match = normalizedQuestion.match(
+    new RegExp(
+      `\\b(?:max|maxi|maximum|limite|limiter)\\s*(?:a|à)?\\s*(${NUMBER_TOKEN})\\s*(?:portions?\\s*)?(?:de\\s*)?(?:boissons?|bouteilles?|bidons?|drink|drinks|mix)\\s*(?:\\/\\s*h|par\\s*(?:heure|h)|a\\s+l[' ]?heure|heure|h)\\b`,
+      "i",
+    ),
+  );
+
+  if (!match) {
+    return null;
+  }
+
+  const parsed = parseFlexibleNumber(match[1]);
+  return parsed === null ? null : clamp(parsed, 0, 6);
+}
+
 function formatMissingInfoPrompt(missingInfo: MissingAdvisorInfo[]) {
   const details = missingInfo.map((entry) => {
     if (entry === "duration") {
@@ -781,6 +866,7 @@ function buildAssumptions(
   const assumptions = [
     `Durée: ${formatDuration(durationMinutes)}.`,
     `Cible: ${targetCarbsPerHour} g de glucides par heure.`,
+    `Boisson limitée à ${formatNumber(input.maxDrinkPortionsPerHour ?? DEFAULT_MAX_DRINK_PORTIONS_PER_HOUR)} portions/h; une portion correspond à environ ${DRINK_WATER_ML_PER_PORTION} ml d'eau.`,
   ];
 
   if (input.caffeine === "avoid") {
@@ -887,7 +973,10 @@ function formatMoney(value: number) {
 
 function formatPlanItems(items: EffortAdvisorItem[]) {
   return items
-    .map((item) => `${formatPortions(item.portions)} de ${item.brand} ${item.name}`)
+    .map((item) => {
+      const waterNote = item.waterMl ? ` dans environ ${item.waterMl} ml d'eau` : "";
+      return `${formatPortions(item.portions)} de ${item.brand} ${item.name}${waterNote}`;
+    })
     .join(", ");
 }
 
