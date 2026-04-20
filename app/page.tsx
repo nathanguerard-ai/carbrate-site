@@ -6,9 +6,12 @@ import {
   clampTargetGrams,
   DEFAULT_TARGET_CARBS,
   getCatalogUpdatedAt,
+  getOfferAssuranceSummary,
   getOfferVerificationLabel,
   getOfferVerificationStatus,
+  getProductBrandCounts,
   getProductBrands,
+  getPortionRecommendations,
   getProducts,
   getProductTypes,
   type Offer,
@@ -40,6 +43,7 @@ export default function Home() {
   const allProducts = getProducts(targetGrams);
   const productTypes = getProductTypes();
   const productBrands = getProductBrands();
+  const productBrandCounts = getProductBrandCounts(allProducts);
   const normalizedSearch = searchTerm.trim().toLowerCase();
   const filteredProducts = allProducts.filter((product) => {
     const typeMatch =
@@ -75,6 +79,8 @@ export default function Home() {
     (page - 1) * itemsPerPage,
     page * itemsPerPage,
   );
+  const quickPlans = getPortionRecommendations(visibleProducts, targetGrams, 3);
+  const assuranceSummary = getOfferAssuranceSummary(allProducts);
   const totalPages = Math.ceil(visibleProducts.length / itemsPerPage);
   const hasActiveFilters =
     selectedTypes.length > 0 ||
@@ -123,6 +129,20 @@ export default function Home() {
                 {formatDate(getCatalogUpdatedAt())}
               </span>
             </div>
+          </div>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <a
+              href="#comparateur"
+              className="rounded-full bg-ink px-5 py-3 text-sm font-medium text-white transition hover:bg-accent"
+            >
+              Explorer le comparateur
+            </a>
+            <a
+              href="#plan-effort"
+              className="rounded-full border border-[var(--line)] bg-white/75 px-5 py-3 text-sm font-medium text-ink transition hover:border-accent hover:text-accent"
+            >
+              Construire un plan d'effort
+            </a>
           </div>
           <div className="mt-6 inline-flex flex-wrap gap-2 rounded-lg border border-[var(--line)] bg-white p-2 shadow-sm">
             {[
@@ -236,9 +256,224 @@ export default function Home() {
         </section>
       </section>
 
-      <NutritionAdvisorPanel />
+      <section className="grid gap-5 pb-4 lg:grid-cols-3">
+        {[
+          {
+            title: "Plans plus stricts",
+            body:
+              "CarbRate pénalise désormais les formats trop denses, les grosses surcharges et les schémas difficiles à exécuter en mouvement.",
+          },
+          {
+            title: "Contexte réel",
+            body:
+              "Le moteur tient compte du sport, de l'intensité, de la chaleur, de la tolérance digestive et de la logistique de ravito.",
+          },
+          {
+            title: "Exécution terrain",
+            body:
+              "Chaque recommandation peut maintenant se lire comme un déroulé d'effort: rythme de prise, dilution, vigilance et checklist.",
+          },
+        ].map((item) => (
+          <div
+            key={item.title}
+            className="rounded-[1.5rem] border border-[var(--line)] bg-white p-5 shadow-sm"
+          >
+            <p className="text-sm font-semibold text-ink">{item.title}</p>
+            <p className="mt-2 text-sm leading-6 text-ink/65">{item.body}</p>
+          </div>
+        ))}
+      </section>
 
-      <section className="py-10">
+      <section className="grid gap-5 pb-4 lg:grid-cols-[1.08fr_0.92fr]">
+        <div
+          id="plans-rapides"
+          className="rounded-[2rem] border border-[var(--line)] bg-[var(--panel)] p-6 shadow-card backdrop-blur"
+        >
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
+                Plans rapides
+              </p>
+              <h2 className="mt-2 text-3xl font-semibold text-ink">
+                Atteins {targetGrams} g/h sans calcul mental.
+              </h2>
+              <p className="mt-3 max-w-2xl text-sm leading-6 text-ink/68">
+                Ces combinaisons sont générées à partir des produits visibles et
+                privilégient un bon équilibre entre précision, coût et simplicité.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-[var(--line)] bg-white/70 px-4 py-3 text-sm text-ink/68">
+              {visibleProducts.length} options filtrées
+            </div>
+          </div>
+
+          <div className="mt-6 grid gap-4 xl:grid-cols-3">
+            {quickPlans.length === 0 ? (
+              <div className="rounded-[1.5rem] border border-[var(--line)] bg-white p-5 text-sm text-ink/60 xl:col-span-3">
+                Aucun plan rapide disponible avec les filtres actuels.
+              </div>
+            ) : null}
+            {quickPlans.map((plan, index) => (
+              <article
+                key={plan.items.map((item) => `${item.productId}-${item.portions}`).join("-")}
+                className="rounded-[1.5rem] border border-[var(--line)] bg-white p-5 shadow-sm"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-ink/45">
+                      {index === 0
+                        ? "Le plus efficace"
+                        : index === 1
+                          ? "Alternative mixte"
+                          : "Option simple"}
+                    </p>
+                    <h3 className="mt-2 text-xl font-semibold text-ink">
+                      {getQuickPlanHeadline(plan)}
+                    </h3>
+                  </div>
+                  <span
+                    className={`rounded-full px-3 py-1 text-xs font-medium ${
+                      plan.deltaFromTarget >= 0
+                        ? "bg-pine/10 text-pine"
+                        : "bg-accent/10 text-accent"
+                    }`}
+                  >
+                    {plan.matchLabel}
+                  </span>
+                </div>
+
+                <div className="mt-4 grid grid-cols-3 gap-2 text-center">
+                  <div className="rounded-xl bg-pine/8 px-3 py-3">
+                    <p className="text-xs text-ink/55">Glucides</p>
+                    <p className="mt-1 font-semibold text-ink">{plan.totalCarbs} g</p>
+                  </div>
+                  <div className="rounded-xl bg-accent/8 px-3 py-3">
+                    <p className="text-xs text-ink/55">Coût</p>
+                    <p className="mt-1 font-semibold text-ink">${plan.totalCost.toFixed(2)}</p>
+                  </div>
+                  <div className="rounded-xl bg-ink/5 px-3 py-3">
+                    <p className="text-xs text-ink/55">Portions</p>
+                    <p className="mt-1 font-semibold text-ink">{plan.portionCount}</p>
+                  </div>
+                </div>
+
+                <div className="mt-4 space-y-2">
+                  {plan.items.map((item) => (
+                    <div
+                      key={`${item.productId}-${item.portions}`}
+                      className="flex items-start justify-between gap-3 rounded-xl bg-[var(--background)] px-3 py-3"
+                    >
+                      <div>
+                        <p className="text-sm font-medium text-ink">
+                          {formatPortions(item.portions)} x {item.brand} {item.name}
+                        </p>
+                        <p className="mt-1 text-xs text-ink/55">
+                          {item.type} · {item.totalCarbs} g · ${item.totalPrice.toFixed(2)}
+                        </p>
+                      </div>
+                      <a
+                        href={findProductUrlById(visibleProducts, item.productId)}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="rounded-full border border-ink/10 bg-white px-3 py-1.5 text-xs text-ink/72 transition hover:border-accent hover:text-accent"
+                      >
+                        Voir
+                      </a>
+                    </div>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <aside className="rounded-[2rem] border border-[var(--line)] bg-ink p-6 text-white shadow-card">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/55">
+            Qualité des prix
+          </p>
+          <h2 className="mt-2 text-3xl font-semibold">
+            Lis la fiabilité avant d'acheter.
+          </h2>
+          <p className="mt-3 text-sm leading-6 text-white/72">
+            CarbRate distingue les prix vérifiés, estimés ou à revoir pour éviter
+            qu'un produit paraisse meilleur qu'il ne l'est réellement.
+          </p>
+
+          <div className="mt-6 grid gap-3 sm:grid-cols-2">
+            <div className="rounded-[1.4rem] border border-white/10 bg-white/10 p-4">
+              <p className="text-sm text-white/60">Prix vérifiés</p>
+              <p className="mt-1 text-3xl font-semibold">
+                {assuranceSummary.verifiedOffers}
+              </p>
+              <p className="mt-2 text-xs text-white/55">
+                sur {assuranceSummary.totalOffers} offres suivies
+              </p>
+            </div>
+            <div className="rounded-[1.4rem] border border-white/10 bg-white/10 p-4">
+              <p className="text-sm text-white/60">Produits avec meilleur prix vérifié</p>
+              <p className="mt-1 text-3xl font-semibold">
+                {assuranceSummary.verifiedProductCount}
+              </p>
+              <p className="mt-2 text-xs text-white/55">
+                sur {allProducts.length} produits
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-5 grid gap-3">
+            {[
+              {
+                label: "Vérifié",
+                value: assuranceSummary.verifiedOffers,
+                tone: "bg-pine/15 text-white",
+              },
+              {
+                label: "Estimé",
+                value: assuranceSummary.estimatedOffers,
+                tone: "bg-white/10 text-white/90",
+              },
+              {
+                label: "Secours ou revue",
+                value:
+                  assuranceSummary.fallbackOffers + assuranceSummary.reviewOffers,
+                tone: "bg-accent/20 text-white",
+              },
+            ].map((entry) => (
+              <div
+                key={entry.label}
+                className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 px-4 py-3"
+              >
+                <span className="text-sm text-white/72">{entry.label}</span>
+                <span className={`rounded-full px-3 py-1 text-sm font-medium ${entry.tone}`}>
+                  {entry.value}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {assuranceSummary.reviewProducts.length > 0 ? (
+            <div className="mt-6 rounded-[1.5rem] border border-white/10 bg-white/5 p-4">
+              <p className="text-sm font-medium text-white">Produits à surveiller</p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {assuranceSummary.reviewProducts.slice(0, 5).map((product) => (
+                  <span
+                    key={product.id}
+                    className="rounded-full border border-white/10 bg-white/10 px-3 py-1.5 text-xs text-white/80"
+                  >
+                    {product.brand} {product.name}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ) : null}
+        </aside>
+      </section>
+
+      <section id="plan-effort">
+        <NutritionAdvisorPanel />
+      </section>
+
+      <section id="comparateur" className="py-10">
         <div className="mb-5 flex flex-col gap-5">
           <div>
             <h2 className="text-3xl font-semibold text-ink">
@@ -335,6 +570,9 @@ export default function Home() {
               <p className="text-xs uppercase tracking-[0.18em] text-ink/50">
                 Marque
               </p>
+              <p className="mt-2 text-xs text-ink/55">
+                {productBrands.length} marques disponibles, dont Carbs Fuel.
+              </p>
               <div className="mt-3 flex flex-wrap gap-2">
                 <button
                   type="button"
@@ -347,7 +585,7 @@ export default function Home() {
                 >
                   Toutes
                 </button>
-                {productBrands.map((brand) => (
+                {productBrandCounts.map(({ brand, count }) => (
                   <button
                     key={brand}
                     type="button"
@@ -364,7 +602,8 @@ export default function Home() {
                         : "border border-ink/10 bg-white/70 text-ink/72"
                     }`}
                   >
-                    {brand}
+                    {brand}{" "}
+                    <span className="text-xs opacity-70">({count})</span>
                   </button>
                 ))}
               </div>
@@ -376,6 +615,14 @@ export default function Home() {
             <div>
               <p className="text-sm text-ink/70">
                 {labelForSort(sortBy, targetGrams)}
+              </p>
+              <p className="mt-1 text-xs text-ink/50">
+                {visibleProducts.length > 0
+                  ? `Affichage de ${(page - 1) * itemsPerPage + 1}-${Math.min(
+                      page * itemsPerPage,
+                      visibleProducts.length,
+                    )} sur ${visibleProducts.length} produits visibles.`
+                  : "Aucun produit visible avec les filtres actuels."}
               </p>
             </div>
             <div className="flex flex-wrap gap-2">
@@ -389,6 +636,34 @@ export default function Home() {
               ) : null}
             </div>
           </div>
+          {hasActiveFilters ? (
+            <div className="flex flex-wrap items-center gap-2 border-b border-[var(--line)] bg-white/55 px-6 py-3">
+              <span className="text-xs font-medium uppercase tracking-[0.14em] text-ink/45">
+                Filtres actifs
+              </span>
+              {selectedTypes.map((type) => (
+                <span
+                  key={`type-${type}`}
+                  className="rounded-full border border-ink/10 bg-white px-3 py-1 text-xs text-ink/72"
+                >
+                  Type: {type}
+                </span>
+              ))}
+              {selectedBrands.map((brand) => (
+                <span
+                  key={`brand-${brand}`}
+                  className="rounded-full border border-ink/10 bg-white px-3 py-1 text-xs text-ink/72"
+                >
+                  Marque: {brand}
+                </span>
+              ))}
+              {normalizedSearch.length > 0 ? (
+                <span className="rounded-full border border-ink/10 bg-white px-3 py-1 text-xs text-ink/72">
+                  Recherche: {searchTerm.trim()}
+                </span>
+              ) : null}
+            </div>
+          ) : null}
           <div className={`${mobileVisibilityClass} gap-3 p-4`}>
             {paginatedProducts.length === 0 ? (
               <div className="rounded-lg border border-[var(--line)] bg-white p-5 text-center text-sm text-ink/60">
@@ -412,9 +687,13 @@ export default function Home() {
                         {product.brand} {product.name}
                       </h3>
                     </div>
-                    {isVerifiedOffer(product.cheapestOffer) ? (
-                      <span className="rounded-full bg-pine/10 px-2.5 py-1 text-xs text-pine">
-                        Vérifié
+                    {getOfferStatusTone(product.cheapestOffer) ? (
+                      <span
+                        className={`rounded-full px-2.5 py-1 text-xs ${getOfferStatusTone(
+                          product.cheapestOffer,
+                        )}`}
+                      >
+                        {getOfferVerificationLabel(product.cheapestOffer)}
                       </span>
                     ) : null}
                   </div>
@@ -587,8 +866,12 @@ export default function Home() {
                         <p className="mt-1 text-xs text-ink/55">
                           {describeOfferPrice(product.cheapestOffer)} chez {product.cheapestOffer.seller}
                         </p>
-                        {isVerifiedOffer(product.cheapestOffer) ? (
-                          <span className="mt-2 inline-flex rounded-full bg-pine/10 px-2.5 py-1 text-xs text-pine">
+                        {getOfferStatusTone(product.cheapestOffer) ? (
+                          <span
+                            className={`mt-2 inline-flex rounded-full px-2.5 py-1 text-xs ${getOfferStatusTone(
+                              product.cheapestOffer,
+                            )}`}
+                          >
                             {getOfferVerificationLabel(product.cheapestOffer)}
                           </span>
                         ) : null}
@@ -701,8 +984,44 @@ function describeOfferPrice(offer: {
   return "prix unitaire";
 }
 
-function isVerifiedOffer(offer: Offer) {
-  return getOfferVerificationStatus(offer) === "verified";
+function getOfferStatusTone(offer: Offer) {
+  const status = getOfferVerificationStatus(offer);
+
+  if (status === "verified") {
+    return "bg-pine/10 text-pine";
+  }
+
+  if (status === "estimated") {
+    return "bg-ink/8 text-ink/72";
+  }
+
+  return "bg-accent/10 text-accent";
+}
+
+function getQuickPlanHeadline(plan: {
+  distinctProductCount: number;
+  distinctTypeCount: number;
+}) {
+  if (plan.distinctProductCount === 1) {
+    return "Une seule référence";
+  }
+
+  if (plan.distinctTypeCount > 1) {
+    return "Mix de formats";
+  }
+
+  return "Plan économique";
+}
+
+function formatPortions(value: number) {
+  return Number.isInteger(value) ? String(value) : value.toFixed(1);
+}
+
+function findProductUrlById(
+  products: Array<{ id: string; cheapestOffer: Offer }>,
+  productId: string,
+) {
+  return products.find((product) => product.id === productId)?.cheapestOffer.productUrl ?? "#";
 }
 
 function getProductLinks(product: {

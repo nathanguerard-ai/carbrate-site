@@ -10,11 +10,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit -p tsconfig.typecheck.json",
     "refresh:product-offers": "node scripts/refresh-product-offers.mjs",
     "refresh:product-offers:live": "node scripts/refresh-product-offers.mjs --live",
     "refresh:product-offers:force": "node scripts/refresh-product-offers.mjs --live --force",
-    "audit:product-offers": "node scripts/audit-product-offers.mjs"
+    "audit:product-offers": "node scripts/audit-product-offers.mjs",
+    "audit:nutrition-advisor": "node --experimental-strip-types scripts/audit-nutrition-advisor.mjs"
   },
   "dependencies": {
     "next": "^16.2.3",

@@ -77,6 +77,11 @@ export type OfferAssuranceSummary = {
   reviewProducts: ProductWithMetrics[];
 };
 
+export type ProductBrandCount = {
+  brand: string;
+  count: number;
+};
+
 type GeneratedCatalog = {
   updatedAt: string;
   products: Product[];
@@ -401,11 +406,44 @@ export function getProductTypes() {
 }
 
 export function getProductBrands() {
-  return [...new Set(catalog.products.map((product) => product.brand))];
+  return getSortedBrands(
+    [...new Set(catalog.products.map((product) => product.brand))],
+  );
+}
+
+export function getProductBrandCounts(
+  products = getProducts(DEFAULT_TARGET_CARBS),
+): ProductBrandCount[] {
+  const counts = new Map<string, number>();
+  for (const product of products) {
+    counts.set(product.brand, (counts.get(product.brand) ?? 0) + 1);
+  }
+
+  return getSortedBrands([...counts.keys()]).map((brand) => ({
+    brand,
+    count: counts.get(brand) ?? 0,
+  }));
 }
 
 function round(value: number) {
   return Math.round(value * 100) / 100;
+}
+
+function getSortedBrands(brands: string[]) {
+  const brandPriority = new Map([
+    ["Carbs Fuel", 0],
+  ]);
+
+  return [...brands].sort((a, b) => {
+    const priorityDifference =
+      (brandPriority.get(a) ?? Number.MAX_SAFE_INTEGER) -
+      (brandPriority.get(b) ?? Number.MAX_SAFE_INTEGER);
+    if (priorityDifference !== 0) {
+      return priorityDifference;
+    }
+
+    return a.localeCompare(b, "fr-CA");
+  });
 }
 
 function labelForVerificationStatus(status: OfferVerificationStatus) {
@@ -435,20 +473,43 @@ function isValidOffer(offer: Offer) {
 }
 
 function getRecommendationCandidates(products: ProductWithMetrics[]) {
-  const byRatio = [...products]
+  const realisticProducts = products.filter(isQuickRecommendationCandidate);
+  const byRatio = [...realisticProducts]
     .sort((a, b) => b.carbsPerDollar - a.carbsPerDollar)
     .slice(0, 24);
-  const byCost = [...products]
+  const byCost = [...realisticProducts]
     .sort((a, b) => a.costForTargetGrams - b.costForTargetGrams)
     .slice(0, 18);
-  const byPrice = [...products]
+  const byPrice = [...realisticProducts]
     .sort((a, b) => a.cheapestOffer.price - b.cheapestOffer.price)
     .slice(0, 16);
-  const byCarbs = [...products]
+  const byCarbs = [...realisticProducts]
     .sort((a, b) => b.carbsGrams - a.carbsGrams)
     .slice(0, 12);
 
   return [...new Map([...byRatio, ...byCost, ...byPrice, ...byCarbs].map((product) => [product.id, product])).values()];
+}
+
+function isQuickRecommendationCandidate(product: ProductWithMetrics) {
+  const label = `${product.brand} ${product.name}`.toLowerCase();
+
+  if (product.carbsGrams >= 150) {
+    return false;
+  }
+
+  if (
+    product.type === "Gel" &&
+    (product.carbsGrams >= 120 ||
+      /\bflow\b|\bflask\b|\bbottle\b|\bpouch\b/.test(label))
+  ) {
+    return false;
+  }
+
+  if (product.type === "Barre" && product.carbsGrams >= 70) {
+    return false;
+  }
+
+  return true;
 }
 
 function buildRecommendation(

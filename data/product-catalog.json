@@ -954,6 +954,126 @@
           "fallbackPrice": 1.47
         }
       ]
+    },
+    {
+      "id": "carbs-fuel-original-gel-25",
+      "name": "Original 25g Energy Gels",
+      "brand": "Carbs Fuel",
+      "type": "Gel",
+      "carbsGrams": 25,
+      "sodiumMg": 65,
+      "caffeineMg": null,
+      "nutritionSources": [
+        {
+          "label": "Carbs Fuel officiel",
+          "url": "https://sea2skynutrition.ca/products/carbs-fuel-original-25g-energy-gel-copy"
+        }
+      ],
+      "offers": [
+        {
+          "seller": "sea2skynutrition.ca",
+          "productUrl": "https://sea2skynutrition.ca/products/carbs-fuel-original-25g-energy-gel-copy",
+          "country": "CA",
+          "unitCount": 12,
+          "fallbackPrice": 2
+        }
+      ]
+    },
+    {
+      "id": "carbs-fuel-original-gel-50",
+      "name": "Original 50g Energy Gels",
+      "brand": "Carbs Fuel",
+      "type": "Gel",
+      "carbsGrams": 50,
+      "sodiumMg": 105,
+      "caffeineMg": null,
+      "nutritionSources": [
+        {
+          "label": "Carbs Fuel officiel",
+          "url": "https://sea2skynutrition.ca/products/carbs-fuel-original-25g-energy-gels-copy"
+        }
+      ],
+      "offers": [
+        {
+          "seller": "sea2skynutrition.ca",
+          "productUrl": "https://sea2skynutrition.ca/products/carbs-fuel-original-25g-energy-gels-copy",
+          "country": "CA",
+          "unitCount": 18,
+          "fallbackPrice": 3
+        }
+      ]
+    },
+    {
+      "id": "carbs-fuel-caffeinated-original-gel-50",
+      "name": "CAFFEINATED Original 50g Energy Gels",
+      "brand": "Carbs Fuel",
+      "type": "Gel",
+      "carbsGrams": 50,
+      "sodiumMg": 150,
+      "caffeineMg": 100,
+      "nutritionSources": [
+        {
+          "label": "Carbs Fuel officiel",
+          "url": "https://sea2skynutrition.ca/products/carbs-fuel-salted-original-50g-energy-gels-copy"
+        }
+      ],
+      "offers": [
+        {
+          "seller": "sea2skynutrition.ca",
+          "productUrl": "https://sea2skynutrition.ca/products/carbs-fuel-salted-original-50g-energy-gels-copy",
+          "country": "CA",
+          "unitCount": 12,
+          "fallbackPrice": 3.5
+        }
+      ]
+    },
+    {
+      "id": "carbs-fuel-salted-original-gel-50",
+      "name": "SALTED Original 50g Energy Gels",
+      "brand": "Carbs Fuel",
+      "type": "Gel",
+      "carbsGrams": 50,
+      "sodiumMg": 450,
+      "caffeineMg": null,
+      "nutritionSources": [
+        {
+          "label": "Carbs Fuel officiel",
+          "url": "https://sea2skynutrition.ca/products/carbs-fuel-original-50g-energy-gels-copy"
+        }
+      ],
+      "offers": [
+        {
+          "seller": "sea2skynutrition.ca",
+          "productUrl": "https://sea2skynutrition.ca/products/carbs-fuel-original-50g-energy-gels-copy",
+          "country": "CA",
+          "unitCount": 12,
+          "fallbackPrice": 3.33
+        }
+      ]
+    },
+    {
+      "id": "carbs-fuel-original-drink-mix-1000",
+      "name": "Original 1,000g Sport Drink Mix",
+      "brand": "Carbs Fuel",
+      "type": "Boisson",
+      "carbsGrams": 75,
+      "sodiumMg": 500,
+      "caffeineMg": null,
+      "nutritionSources": [
+        {
+          "label": "Carbs Fuel officiel",
+          "url": "https://sea2skynutrition.ca/products/carbs-fuel-original-1-000g-sport-drink-mix-copy"
+        }
+      ],
+      "offers": [
+        {
+          "seller": "sea2skynutrition.ca",
+          "productUrl": "https://sea2skynutrition.ca/products/carbs-fuel-original-1-000g-sport-drink-mix-copy",
+          "country": "CA",
+          "unitCount": 13.33,
+          "fallbackPrice": 3.38
+        }
+      ]
     }
   ]
 }

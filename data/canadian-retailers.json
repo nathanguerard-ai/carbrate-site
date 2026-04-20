@@ -41,6 +41,12 @@
       "priority": 70,
       "searchUrlTemplate": "https://fuelkit.ca/search?q={query}&type=product",
       "allowedHosts": ["fuelkit.ca", "www.fuelkit.ca"]
+    },
+    {
+      "seller": "sea2skynutrition.ca",
+      "priority": 65,
+      "searchUrlTemplate": "https://sea2skynutrition.ca/search?q={query}&type=product",
+      "allowedHosts": ["sea2skynutrition.ca", "www.sea2skynutrition.ca"]
     }
   ]
 }

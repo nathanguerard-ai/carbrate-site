@@ -8,12 +8,30 @@ import {
 
 export type EffortPreference = "best-value" | "lowest-cost" | "simple" | "mixed";
 export type CaffeinePreference = "any" | "avoid" | "ok";
+export type EffortContext = "training" | "race" | "neutral";
+export type GutTrainingStatus = "standard" | "gut-trained";
+export type SportProfile =
+  | "neutral"
+  | "running"
+  | "cycling"
+  | "trail"
+  | "triathlon";
+export type IntensityLevel = "easy" | "steady" | "hard" | "race-pace";
+export type HeatProfile = "cool" | "mild" | "hot";
+export type AidStationAccess = "self-supported" | "regular" | "frequent";
+export type RecommendationTier = "conservative" | "standard" | "advanced";
 
 export type EffortAdvisorInput = {
   durationMinutes: number;
   targetCarbsPerHour: number;
   preference?: EffortPreference;
   caffeine?: CaffeinePreference;
+  context?: EffortContext;
+  gutTrainingStatus?: GutTrainingStatus;
+  sport?: SportProfile;
+  intensity?: IntensityLevel;
+  heat?: HeatProfile;
+  aidStations?: AidStationAccess;
   preferredTypes?: ProductType[];
   desiredTypeCounts?: Partial<Record<ProductType, number>>;
   typeBrandPreferences?: Partial<Record<ProductType, string>>;
@@ -58,12 +76,42 @@ export type EffortAdvisorPlan = {
   items: EffortAdvisorItem[];
 };
 
+export type EffortAdvisorExecutionStep = {
+  minute: number;
+  label: string;
+  carbsTarget: number;
+  action: string;
+  hydration: string;
+};
+
+export type EffortAdvisorStrategyNote = {
+  title: string;
+  detail: string;
+};
+
 export type EffortAdvisorResult = {
   durationMinutes: number;
   durationHours: number;
   targetCarbsPerHour: number;
+  maxDrinkPortionsPerHour?: number;
+  requestedTargetCarbsPerHour?: number;
   targetTotalCarbs: number;
+  context?: EffortContext;
+  gutTrainingStatus?: GutTrainingStatus;
+  sport?: SportProfile;
+  intensity?: IntensityLevel;
+  heat?: HeatProfile;
+  aidStations?: AidStationAccess;
+  recommendationTier?: RecommendationTier;
+  recommendedCarbsPerHourRange?: {
+    min: number;
+    max: number;
+  };
   assumptions: string[];
+  warnings: string[];
+  strategyNotes: EffortAdvisorStrategyNote[];
+  executionPlan: EffortAdvisorExecutionStep[];
+  preRaceChecklist: string[];
   plans: EffortAdvisorPlan[];
   answer: string;
 };
@@ -76,7 +124,8 @@ const TYPE_KEYWORDS: Array<[ProductType, RegExp]> = [
 ];
 const PRODUCT_TYPES: ProductType[] = ["Gel", "Boisson", "Barre", "Autre"];
 export const DEFAULT_MAX_DRINK_PORTIONS_PER_HOUR = 2;
-export const DRINK_WATER_ML_PER_PORTION = 500;
+export const DEFAULT_MAX_DRINK_PORTIONS_PER_BOTTLE = 2;
+export const DRINK_BOTTLE_ML = 500;
 const NUMBER_WORDS: Record<string, number> = {
   un: 1,
   une: 1,
@@ -98,6 +147,19 @@ const NUMBER_TOKEN =
 type AdvisorSelection = {
   product: ProductWithMetrics;
   portions?: number;
+};
+
+type CarbRecommendationProfile = {
+  min: number;
+  max: number;
+  suggested: number;
+  note: string;
+  tier: RecommendationTier;
+};
+
+type PortionAllocation = {
+  product: ProductWithMetrics;
+  portions: number;
 };
 
 export function parseAdvisorQuestion(question: string): EffortAdvisorInput {
@@ -155,6 +217,21 @@ export function analyzeAdvisorQuestion(
     caffeine: /\b(sans|éviter|eviter|pas de|aucune?)\s+(caféine|cafeine)\b/i.test(question)
       ? "avoid"
       : fallbackInput.caffeine ?? "any",
+    context: parseEffortContext(question) ?? fallbackInput.context ?? "neutral",
+    gutTrainingStatus:
+      parseGutTrainingStatus(question) ??
+      fallbackInput.gutTrainingStatus ??
+      "standard",
+    sport: parseSportProfile(question) ?? fallbackInput.sport ?? "neutral",
+    intensity:
+      parseIntensityLevel(question) ??
+      fallbackInput.intensity ??
+      ((parseEffortContext(question) ?? fallbackInput.context) === "race"
+        ? "race-pace"
+        : "steady"),
+    heat: parseHeatProfile(question) ?? fallbackInput.heat ?? "mild",
+    aidStations:
+      parseAidStations(question) ?? fallbackInput.aidStations ?? "regular",
     preferredTypes: preferredTypes.length > 0
       ? preferredTypes
       : fallbackInput.preferredTypes ?? [],
@@ -179,20 +256,60 @@ export function buildEffortAdvisorResult(
   input: EffortAdvisorInput,
 ): EffortAdvisorResult {
   const durationMinutes = clamp(input.durationMinutes, 30, 24 * 60);
-  const targetCarbsPerHour = clamp(input.targetCarbsPerHour, 20, 140);
+  const requestedTargetCarbsPerHour = clamp(input.targetCarbsPerHour, 20, 140);
+  const context = input.context ?? "neutral";
+  const gutTrainingStatus = input.gutTrainingStatus ?? "standard";
+  const sport = input.sport ?? "neutral";
+  const intensity = input.intensity ?? (context === "race" ? "race-pace" : "steady");
+  const heat = input.heat ?? "mild";
+  const aidStations = input.aidStations ?? "regular";
+  const carbProfile = getCarbRecommendationProfile(
+    durationMinutes,
+    context,
+    gutTrainingStatus,
+    sport,
+    intensity,
+    heat,
+  );
+  const targetCarbsPerHour = clamp(
+    requestedTargetCarbsPerHour,
+    20,
+    carbProfile.max,
+  );
   const durationHours = round(durationMinutes / 60);
   const targetTotalCarbs = Math.round(durationHours * targetCarbsPerHour);
   const maxDrinkPortions = getMaxDrinkPortionsForDuration(input, durationHours);
-  const products = getAdvisorProducts(input);
-  const assumptions = buildAssumptions(input, durationMinutes, targetCarbsPerHour);
-  const customPlan = buildRequestedCompositionPlan(products, targetTotalCarbs, input, maxDrinkPortions);
-  const mixedPlan = buildMixedPlan(products, targetTotalCarbs, input, maxDrinkPortions);
+  const normalizedInput = {
+    ...input,
+    targetCarbsPerHour,
+    context,
+    gutTrainingStatus,
+    sport,
+    intensity,
+    heat,
+    aidStations,
+  };
+  const products = getAdvisorProducts(normalizedInput);
+  const assumptions = buildAssumptions(
+    normalizedInput,
+    durationMinutes,
+    targetCarbsPerHour,
+    requestedTargetCarbsPerHour,
+    carbProfile,
+  );
+  const customPlan = buildRequestedCompositionPlan(
+    products,
+    targetTotalCarbs,
+    normalizedInput,
+    maxDrinkPortions,
+  );
+  const mixedPlan = buildMixedPlan(products, targetTotalCarbs, normalizedInput, maxDrinkPortions);
   const budgetPlan = buildSingleProductPlan(
     "Option budget",
     products,
     targetTotalCarbs,
     "lowest-cost",
-    input,
+    normalizedInput,
     maxDrinkPortions,
   );
   const ratioPlan = buildSingleProductPlan(
@@ -200,7 +317,7 @@ export function buildEffortAdvisorResult(
     products,
     targetTotalCarbs,
     "best-value",
-    input,
+    normalizedInput,
     maxDrinkPortions,
   );
   const simplePlan = buildSingleProductPlan(
@@ -208,7 +325,7 @@ export function buildEffortAdvisorResult(
     products,
     targetTotalCarbs,
     "simple",
-    input,
+    normalizedInput,
     maxDrinkPortions,
   );
   const plans = dedupePlans(
@@ -217,15 +334,71 @@ export function buildEffortAdvisorResult(
       : [mixedPlan, budgetPlan, ratioPlan, simplePlan]
     ).filter((plan): plan is EffortAdvisorPlan => plan !== null),
   ).slice(0, 4);
+  const primaryPlan = plans[0] ?? {
+    title: "Aucun plan",
+    summary: "",
+    totalCarbs: 0,
+    totalCost: 0,
+    items: [],
+  };
+  const warnings = buildAdvisorWarnings(
+    normalizedInput,
+    primaryPlan,
+    targetTotalCarbs,
+    carbProfile,
+  );
+  const strategyNotes = buildStrategyNotes(
+    normalizedInput,
+    primaryPlan,
+    durationHours,
+    targetCarbsPerHour,
+  );
+  const executionPlan = buildExecutionPlan(
+    normalizedInput,
+    primaryPlan,
+    targetCarbsPerHour,
+    durationMinutes,
+  );
+  const preRaceChecklist = buildPreRaceChecklist(
+    normalizedInput,
+    primaryPlan,
+    targetCarbsPerHour,
+  );
 
   return {
     durationMinutes,
     durationHours,
     targetCarbsPerHour,
+    maxDrinkPortionsPerHour: input.maxDrinkPortionsPerHour ?? DEFAULT_MAX_DRINK_PORTIONS_PER_HOUR,
+    requestedTargetCarbsPerHour,
     targetTotalCarbs,
+    context,
+    gutTrainingStatus,
+    sport,
+    intensity,
+    heat,
+    aidStations,
+    recommendationTier: carbProfile.tier,
+    recommendedCarbsPerHourRange: {
+      min: carbProfile.min,
+      max: carbProfile.max,
+    },
     assumptions,
+    warnings,
+    strategyNotes,
+    executionPlan,
+    preRaceChecklist,
     plans,
-    answer: formatAdvisorAnswer(targetTotalCarbs, targetCarbsPerHour, durationHours, plans),
+    answer: formatAdvisorAnswer(
+      targetTotalCarbs,
+      targetCarbsPerHour,
+      durationHours,
+      plans,
+      context,
+      carbProfile,
+      sport,
+      intensity,
+    ),
   };
 }
 
@@ -236,6 +409,10 @@ function getAdvisorProducts(input: EffortAdvisorInput) {
 
   const candidates = getProducts(input.targetCarbsPerHour)
     .filter((product) => {
+      if (!isAutomaticRecommendationCandidate(product, input)) {
+        return false;
+      }
+
       if (
         preferredTypes.length > 0 &&
         !hasRequestedComposition &&
@@ -271,6 +448,7 @@ function buildSingleProductPlan(
     targetTotalCarbs,
     product ? [{ product }] : [],
     maxDrinkPortions,
+    input,
   );
 }
 
@@ -280,35 +458,30 @@ function buildMixedPlan(
   input: EffortAdvisorInput,
   maxDrinkPortions: number,
 ): EffortAdvisorPlan {
-  const rankedProducts = [
-    ...rankProducts(products, targetTotalCarbs, "best-value", input),
-    ...rankProducts(products, targetTotalCarbs, "simple", input),
-    ...rankProducts(products, targetTotalCarbs, "lowest-cost", input),
-  ];
-  const selections: ProductWithMetrics[] = [];
-
-  for (const product of rankedProducts) {
-    if (selections.length >= 3) {
-      break;
-    }
-
-    if (selections.some((selection) => selection.id === product.id)) {
-      continue;
-    }
-
-    if (!canAddProductToPlan(selections, product)) {
-      continue;
-    }
-
-    selections.push(product);
-  }
-
-  return buildPlanFromSelections(
+  const candidatePool = buildMixedCandidatePool(products, targetTotalCarbs, input);
+  const candidateSelectionSets = buildSelectionSets(candidatePool);
+  const fallbackPlan = buildPlanFromSelections(
     "Option mixte",
     targetTotalCarbs,
-    selections.map((product) => ({ product })),
+    candidatePool.slice(0, 3).map((product) => ({ product })),
     maxDrinkPortions,
+    input,
   );
+
+  return candidateSelectionSets.reduce<EffortAdvisorPlan>((bestPlan, selectionSet) => {
+    const nextPlan = buildPlanFromSelections(
+      "Option mixte",
+      targetTotalCarbs,
+      selectionSet.map((product) => ({ product })),
+      maxDrinkPortions,
+      input,
+    );
+
+    return scorePlan(nextPlan, targetTotalCarbs, input) <
+      scorePlan(bestPlan, targetTotalCarbs, input)
+      ? nextPlan
+      : bestPlan;
+  }, fallbackPlan);
 }
 
 function buildRequestedCompositionPlan(
@@ -349,7 +522,12 @@ function buildRequestedCompositionPlan(
     if (product) {
       selections.push({
         product,
-        portions: clampRequestedPortions(product, requestedCount, maxDrinkPortions),
+        portions: clampRequestedPortions(
+          product,
+          requestedCount,
+          maxDrinkPortions,
+          input,
+        ),
       });
     }
   }
@@ -392,6 +570,7 @@ function buildRequestedCompositionPlan(
     targetTotalCarbs,
     selections,
     maxDrinkPortions,
+    input,
   );
 }
 
@@ -400,6 +579,7 @@ function buildPlanFromSelections(
   targetTotalCarbs: number,
   selections: AdvisorSelection[],
   maxDrinkPortions: number,
+  input: EffortAdvisorInput,
 ): EffortAdvisorPlan {
   if (selections.length === 0) {
     return {
@@ -411,34 +591,23 @@ function buildPlanFromSelections(
     };
   }
 
-  let remainingCarbs = targetTotalCarbs;
-  let flexibleSelectionsLeft = selections.filter(
-    (selection) => selection.portions === undefined,
-  ).length;
-  const items = selections.map((selection) => {
-    const { product } = selection;
-    const portions = selection.portions ?? estimatePortionsForCarbs(
-      product,
-      flexibleSelectionsLeft <= 1
-        ? remainingCarbs
-        : Math.max(product.carbsGrams, remainingCarbs / flexibleSelectionsLeft),
-      maxDrinkPortions,
-    );
-    if (selection.portions === undefined) {
-      flexibleSelectionsLeft -= 1;
-    }
-
-    const totalCarbs = round(product.carbsGrams * portions);
-    remainingCarbs = Math.max(0, remainingCarbs - totalCarbs);
-
-    return buildAdvisorItem(product, portions);
-  });
+  const durationHours = round(input.durationMinutes / 60);
+  const portionPlan = allocatePlanPortions(
+    selections,
+    targetTotalCarbs,
+    maxDrinkPortions,
+    durationHours,
+    input,
+  );
+  const items = portionPlan
+    .filter((entry) => entry.portions > 0)
+    .map((entry) => buildAdvisorItem(entry.product, entry.portions));
   const totalCarbs = round(items.reduce((sum, item) => sum + item.totalCarbs, 0));
   const totalCost = round(items.reduce((sum, item) => sum + item.totalCost, 0));
 
   return {
     title,
-    summary: describePlanFit(totalCarbs, targetTotalCarbs),
+    summary: describePlanFit(totalCarbs, targetTotalCarbs, items, durationHours),
     totalCarbs,
     totalCost,
     items,
@@ -465,7 +634,7 @@ function buildAdvisorItem(
     totalCost: round(offer.price * portions),
     waterMl:
       product.type === "Boisson"
-        ? Math.round(portions * DRINK_WATER_ML_PER_PORTION)
+        ? estimateDrinkWaterMl(product, portions)
         : undefined,
     packagePrice: offer.packagePrice,
     unitCount: offer.unitCount,
@@ -485,27 +654,36 @@ function estimatePortionsForCarbs(
   product: ProductWithMetrics,
   targetCarbs: number,
   maxDrinkPortions = Infinity,
+  durationHours = 1,
+  context: EffortContext = "neutral",
+  targetCarbsPerHour = DEFAULT_TARGET_CARBS,
 ) {
   const step = product.type === "Boisson" || product.type === "Barre" ? 0.5 : 1;
   const portions = Math.max(step, Math.ceil(targetCarbs / product.carbsGrams / step) * step);
-
-  if (product.type !== "Boisson") {
-    return portions;
-  }
-
-  return Math.min(portions, maxDrinkPortions);
+  return clampPortionsForPracticality(
+    product,
+    portions,
+    maxDrinkPortions,
+    durationHours,
+    context,
+    targetCarbsPerHour,
+  );
 }
 
 function clampRequestedPortions(
   product: ProductWithMetrics,
   requestedPortions: number,
   maxDrinkPortions: number,
+  input: EffortAdvisorInput,
 ) {
-  if (product.type !== "Boisson") {
-    return requestedPortions;
-  }
-
-  return Math.min(requestedPortions, maxDrinkPortions);
+  return clampPortionsForPracticality(
+    product,
+    requestedPortions,
+    maxDrinkPortions,
+    round(input.durationMinutes / 60),
+    input.context ?? "neutral",
+    input.targetCarbsPerHour,
+  );
 }
 
 function getMaxDrinkPortionsForDuration(
@@ -527,6 +705,26 @@ function rankProducts(
   input: EffortAdvisorInput,
 ) {
   return [...products].sort((a, b) => {
+    const practicalityDifference =
+      getPracticalityPenalty(a, targetTotalCarbs, input) -
+      getPracticalityPenalty(b, targetTotalCarbs, input);
+    if (practicalityDifference !== 0) {
+      return practicalityDifference;
+    }
+
+    const suitabilityDifference =
+      getFuelFormPenalty(a, input) - getFuelFormPenalty(b, input);
+    if (suitabilityDifference !== 0) {
+      return suitabilityDifference;
+    }
+
+    const concentrationDifference =
+      getServingConcentrationPenalty(a, targetTotalCarbs, input) -
+      getServingConcentrationPenalty(b, targetTotalCarbs, input);
+    if (concentrationDifference !== 0) {
+      return concentrationDifference;
+    }
+
     const brandDifference =
       getBrandPreferencePenalty(a, input) - getBrandPreferencePenalty(b, input);
     if (brandDifference !== 0) {
@@ -740,6 +938,106 @@ function parsePreference(question: string): EffortPreference {
   return "best-value";
 }
 
+function parseEffortContext(question: string): EffortContext | null {
+  const normalizedQuestion = normalizeQuestion(question);
+
+  if (/\b(course|competition|compete|marathon|semi|half|triathlon|ironman|epreuve|epreuve|race day)\b/i.test(normalizedQuestion)) {
+    return "race";
+  }
+
+  if (/\b(entrainement|training|sortie|long run|longue sortie|brick|tempo|seance|session|ride)\b/i.test(normalizedQuestion)) {
+    return "training";
+  }
+
+  return null;
+}
+
+function parseGutTrainingStatus(question: string): GutTrainingStatus | null {
+  const normalizedQuestion = normalizeQuestion(question);
+
+  if (/\b(gut train|gut-trained|entraine le tube digestif|entraine l intestin|deja teste|deja pratique|habitue a 90|habitue a 100|habitue a 120|tolere bien)\b/i.test(normalizedQuestion)) {
+    return "gut-trained";
+  }
+
+  return null;
+}
+
+function parseSportProfile(question: string): SportProfile | null {
+  const normalizedQuestion = normalizeQuestion(question);
+
+  if (/\b(trail|ultra trail|sentier|montagne)\b/i.test(normalizedQuestion)) {
+    return "trail";
+  }
+
+  if (/\b(velo|bike|cycling|cyclisme|ride|gravel)\b/i.test(normalizedQuestion)) {
+    return "cycling";
+  }
+
+  if (/\b(triathlon|half ironman|ironman|70\.3)\b/i.test(normalizedQuestion)) {
+    return "triathlon";
+  }
+
+  if (/\b(course a pied|running|run|marathon|semi|10k|5k)\b/i.test(normalizedQuestion)) {
+    return "running";
+  }
+
+  return null;
+}
+
+function parseIntensityLevel(question: string): IntensityLevel | null {
+  const normalizedQuestion = normalizeQuestion(question);
+
+  if (/\b(facile|easy|endurance fondamentale|recovery|recup)\b/i.test(normalizedQuestion)) {
+    return "easy";
+  }
+
+  if (/\b(tempo|seuil|hard|dur|intense|fractionne|intervalles)\b/i.test(normalizedQuestion)) {
+    return "hard";
+  }
+
+  if (/\b(allure course|race pace|competition|race day|objectif chrono)\b/i.test(normalizedQuestion)) {
+    return "race-pace";
+  }
+
+  if (/\b(steady|regulier|continu|sortie longue)\b/i.test(normalizedQuestion)) {
+    return "steady";
+  }
+
+  return null;
+}
+
+function parseHeatProfile(question: string): HeatProfile | null {
+  const normalizedQuestion = normalizeQuestion(question);
+
+  if (/\b(chaud|canicule|hot|humid|humide|soleil|heat)\b/i.test(normalizedQuestion)) {
+    return "hot";
+  }
+
+  if (/\b(frais|cool|cold|cold weather|froi[dt])\b/i.test(normalizedQuestion)) {
+    return "cool";
+  }
+
+  return null;
+}
+
+function parseAidStations(question: string): AidStationAccess | null {
+  const normalizedQuestion = normalizeQuestion(question);
+
+  if (/\b(sans ravito|self supported|autonomie|autonome|pas de ravito)\b/i.test(normalizedQuestion)) {
+    return "self-supported";
+  }
+
+  if (/\b(ravitos frequents|frequent aid|souvent|beaucoup de ravitos)\b/i.test(normalizedQuestion)) {
+    return "frequent";
+  }
+
+  if (/\b(ravito|aid station|points d eau|points d'eau)\b/i.test(normalizedQuestion)) {
+    return "regular";
+  }
+
+  return null;
+}
+
 function parseDesiredTypeCounts(question: string) {
   const normalizedQuestion = normalizeQuestion(question);
   const counts: Partial<Record<ProductType, number>> = {};
@@ -862,12 +1160,40 @@ function buildAssumptions(
   input: EffortAdvisorInput,
   durationMinutes: number,
   targetCarbsPerHour: number,
+  requestedTargetCarbsPerHour: number,
+  carbProfile: CarbRecommendationProfile,
 ) {
   const assumptions = [
     `Durée: ${formatDuration(durationMinutes)}.`,
     `Cible: ${targetCarbsPerHour} g de glucides par heure.`,
-    `Boisson limitée à ${formatNumber(input.maxDrinkPortionsPerHour ?? DEFAULT_MAX_DRINK_PORTIONS_PER_HOUR)} portions/h; une portion correspond à environ ${DRINK_WATER_ML_PER_PORTION} ml d'eau.`,
+    `Sport: ${formatSportProfile(input.sport ?? "neutral")} · Intensité: ${formatIntensity(input.intensity ?? "steady")} · Température: ${formatHeatProfile(input.heat ?? "mild")}.`,
+    `Boisson limitée à ${formatNumber(input.maxDrinkPortionsPerHour ?? DEFAULT_MAX_DRINK_PORTIONS_PER_HOUR)} portions/h, avec un maximum de ${DEFAULT_MAX_DRINK_PORTIONS_PER_BOTTLE} portions par bidon de ${DRINK_BOTTLE_ML} ml, et souvent seulement 1 portion par bidon pour les mixes déjà très concentrés.`,
+    carbProfile.note,
   ];
+
+  if (requestedTargetCarbsPerHour !== targetCarbsPerHour) {
+    assumptions.push(
+      `La cible demandée (${requestedTargetCarbsPerHour} g/h) a été ramenée à ${targetCarbsPerHour} g/h pour rester dans une plage réaliste pour ce contexte.`,
+    );
+  }
+
+  if ((input.context ?? "neutral") === "race") {
+    assumptions.push("Contexte interprété comme course: le moteur favorise davantage les formats faciles à consommer en mouvement.");
+  } else if ((input.context ?? "neutral") === "training") {
+    assumptions.push("Contexte interprété comme entraînement: le moteur garde une marge plus conservatrice sur l'apport horaire élevé.");
+  }
+
+  if ((input.gutTrainingStatus ?? "standard") === "gut-trained") {
+    assumptions.push("Tolérance digestive avancée présumée: les apports élevés sont davantage acceptés, mais restent pénalisés s'ils deviennent peu réalistes en pratique.");
+  } else {
+    assumptions.push("Sans indication de gut training, les stratégies très élevées en glucides sont limitées pour rester réalistes.");
+  }
+
+  if ((input.aidStations ?? "regular") === "self-supported") {
+    assumptions.push("Logistique en autonomie: le moteur pénalise davantage les plans trop fragmentés ou difficiles à transporter.");
+  } else if ((input.aidStations ?? "regular") === "frequent") {
+    assumptions.push("Ravitos fréquents: les recharges liquides sont un peu plus acceptables qu'en autonomie complète.");
+  }
 
   if (input.caffeine === "avoid") {
     assumptions.push("Caféine évitée quand le nom du produit l'indique.");
@@ -900,6 +1226,10 @@ function formatAdvisorAnswer(
   targetCarbsPerHour: number,
   durationHours: number,
   plans: EffortAdvisorPlan[],
+  context: EffortContext,
+  carbProfile: CarbRecommendationProfile,
+  sport: SportProfile,
+  intensity: IntensityLevel,
 ) {
   const bestPlan = plans[0];
   if (!bestPlan || bestPlan.items.length === 0) {
@@ -908,10 +1238,19 @@ function formatAdvisorAnswer(
 
   const firstItem = bestPlan.items[0];
   const base = `Pour ${durationHours.toString().replace(".", ",")} h à ${targetCarbsPerHour} g/h, vise environ ${targetTotalCarbs} g de glucides.`;
+  const pacing = `Repère pratique: environ ${formatNumber(round(targetCarbsPerHour / 3))} g toutes les 20 minutes.`;
+  const contextLine =
+    context === "race"
+      ? `Plage réaliste d'après la littérature pour ce contexte: ${carbProfile.min}-${carbProfile.max} g/h.`
+      : `Plage pratique d'après la littérature pour cette durée: ${carbProfile.min}-${carbProfile.max} g/h.`;
+  const framing = `Lecture terrain: ${formatSportProfile(sport)}, intensité ${formatIntensity(intensity).toLowerCase()}.`;
 
   if (bestPlan.items.length > 1) {
     return [
       base,
+      contextLine,
+      framing,
+      pacing,
       `Le plan recommandé combine ${formatPlanItems(bestPlan.items)} pour ${formatNumber(bestPlan.totalCarbs)} g, environ ${formatMoney(bestPlan.totalCost)} $.`,
       `Détaillants recommandés: ${formatSellers(bestPlan.items)}.`,
     ].join("\n\n");
@@ -919,22 +1258,37 @@ function formatAdvisorAnswer(
 
   return [
     base,
+    contextLine,
+    framing,
+    pacing,
     `Le meilleur départ est ${firstItem.brand} ${firstItem.name}: ${formatPortions(firstItem.portions)}, ${formatNumber(firstItem.totalCarbs)} g, environ ${formatMoney(firstItem.totalCost)} $.`,
     `Détaillant recommandé: ${firstItem.seller}.`,
   ].join("\n\n");
 }
 
-function describePlanFit(totalCarbs: number, targetTotalCarbs: number) {
+function describePlanFit(
+  totalCarbs: number,
+  targetTotalCarbs: number,
+  items: EffortAdvisorItem[],
+  durationHours: number,
+) {
   const difference = round(totalCarbs - targetTotalCarbs);
+  const rhythm = describePlanRhythm(items, durationHours);
   if (difference === 0) {
-    return "Atteint exactement la cible de glucides.";
+    return rhythm
+      ? `Atteint exactement la cible de glucides. ${rhythm}`
+      : "Atteint exactement la cible de glucides.";
   }
 
   if (difference > 0) {
-    return `Dépasse la cible de ${difference} g.`;
+    return rhythm
+      ? `Dépasse la cible de ${difference} g. ${rhythm}`
+      : `Dépasse la cible de ${difference} g.`;
   }
 
-  return `Reste ${Math.abs(difference)} g sous la cible.`;
+  return rhythm
+    ? `Reste ${Math.abs(difference)} g sous la cible. ${rhythm}`
+    : `Reste ${Math.abs(difference)} g sous la cible.`;
 }
 
 function dedupePlans(plans: EffortAdvisorPlan[]) {
@@ -980,8 +1334,454 @@ function formatPlanItems(items: EffortAdvisorItem[]) {
     .join(", ");
 }
 
+function estimateDrinkWaterMl(
+  product: ProductWithMetrics,
+  portions: number,
+) {
+  const bottlesNeeded = Math.ceil(
+    portions / getMaxDrinkPortionsPerBottle(product),
+  );
+  return bottlesNeeded * DRINK_BOTTLE_ML;
+}
+
 function formatSellers(items: EffortAdvisorItem[]) {
   return [...new Set(items.map((item) => item.seller))].join(", ");
+}
+
+function formatSportProfile(sport: SportProfile) {
+  if (sport === "running") {
+    return "course à pied";
+  }
+
+  if (sport === "cycling") {
+    return "vélo";
+  }
+
+  if (sport === "trail") {
+    return "trail";
+  }
+
+  if (sport === "triathlon") {
+    return "triathlon";
+  }
+
+  return "endurance générale";
+}
+
+function formatIntensity(intensity: IntensityLevel) {
+  if (intensity === "easy") {
+    return "facile";
+  }
+
+  if (intensity === "steady") {
+    return "régulière";
+  }
+
+  if (intensity === "hard") {
+    return "soutenue";
+  }
+
+  return "allure course";
+}
+
+function formatHeatProfile(heat: HeatProfile) {
+  if (heat === "cool") {
+    return "fraîche";
+  }
+
+  if (heat === "hot") {
+    return "chaude";
+  }
+
+  return "tempérée";
+}
+
+function formatAidStations(aidStations: AidStationAccess) {
+  if (aidStations === "self-supported") {
+    return "autonomie complète";
+  }
+
+  if (aidStations === "frequent") {
+    return "ravitos fréquents";
+  }
+
+  return "ravitos réguliers";
+}
+
+function describePlanRhythm(
+  items: EffortAdvisorItem[],
+  durationHours: number,
+) {
+  if (items.length === 0 || durationHours <= 0) {
+    return "";
+  }
+
+  const rhythmNotes = items.map((item) => {
+    const portionsPerHour = round(item.portions / durationHours);
+    if (item.type === "Boisson") {
+      const minutesBetween = Math.max(
+        20,
+        Math.round((durationHours * 60) / item.portions / 5) * 5,
+      );
+      return `1 portion de boisson toutes les ${minutesBetween} min`;
+    }
+
+    if (item.portions < 1) {
+      return `${formatNumber(item.portions)} portion de ${item.type.toLowerCase()} sur l'effort`;
+    }
+
+    const minutesBetween = Math.max(
+      15,
+      Math.round((durationHours * 60) / item.portions / 5) * 5,
+    );
+    return `1 ${item.type.toLowerCase()} toutes les ${minutesBetween} min`;
+  });
+
+  return `Rythme indicatif: ${rhythmNotes.join(" + ")}.`;
+}
+
+function buildAdvisorWarnings(
+  input: EffortAdvisorInput,
+  plan: EffortAdvisorPlan,
+  targetTotalCarbs: number,
+  carbProfile: CarbRecommendationProfile,
+) {
+  const warnings: string[] = [];
+  const difference = plan.totalCarbs - targetTotalCarbs;
+  const drinkItems = plan.items.filter((item) => item.type === "Boisson");
+  const nonDrinkItems = plan.items.filter((item) => item.type !== "Boisson");
+  const durationHours = Math.max(1, round(input.durationMinutes / 60));
+
+  if (difference > Math.max(20, Math.round(targetTotalCarbs * 0.12))) {
+    warnings.push("Le meilleur plan disponible dépasse sensiblement la cible. Mieux vaut réduire une prise ou choisir un format plus petit.");
+  }
+
+  if (difference < -Math.max(20, Math.round(targetTotalCarbs * 0.12))) {
+    warnings.push("Le plan reste nettement sous la cible. Il est cohérent seulement si tu assumes volontairement une stratégie plus conservatrice.");
+  }
+
+  if (
+    (input.sport ?? "neutral") === "running" &&
+    input.targetCarbsPerHour >= 80 &&
+    (input.gutTrainingStatus ?? "standard") !== "gut-trained"
+  ) {
+    warnings.push("En course à pied, 80 g/h ou plus sans gut training reste ambitieux. À réserver à des sorties déjà testées.");
+  }
+
+  if ((input.heat ?? "mild") === "hot" && nonDrinkItems.length > drinkItems.length) {
+    warnings.push("Par temps chaud, le plan manque probablement de part liquide. Vérifie que l'hydratation réelle suit.");
+  }
+
+  if (
+    (input.aidStations ?? "regular") === "self-supported" &&
+    plan.items.reduce((sum, item) => sum + item.portions, 0) >= durationHours * 2.5
+  ) {
+    warnings.push("Plan assez chargé à transporter en autonomie complète. Vérifie le volume et l'accès réel aux produits pendant l'effort.");
+  }
+
+  if (
+    (input.sport ?? "neutral") === "trail" &&
+    (input.heat ?? "mild") === "hot" &&
+    (input.aidStations ?? "regular") === "self-supported"
+  ) {
+    warnings.push("Trail chaud en autonomie: la stratégie doit rester simple, tolérable et facilement transportable. Évite de dépendre d'un protocole trop dense.");
+  }
+
+  if (carbProfile.tier === "advanced") {
+    warnings.push("Stratégie avancée: elle doit être répétée à l'entraînement avant d'être utilisée en course.");
+  }
+
+  return warnings;
+}
+
+function buildStrategyNotes(
+  input: EffortAdvisorInput,
+  plan: EffortAdvisorPlan,
+  durationHours: number,
+  targetCarbsPerHour: number,
+): EffortAdvisorStrategyNote[] {
+  const notes: EffortAdvisorStrategyNote[] = [];
+  const drinkCarbs = plan.items
+    .filter((item) => item.type === "Boisson")
+    .reduce((sum, item) => sum + item.totalCarbs, 0);
+  const drinkShare = plan.totalCarbs > 0 ? drinkCarbs / plan.totalCarbs : 0;
+
+  notes.push({
+    title: "Niveau de risque",
+    detail:
+      targetCarbsPerHour >= 90
+        ? "Apport élevé: le succès dépend surtout de la tolérance digestive, du fractionnement et de la dilution réelle."
+        : targetCarbsPerHour >= 70
+          ? "Apport soutenu mais courant en endurance longue si la prise est régulière."
+          : "Apport modéré: généralement plus facile à tenir sans dérive digestive.",
+  });
+
+  notes.push({
+    title: "Logique du plan",
+    detail:
+      drinkShare >= 0.7
+        ? "Le plan est majoritairement liquide pour simplifier la digestion et stabiliser l'apport horaire."
+        : drinkShare >= 0.35
+          ? "Le plan mixe liquide et prises plus denses pour équilibrer confort digestif et logistique."
+          : "Le plan repose surtout sur des prises unitaires. Il faut être discipliné sur le timing pour éviter les trous.",
+  });
+
+  notes.push({
+    title: "Transport",
+    detail: `Configuration pensée pour ${formatAidStations(input.aidStations ?? "regular")}, sur ${formatNumber(durationHours)} h d'effort.`,
+  });
+
+  if ((input.sport ?? "neutral") === "running" || (input.sport ?? "neutral") === "trail") {
+    notes.push({
+      title: "Spécificité terrain",
+      detail:
+        "En appuis répétés, les blocs très denses sont plus risqués. La priorité reste la régularité et des prises faciles à avaler.",
+    });
+  } else if ((input.sport ?? "neutral") === "cycling") {
+    notes.push({
+      title: "Spécificité terrain",
+      detail:
+        "À vélo, l'accès aux bidons rend les stratégies liquides plus réalistes, mais la dilution doit rester crédible sur chaque bidon.",
+    });
+  }
+
+  return notes;
+}
+
+function buildExecutionPlan(
+  input: EffortAdvisorInput,
+  plan: EffortAdvisorPlan,
+  targetCarbsPerHour: number,
+  durationMinutes: number,
+) {
+  if (plan.items.length === 0) {
+    return [];
+  }
+
+  const intervalMinutes = chooseExecutionInterval(targetCarbsPerHour, input);
+  const steps: EffortAdvisorExecutionStep[] = [];
+  const totalSlots = Math.max(1, Math.ceil(durationMinutes / intervalMinutes));
+  const slotCarbsTarget = round(targetCarbsPerHour * (intervalMinutes / 60));
+  const scheduledActions = schedulePlanActions(plan.items, totalSlots);
+
+  for (let slot = 0; slot < totalSlots; slot += 1) {
+    const minute = Math.min(durationMinutes, slot * intervalMinutes);
+    const label =
+      minute === 0
+        ? "Départ"
+        : `${Math.floor(minute / 60)} h ${String(minute % 60).padStart(2, "0")}`;
+    const slotActions = scheduledActions[slot] ?? [];
+    const actionParts = slotActions.map((action) =>
+      formatExecutionAction(action.item, action.increment),
+    );
+    const carbsAllocated = round(
+      slotActions.reduce(
+        (sum, action) => sum + action.item.carbsPerPortion * action.increment,
+        0,
+      ),
+    );
+
+    steps.push({
+      minute,
+      label,
+      carbsTarget: Math.max(slotCarbsTarget, carbsAllocated),
+      action:
+        actionParts.length > 0
+          ? actionParts.join(" + ")
+          : "Rythme stable, pas de prise supplémentaire sur ce créneau.",
+      hydration: describeHydrationForStep(input, slotActions, intervalMinutes),
+    });
+  }
+
+  return condenseExecutionPlan(steps);
+}
+
+function buildPreRaceChecklist(
+  input: EffortAdvisorInput,
+  plan: EffortAdvisorPlan,
+  targetCarbsPerHour: number,
+) {
+  const checklist = [
+    "Tester la stratégie complète au moins une fois sur une séance comparable avant la course.",
+    "Préparer les portions dans l'ordre réel d'utilisation pour éviter les oublis.",
+  ];
+
+  if (plan.items.some((item) => item.type === "Boisson")) {
+    checklist.push("Pré-mélanger les bidons et vérifier la concentration réelle de chaque boisson avant de partir.");
+  }
+
+  if ((input.heat ?? "mild") === "hot") {
+    checklist.push("Prévoir plus d'eau que la base du plan si la chaleur ou l'humidité montent pendant l'effort.");
+  }
+
+  if ((input.aidStations ?? "regular") === "self-supported") {
+    checklist.push("Vérifier que tout le volume prévu est transportable sans dépendre d'un ravito externe.");
+  }
+
+  if (
+    targetCarbsPerHour >= 85 &&
+    (input.gutTrainingStatus ?? "standard") !== "gut-trained"
+  ) {
+    checklist.push("Réduire légèrement la cible ou fractionner davantage si cette charge n'a jamais été tolérée à l'entraînement.");
+  }
+
+  return checklist;
+}
+
+function chooseExecutionInterval(
+  targetCarbsPerHour: number,
+  input: EffortAdvisorInput,
+) {
+  if ((input.sport ?? "neutral") === "running" || targetCarbsPerHour >= 85) {
+    return 20;
+  }
+
+  if (targetCarbsPerHour >= 60) {
+    return 30;
+  }
+
+  return 40;
+}
+
+function getExecutionPriority(item: EffortAdvisorItem) {
+  if (item.type === "Boisson") {
+    return 4;
+  }
+
+  if (item.type === "Gel") {
+    return 3;
+  }
+
+  if (item.type === "Autre") {
+    return 2;
+  }
+
+  return 1;
+}
+
+function getExecutionPortionIncrement(item: EffortAdvisorItem) {
+  if (item.type === "Boisson") {
+    return 0.5;
+  }
+
+  if (item.type === "Barre" || item.type === "Autre") {
+    return 0.5;
+  }
+
+  return 1;
+}
+
+function formatExecutionAction(
+  item: EffortAdvisorItem,
+  increment: number,
+) {
+  const formattedIncrement = formatNumber(increment);
+  if (increment >= 1) {
+    return `${formattedIncrement} portion de ${item.brand} ${item.name}`;
+  }
+
+  return `${formattedIncrement} portion de ${item.brand} ${item.name}`;
+}
+
+function describeHydrationForStep(
+  input: EffortAdvisorInput,
+  slotActions: Array<{ item: EffortAdvisorItem; increment: number }>,
+  intervalMinutes: number,
+) {
+  const drinkEntries = slotActions.filter((entry) => entry.item.type === "Boisson");
+  if (drinkEntries.length === 0) {
+    return intervalMinutes <= 20
+      ? "Quelques gorgées d'eau selon la soif."
+      : "Hydratation libre selon la soif et la température.";
+  }
+
+  if ((input.heat ?? "mild") === "hot") {
+    return "Boire régulièrement, sans attendre la soif, surtout si la prise du créneau est dense.";
+  }
+
+  return "Associer la prise à quelques gorgées d'eau ou à la boisson prévue sur ce créneau.";
+}
+
+function schedulePlanActions(
+  items: EffortAdvisorItem[],
+  totalSlots: number,
+) {
+  const schedule = Array.from({ length: totalSlots }, () => [] as Array<{
+    item: EffortAdvisorItem;
+    increment: number;
+  }>);
+
+  const sortedItems = [...items].sort(
+    (a, b) => getExecutionPriority(b) - getExecutionPriority(a),
+  );
+
+  for (const item of sortedItems) {
+    const baseIncrement = getExecutionPortionIncrement(item);
+    const increments: number[] = [];
+    let remaining = item.portions;
+
+    while (remaining > 0.01) {
+      const nextIncrement =
+        remaining >= baseIncrement ? baseIncrement : round(remaining);
+      increments.push(nextIncrement);
+      remaining = round(remaining - nextIncrement);
+    }
+
+    increments.forEach((increment, index) => {
+      const preferredSlot =
+        increments.length === 1
+          ? Math.max(0, Math.floor(totalSlots / 2) - 1)
+          : Math.min(
+              totalSlots - 1,
+              Math.max(
+                0,
+                Math.round(((index + 0.5) * totalSlots) / increments.length) - 1,
+              ),
+            );
+      const slotIndex = findBestScheduleSlot(schedule, preferredSlot, item);
+      schedule[slotIndex].push({ item, increment });
+    });
+  }
+
+  return schedule;
+}
+
+function findBestScheduleSlot(
+  schedule: Array<Array<{ item: EffortAdvisorItem; increment: number }>>,
+  preferredSlot: number,
+  item: EffortAdvisorItem,
+) {
+  let bestSlot = preferredSlot;
+  let bestScore = Number.POSITIVE_INFINITY;
+
+  for (let slot = 0; slot < schedule.length; slot += 1) {
+    const distancePenalty = Math.abs(slot - preferredSlot) * 3;
+    const existingActions = schedule[slot] ?? [];
+    const sameTypePenalty = existingActions.some(
+      (action) => action.item.type === item.type,
+    )
+      ? 2
+      : 0;
+    const loadPenalty = existingActions.length * 4;
+    const score = distancePenalty + sameTypePenalty + loadPenalty;
+
+    if (score < bestScore) {
+      bestScore = score;
+      bestSlot = slot;
+    }
+  }
+
+  return bestSlot;
+}
+
+function condenseExecutionPlan(steps: EffortAdvisorExecutionStep[]) {
+  return steps.filter((step, index) => {
+    if (index === 0 || index === steps.length - 1) {
+      return true;
+    }
+
+    return step.action !== steps[index - 1]?.action || index % 2 === 0;
+  });
 }
 
 function normalizeQuestion(value: string) {
@@ -1058,4 +1858,568 @@ function clamp(value: number, min: number, max: number) {
 
 function round(value: number) {
   return Math.round(value * 100) / 100;
+}
+
+function getCarbRecommendationProfile(
+  durationMinutes: number,
+  context: EffortContext,
+  gutTrainingStatus: GutTrainingStatus,
+  sport: SportProfile,
+  intensity: IntensityLevel,
+  heat: HeatProfile,
+): CarbRecommendationProfile {
+  const sportPenalty =
+    sport === "running" ? 10 : sport === "trail" ? 7 : sport === "triathlon" ? 4 : 0;
+  const intensityAdjustment =
+    intensity === "easy" ? -5 : intensity === "hard" ? 5 : intensity === "race-pace" ? 8 : 0;
+  const heatPenalty = heat === "hot" ? 8 : heat === "cool" ? 0 : 3;
+
+  if (durationMinutes <= 75) {
+    return {
+      min: 0,
+      max: Math.max(20, 30 - Math.round(sportPenalty / 2)),
+      suggested: 20,
+      tier: "conservative",
+      note:
+        "Référence littérature: sur les efforts courts, de petites quantités de glucides ou même une stratégie minimale peuvent suffire; un gros apport horaire n'est généralement pas nécessaire.",
+    };
+  }
+
+  if (durationMinutes <= 150) {
+    const adjustedMax = clamp(
+      60 - sportPenalty + Math.max(0, intensityAdjustment - heatPenalty / 2),
+      40,
+      65,
+    );
+    return {
+      min: 30,
+      max: adjustedMax,
+      suggested: clamp(adjustedMax - 10, 35, 55),
+      tier: adjustedMax >= 55 ? "standard" : "conservative",
+      note:
+        "Référence littérature: pour environ 1-2,5 h, une plage de 30-60 g/h est la stratégie la plus classique et la plus réaliste.",
+    };
+  }
+
+  if (durationMinutes <= 240) {
+    const baselineMax = context === "race" ? 90 : 75;
+    const adjustedMax = clamp(
+      baselineMax - sportPenalty - Math.round(heatPenalty / 2) + intensityAdjustment,
+      context === "race" ? 55 : 50,
+      baselineMax,
+    );
+    return {
+      min: 45,
+      max: adjustedMax,
+      suggested: clamp(adjustedMax - (context === "race" ? 10 : 12), 50, 78),
+      tier: adjustedMax >= 80 ? "advanced" : "standard",
+      note:
+        context === "race"
+          ? "Référence littérature: pour les efforts prolongés, 60-90 g/h devient réaliste en course, surtout avec des glucides multiples."
+          : "Référence littérature: à l'entraînement long, rester autour de 45-75 g/h est souvent plus réaliste qu'un plafond directement poussé à 90 g/h.",
+    };
+  }
+
+  const longFormMax =
+    context === "race" && gutTrainingStatus === "gut-trained" ? 120 : 90;
+  const adjustedLongMax = clamp(
+    longFormMax - sportPenalty - Math.round(heatPenalty / 2) + intensityAdjustment,
+    gutTrainingStatus === "gut-trained" ? 70 : 60,
+    longFormMax,
+  );
+  return {
+    min: 60,
+    max: adjustedLongMax,
+    suggested: clamp(
+      adjustedLongMax -
+        (context === "race" && gutTrainingStatus === "gut-trained" ? 18 : 15),
+      65,
+      95,
+    ),
+    tier:
+      context === "race" && gutTrainingStatus === "gut-trained" && adjustedLongMax >= 95
+        ? "advanced"
+        : "standard",
+    note:
+      context === "race" && gutTrainingStatus === "gut-trained"
+        ? "Référence littérature: sur les très longues courses, 90 g/h ou plus peut être toléré avec gut training; 120 g/h reste une stratégie avancée, pas un défaut."
+        : "Référence littérature: sur les efforts très longs, 60-90 g/h est le plafond pratique le plus réaliste sans tolérance digestive spécifiquement entraînée.",
+  };
+}
+
+function isAutomaticRecommendationCandidate(
+  product: ProductWithMetrics,
+  input: EffortAdvisorInput,
+) {
+  const label = `${product.brand} ${product.name}`.toLowerCase();
+  const sport = input.sport ?? "neutral";
+  const aidStations = input.aidStations ?? "regular";
+
+  if (product.carbsGrams >= 150) {
+    return false;
+  }
+
+  if (
+    product.type === "Gel" &&
+    (/\bflow\b|\bflask\b|\bbottle\b|\bpouch\b/.test(label) ||
+      product.carbsGrams >= 120)
+  ) {
+    return false;
+  }
+
+  if (
+    (input.context ?? "neutral") !== "race" &&
+    product.type === "Boisson" &&
+    product.carbsGrams >= 80 &&
+    round(input.durationMinutes / 60) <= 2
+  ) {
+    return false;
+  }
+
+  if (
+    aidStations === "self-supported" &&
+    product.type === "Boisson" &&
+    product.carbsGrams >= 80 &&
+    round(input.durationMinutes / 60) >= 4 &&
+    sport !== "cycling"
+  ) {
+    return false;
+  }
+
+  if (
+    sport === "running" &&
+    product.type === "Barre" &&
+    input.targetCarbsPerHour >= 70 &&
+    round(input.durationMinutes / 60) >= 2
+  ) {
+    return false;
+  }
+
+  return true;
+}
+
+function buildMixedCandidatePool(
+  products: ProductWithMetrics[],
+  targetTotalCarbs: number,
+  input: EffortAdvisorInput,
+) {
+  const rankedUnique: ProductWithMetrics[] = [];
+  const typeCounts: Partial<Record<ProductType, number>> = {};
+
+  for (const product of rankProducts(products, targetTotalCarbs, "best-value", input)) {
+    const countForType = typeCounts[product.type] ?? 0;
+    const limitForType = product.type === "Boisson" ? 3 : 2;
+
+    if (countForType >= limitForType) {
+      continue;
+    }
+
+    rankedUnique.push(product);
+    typeCounts[product.type] = countForType + 1;
+
+    if (rankedUnique.length >= 7) {
+      break;
+    }
+  }
+
+  return rankedUnique;
+}
+
+function buildSelectionSets(products: ProductWithMetrics[]) {
+  const selectionSets: ProductWithMetrics[][] = [];
+
+  for (let i = 0; i < products.length; i += 1) {
+    selectionSets.push([products[i]]);
+
+    for (let j = i + 1; j < products.length; j += 1) {
+      const pair = [products[i], products[j]];
+      if (isValidSelectionSet(pair)) {
+        selectionSets.push(pair);
+      }
+
+      for (let k = j + 1; k < products.length; k += 1) {
+        const trio = [products[i], products[j], products[k]];
+        if (isValidSelectionSet(trio)) {
+          selectionSets.push(trio);
+        }
+      }
+    }
+  }
+
+  return selectionSets;
+}
+
+function isValidSelectionSet(products: ProductWithMetrics[]) {
+  const selections: ProductWithMetrics[] = [];
+
+  for (const product of products) {
+    if (!canAddProductToPlan(selections, product)) {
+      return false;
+    }
+
+    selections.push(product);
+  }
+
+  return true;
+}
+
+function allocatePlanPortions(
+  selections: AdvisorSelection[],
+  targetTotalCarbs: number,
+  maxDrinkPortions: number,
+  durationHours: number,
+  input: EffortAdvisorInput,
+) {
+  const plan = selections.map<PortionAllocation>((selection) => ({
+    product: selection.product,
+    portions: selection.portions ?? 0,
+  }));
+  const lockedProductIds = new Set(
+    selections
+      .filter((selection) => selection.portions !== undefined)
+      .map((selection) => selection.product.id),
+  );
+
+  let currentScore = scorePortionPlan(plan, targetTotalCarbs, input);
+
+  while (true) {
+    let bestCandidate: PortionAllocation[] | null = null;
+    let bestScore = currentScore;
+
+    for (const entry of plan) {
+      if (lockedProductIds.has(entry.product.id)) {
+        continue;
+      }
+
+      const nextPortions = round(entry.portions + getPortionStep(entry.product));
+      const cappedPortions = clampPortionsForPracticality(
+        entry.product,
+        nextPortions,
+        maxDrinkPortions,
+        durationHours,
+        input.context ?? "neutral",
+        input.targetCarbsPerHour,
+      );
+
+      if (cappedPortions <= entry.portions) {
+        continue;
+      }
+
+      const candidatePlan = plan.map((candidate) =>
+        candidate.product.id === entry.product.id
+          ? { ...candidate, portions: cappedPortions }
+          : candidate,
+      );
+      const candidateScore = scorePortionPlan(
+        candidatePlan,
+        targetTotalCarbs,
+        input,
+      );
+
+      if (candidateScore < bestScore) {
+        bestScore = candidateScore;
+        bestCandidate = candidatePlan;
+      }
+    }
+
+    if (!bestCandidate) {
+      break;
+    }
+
+    plan.splice(0, plan.length, ...bestCandidate);
+    currentScore = bestScore;
+  }
+
+  return plan;
+}
+
+function scorePortionPlan(
+  plan: PortionAllocation[],
+  targetTotalCarbs: number,
+  input: EffortAdvisorInput,
+) {
+  const totalCarbs = round(
+    plan.reduce((sum, entry) => sum + entry.product.carbsGrams * entry.portions, 0),
+  );
+  const totalCost = round(
+    plan.reduce((sum, entry) => sum + entry.product.cheapestOffer.price * entry.portions, 0),
+  );
+  const totalPortions = round(plan.reduce((sum, entry) => sum + entry.portions, 0));
+  const overshoot = Math.max(0, totalCarbs - targetTotalCarbs);
+  const shortfall = Math.max(0, targetTotalCarbs - totalCarbs);
+  const tolerance = Math.max(10, Math.round(targetTotalCarbs * 0.05));
+  const effectiveOvershoot = Math.max(0, overshoot - tolerance);
+  const effectiveShortfall = Math.max(0, shortfall - tolerance);
+  const concentrationPenalty = plan.reduce(
+    (sum, entry) =>
+      sum + getServingConcentrationPenalty(entry.product, targetTotalCarbs, input),
+    0,
+  );
+  const activeProductCount = plan.filter((entry) => entry.portions > 0).length;
+  const tinyPortionPenalty = plan.reduce((sum, entry) => {
+    if (entry.portions <= 0 || entry.portions >= 0.75) {
+      return sum;
+    }
+
+    return sum + (entry.product.type === "Boisson" ? 8 : 14);
+  }, 0);
+
+  return round(
+    effectiveOvershoot * 3 +
+      effectiveShortfall * 1.2 +
+      totalCost * 0.45 +
+      totalPortions * 2 +
+      activeProductCount * 4 +
+      concentrationPenalty +
+      tinyPortionPenalty,
+  );
+}
+
+function scorePlan(
+  plan: EffortAdvisorPlan,
+  targetTotalCarbs: number,
+  input: EffortAdvisorInput,
+) {
+  const overshoot = Math.max(0, plan.totalCarbs - targetTotalCarbs);
+  const shortfall = Math.max(0, targetTotalCarbs - plan.totalCarbs);
+  const tolerance = Math.max(10, Math.round(targetTotalCarbs * 0.05));
+  const effectiveOvershoot = Math.max(0, overshoot - tolerance);
+  const effectiveShortfall = Math.max(0, shortfall - tolerance);
+  const portions = plan.items.reduce((sum, item) => sum + item.portions, 0);
+  const concentrationPenalty = plan.items.reduce((sum, item) => {
+    const product = getProducts(input.targetCarbsPerHour).find((entry) => entry.id === item.productId);
+    return sum +
+      (product
+        ? getServingConcentrationPenalty(product, targetTotalCarbs, input)
+        : 0);
+  }, 0);
+  const tinyPortionPenalty = plan.items.reduce((sum, item) => {
+    if (item.portions >= 0.75) {
+      return sum;
+    }
+
+    return sum + (item.type === "Boisson" ? 8 : 14);
+  }, 0);
+
+  return round(
+    effectiveOvershoot * 3 +
+      effectiveShortfall * 1.2 +
+      plan.totalCost * 0.45 +
+      portions * 2 +
+      plan.items.length * 4 +
+      concentrationPenalty +
+      tinyPortionPenalty,
+  );
+}
+
+function getPortionStep(product: ProductWithMetrics) {
+  return product.type === "Boisson" || product.type === "Barre" ? 0.5 : 1;
+}
+
+function getPracticalityPenalty(
+  product: ProductWithMetrics,
+  targetTotalCarbs: number,
+  input: EffortAdvisorInput,
+) {
+  const durationHours = round(input.durationMinutes / 60);
+  const maxDrinkPortions = getMaxDrinkPortionsForDuration(input, durationHours);
+  const requiredPortions = estimatePortionsForCarbs(
+    product,
+    targetTotalCarbs,
+    maxDrinkPortions,
+    durationHours,
+    input.context ?? "neutral",
+    input.targetCarbsPerHour,
+  );
+  const requiredCarbs = round(requiredPortions * product.carbsGrams);
+  const shortfall = Math.max(0, targetTotalCarbs - requiredCarbs);
+  const portionPenalty = Math.max(0, requiredPortions - getMaxPracticalPortions(
+    product,
+    durationHours,
+    input.context ?? "neutral",
+    input.targetCarbsPerHour,
+    maxDrinkPortions,
+  ));
+
+  return round(shortfall + portionPenalty * 50);
+}
+
+function getServingConcentrationPenalty(
+  product: ProductWithMetrics,
+  targetTotalCarbs: number,
+  input: EffortAdvisorInput,
+) {
+  const durationHours = Math.max(1, round(input.durationMinutes / 60));
+  const targetPerHour = input.targetCarbsPerHour;
+  const shareOfTarget = product.carbsGrams / Math.max(targetTotalCarbs, 1);
+  const label = `${product.brand} ${product.name}`.toLowerCase();
+
+  if (product.carbsGrams >= 150 || /\bflow\b|\bflask\b|\bbottle\b/.test(label)) {
+    return 500;
+  }
+
+  if (product.type === "Gel" && product.carbsGrams >= 90) {
+    return 70;
+  }
+
+  if (
+    product.type !== "Boisson" &&
+    product.carbsGrams > targetPerHour &&
+    durationHours <= 4
+  ) {
+    return 25;
+  }
+
+  if (product.type === "Barre" && product.carbsGrams >= 60) {
+    return (input.context ?? "neutral") === "race" ? 20 : 8;
+  }
+
+  if (shareOfTarget >= 0.55 && product.type !== "Boisson") {
+    return 18;
+  }
+
+  return 0;
+}
+
+function getFuelFormPenalty(
+  product: ProductWithMetrics,
+  input: EffortAdvisorInput,
+) {
+  const context = input.context ?? "neutral";
+  const targetCarbsPerHour = input.targetCarbsPerHour;
+  const durationHours = round(input.durationMinutes / 60);
+  const sport = input.sport ?? "neutral";
+  const heat = input.heat ?? "mild";
+  const aidStations = input.aidStations ?? "regular";
+
+  if (context === "race") {
+    if (product.type === "Boisson") {
+      let score = targetCarbsPerHour >= 60 ? -3 : -1;
+      if (sport === "running" && heat === "hot") {
+        score -= 1;
+      }
+      if (aidStations === "self-supported" && product.carbsGrams >= 80) {
+        score += 2;
+      }
+      return score;
+    }
+
+    if (product.type === "Gel") {
+      let score = targetCarbsPerHour >= 60 ? -2 : -1;
+      if (sport === "running" || sport === "trail") {
+        score -= 1;
+      }
+      if (heat === "hot" && targetCarbsPerHour >= 80) {
+        score += 1;
+      }
+      return score;
+    }
+
+    if (product.type === "Barre") {
+      return durationHours <= 3 || targetCarbsPerHour >= 70 || sport === "running"
+        ? 4
+        : 1;
+    }
+
+    return sport === "running" ? 1 : 0;
+  }
+
+  if (context === "training") {
+    if (product.type === "Barre" && durationHours >= 2.5 && targetCarbsPerHour <= 60) {
+      return -1;
+    }
+
+    if (product.type === "Boisson" && targetCarbsPerHour >= 60) {
+      return sport === "cycling" ? -3 : -2;
+    }
+
+    if (product.type === "Gel" && sport === "running" && durationHours >= 3) {
+      return -1;
+    }
+  }
+
+  return 0;
+}
+
+function getMaxPracticalPortions(
+  product: ProductWithMetrics,
+  durationHours: number,
+  context: EffortContext,
+  targetCarbsPerHour: number,
+  maxDrinkPortions: number,
+) {
+  if (product.type === "Boisson") {
+    return maxDrinkPortions;
+  }
+
+  if (product.type === "Gel") {
+    const perHour = targetCarbsPerHour >= 80 ? 3 : 2;
+    return perHour * durationHours;
+  }
+
+  if (product.type === "Barre") {
+    const perHour =
+      context === "race"
+        ? targetCarbsPerHour >= 70
+          ? 0.5
+          : 1
+        : durationHours >= 3
+          ? 1
+          : 0.75;
+    return round(perHour * durationHours * 2) / 2;
+  }
+
+  const perHour = context === "race" ? 1.5 : 2;
+  return round(perHour * durationHours * 2) / 2;
+}
+
+function getMaxDrinkPortionsPerBottle(product: ProductWithMetrics) {
+  if (product.type !== "Boisson") {
+    return DEFAULT_MAX_DRINK_PORTIONS_PER_BOTTLE;
+  }
+
+  if (product.carbsGrams >= 60) {
+    return 1;
+  }
+
+  if (product.carbsGrams >= 40) {
+    return 1.5;
+  }
+
+  return DEFAULT_MAX_DRINK_PORTIONS_PER_BOTTLE;
+}
+
+function clampPortionsForPracticality(
+  product: ProductWithMetrics,
+  portions: number,
+  maxDrinkPortions: number,
+  durationHours: number,
+  context: EffortContext,
+  targetCarbsPerHour: number,
+) {
+  const cap = getMaxPracticalPortions(
+    product,
+    durationHours,
+    context,
+    targetCarbsPerHour,
+    maxDrinkPortions,
+  );
+
+  return Math.min(portions, cap);
+}
+
+function inferHourlyTarget(targetTotalCarbs: number) {
+  if (targetTotalCarbs <= 30) {
+    return 30;
+  }
+
+  if (targetTotalCarbs <= 90) {
+    return 45;
+  }
+
+  if (targetTotalCarbs <= 180) {
+    return 60;
+  }
+
+  return 75;
 }

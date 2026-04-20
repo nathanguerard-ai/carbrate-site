@@ -20,6 +20,24 @@ export default function Header() {
           >
             Accueil
           </Link>
+          <a
+            href="/#plans-rapides"
+            className="text-sm text-ink/70 transition-colors hover:text-ink"
+          >
+            Plans
+          </a>
+          <a
+            href="/#plan-effort"
+            className="text-sm text-ink/70 transition-colors hover:text-ink"
+          >
+            Plan d'effort
+          </a>
+          <a
+            href="/#comparateur"
+            className="text-sm text-ink/70 transition-colors hover:text-ink"
+          >
+            Comparateur
+          </a>
         </nav>
       </div>
     </header>

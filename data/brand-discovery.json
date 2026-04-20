@@ -81,6 +81,26 @@
         "/collections/",
         "/pages/"
       ]
+    },
+    {
+      "brand": "Carbs Fuel",
+      "seller": "sea2skynutrition.ca",
+      "country": "CA",
+      "collectionUrls": [
+        "https://sea2skynutrition.ca/collections/carb-fuel"
+      ],
+      "allowedHosts": [
+        "sea2skynutrition.ca",
+        "www.sea2skynutrition.ca"
+      ],
+      "productPathPrefixes": [
+        "/products/"
+      ],
+      "excludePathPatterns": [
+        "/collections/",
+        "/pages/",
+        "/blogs/"
+      ]
     }
   ]
 }

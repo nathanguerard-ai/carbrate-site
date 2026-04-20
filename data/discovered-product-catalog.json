@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-20T15:51:55.369Z",
+  "updatedAt": "2026-04-28T15:13:40.036Z",
   "products": [
     {
       "id": "naak-ultra-energy-puree",
@@ -12,13 +12,13 @@
       "nutritionSources": [
         {
           "label": "Näak officiel",
-          "url": "https://www.naak.com/products/energy-puree-apple-maple-syrup"
+          "url": "https://www.naak.com/products/energy-puree-apple-maple-syrup#judgeme_product_reviews"
         }
       ],
       "offers": [
         {
           "seller": "naak.com",
-          "productUrl": "https://www.naak.com/products/energy-puree-apple-maple-syrup",
+          "productUrl": "https://www.naak.com/products/energy-puree-apple-maple-syrup#judgeme_product_reviews",
           "country": "CA",
           "unitCount": 4,
           "fallbackPrice": 1.07

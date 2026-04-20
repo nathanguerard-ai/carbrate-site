@@ -1072,6 +1072,17 @@ function normalizeComparableUrl(url) {
   }
 }
 
+function normalizeLooseComparableUrl(url) {
+  try {
+    const parsedUrl = new URL(url);
+    parsedUrl.hash = "";
+    parsedUrl.search = "";
+    return parsedUrl.toString();
+  } catch {
+    return String(url).split("#")[0].split("?")[0];
+  }
+}
+
 function normalizeProductLabel(value) {
   return normalizeSignalText(value).toLowerCase();
 }
@@ -1121,7 +1132,7 @@ async function getProductSignals(product, cache, stats) {
 }
 
 async function ensurePageSignals(url, cache, stats) {
-  const cached = cache.pages?.[url];
+  const cached = findCachedPageSignals(cache, url);
   if (cached && !forceRefresh && !isCacheExpired(cached.fetchedAt)) {
     stats.pagesFromCache += 1;
     return cached;
@@ -1155,6 +1166,36 @@ async function ensurePageSignals(url, cache, stats) {
   cache.pages[url] = nextEntry;
   stats.pagesFetched += 1;
   return nextEntry;
+}
+
+function findCachedPageSignals(cache, url) {
+  if (!cache?.pages || !url) {
+    return null;
+  }
+
+  if (cache.pages[url]) {
+    return cache.pages[url];
+  }
+
+  const comparableUrl = normalizeComparableUrl(url);
+  const looseComparableUrl = normalizeLooseComparableUrl(url);
+  for (const [cachedUrl, page] of Object.entries(cache.pages)) {
+    if (!page) {
+      continue;
+    }
+
+    const candidateUrls = [cachedUrl, page.canonicalUrl, page.url].filter(Boolean);
+    if (
+      candidateUrls.some((candidateUrl) =>
+        normalizeComparableUrl(candidateUrl) === comparableUrl ||
+        normalizeLooseComparableUrl(candidateUrl) === looseComparableUrl,
+      )
+    ) {
+      return page;
+    }
+  }
+
+  return null;
 }
 
 function resolveProductCarbs(product, productSignals, stats) {
@@ -1237,8 +1278,11 @@ function resolveOfferPrice(
   trackUnitCountStats(unitResolution, stats);
 
   if (liveCandidate && isReliableUnitPrice(liveCandidate.value)) {
+    const resolvedConfidence = shouldDowngradeCurrencyConfidence(liveCandidate, offer)
+      ? "live-text"
+      : liveCandidate.confidence ?? "live";
     const verification = buildOfferVerification({
-      priceConfidence: liveCandidate.confidence ?? "live",
+      priceConfidence: resolvedConfidence,
       priceSource: liveCandidate.url ?? offer.productUrl,
       packagePrice: liveCandidate.packagePrice,
       unitCount: unitResolution.unitCount,
@@ -1254,7 +1298,7 @@ function resolveOfferPrice(
       unitCountSource: unitResolution.source,
       unitCountConfidence: unitResolution.confidence,
       source: liveCandidate.url ?? offer.productUrl,
-      confidence: liveCandidate.confidence ?? "live",
+      confidence: resolvedConfidence,
       ...verification,
       lastCheckedAt: new Date().toISOString(),
     };
@@ -2800,7 +2844,7 @@ function chooseBestPriceCandidate(candidates, offer) {
       }));
     })
     .filter((candidate) => candidate.value > 0 && candidate.packagePrice <= MAX_PACKAGE_PRICE)
-    .filter((candidate) => !candidate.currency || candidate.currency === "CAD")
+    .filter((candidate) => isAcceptableCandidateCurrency(candidate, offer))
     .filter((candidate) => !shouldRejectPriceCandidate(candidate, offer));
 
   if (normalized.length === 0) {
@@ -2849,7 +2893,7 @@ function choosePackagePriceCandidate(candidates, offer = null) {
       })),
     )
     .filter((candidate) => candidate.value > 0 && candidate.value <= MAX_PACKAGE_PRICE)
-    .filter((candidate) => !candidate.currency || candidate.currency === "CAD")
+    .filter((candidate) => isAcceptableCandidateCurrency(candidate, offer))
     .filter((candidate) => !shouldRejectPriceCandidate(candidate, offer))
     .map((candidate) => ({
       ...candidate,
@@ -2952,13 +2996,35 @@ function resolveOfferUnitCount(
     Number.isFinite(packagePrice) ? [packagePrice] : [],
     singleUnitPrice,
   );
+  const servingPriceInference = inferUnitCountFromServingPriceSignals(
+    pageSignals?.priceCandidates ?? [],
+    packageCandidate,
+  );
+
+  if (
+    offerUnit &&
+    servingPriceInference &&
+    shouldPreferServingPriceInference(
+      offerUnit,
+      servingPriceInference,
+      packagePrice,
+      singleUnitPrice,
+    )
+  ) {
+    return servingPriceInference;
+  }
 
   if (offerUnit) {
     return {
       unitCount: offerUnit.value,
       source: offerUnit.url ?? pageSignals?.url ?? offer.productUrl,
       confidence: offerUnit.sourceType === "single" ? "live-single" : "live",
+      sourceType: offerUnit.sourceType,
     };
+  }
+
+  if (servingPriceInference) {
+    return servingPriceInference;
   }
 
   const inferredFromPeerPrice = inferUnitCountFromPeerPrice(
@@ -3280,6 +3346,146 @@ function inferSingleUnitPrice(offerPackages) {
   return unitLikePrices[Math.floor(unitLikePrices.length / 2)];
 }
 
+function inferUnitCountFromServingPriceSignals(priceCandidates, packageCandidate) {
+  const packagePrice = packageCandidate?.value;
+  if (!Number.isFinite(packagePrice) || packagePrice <= MAX_UNIT_PRICE) {
+    return null;
+  }
+
+  const servingPriceCandidates = priceCandidates
+    .filter((candidate) => isServingPriceCandidate(candidate))
+    .flatMap((candidate) =>
+      normalizeMoneyValues(candidate.value)
+        .filter((value) => Number.isFinite(value) && value > 0 && value <= MAX_UNIT_PRICE)
+        .map((servingPrice) => ({
+          servingPrice,
+          candidate,
+          score: getServingPriceInferenceScore(candidate, packageCandidate, servingPrice),
+        })),
+    )
+    .sort((a, b) => b.score - a.score || b.servingPrice - a.servingPrice);
+
+  for (const { servingPrice, candidate } of servingPriceCandidates) {
+    const inferredUnitCount = inferUnitCountFromPeerPrice(packagePrice, servingPrice);
+    if (!inferredUnitCount) {
+      continue;
+    }
+
+    return {
+      unitCount: inferredUnitCount,
+      source: candidate.url ?? "serving-price-inference",
+      confidence: "inferred",
+      sourceType: "serving-price",
+    };
+  }
+
+  return null;
+}
+
+function isServingPriceCandidate(candidate) {
+  const evidence = `${candidate?.evidenceText ?? ""}`.toLowerCase();
+  const rawValue = String(candidate?.rawValue ?? "").trim().toLowerCase();
+  if (!rawValue) {
+    return false;
+  }
+
+  const escapedRawValue = escapeRegex(rawValue);
+  const proximityPattern = new RegExp(
+    `${escapedRawValue}[^\\n\\r]{0,24}(?:\\/|per\\s+)(?:serving|portion|unit)\\b|(?:\\/|per\\s+)(?:serving|portion|unit)\\b[^\\n\\r]{0,24}${escapedRawValue}|${escapedRawValue}[^\\n\\r]{0,24}par\\s+(?:portion|unite)\\b|par\\s+(?:portion|unite)\\b[^\\n\\r]{0,24}${escapedRawValue}`,
+    "i",
+  );
+
+  return proximityPattern.test(evidence);
+}
+
+function getServingPriceInferenceScore(candidate, packageCandidate, servingPrice) {
+  let score = 0;
+  const evidence = `${candidate?.evidenceText ?? ""}`.toLowerCase();
+  const packageEvidence = `${packageCandidate?.evidenceText ?? ""}`.toLowerCase();
+  const packageRawValue = String(packageCandidate?.rawValue ?? packageCandidate?.value ?? "").trim();
+
+  if (candidate?.url && candidate.url === packageCandidate?.url) {
+    score += 4;
+  }
+
+  if (
+    packageRawValue &&
+    evidence.includes(packageRawValue.toLowerCase()) &&
+    packageEvidence.includes(packageRawValue.toLowerCase())
+  ) {
+    score += 10;
+  }
+
+  if (candidate?.semanticType === "current") {
+    score += 6;
+  } else if (candidate?.semanticType === "sale") {
+    score += 3;
+  } else if (candidate?.semanticType === "shipping") {
+    score -= 8;
+  }
+
+  if (/1\s*bag|single serve|single serving/.test(evidence)) {
+    score += 6;
+  }
+
+  if (/compare-price|most popular|best value|free shipping|-\d+%/.test(evidence)) {
+    score -= 4;
+  }
+
+  if (Number.isFinite(servingPrice) && servingPrice >= 1.5 && servingPrice <= 8) {
+    score += 2;
+  }
+
+  return score;
+}
+
+function shouldPreferServingPriceInference(
+  offerUnit,
+  servingPriceInference,
+  packagePrice,
+  singleUnitPrice,
+) {
+  if (
+    !Number.isFinite(packagePrice) ||
+    !Number.isFinite(offerUnit?.value) ||
+    !Number.isFinite(servingPriceInference?.unitCount)
+  ) {
+    return false;
+  }
+
+  if (offerUnit.sourceType === "single" || offerUnit.sourceType === "odoo-format") {
+    return false;
+  }
+
+  const offerUnitPrice = packagePrice / offerUnit.value;
+  const inferredUnitPrice = packagePrice / servingPriceInference.unitCount;
+
+  if (!isReliableUnitPrice(inferredUnitPrice)) {
+    return false;
+  }
+
+  const hasStrongExplicitCount = STRONG_PACKAGE_SOURCE_TYPES.has(offerUnit.sourceType);
+  if (hasStrongExplicitCount) {
+    if (!Number.isFinite(singleUnitPrice) || singleUnitPrice <= 0) {
+      return false;
+    }
+
+    const offerDistance = Math.abs(offerUnitPrice - singleUnitPrice) / singleUnitPrice;
+    const inferredDistance = Math.abs(inferredUnitPrice - singleUnitPrice) / singleUnitPrice;
+    return inferredDistance + 0.08 < offerDistance;
+  }
+
+  if (Number.isFinite(singleUnitPrice) && singleUnitPrice > 0) {
+    const offerDistance = Math.abs(offerUnitPrice - singleUnitPrice) / singleUnitPrice;
+    const inferredDistance = Math.abs(inferredUnitPrice - singleUnitPrice) / singleUnitPrice;
+    if (inferredDistance + 0.05 < offerDistance) {
+      return true;
+    }
+  }
+
+  return inferredUnitPrice < offerUnitPrice * 0.8;
+}
+
 function inferUnitCountFromPeerPrice(packagePrice, singleUnitPrice) {
   if (
     !Number.isFinite(packagePrice) ||
@@ -3308,6 +3514,10 @@ function inferUnitCountFromPeerPrice(packagePrice, singleUnitPrice) {
   }
 
   return null;
+}
+
+function escapeRegex(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 function inferUnitCountFromPackagePrice(packagePrice, product) {
@@ -3642,6 +3852,10 @@ function shouldRejectPriceCandidate(candidate, offer = null) {
     return true;
   }
 
+  if (isDateLikePriceCandidate(candidate)) {
+    return true;
+  }
+
   if (candidate.semanticType === "shipping" || candidate.semanticType === "savings") {
     return true;
   }
@@ -3671,6 +3885,74 @@ function shouldRejectPriceCandidate(candidate, offer = null) {
       ],
       offer,
     ) <= -8
+  ) {
+    return true;
+  }
+
+  return false;
+}
+
+function isAcceptableCandidateCurrency(candidate, offer = null) {
+  const currency = normalizeCurrencyCode(candidate?.currency ?? candidate?.assumedCurrency);
+  if (!currency || currency === "CAD") {
+    return true;
+  }
+
+  if (currency !== "USD") {
+    return false;
+  }
+
+  return hasCanadianMarketContext(candidate, offer);
+}
+
+function shouldDowngradeCurrencyConfidence(candidate, offer = null) {
+  const currency = normalizeCurrencyCode(candidate?.currency ?? candidate?.assumedCurrency);
+  return currency === "USD" && hasCanadianMarketContext(candidate, offer);
+}
+
+function hasCanadianMarketContext(candidate, offer = null) {
+  const urls = [
+    candidate?.url,
+    candidate?.pageContext?.canonicalUrl,
+    offer?.productUrl,
+  ].filter(Boolean);
+  const combinedText = normalizeSignalText(
+    [
+      candidate?.pageContext?.decodedPath,
+      candidate?.pageContext?.canonicalDecodedPath,
+      candidate?.pageContext?.title,
+      candidate?.pageContext?.ogTitle,
+      candidate?.pageContext?.textPreview,
+      candidate?.evidenceText,
+    ]
+      .filter(Boolean)
+      .join(" "),
+  ).toLowerCase();
+
+  return urls.some((value) => {
+    try {
+      const url = new URL(value);
+      return (
+        url.hostname.endsWith(".ca") ||
+        /(^|\/)(ca|en-ca|fr-ca)(\/|$)/i.test(url.pathname)
+      );
+    } catch {
+      return /(^|\/)(ca|en-ca|fr-ca)(\/|$)/i.test(value);
+    }
+  }) || /\bcanada\b|\bcad\b|livraison gratuite 75\$/.test(combinedText);
+}
+
+function isDateLikePriceCandidate(candidate) {
+  const rawValue = String(candidate?.rawValue ?? "").trim();
+  const evidence = normalizeSignalText(candidate?.evidenceText ?? "").toLowerCase();
+
+  if (/^\d{4}-\d{2}-\d{2}(?:t|\b)/i.test(rawValue)) {
+    return true;
+  }
+
+  if (
+    /pricevaliduntil|validuntil|expires|expiration/.test(evidence) &&
+    /^\d{4}-\d{2}-\d{2}(?:t|\b)/i.test(rawValue)
   ) {
     return true;
   }
@@ -3773,7 +4055,12 @@ async function fetchHtml(url, options = {}) {
       return null;
     }
 
-    return await response.text();
+    const html = await response.text();
+    if (!html || isBlockedOrEmptyHtml(html)) {
+      return fetchHtmlWithCurl(url, timeoutMs);
+    }
+
+    return html;
   } catch {
     return fetchHtmlWithCurl(url, timeoutMs);
   } finally {
