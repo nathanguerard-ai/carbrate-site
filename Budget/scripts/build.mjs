@@ -9,26 +9,17 @@ const publicFiles = ["index.html", "styles.css", "app.js"];
 const requiredIds = [
   "budgetForm",
   "expenseForm",
-  "filterForm",
-  "goalForm",
-  "scenarioForm",
-  "checklistForm",
   "incomeTotal",
   "expenseTotal",
   "remainingTotal",
-  "usageRate",
-  "savingsRate",
   "unpaidTotal",
-  "nextDue",
-  "readinessScore",
+  "sharedTotal",
+  "perPersonTotal",
+  "personalTotal",
   "expenseTable",
-  "categoryGrid",
   "insightList",
-  "timelineList",
-  "goalList",
-  "checklistList",
-  "scenarioResult",
-  "exportPreview"
+  "exportButton",
+  "resetButton"
 ];
 
 const html = await readFile(join(root, "index.html"), "utf8");

@@ -6,93 +6,51 @@
     <title>Budget Appartement</title>
     <meta
       name="description"
-      content="Tableau de bord pour planifier un budget d'appartement, séparer les dépenses et suivre les paiements."
+      content="Gestion simple du budget d'appartement: revenus, dépenses, partage et suivi des paiements."
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <header class="app-header">
+    <header class="site-header">
       <div>
         <p class="eyebrow">Budget appartement</p>
-        <h1>Gère ton mois, tes factures et les dépenses partagées.</h1>
+        <h1>Un budget clair pour vivre en appartement.</h1>
+        <p>
+          Calcule ce que tu peux payer, sépare les dépenses communes et garde une
+          vue simple sur ce qui reste.
+        </p>
       </div>
-      <nav aria-label="Navigation principale">
-        <a href="#resume">Résumé</a>
-        <a href="#depenses">Dépenses</a>
-        <a href="#partage">Partage</a>
-        <a href="#calendrier">Calendrier</a>
-        <a href="#objectifs">Objectifs</a>
-        <a href="#plan">Plan</a>
-      </nav>
+      <img
+        src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=900&q=80"
+        alt="Calculatrice et notes de budget sur un bureau"
+      />
     </header>
 
     <main>
-      <section class="workspace" id="resume" aria-labelledby="dashboard-title">
-        <div class="intro-panel">
-          <div class="intro-copy">
-            <p class="eyebrow">Tableau de bord</p>
-            <h2 id="dashboard-title">Prépare un budget clair avant de partir en appartement.</h2>
-            <p>
-              Entre tes revenus, tes dépenses fixes et les coûts partagés. Les montants se
-              recalculent automatiquement pour voir ce qui reste à payer, à économiser et à
-              répartir.
-            </p>
-          </div>
-          <img
-            src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80"
-            alt="Carnet, calculatrice et documents de budget sur un bureau"
-          />
-        </div>
-
-        <div class="summary-grid" aria-label="Résumé financier">
-          <article class="metric">
-            <span>Revenus mensuels</span>
-            <strong id="incomeTotal">$0</strong>
-            <small>Argent disponible ce mois-ci</small>
-          </article>
-          <article class="metric">
-            <span>Dépenses prévues</span>
-            <strong id="expenseTotal">$0</strong>
-            <small>Fixes, variables et partagées</small>
-          </article>
-          <article class="metric">
-            <span>Reste estimé</span>
-            <strong id="remainingTotal">$0</strong>
-            <small>Après toutes les dépenses</small>
-          </article>
-          <article class="metric">
-            <span>Taux utilisé</span>
-            <strong id="usageRate">0%</strong>
-            <small>Part du revenu déjà planifiée</small>
-          </article>
-          <article class="metric">
-            <span>Taux d'épargne</span>
-            <strong id="savingsRate">0%</strong>
-            <small>Épargne prévue sur le revenu</small>
-          </article>
-          <article class="metric">
-            <span>À payer</span>
-            <strong id="unpaidTotal">$0</strong>
-            <small>Factures non marquées comme payées</small>
-          </article>
-          <article class="metric">
-            <span>Prochaine échéance</span>
-            <strong id="nextDue">Aucune</strong>
-            <small>Basé sur les journées inscrites</small>
-          </article>
-          <article class="metric">
-            <span>Score préparation</span>
-            <strong id="readinessScore">0/100</strong>
-            <small>Budget, épargne, logement et tâches</small>
-          </article>
-        </div>
+      <section class="summary" aria-label="Résumé du budget">
+        <article>
+          <span>Revenu</span>
+          <strong id="incomeTotal">0 $</strong>
+        </article>
+        <article>
+          <span>Dépenses</span>
+          <strong id="expenseTotal">0 $</strong>
+        </article>
+        <article>
+          <span>Reste</span>
+          <strong id="remainingTotal">0 $</strong>
+        </article>
+        <article>
+          <span>À payer</span>
+          <strong id="unpaidTotal">0 $</strong>
+        </article>
       </section>
 
-      <section class="budget-layout" aria-label="Entrée du budget">
-        <form class="control-surface" id="budgetForm">
-          <div class="section-heading">
+      <section class="layout">
+        <form class="panel" id="budgetForm">
+          <div class="section-title">
             <p class="eyebrow">Paramètres</p>
-            <h2>Montants du mois</h2>
+            <h2>Ton mois</h2>
           </div>
 
           <label>
@@ -101,7 +59,7 @@
           </label>
 
           <label>
-            Objectif d'épargne
+            Épargne prévue
             <input id="savingsInput" type="number" min="0" step="25" inputmode="decimal" />
           </label>
 
@@ -111,38 +69,34 @@
           </label>
 
           <label>
-            Colocataires ou personnes qui paient
+            Personnes qui paient les dépenses communes
             <input id="peopleInput" type="number" min="1" max="8" step="1" />
-          </label>
-
-          <label>
-            Loyer cible personnel
-            <input id="rentTargetInput" type="number" min="0" step="25" inputmode="decimal" />
           </label>
 
           <button class="primary-button" type="submit">Mettre à jour</button>
         </form>
 
-        <section class="insight-band" aria-labelledby="insight-title">
-          <div>
+        <section class="panel insight-panel" aria-labelledby="insightTitle">
+          <div class="section-title">
             <p class="eyebrow">Diagnostic</p>
-            <h2 id="insight-title">Lecture rapide</h2>
+            <h2 id="insightTitle">Ce que ton budget dit</h2>
           </div>
-          <div class="insight-list" id="insightList"></div>
+          <div id="insightList" class="insight-list"></div>
         </section>
       </section>
 
-      <section class="section-block" id="depenses" aria-labelledby="expenses-title">
-        <div class="section-heading">
-          <p class="eyebrow">Dépenses</p>
-          <h2 id="expenses-title">Sépare les coûts clairement.</h2>
+      <section class="panel">
+        <div class="section-title">
+          <p class="eyebrow">Ajouter</p>
+          <h2>Nouvelle dépense</h2>
         </div>
 
-        <form class="entry-row" id="expenseForm">
+        <form class="expense-form" id="expenseForm">
           <label>
-            Dépense
-            <input id="expenseName" type="text" placeholder="Ex.: Hydro, épicerie, internet" />
+            Nom
+            <input id="expenseName" type="text" placeholder="Ex.: Loyer, hydro, épicerie" />
           </label>
+
           <label>
             Catégorie
             <select id="expenseCategory">
@@ -152,79 +106,37 @@
               <option>Transport</option>
               <option>Assurances</option>
               <option>Personnel</option>
-              <option>Épargne</option>
             </select>
           </label>
+
           <label>
             Montant
             <input id="expenseAmount" type="number" min="0" step="1" inputmode="decimal" />
           </label>
+
           <label>
             Type
             <select id="expenseType">
-              <option value="fixed">Fixe</option>
-              <option value="variable">Variable</option>
-              <option value="shared">Partagée</option>
+              <option value="shared">Commune</option>
+              <option value="personal">Personnelle</option>
             </select>
           </label>
-          <label>
-            Échéance
-            <input id="expenseDueDay" type="number" min="0" max="31" step="1" placeholder="Jour" />
-          </label>
-          <label>
-            Statut
-            <select id="expenseStatus">
-              <option value="unpaid">À payer</option>
-              <option value="paid">Payée</option>
-            </select>
-          </label>
-          <label class="checkbox-label">
-            <input id="expenseEssential" type="checkbox" checked />
-            Essentielle
-          </label>
-          <label class="notes-field">
-            Notes
-            <input id="expenseNotes" type="text" placeholder="Ex.: estimation, contrat, coloc, rappel" />
-          </label>
+
           <button class="secondary-button" type="submit">Ajouter</button>
         </form>
+      </section>
 
-        <form class="filter-row" id="filterForm">
-          <label>
-            Recherche
-            <input id="searchFilter" type="search" placeholder="Nom, catégorie ou note" />
-          </label>
-          <label>
-            Catégorie
-            <select id="categoryFilter">
-              <option>Toutes</option>
-              <option>Logement</option>
-              <option>Services</option>
-              <option>Épicerie</option>
-              <option>Transport</option>
-              <option>Assurances</option>
-              <option>Personnel</option>
-              <option>Épargne</option>
-            </select>
-          </label>
-          <label>
-            Type
-            <select id="typeFilter">
-              <option value="Tous">Tous</option>
-              <option value="fixed">Fixe</option>
-              <option value="variable">Variable</option>
-              <option value="shared">Partagée</option>
-            </select>
-          </label>
-          <label>
-            Statut
-            <select id="statusFilter">
-              <option value="Tous">Tous</option>
-              <option value="unpaid">À payer</option>
-              <option value="paid">Payée</option>
-            </select>
-          </label>
-        </form>
+      <section class="panel">
+        <div class="table-header">
+          <div class="section-title">
+            <p class="eyebrow">Dépenses</p>
+            <h2>Liste claire</h2>
+          </div>
+          <div class="actions">
+            <button class="secondary-button" id="exportButton" type="button">Exporter CSV</button>
+            <button class="ghost-button" id="resetButton" type="button">Réinitialiser</button>
+          </div>
+        </div>
 
         <div class="table-shell">
           <table>
@@ -233,12 +145,10 @@
                 <th>Dépense</th>
                 <th>Catégorie</th>
                 <th>Type</th>
-                <th>Échéance</th>
-                <th>Priorité</th>
                 <th>Montant</th>
                 <th>Par personne</th>
                 <th>Statut</th>
-                <th>Action</th>
+                <th></th>
               </tr>
             </thead>
             <tbody id="expenseTable"></tbody>
@@ -246,141 +156,27 @@
         </div>
       </section>
 
-      <section class="section-block" id="calendrier" aria-labelledby="calendar-title">
-        <div class="section-heading">
-          <p class="eyebrow">Calendrier</p>
-          <h2 id="calendar-title">Échéances du mois.</h2>
-        </div>
-        <div class="timeline-list" id="timelineList"></div>
-      </section>
-
-      <section class="section-block split-section" id="partage" aria-labelledby="split-title">
-        <div class="section-heading">
-          <p class="eyebrow">Partage</p>
-          <h2 id="split-title">Voir qui doit payer quoi.</h2>
-        </div>
-        <div class="split-grid">
-          <article class="split-panel">
-            <span>Coûts partagés</span>
-            <strong id="sharedTotal">$0</strong>
-            <small>Loyer, internet, hydro et autres dépenses communes</small>
-          </article>
-          <article class="split-panel">
-            <span>Part par personne</span>
-            <strong id="perPersonTotal">$0</strong>
-            <small>Basé sur le nombre de personnes qui paient</small>
-          </article>
-          <article class="split-panel">
-            <span>Dépenses personnelles</span>
-            <strong id="personalTotal">$0</strong>
-            <small>Ce qui reste à ta charge seulement</small>
-          </article>
-        </div>
-      </section>
-
-      <section class="section-block" id="objectifs" aria-labelledby="goals-title">
-        <div class="section-heading">
-          <p class="eyebrow">Objectifs</p>
-          <h2 id="goals-title">Préparer les gros paiements.</h2>
-        </div>
-        <form class="goal-form" id="goalForm">
-          <label>
-            Objectif
-            <input id="goalName" type="text" placeholder="Ex.: meubles, dépôt, fonds d'urgence" />
-          </label>
-          <label>
-            Montant cible
-            <input id="goalTarget" type="number" min="0" step="25" />
-          </label>
-          <label>
-            Déjà accumulé
-            <input id="goalSaved" type="number" min="0" step="25" />
-          </label>
-          <label>
-            Date limite
-            <input id="goalDeadline" type="date" />
-          </label>
-          <button class="secondary-button" type="submit">Ajouter</button>
-        </form>
-        <div class="goal-list" id="goalList"></div>
-      </section>
-
-      <section class="section-block scenario-section" id="simulation" aria-labelledby="scenario-title">
-        <div class="section-heading">
-          <p class="eyebrow">Simulation</p>
-          <h2 id="scenario-title">Tester un appartement avant de dire oui.</h2>
-        </div>
-        <form class="scenario-grid" id="scenarioForm">
-          <label>
-            Loyer
-            <input id="scenarioRent" type="number" min="0" step="25" />
-          </label>
-          <label>
-            Services
-            <input id="scenarioUtilities" type="number" min="0" step="10" />
-          </label>
-          <label>
-            Épicerie
-            <input id="scenarioGroceries" type="number" min="0" step="10" />
-          </label>
-          <label>
-            Transport
-            <input id="scenarioTransport" type="number" min="0" step="10" />
-          </label>
-          <label>
-            Personnel
-            <input id="scenarioPersonal" type="number" min="0" step="10" />
-          </label>
-        </form>
-        <div class="scenario-result" id="scenarioResult"></div>
-      </section>
-
-      <section class="section-block" id="plan" aria-labelledby="plan-title">
-        <div class="section-heading">
-          <p class="eyebrow">Plan mensuel</p>
-          <h2 id="plan-title">Répartition professionnelle du budget.</h2>
-        </div>
-        <div class="category-grid" id="categoryGrid"></div>
-      </section>
-
-      <section class="section-block checklist-section" id="preparation" aria-labelledby="checklist-title">
-        <div class="section-heading with-meta">
-          <div>
-            <p class="eyebrow">Préparation</p>
-            <h2 id="checklist-title">Liste avant déménagement.</h2>
-          </div>
-          <div>
-            <strong id="checklistProgress">0/0 tâches</strong>
-            <small id="riskLevel">Correct</small>
-          </div>
-        </div>
-        <form class="checklist-form" id="checklistForm">
-          <label>
-            Nouvelle tâche
-            <input id="taskName" type="text" placeholder="Ex.: appeler Hydro-Québec" />
-          </label>
-          <button class="secondary-button" type="submit">Ajouter</button>
-        </form>
-        <div class="checklist-list" id="checklistList"></div>
-      </section>
-
-      <section class="section-block export-section" id="export" aria-labelledby="export-title">
-        <div class="section-heading">
-          <p class="eyebrow">Export</p>
-          <h2 id="export-title">Garder une copie claire.</h2>
-        </div>
-        <pre id="exportPreview"></pre>
-        <div class="action-row">
-          <button class="secondary-button" id="exportCsvButton" type="button">Exporter CSV</button>
-          <button class="secondary-button" id="exportJsonButton" type="button">Exporter JSON</button>
-          <button class="secondary-button" id="clearPaidButton" type="button">Remettre les factures à payer</button>
-        </div>
+      <section class="split-grid">
+        <article class="panel">
+          <span>Dépenses communes</span>
+          <strong id="sharedTotal">0 $</strong>
+          <small>Total à diviser entre les personnes qui paient.</small>
+        </article>
+        <article class="panel">
+          <span>Part par personne</span>
+          <strong id="perPersonTotal">0 $</strong>
+          <small>Montant estimé pour chaque personne.</small>
+        </article>
+        <article class="panel">
+          <span>Dépenses personnelles</span>
+          <strong id="personalTotal">0 $</strong>
+          <small>Ce que tu paies seul, incluant l'épargne.</small>
+        </article>
       </section>
     </main>
 
     <footer>
-      <p>Les données restent dans ce navigateur. Ajuste les montants selon ton vrai bail, tes factures et tes habitudes.</p>
-      <button id="resetButton" type="button">Réinitialiser l'exemple</button>
+      <p>Les données restent dans ton navigateur. Mets les vrais montants de ton bail et de tes factures.</p>
     </footer>
 
     <script src="app.js"></script>
