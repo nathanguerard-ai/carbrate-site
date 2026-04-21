@@ -1,26 +1,26 @@
 {
-  "updatedAt": "2026-04-20T15:51:55.370Z",
+  "updatedAt": "2026-04-21T09:58:41.922Z",
   "analysis": {
-    "mode": "cached",
-    "pagesFetched": 0,
-    "pagesFromCache": 65,
-    "offerPricesFromLive": 44,
-    "offerPricesFromFallback": 20,
-    "offerPricesSkipped": 0,
-    "unitCountsFromLive": 42,
+    "mode": "live",
+    "pagesFetched": 162,
+    "pagesFromCache": 2,
+    "offerPricesFromLive": 79,
+    "offerPricesFromFallback": 24,
+    "offerPricesSkipped": 8,
+    "unitCountsFromLive": 58,
     "unitCountsFromCatalog": 7,
-    "unitCountsInferredFromPrice": 0,
-    "unitCountsDefaulted": 15,
-    "carbsFromLive": 25,
-    "carbsFromCatalog": 23,
+    "unitCountsInferredFromPrice": 1,
+    "unitCountsDefaulted": 45,
+    "carbsFromLive": 18,
+    "carbsFromCatalog": 30,
     "discoveredProductsAdded": 0,
-    "discoveredProductsSkipped": 0,
-    "discoveredProductsMerged": 0,
-    "discoveredBrandsScanned": 0,
-    "discoveryPagesFetched": 0,
-    "discoveredOfferUrlsAdded": 0,
-    "searchQueriesRun": 0,
-    "retailerSearchQueriesRun": 0
+    "discoveredProductsSkipped": 104,
+    "discoveredProductsMerged": 1,
+    "discoveredBrandsScanned": 4,
+    "discoveryPagesFetched": 6,
+    "discoveredOfferUrlsAdded": 47,
+    "searchQueriesRun": 53,
+    "retailerSearchQueriesRun": 42
   },
   "products": [
     {
@@ -29,7 +29,7 @@
       "brand": "Maurten",
       "type": "Gel",
       "carbsGrams": 25,
-      "carbsSource": "catalog",
+      "carbsSource": "https://shop.forerunners.ca/products/maurten-gel-100-box-of-12",
       "officialProductUrl": "https://www.maurten.com/products/gel-100-box-us",
       "offers": [
         {
@@ -40,12 +40,12 @@
           "unitCountSource": "default-single",
           "unitCountConfidence": "default",
           "productUrl": "https://spryactive.ca/products/maurten-hydrogel-sports-fuel-gel-100",
-          "priceSource": "catalog-fallback",
-          "priceConfidence": "fallback",
-          "verificationStatus": "fallback",
-          "verificationLabel": "Prix de secours",
-          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-20T15:51:55.261Z"
+          "priceSource": "https://spryactive.ca/products/maurten-hydrogel-sports-fuel-gel-100",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-21T09:58:06.769Z"
         },
         {
           "seller": "lecoureurnordique.ca",
@@ -60,7 +60,127 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-20T15:51:55.262Z"
+          "lastCheckedAt": "2026-04-21T09:58:06.769Z"
+        },
+        {
+          "seller": "enroute.run",
+          "price": 5,
+          "packagePrice": 5,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://enroute.run/products/maurten-gel-100",
+          "priceSource": "https://enroute.run/products/maurten-gel-100",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-21T09:58:06.772Z"
+        },
+        {
+          "seller": "enroute.run",
+          "price": 7,
+          "packagePrice": 7,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://enroute.run/products/maurten-gel-160",
+          "priceSource": "https://enroute.run/products/maurten-gel-160",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-21T09:58:06.775Z"
+        },
+        {
+          "seller": "enroute.run",
+          "price": 6.5,
+          "packagePrice": 6.5,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://enroute.run/products/maurten-gel-100-caf-100",
+          "priceSource": "https://enroute.run/products/maurten-gel-100-caf-100",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-21T09:58:06.777Z"
+        },
+        {
+          "seller": "sea2skynutrition.ca",
+          "price": 3.75,
+          "packagePrice": 45,
+          "unitCount": 12,
+          "unitCountSource": "https://sea2skynutrition.ca/products/maurten-gel-100",
+          "unitCountConfidence": "live",
+          "productUrl": "https://sea2skynutrition.ca/products/maurten-gel-100",
+          "priceSource": "https://sea2skynutrition.ca/products/maurten-gel-100",
+          "priceConfidence": "live",
+          "verificationStatus": "verified",
+          "verificationLabel": "Prix vérifié",
+          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
+          "lastCheckedAt": "2026-04-21T09:58:06.779Z"
+        },
+        {
+          "seller": "boutiqueendurance.ca",
+          "price": 5,
+          "packagePrice": 60,
+          "unitCount": 12,
+          "unitCountSource": "https://www.boutiqueendurance.ca/en/products/maurten-gel-100-box",
+          "unitCountConfidence": "live",
+          "productUrl": "https://www.boutiqueendurance.ca/en/products/maurten-gel-100-box",
+          "priceSource": "https://www.boutiqueendurance.ca/en/products/maurten-gel-100-box",
+          "priceConfidence": "live",
+          "verificationStatus": "verified",
+          "verificationLabel": "Prix vérifié",
+          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
+          "lastCheckedAt": "2026-04-21T09:58:06.781Z"
+        },
+        {
+          "seller": "fuelkit.ca",
+          "price": 6,
+          "packagePrice": 60,
+          "unitCount": 10,
+          "unitCountSource": "price-peer-inference",
+          "unitCountConfidence": "inferred",
+          "productUrl": "https://fuelkit.ca/products/maurten-gel-100-12-packets-caffeine-free",
+          "priceSource": "https://fuelkit.ca/products/maurten-gel-100-12-packets-caffeine-free",
+          "priceConfidence": "live",
+          "verificationStatus": "verified",
+          "verificationLabel": "Prix vérifié",
+          "verificationReason": "Le prix vient d'une page vendeur et le format de portion a été confirmé par une déduction cohérente entre le prix de boîte et le prix unitaire.",
+          "lastCheckedAt": "2026-04-21T09:58:06.785Z"
+        },
+        {
+          "seller": "shop.forerunners.ca",
+          "price": 5,
+          "packagePrice": 60,
+          "unitCount": 12,
+          "unitCountSource": "https://shop.forerunners.ca/products/maurten-gel-100-box-of-12",
+          "unitCountConfidence": "live",
+          "productUrl": "https://shop.forerunners.ca/products/maurten-gel-100-box-of-12",
+          "priceSource": "https://shop.forerunners.ca/products/maurten-gel-100-box-of-12",
+          "priceConfidence": "live",
+          "verificationStatus": "verified",
+          "verificationLabel": "Prix vérifié",
+          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
+          "lastCheckedAt": "2026-04-21T09:58:06.787Z"
+        },
+        {
+          "seller": "runnersedge.ca",
+          "price": 5.83,
+          "packagePrice": 70,
+          "unitCount": 12,
+          "unitCountSource": "https://www.runnersedge.ca/maurten-gel-100-caf-100-box-of-12.html",
+          "unitCountConfidence": "live",
+          "productUrl": "https://www.runnersedge.ca/maurten-gel-100-caf-100-box-of-12.html",
+          "priceSource": "https://www.runnersedge.ca/maurten-gel-100-caf-100-box-of-12.html",
+          "priceConfidence": "live-text",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix vient d'une page live, mais une partie du calcul a été déduite automatiquement.",
+          "lastCheckedAt": "2026-04-21T09:58:06.787Z"
         }
       ]
     },
@@ -86,7 +206,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-20T15:51:55.271Z"
+          "lastCheckedAt": "2026-04-21T09:58:08.997Z"
         },
         {
           "seller": "lecoureurnordique.ca",
@@ -101,7 +221,52 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-20T15:51:55.271Z"
+          "lastCheckedAt": "2026-04-21T09:58:08.998Z"
+        },
+        {
+          "seller": "enroute.run",
+          "price": 6.5,
+          "packagePrice": 6.5,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://enroute.run/products/maurten-gel-100-caf-100",
+          "priceSource": "https://enroute.run/products/maurten-gel-100-caf-100",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-21T09:58:09.003Z"
+        },
+        {
+          "seller": "enroute.run",
+          "price": 5,
+          "packagePrice": 5,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://enroute.run/products/maurten-gel-100",
+          "priceSource": "https://enroute.run/products/maurten-gel-100",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-21T09:58:09.006Z"
+        },
+        {
+          "seller": "enroute.run",
+          "price": 7,
+          "packagePrice": 7,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://enroute.run/products/maurten-drink-mix-320-caf-100",
+          "priceSource": "https://enroute.run/products/maurten-drink-mix-320-caf-100",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-21T09:58:09.009Z"
         }
       ]
     },
@@ -111,7 +276,7 @@
       "brand": "Maurten",
       "type": "Gel",
       "carbsGrams": 40,
-      "carbsSource": "catalog",
+      "carbsSource": "https://enroute.run/products/maurten-solid-160",
       "officialProductUrl": "https://www.maurten.com/products/gel-160-us-ca",
       "offers": [
         {
@@ -122,12 +287,12 @@
           "unitCountSource": "default-single",
           "unitCountConfidence": "default",
           "productUrl": "https://spryactive.ca/products/maurten-hydrogel-sports-fuel-gel-160",
-          "priceSource": "catalog-fallback",
-          "priceConfidence": "fallback",
-          "verificationStatus": "fallback",
-          "verificationLabel": "Prix de secours",
-          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-20T15:51:55.271Z"
+          "priceSource": "https://spryactive.ca/products/maurten-hydrogel-sports-fuel-gel-160",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-21T09:58:10.670Z"
         },
         {
           "seller": "lecoureurnordique.ca",
@@ -142,7 +307,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-20T15:51:55.271Z"
+          "lastCheckedAt": "2026-04-21T09:58:10.670Z"
         },
         {
           "seller": "frontrunners.ca",
@@ -152,12 +317,102 @@
           "unitCountSource": "default-single",
           "unitCountConfidence": "default",
           "productUrl": "https://frontrunners.ca/products/maurten-gel-160",
-          "priceSource": "catalog-fallback",
-          "priceConfidence": "fallback",
-          "verificationStatus": "fallback",
-          "verificationLabel": "Prix de secours",
-          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-20T15:51:55.271Z"
+          "priceSource": "https://frontrunners.ca/products/maurten-gel-160",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-21T09:58:10.673Z"
+        },
+        {
+          "seller": "enroute.run",
+          "price": 7,
+          "packagePrice": 7,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://enroute.run/products/maurten-gel-160",
+          "priceSource": "https://enroute.run/products/maurten-gel-160",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-21T09:58:10.677Z"
+        },
+        {
+          "seller": "enroute.run",
+          "price": 6.5,
+          "packagePrice": 6.5,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://enroute.run/products/maurten-gel-100-caf-100",
+          "priceSource": "https://enroute.run/products/maurten-gel-100-caf-100",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-21T09:58:10.680Z"
+        },
+        {
+          "seller": "enroute.run",
+          "price": 5,
+          "packagePrice": 5,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://enroute.run/products/maurten-gel-100",
+          "priceSource": "https://enroute.run/products/maurten-gel-100",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-21T09:58:10.682Z"
+        },
+        {
+          "seller": "enroute.run",
+          "price": 3.5,
+          "packagePrice": 3.5,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://enroute.run/products/maurten-drink-mix-160",
+          "priceSource": "https://enroute.run/products/maurten-drink-mix-160",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-21T09:58:10.684Z"
+        },
+        {
+          "seller": "enroute.run",
+          "price": 4.5,
+          "packagePrice": 4.5,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://enroute.run/products/maurten-solid-160",
+          "priceSource": "https://enroute.run/products/maurten-solid-160",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-21T09:58:10.686Z"
+        },
+        {
+          "seller": "enroute.run",
+          "price": 4.5,
+          "packagePrice": 4.5,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://enroute.run/products/maurten-solid-c-160",
+          "priceSource": "https://enroute.run/products/maurten-solid-c-160",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-21T09:58:10.688Z"
         }
       ]
     },
@@ -167,7 +422,7 @@
       "brand": "Maurten",
       "type": "Barre",
       "carbsGrams": 40,
-      "carbsSource": "catalog",
+      "carbsSource": "https://enroute.run/products/maurten-solid-160",
       "officialProductUrl": "https://www.maurten.com/products/solid-160",
       "offers": [
         {
@@ -178,12 +433,12 @@
           "unitCountSource": "https://frontrunners.ca/products/maurten-solid-c-160",
           "unitCountConfidence": "live",
           "productUrl": "https://frontrunners.ca/products/maurten-solid-c-160",
-          "priceSource": "catalog-fallback",
-          "priceConfidence": "fallback",
-          "verificationStatus": "fallback",
-          "verificationLabel": "Prix de secours",
-          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-20T15:51:55.272Z"
+          "priceSource": "https://frontrunners.ca/products/maurten-solid-c-160",
+          "priceConfidence": "live",
+          "verificationStatus": "verified",
+          "verificationLabel": "Prix vérifié",
+          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
+          "lastCheckedAt": "2026-04-21T09:58:12.910Z"
         },
         {
           "seller": "lecoureurnordique.ca",
@@ -198,7 +453,67 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-20T15:51:55.272Z"
+          "lastCheckedAt": "2026-04-21T09:58:12.915Z"
+        },
+        {
+          "seller": "enroute.run",
+          "price": 7,
+          "packagePrice": 7,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://enroute.run/products/maurten-gel-160",
+          "priceSource": "https://enroute.run/products/maurten-gel-160",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-21T09:58:12.919Z"
+        },
+        {
+          "seller": "enroute.run",
+          "price": 3.5,
+          "packagePrice": 3.5,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://enroute.run/products/maurten-drink-mix-160",
+          "priceSource": "https://enroute.run/products/maurten-drink-mix-160",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-21T09:58:12.921Z"
+        },
+        {
+          "seller": "enroute.run",
+          "price": 4.5,
+          "packagePrice": 4.5,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://enroute.run/products/maurten-solid-160",
+          "priceSource": "https://enroute.run/products/maurten-solid-160",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-21T09:58:12.923Z"
+        },
+        {
+          "seller": "enroute.run",
+          "price": 4.5,
+          "packagePrice": 4.5,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://enroute.run/products/maurten-solid-c-160",
+          "priceSource": "https://enroute.run/products/maurten-solid-c-160",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-21T09:58:12.925Z"
         }
       ]
     },
@@ -207,8 +522,8 @@
       "name": "Drink Mix 160",
       "brand": "Maurten",
       "type": "Boisson",
-      "carbsGrams": 40,
-      "carbsSource": "catalog",
+      "carbsGrams": 41,
+      "carbsSource": "https://fuelkit.ca/products/maurten-fuel-drink-mix-160-single-packet?_pos=1&_sid=ab50a5551&_ss=r",
       "officialProductUrl": "https://www.maurten.com/products/drink-mix-160-box-us",
       "offers": [
         {
@@ -224,22 +539,82 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-20T15:51:55.273Z"
+          "lastCheckedAt": "2026-04-21T09:58:16.687Z"
         },
         {
           "seller": "frontrunners.ca",
           "price": 3.5,
-          "packagePrice": 140,
-          "unitCount": 40,
-          "unitCountSource": "https://frontrunners.ca/products/maurten-drink-mix-160",
-          "unitCountConfidence": "live",
+          "packagePrice": 3.5,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
           "productUrl": "https://frontrunners.ca/products/maurten-drink-mix-160",
-          "priceSource": "catalog-fallback",
-          "priceConfidence": "fallback",
-          "verificationStatus": "fallback",
-          "verificationLabel": "Prix de secours",
-          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-20T15:51:55.273Z"
+          "priceSource": "https://frontrunners.ca/products/maurten-drink-mix-160",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-21T09:58:16.691Z"
+        },
+        {
+          "seller": "enroute.run",
+          "price": 3.5,
+          "packagePrice": 3.5,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://enroute.run/products/maurten-drink-mix-160",
+          "priceSource": "https://enroute.run/products/maurten-drink-mix-160",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-21T09:58:16.695Z"
+        },
+        {
+          "seller": "enroute.run",
+          "price": 5,
+          "packagePrice": 5,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://enroute.run/products/maurten-drink-mix-320",
+          "priceSource": "https://enroute.run/products/maurten-drink-mix-320",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-21T09:58:16.697Z"
+        },
+        {
+          "seller": "enroute.run",
+          "price": 5.14,
+          "packagePrice": 72,
+          "unitCount": 14,
+          "unitCountSource": "https://enroute.run/products/maurten-drink-mix-320-caf-100",
+          "unitCountConfidence": "live",
+          "productUrl": "https://enroute.run/products/maurten-drink-mix-320-caf-100",
+          "priceSource": "https://enroute.run/products/maurten-drink-mix-320-caf-100",
+          "priceConfidence": "live",
+          "verificationStatus": "verified",
+          "verificationLabel": "Prix vérifié",
+          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
+          "lastCheckedAt": "2026-04-21T09:58:16.699Z"
+        },
+        {
+          "seller": "fuelkit.ca",
+          "price": 3.5,
+          "packagePrice": 3.5,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://fuelkit.ca/products/maurten-fuel-drink-mix-160-single-packet?_pos=1&_sid=ab50a5551&_ss=r",
+          "priceSource": "https://fuelkit.ca/products/maurten-fuel-drink-mix-160-single-packet?_pos=1&_sid=ab50a5551&_ss=r",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-21T09:58:16.702Z"
         }
       ]
     },
@@ -265,22 +640,112 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-20T15:51:55.274Z"
+          "lastCheckedAt": "2026-04-21T09:58:18.649Z"
         },
         {
           "seller": "frontrunners.ca",
-          "price": 5.5,
-          "packagePrice": 5.5,
+          "price": 5.25,
+          "packagePrice": 5.25,
           "unitCount": 1,
           "unitCountSource": "default-single",
           "unitCountConfidence": "default",
           "productUrl": "https://frontrunners.ca/products/maurten-drink-mix-320",
-          "priceSource": "catalog-fallback",
-          "priceConfidence": "fallback",
-          "verificationStatus": "fallback",
-          "verificationLabel": "Prix de secours",
-          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-20T15:51:55.274Z"
+          "priceSource": "https://frontrunners.ca/products/maurten-drink-mix-320",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-21T09:58:18.652Z"
+        },
+        {
+          "seller": "frontrunners.ca",
+          "price": 6.25,
+          "packagePrice": 6.25,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://frontrunners.ca/products/maurten-drink-mix-320-caf100",
+          "priceSource": "https://frontrunners.ca/products/maurten-drink-mix-320-caf100",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-21T09:58:18.655Z"
+        },
+        {
+          "seller": "spryactive.ca",
+          "price": 5.35,
+          "packagePrice": 5.35,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://spryactive.ca/products/maurten-hydrogel-sports-fuel-drink-mix-320?_pos=1&_sid=0cc17f0ca&_ss=r",
+          "priceSource": "https://spryactive.ca/products/maurten-hydrogel-sports-fuel-drink-mix-320?_pos=1&_sid=0cc17f0ca&_ss=r",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-21T09:58:18.658Z"
+        },
+        {
+          "seller": "spryactive.ca",
+          "price": 6.35,
+          "packagePrice": 6.35,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://spryactive.ca/products/maurten-hydrogel-sports-fuel-drink-mix-320-caf-100?_pos=2&_sid=0cc17f0ca&_ss=r",
+          "priceSource": "https://spryactive.ca/products/maurten-hydrogel-sports-fuel-drink-mix-320-caf-100?_pos=2&_sid=0cc17f0ca&_ss=r",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-21T09:58:18.661Z"
+        },
+        {
+          "seller": "enroute.run",
+          "price": 5.14,
+          "packagePrice": 72,
+          "unitCount": 14,
+          "unitCountSource": "https://enroute.run/products/maurten-drink-mix-320-caf-100",
+          "unitCountConfidence": "live",
+          "productUrl": "https://enroute.run/products/maurten-drink-mix-320-caf-100",
+          "priceSource": "https://enroute.run/products/maurten-drink-mix-320-caf-100",
+          "priceConfidence": "live",
+          "verificationStatus": "verified",
+          "verificationLabel": "Prix vérifié",
+          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
+          "lastCheckedAt": "2026-04-21T09:58:18.663Z"
+        },
+        {
+          "seller": "enroute.run",
+          "price": 5,
+          "packagePrice": 5,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://enroute.run/products/maurten-drink-mix-320",
+          "priceSource": "https://enroute.run/products/maurten-drink-mix-320",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-21T09:58:18.667Z"
+        },
+        {
+          "seller": "enroute.run",
+          "price": 3.5,
+          "packagePrice": 3.5,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://enroute.run/products/maurten-drink-mix-160",
+          "priceSource": "https://enroute.run/products/maurten-drink-mix-160",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-21T09:58:18.671Z"
         }
       ]
     },
@@ -306,7 +771,52 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-20T15:51:55.275Z"
+          "lastCheckedAt": "2026-04-21T09:58:20.867Z"
+        },
+        {
+          "seller": "frontrunners.ca",
+          "price": 6.25,
+          "packagePrice": 6.25,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://frontrunners.ca/products/maurten-drink-mix-320-caf100",
+          "priceSource": "https://frontrunners.ca/products/maurten-drink-mix-320-caf100",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-21T09:58:20.870Z"
+        },
+        {
+          "seller": "spryactive.ca",
+          "price": 6.35,
+          "packagePrice": 6.35,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://spryactive.ca/products/maurten-hydrogel-sports-fuel-drink-mix-320-caf-100?_pos=1&_sid=d859d5466&_ss=r",
+          "priceSource": "https://spryactive.ca/products/maurten-hydrogel-sports-fuel-drink-mix-320-caf-100?_pos=1&_sid=d859d5466&_ss=r",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-21T09:58:20.873Z"
+        },
+        {
+          "seller": "enroute.run",
+          "price": 5.14,
+          "packagePrice": 72,
+          "unitCount": 14,
+          "unitCountSource": "https://enroute.run/products/maurten-drink-mix-320-caf-100",
+          "unitCountConfidence": "live",
+          "productUrl": "https://enroute.run/products/maurten-drink-mix-320-caf-100",
+          "priceSource": "https://enroute.run/products/maurten-drink-mix-320-caf-100",
+          "priceConfidence": "live",
+          "verificationStatus": "verified",
+          "verificationLabel": "Prix vérifié",
+          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
+          "lastCheckedAt": "2026-04-21T09:58:20.876Z"
         }
       ]
     },
@@ -321,18 +831,18 @@
       "offers": [
         {
           "seller": "upika.ca",
-          "price": 8.33,
-          "packagePrice": 49.99,
+          "price": 2,
+          "packagePrice": 12,
           "unitCount": 6,
           "unitCountSource": "https://upika.ca/en/products/upika-endurance",
           "unitCountConfidence": "live",
           "productUrl": "https://upika.ca/en/products/upika-endurance",
-          "priceSource": "https://upika.ca/en/products/upika-endurance",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-20T15:51:55.276Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-21T09:58:22.006Z"
         },
         {
           "seller": "shopsante.ca",
@@ -347,7 +857,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-20T15:51:55.276Z"
+          "lastCheckedAt": "2026-04-21T09:58:22.014Z"
         },
         {
           "seller": "lecoureurnordique.ca",
@@ -362,7 +872,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-20T15:51:55.276Z"
+          "lastCheckedAt": "2026-04-21T09:58:22.019Z"
         }
       ]
     },
@@ -388,7 +898,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-20T15:51:55.277Z"
+          "lastCheckedAt": "2026-04-21T09:58:24.389Z"
         },
         {
           "seller": "shopsante.ca",
@@ -403,7 +913,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-20T15:51:55.277Z"
+          "lastCheckedAt": "2026-04-21T09:58:24.402Z"
         }
       ]
     },
@@ -429,7 +939,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-20T15:51:55.300Z"
+          "lastCheckedAt": "2026-04-21T09:58:25.797Z"
         },
         {
           "seller": "enroute.run",
@@ -444,7 +954,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-20T15:51:55.301Z"
+          "lastCheckedAt": "2026-04-21T09:58:25.799Z"
         }
       ]
     },
@@ -470,7 +980,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-20T15:51:55.306Z"
+          "lastCheckedAt": "2026-04-21T09:58:26.376Z"
         },
         {
           "seller": "precisionhydration.com",
@@ -485,7 +995,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-20T15:51:55.312Z"
+          "lastCheckedAt": "2026-04-21T09:58:26.385Z"
         }
       ]
     },
@@ -511,7 +1021,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-20T15:51:55.313Z"
+          "lastCheckedAt": "2026-04-21T09:58:26.648Z"
         }
       ]
     },
@@ -521,23 +1031,23 @@
       "brand": "Krono Nutrition",
       "type": "Gel",
       "carbsGrams": 24,
-      "carbsSource": "https://krononutrition.com/products/maple-coffee-energy-gels-box-of-24",
+      "carbsSource": "catalog",
       "officialProductUrl": "https://krononutrition.com/products/maple-coffee-energy-gels-box-of-24",
       "offers": [
         {
           "seller": "krononutrition.com",
           "price": 2.71,
-          "packagePrice": 64.99,
+          "packagePrice": 65.04,
           "unitCount": 24,
           "unitCountSource": "https://krononutrition.com/products/maple-coffee-energy-gels-box-of-24",
           "unitCountConfidence": "live",
           "productUrl": "https://krononutrition.com/products/maple-coffee-energy-gels-box-of-24",
-          "priceSource": "https://krononutrition.com/products/maple-coffee-energy-gels-box-of-24",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-20T15:51:55.313Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-21T09:58:26.779Z"
         }
       ]
     },
@@ -547,23 +1057,23 @@
       "brand": "Krono Nutrition",
       "type": "Gel",
       "carbsGrams": 29,
-      "carbsSource": "https://krononutrition.com/products/maple-raspberry-energy-gels-box-of-24",
+      "carbsSource": "catalog",
       "officialProductUrl": "https://krononutrition.com/products/maple-raspberry-energy-gels-box-of-24",
       "offers": [
         {
           "seller": "krononutrition.com",
           "price": 2.71,
-          "packagePrice": 64.99,
+          "packagePrice": 65.04,
           "unitCount": 24,
           "unitCountSource": "https://krononutrition.com/products/maple-raspberry-energy-gels-box-of-24",
           "unitCountConfidence": "live",
           "productUrl": "https://krononutrition.com/products/maple-raspberry-energy-gels-box-of-24",
-          "priceSource": "https://krononutrition.com/products/maple-raspberry-energy-gels-box-of-24",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-20T15:51:55.313Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-21T09:58:27.017Z"
         }
       ]
     },
@@ -573,23 +1083,23 @@
       "brand": "Krono Nutrition",
       "type": "Gel",
       "carbsGrams": 30,
-      "carbsSource": "https://krononutrition.com/products/tropical-energy-gels-box-of-24",
+      "carbsSource": "catalog",
       "officialProductUrl": "https://krononutrition.com/products/tropical-energy-gels-box-of-24",
       "offers": [
         {
           "seller": "krononutrition.com",
           "price": 2.71,
-          "packagePrice": 64.99,
+          "packagePrice": 65.04,
           "unitCount": 24,
           "unitCountSource": "https://krononutrition.com/products/tropical-energy-gels-box-of-24",
           "unitCountConfidence": "live",
           "productUrl": "https://krononutrition.com/products/tropical-energy-gels-box-of-24",
-          "priceSource": "https://krononutrition.com/products/tropical-energy-gels-box-of-24",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-20T15:51:55.314Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-21T09:58:27.235Z"
         }
       ]
     },
@@ -615,7 +1125,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-20T15:51:55.315Z"
+          "lastCheckedAt": "2026-04-21T09:58:27.784Z"
         },
         {
           "seller": "well.ca",
@@ -630,7 +1140,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-20T15:51:55.315Z"
+          "lastCheckedAt": "2026-04-21T09:58:27.785Z"
         }
       ]
     },
@@ -656,7 +1166,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-20T15:51:55.316Z"
+          "lastCheckedAt": "2026-04-21T09:58:28.909Z"
         },
         {
           "seller": "elementsport.ca",
@@ -671,7 +1181,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-20T15:51:55.316Z"
+          "lastCheckedAt": "2026-04-21T09:58:28.909Z"
         }
       ]
     },
@@ -692,12 +1202,12 @@
           "unitCountSource": "https://frontrunners.ca/products/maurten-solid-c-160",
           "unitCountConfidence": "live",
           "productUrl": "https://frontrunners.ca/products/maurten-solid-c-160",
-          "priceSource": "catalog-fallback",
-          "priceConfidence": "fallback",
-          "verificationStatus": "fallback",
-          "verificationLabel": "Prix de secours",
-          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-20T15:51:55.316Z"
+          "priceSource": "https://frontrunners.ca/products/maurten-solid-c-160",
+          "priceConfidence": "live",
+          "verificationStatus": "verified",
+          "verificationLabel": "Prix vérifié",
+          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
+          "lastCheckedAt": "2026-04-21T09:58:29.375Z"
         },
         {
           "seller": "fuelkit.ca",
@@ -712,7 +1222,22 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-20T15:51:55.316Z"
+          "lastCheckedAt": "2026-04-21T09:58:29.378Z"
+        },
+        {
+          "seller": "enroute.run",
+          "price": 4.5,
+          "packagePrice": 4.5,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://enroute.run/products/maurten-solid-c-160",
+          "priceSource": "https://enroute.run/products/maurten-solid-c-160",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-21T09:58:29.381Z"
         }
       ]
     },
@@ -738,7 +1263,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-20T15:51:55.329Z"
+          "lastCheckedAt": "2026-04-21T09:58:30.144Z"
         }
       ]
     },
@@ -764,7 +1289,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-20T15:51:55.333Z"
+          "lastCheckedAt": "2026-04-21T09:58:30.632Z"
         }
       ]
     },
@@ -790,7 +1315,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-20T15:51:55.343Z"
+          "lastCheckedAt": "2026-04-21T09:58:31.245Z"
         }
       ]
     },
@@ -816,7 +1341,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-20T15:51:55.347Z"
+          "lastCheckedAt": "2026-04-21T09:58:31.821Z"
         }
       ]
     },
@@ -842,7 +1367,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-20T15:51:55.348Z"
+          "lastCheckedAt": "2026-04-21T09:58:31.943Z"
         }
       ]
     },
@@ -868,7 +1393,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-20T15:51:55.348Z"
+          "lastCheckedAt": "2026-04-21T09:58:32.080Z"
         }
       ]
     },
@@ -894,7 +1419,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-20T15:51:55.351Z"
+          "lastCheckedAt": "2026-04-21T09:58:32.254Z"
         }
       ]
     },
@@ -920,7 +1445,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-20T15:51:55.353Z"
+          "lastCheckedAt": "2026-04-21T09:58:32.504Z"
         }
       ]
     },
@@ -946,7 +1471,7 @@
           "verificationStatus": "fallback",
           "verificationLabel": "Prix de secours",
           "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-20T15:51:55.355Z"
+          "lastCheckedAt": "2026-04-21T09:58:32.619Z"
         }
       ]
     },
@@ -972,7 +1497,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-20T15:51:55.355Z"
+          "lastCheckedAt": "2026-04-21T09:58:32.762Z"
         }
       ]
     },
@@ -982,23 +1507,23 @@
       "brand": "Krono Nutrition",
       "type": "Gel",
       "carbsGrams": 21,
-      "carbsSource": "https://krononutrition.com/products/apple-maple-energy-gels-box-of-24",
+      "carbsSource": "catalog",
       "officialProductUrl": "https://krononutrition.com/products/apple-maple-energy-gels-box-of-24",
       "offers": [
         {
           "seller": "krononutrition.com",
           "price": 2.71,
-          "packagePrice": 64.99,
+          "packagePrice": 65.04,
           "unitCount": 24,
           "unitCountSource": "https://krononutrition.com/products/apple-maple-energy-gels-box-of-24",
           "unitCountConfidence": "live",
           "productUrl": "https://krononutrition.com/products/apple-maple-energy-gels-box-of-24",
-          "priceSource": "https://krononutrition.com/products/apple-maple-energy-gels-box-of-24",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-20T15:51:55.355Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-21T09:58:33.021Z"
         }
       ]
     },
@@ -1008,23 +1533,23 @@
       "brand": "Krono Nutrition",
       "type": "Gel",
       "carbsGrams": 30,
-      "carbsSource": "https://krononutrition.com/products/citrus-energy-gels-box-of-24",
+      "carbsSource": "catalog",
       "officialProductUrl": "https://krononutrition.com/products/citrus-energy-gels-box-of-24",
       "offers": [
         {
           "seller": "krononutrition.com",
           "price": 2.71,
-          "packagePrice": 64.99,
+          "packagePrice": 65.04,
           "unitCount": 24,
           "unitCountSource": "https://krononutrition.com/products/citrus-energy-gels-box-of-24",
           "unitCountConfidence": "live",
           "productUrl": "https://krononutrition.com/products/citrus-energy-gels-box-of-24",
-          "priceSource": "https://krononutrition.com/products/citrus-energy-gels-box-of-24",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-20T15:51:55.356Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-21T09:58:33.256Z"
         }
       ]
     },
@@ -1050,7 +1575,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-20T15:51:55.356Z"
+          "lastCheckedAt": "2026-04-21T09:58:33.564Z"
         }
       ]
     },
@@ -1060,23 +1585,23 @@
       "brand": "Krono Nutrition",
       "type": "Gel",
       "carbsGrams": 30,
-      "carbsSource": "https://krononutrition.com/products/salted-caramel-energy-gels-box-of-24",
+      "carbsSource": "catalog",
       "officialProductUrl": "https://krononutrition.com/products/salted-caramel-energy-gels-box-of-24",
       "offers": [
         {
           "seller": "krononutrition.com",
           "price": 2.71,
-          "packagePrice": 64.99,
+          "packagePrice": 65.04,
           "unitCount": 24,
           "unitCountSource": "https://krononutrition.com/products/salted-caramel-energy-gels-box-of-24",
           "unitCountConfidence": "live",
           "productUrl": "https://krononutrition.com/products/salted-caramel-energy-gels-box-of-24",
-          "priceSource": "https://krononutrition.com/products/salted-caramel-energy-gels-box-of-24",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-20T15:51:55.357Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-21T09:58:33.756Z"
         }
       ]
     },
@@ -1102,7 +1627,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-20T15:51:55.357Z"
+          "lastCheckedAt": "2026-04-21T09:58:33.979Z"
         }
       ]
     },
@@ -1112,23 +1637,23 @@
       "brand": "Krono Nutrition",
       "type": "Autre",
       "carbsGrams": 39,
-      "carbsSource": "https://krononutrition.com/en-ca/products/apple-maple-chews-box-of-12",
+      "carbsSource": "catalog",
       "officialProductUrl": "https://krononutrition.com/en-ca/products/apple-maple-chews-box-of-12",
       "offers": [
         {
           "seller": "krononutrition.com",
           "price": 3.75,
-          "packagePrice": 44.99,
+          "packagePrice": 45,
           "unitCount": 12,
           "unitCountSource": "https://krononutrition.com/en-ca/products/apple-maple-chews-box-of-12",
           "unitCountConfidence": "live",
           "productUrl": "https://krononutrition.com/en-ca/products/apple-maple-chews-box-of-12",
-          "priceSource": "https://krononutrition.com/en-ca/products/apple-maple-chews-box-of-12",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-20T15:51:55.357Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-21T09:58:34.184Z"
         }
       ]
     },
@@ -1138,23 +1663,23 @@
       "brand": "Krono Nutrition",
       "type": "Autre",
       "carbsGrams": 39,
-      "carbsSource": "https://krononutrition.com/en-ca/products/strawberry-maple-chews-box-of-12",
+      "carbsSource": "catalog",
       "officialProductUrl": "https://krononutrition.com/en-ca/products/strawberry-maple-chews-box-of-12",
       "offers": [
         {
           "seller": "krononutrition.com",
           "price": 3.75,
-          "packagePrice": 44.99,
+          "packagePrice": 45,
           "unitCount": 12,
           "unitCountSource": "https://krononutrition.com/en-ca/products/strawberry-maple-chews-box-of-12",
           "unitCountConfidence": "live",
           "productUrl": "https://krononutrition.com/en-ca/products/strawberry-maple-chews-box-of-12",
-          "priceSource": "https://krononutrition.com/en-ca/products/strawberry-maple-chews-box-of-12",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-20T15:51:55.357Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-21T09:58:34.388Z"
         }
       ]
     },
@@ -1164,23 +1689,23 @@
       "brand": "Krono Nutrition",
       "type": "Barre",
       "carbsGrams": 32,
-      "carbsSource": "https://krononutrition.com/en-ca/products/apricot-cranberry-energy-bars-box-of-12",
+      "carbsSource": "catalog",
       "officialProductUrl": "https://krononutrition.com/en-ca/products/apricot-cranberry-energy-bars-box-of-12",
       "offers": [
         {
           "seller": "krononutrition.com",
           "price": 3.33,
-          "packagePrice": 39.99,
+          "packagePrice": 39.96,
           "unitCount": 12,
           "unitCountSource": "https://krononutrition.com/en-ca/products/apricot-cranberry-energy-bars-box-of-12",
           "unitCountConfidence": "live",
           "productUrl": "https://krononutrition.com/en-ca/products/apricot-cranberry-energy-bars-box-of-12",
-          "priceSource": "https://krononutrition.com/en-ca/products/apricot-cranberry-energy-bars-box-of-12",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-20T15:51:55.358Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-21T09:58:34.597Z"
         }
       ]
     },
@@ -1190,23 +1715,23 @@
       "brand": "Krono Nutrition",
       "type": "Barre",
       "carbsGrams": 32,
-      "carbsSource": "https://krononutrition.com/products/strawberry-pineapple-energy-bars-box-of-12",
+      "carbsSource": "catalog",
       "officialProductUrl": "https://krononutrition.com/products/strawberry-pineapple-energy-bars-box-of-12",
       "offers": [
         {
           "seller": "krononutrition.com",
-          "price": 3.33,
-          "packagePrice": 39.99,
+          "price": 3.25,
+          "packagePrice": 39,
           "unitCount": 12,
           "unitCountSource": "https://krononutrition.com/products/strawberry-pineapple-energy-bars-box-of-12",
           "unitCountConfidence": "live",
           "productUrl": "https://krononutrition.com/products/strawberry-pineapple-energy-bars-box-of-12",
-          "priceSource": "https://krononutrition.com/products/strawberry-pineapple-energy-bars-box-of-12",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-20T15:51:55.358Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-21T09:58:34.787Z"
         }
       ]
     },
@@ -1216,23 +1741,23 @@
       "brand": "Krono Nutrition",
       "type": "Barre",
       "carbsGrams": 31,
-      "carbsSource": "https://krononutrition.com/products/cherry-chocolate-energy-bars-box-of-12",
+      "carbsSource": "catalog",
       "officialProductUrl": "https://krononutrition.com/products/cherry-chocolate-energy-bars-box-of-12",
       "offers": [
         {
           "seller": "krononutrition.com",
-          "price": 3.33,
-          "packagePrice": 39.99,
+          "price": 3.25,
+          "packagePrice": 39,
           "unitCount": 12,
           "unitCountSource": "https://krononutrition.com/products/cherry-chocolate-energy-bars-box-of-12",
           "unitCountConfidence": "live",
           "productUrl": "https://krononutrition.com/products/cherry-chocolate-energy-bars-box-of-12",
-          "priceSource": "https://krononutrition.com/products/cherry-chocolate-energy-bars-box-of-12",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-20T15:51:55.358Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-21T09:58:34.988Z"
         }
       ]
     },
@@ -1242,23 +1767,23 @@
       "brand": "Krono Nutrition",
       "type": "Barre",
       "carbsGrams": 29,
-      "carbsSource": "https://krononutrition.com/products/chocolate-espresso-energy-bars-box-of-12",
+      "carbsSource": "catalog",
       "officialProductUrl": "https://krononutrition.com/products/chocolate-espresso-energy-bars-box-of-12",
       "offers": [
         {
           "seller": "krononutrition.com",
           "price": 3.33,
-          "packagePrice": 39.99,
+          "packagePrice": 39.96,
           "unitCount": 12,
           "unitCountSource": "https://krononutrition.com/products/chocolate-espresso-energy-bars-box-of-12",
           "unitCountConfidence": "live",
           "productUrl": "https://krononutrition.com/products/chocolate-espresso-energy-bars-box-of-12",
-          "priceSource": "https://krononutrition.com/products/chocolate-espresso-energy-bars-box-of-12",
-          "priceConfidence": "live",
-          "verificationStatus": "verified",
-          "verificationLabel": "Prix vérifié",
-          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-20T15:51:55.359Z"
+          "priceSource": "catalog-fallback",
+          "priceConfidence": "fallback",
+          "verificationStatus": "fallback",
+          "verificationLabel": "Prix de secours",
+          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+          "lastCheckedAt": "2026-04-21T09:58:35.192Z"
         }
       ]
     },
@@ -1284,7 +1809,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix vient d'une page live, mais une partie du calcul a été déduite automatiquement.",
-          "lastCheckedAt": "2026-04-20T15:51:55.359Z"
+          "lastCheckedAt": "2026-04-21T09:58:35.692Z"
         },
         {
           "seller": "shopsante.ca",
@@ -1299,7 +1824,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-20T15:51:55.360Z"
+          "lastCheckedAt": "2026-04-21T09:58:35.693Z"
         }
       ]
     },
@@ -1325,7 +1850,7 @@
           "verificationStatus": "estimated",
           "verificationLabel": "Prix estimé",
           "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
-          "lastCheckedAt": "2026-04-20T15:51:55.360Z"
+          "lastCheckedAt": "2026-04-21T09:58:35.847Z"
         }
       ]
     },
@@ -1351,7 +1876,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-20T15:51:55.360Z"
+          "lastCheckedAt": "2026-04-21T09:58:36.058Z"
         }
       ]
     },
@@ -1361,7 +1886,7 @@
       "brand": "Näak",
       "type": "Boisson",
       "carbsGrams": 60,
-      "carbsSource": "catalog",
+      "carbsSource": "https://www.fitfirst.ca/products/naak-drink-mix-bag?_pos=1&_sid=f8513620c&_ss=r",
       "officialProductUrl": "https://www.naak.com/products/boost-drink-mix-bag-neutral",
       "offers": [
         {
@@ -1377,7 +1902,37 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-20T15:51:55.361Z"
+          "lastCheckedAt": "2026-04-21T09:58:36.927Z"
+        },
+        {
+          "seller": "fitfirst.ca",
+          "price": 3,
+          "packagePrice": 45,
+          "unitCount": 15,
+          "unitCountSource": "https://www.fitfirst.ca/products/naak-drink-mix-bag?_pos=1&_sid=f8513620c&_ss=r",
+          "unitCountConfidence": "live",
+          "productUrl": "https://www.fitfirst.ca/products/naak-drink-mix-bag?_pos=1&_sid=f8513620c&_ss=r",
+          "priceSource": "https://www.fitfirst.ca/products/naak-drink-mix-bag?_pos=1&_sid=f8513620c&_ss=r",
+          "priceConfidence": "live",
+          "verificationStatus": "verified",
+          "verificationLabel": "Prix vérifié",
+          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
+          "lastCheckedAt": "2026-04-21T09:58:36.929Z"
+        },
+        {
+          "seller": "fitfirst.ca",
+          "price": 2.25,
+          "packagePrice": 4.5,
+          "unitCount": 2,
+          "unitCountSource": "https://www.fitfirst.ca/products/naak-drink-mix?_pos=2&_sid=f8513620c&_ss=r",
+          "unitCountConfidence": "live",
+          "productUrl": "https://www.fitfirst.ca/products/naak-drink-mix?_pos=2&_sid=f8513620c&_ss=r",
+          "priceSource": "https://www.fitfirst.ca/products/naak-drink-mix?_pos=2&_sid=f8513620c&_ss=r",
+          "priceConfidence": "live",
+          "verificationStatus": "verified",
+          "verificationLabel": "Prix vérifié",
+          "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
+          "lastCheckedAt": "2026-04-21T09:58:36.933Z"
         }
       ]
     },
@@ -1392,18 +1947,33 @@
       "offers": [
         {
           "seller": "naak.com",
-          "price": 4.25,
-          "packagePrice": 4.25,
+          "price": 4,
+          "packagePrice": 4,
           "unitCount": 1,
           "unitCountSource": "default-single",
           "unitCountConfidence": "default",
           "productUrl": "https://www.naak.com/products/ultra-energy-gel-salted-maple?variant=49096442413360",
-          "priceSource": "catalog-fallback",
-          "priceConfidence": "fallback",
-          "verificationStatus": "fallback",
-          "verificationLabel": "Prix de secours",
-          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-20T15:51:55.361Z"
+          "priceSource": "https://www.naak.com/products/ultra-energy-gel-salted-maple?variant=49096442413360",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-21T09:58:38.071Z"
+        },
+        {
+          "seller": "frontrunners.ca",
+          "price": 4.5,
+          "packagePrice": 4.5,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://frontrunners.ca/products/naak-ultra-energy-gel",
+          "priceSource": "https://frontrunners.ca/products/naak-ultra-energy-gel",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-21T09:58:38.075Z"
         }
       ]
     },
@@ -1418,18 +1988,33 @@
       "offers": [
         {
           "seller": "naak.com",
+          "price": 4,
+          "packagePrice": 4,
+          "unitCount": 1,
+          "unitCountSource": "default-single",
+          "unitCountConfidence": "default",
+          "productUrl": "https://www.naak.com/products/ultra-energy-gel-chocolate?variant=49096432779568",
+          "priceSource": "https://www.naak.com/products/ultra-energy-gel-chocolate?variant=49096432779568",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-21T09:58:38.853Z"
+        },
+        {
+          "seller": "frontrunners.ca",
           "price": 4.5,
           "packagePrice": 4.5,
           "unitCount": 1,
           "unitCountSource": "default-single",
           "unitCountConfidence": "default",
-          "productUrl": "https://www.naak.com/products/ultra-energy-gel-chocolate?variant=49096432779568",
-          "priceSource": "catalog-fallback",
-          "priceConfidence": "fallback",
-          "verificationStatus": "fallback",
-          "verificationLabel": "Prix de secours",
-          "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-          "lastCheckedAt": "2026-04-20T15:51:55.361Z"
+          "productUrl": "https://frontrunners.ca/products/naak-ultra-energy-gel",
+          "priceSource": "https://frontrunners.ca/products/naak-ultra-energy-gel",
+          "priceConfidence": "live",
+          "verificationStatus": "estimated",
+          "verificationLabel": "Prix estimé",
+          "verificationReason": "Le prix est live, mais le format exact de portion reste moins explicite.",
+          "lastCheckedAt": "2026-04-21T09:58:38.857Z"
         }
       ]
     },
@@ -1455,7 +2040,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-20T15:51:55.361Z"
+          "lastCheckedAt": "2026-04-21T09:58:40.346Z"
         }
       ]
     },
@@ -1481,7 +2066,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-20T15:51:55.361Z"
+          "lastCheckedAt": "2026-04-21T09:58:41.727Z"
         }
       ]
     },
@@ -1507,7 +2092,7 @@
           "verificationStatus": "verified",
           "verificationLabel": "Prix vérifié",
           "verificationReason": "Le prix et le format de portion ont été trouvés sur une page vendeur ou confirmés par le catalogue.",
-          "lastCheckedAt": "2026-04-20T15:51:55.368Z"
+          "lastCheckedAt": "2026-04-21T09:58:41.920Z"
         }
       ]
     }
