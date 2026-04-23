@@ -1,9 +1,9 @@
 {
   "summary": {
-    "updatedAt": "2026-04-22T09:58:35.546Z",
-    "generatedAt": "2026-04-22T09:58:35.261Z",
+    "updatedAt": "2026-04-23T10:04:08.057Z",
+    "generatedAt": "2026-04-23T10:04:07.759Z",
     "productCount": 48,
-    "offerCount": 104,
+    "offerCount": 108,
     "findingsCount": 25,
     "fallbackCount": 24,
     "reviewCount": 0
@@ -19,19 +19,6 @@
       "price": 5,
       "packagePrice": 60,
       "unitCount": 12,
-      "verificationStatus": "fallback",
-      "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire."
-    },
-    {
-      "code": "fallback",
-      "message": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
-      "productId": "maurten-gel-160",
-      "productName": "Maurten Gel 160",
-      "seller": "lecoureurnordique.ca",
-      "productUrl": "https://lecoureurnordique.ca/en/products/maurten-gel-160-boite",
-      "price": 7.5,
-      "packagePrice": 75,
-      "unitCount": 10,
       "verificationStatus": "fallback",
       "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire."
     },
@@ -71,6 +58,19 @@
       "price": 8.5,
       "packagePrice": 170,
       "unitCount": 20,
+      "verificationStatus": "fallback",
+      "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire."
+    },
+    {
+      "code": "fallback",
+      "message": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+      "productId": "krono-maple-gel",
+      "productName": "Krono Nutrition Maple Energy Gel",
+      "seller": "krononutrition.com",
+      "productUrl": "https://krononutrition.com/products/maple-energy-gels-box-of-24",
+      "price": 2.71,
+      "packagePrice": 65.04,
+      "unitCount": 24,
       "verificationStatus": "fallback",
       "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire."
     },
