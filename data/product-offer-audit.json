@@ -1,11 +1,11 @@
 {
   "summary": {
-    "updatedAt": "2026-04-29T10:24:36.599Z",
-    "generatedAt": "2026-04-29T10:24:36.255Z",
+    "updatedAt": "2026-04-30T10:25:46.079Z",
+    "generatedAt": "2026-04-30T10:25:45.746Z",
     "productCount": 48,
-    "offerCount": 124,
-    "findingsCount": 26,
-    "fallbackCount": 25,
+    "offerCount": 133,
+    "findingsCount": 27,
+    "fallbackCount": 26,
     "reviewCount": 0
   },
   "findings": [
@@ -29,6 +29,19 @@
       "productName": "UPIKA Endurance",
       "seller": "upika.ca",
       "productUrl": "https://upika.ca/en/products/upika-endurance",
+      "price": 2,
+      "packagePrice": 12,
+      "unitCount": 6,
+      "verificationStatus": "fallback",
+      "verificationReason": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire."
+    },
+    {
+      "code": "fallback",
+      "message": "Aucun prix live fiable n'a été retenu; le catalogue sert de valeur temporaire.",
+      "productId": "upika-endurance-plus",
+      "productName": "UPIKA Endurance+",
+      "seller": "upika.ca",
+      "productUrl": "https://upika.ca/en/products/upika-endurance-plus-cerise-lime",
       "price": 2,
       "packagePrice": 12,
       "unitCount": 6,
